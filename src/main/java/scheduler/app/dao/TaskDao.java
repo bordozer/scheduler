@@ -1,8 +1,8 @@
 package scheduler.app.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 import scheduler.app.models.TaskEntry;
 
-public interface TaskDao extends JpaRepository<TaskEntry, Long> {
+public interface TaskDao extends Repository<TaskEntry, Long> {
 
 }
