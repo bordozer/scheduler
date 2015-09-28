@@ -54,7 +54,7 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" ); // TODO: for DB upgrade only
+//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" ); // TODO: for DB upgrade only
 		jpaProperties.put( "hibernate.connection.CharSet", "utf8" );
 		jpaProperties.put( "hibernate.connection.characterEncoding", "utf8" );
 		jpaProperties.put( "hibernate.connection.useUnicode", "true" );
@@ -80,7 +80,7 @@ public class DevelopmentConfiguration {
 
 		final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
 		jdbcTokenRepository.setDataSource( dataSource() );
-		jdbcTokenRepository.setCreateTableOnStartup( true ); // TODO: for DB upgrade only
+//		jdbcTokenRepository.setCreateTableOnStartup( true ); // TODO: for DB upgrade only
 
 		return jdbcTokenRepository;
 	}
