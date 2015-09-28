@@ -18,8 +18,8 @@ import scheduler.app.security.SecurityUserDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
-	public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
-//	public static final String REMEMBER_ME_KEY = "myAppKey";
+//	public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
+	public static final String REMEMBER_ME_KEY = "myAppKey";
 
 	public static final String PORTAL_PAGE_URL = "/scheduler/";
 
@@ -83,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		final TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices( REMEMBER_ME_KEY, userDetailsService );
 		rememberMeServices.setTokenValiditySeconds( 1209600 );
+		rememberMeServices.setCookieName( "Scheduler_Micro_Service_Remember_Me_Cookie" );
 
 		return rememberMeServices;
 	}
