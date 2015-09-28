@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static final String PORTAL_PAGE_URL = "/scheduler/";
 
-    private static final String LOGIN_PAGE_URL = "/resources/public/login.html";
+    private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
 
 	private static final Logger LOGGER = Logger.getLogger( SecurityConfig.class );
     public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
@@ -38,9 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure( AuthenticationManagerBuilder auth ) throws Exception {
 		auth
-			.eraseCredentials(true)
-			.userDetailsService(userDetailsService)
-			.passwordEncoder(new BCryptPasswordEncoder());
+			.eraseCredentials( true )
+			.userDetailsService( userDetailsService )
+			.passwordEncoder( new BCryptPasswordEncoder() );
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.authenticated()
 					.and()
 				.formLogin()
-					.defaultSuccessUrl(PORTAL_PAGE_URL)
+				.defaultSuccessUrl( PORTAL_PAGE_URL )
 					.loginProcessingUrl( "/authenticate" )
 					.usernameParameter( "login" )
 					.passwordParameter( "password" )
@@ -79,8 +79,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.rememberMeServices( rememberMeServices() )
 					.key( REMEMBER_ME_KEY );
     }
-
-
 
 	@Bean
 	public TokenBasedRememberMeServices rememberMeServices() {
