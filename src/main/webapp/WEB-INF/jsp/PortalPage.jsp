@@ -3,27 +3,11 @@
 
 <tags:page>
 
-	<div class="page-header" style="padding-left: 15px; margin: 0;">
-
-		<div class="row">
-
-			<div class="col-lg-2">
-				<img src="/resources/public/images/logo.png">
-			</div>
-
-			<div class="col-lg-10">
-				<h1>Scheduler Micro Service</h1>
-			</div>
-
-		</div>
-
-	</div>
-
 	<div class="portal-page-container"></div>
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/portal-page/portal-page', 'translator' ], function ( $, Page, portal, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/portal-page/portal-page', 'translator' ], function ( $, Page, render, Translator ) {
 
 			var t = new Translator( {
 				title: 'Portal page'
@@ -35,7 +19,7 @@
 
 			var pageView = new Page( {
 				el: $( '.portal-page-container' ),
-				bodyRenderer: portal,
+				bodyRenderer: render,
 				breadcrumbs: breadcrumbs,
 				options: {}
 			} );
