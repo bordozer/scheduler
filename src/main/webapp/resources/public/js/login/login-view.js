@@ -16,6 +16,7 @@ define( function ( require ) {
 		, passwordLabel: 'Password or credit card number'
 		, loginFailedLabel: 'Login failed'
 		, loginFailedMessage: "Login failed or there are not enough money on the credit card ( depends what you've filled in the field )"
+		, rememberMeLabel: "Remember me ( and my card number )"
 	} );
 
 	return Backbone.View.extend( {

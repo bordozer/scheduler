@@ -19,8 +19,8 @@ import scheduler.app.security.SecurityUserDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //	public static final String PORTAL_PAGE_URL = "/resources/js/pages/main/main-page.js";
-	public static final String PORTAL_PAGE_URL = "/resources/index.html";
-//	public static final String PORTAL_PAGE_URL = "/scheduler/";
+//	public static final String PORTAL_PAGE_URL = "/resources/index.html";
+	public static final String PORTAL_PAGE_URL = "/scheduler/";
 
     private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
 

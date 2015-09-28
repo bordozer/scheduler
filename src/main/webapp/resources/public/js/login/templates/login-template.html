@@ -9,7 +9,7 @@
 		<div class="panel-body">
 
 			<div class="row">
-				<div class="col-xs-12 col-lg-6">
+				<div class="col-xs-12 col-lg-6 text-muted">
 					<%= t.loginLabel %>
 				</div>
 				<div class="col-xs-12 col-lg-6">
@@ -18,11 +18,17 @@
 			</div>
 
 			<div class="row">
-				<div class="col-xs-12 col-lg-6">
+				<div class="col-xs-12 col-lg-6 text-muted">
 					<%= t.passwordLabel %>
 				</div>
 				<div class="col-xs-12 col-lg-6">
 					<input type="password" class="form-control" id="password" name="password" value="password">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-lg-12 text-muted">
+					<input type="checkbox" name="_spring_security_remember_me" /> <%=t.rememberMeLabel%>
 				</div>
 			</div>
 
