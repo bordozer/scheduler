@@ -291,7 +291,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>totalizator</finalName>
+		<finalName>scheduler</finalName>
 
 		<plugins>
 

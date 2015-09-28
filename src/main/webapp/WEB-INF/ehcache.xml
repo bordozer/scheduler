@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+		 updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+
+	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false"/>
+
+	<cache name="scheduler.app.cache.user"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="scheduler.app.cache.users"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+</ehcache>
