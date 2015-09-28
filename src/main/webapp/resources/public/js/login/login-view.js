@@ -34,7 +34,13 @@ define( function ( require ) {
 		},
 
 		__onLoginClick: function() {
-			this.__authenticate( this.$( '#login-form' ).serializeArray() );
+
+
+			var options = this.$( '#login-form' ).serializeArray();
+			//options.push( { name: 'rememberMe', value:  this.$( '[name=_spring_security_remember_me]' ).prop( 'checked' ) } );
+			//console.log( options );
+			//debugger;
+			this.__authenticate( options );
 		},
 
 		__authenticate: function( options ) {

@@ -17,8 +17,10 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	private AuthenticationSuccessHandler defaultHandler;
 
 	public AjaxAuthenticationSuccessHandler() {
+
 		final SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
 		savedRequestAwareSuccessHandler.setTargetUrlParameter( SecurityConfig.PORTAL_PAGE_URL );
+
 		this.defaultHandler = savedRequestAwareSuccessHandler;
 	}
 

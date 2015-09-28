@@ -1,6 +1,5 @@
 package scheduler.config.root;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +17,11 @@ import scheduler.app.security.SecurityUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//	public static final String PORTAL_PAGE_URL = "/resources/js/pages/main/main-page.js";
-//	public static final String PORTAL_PAGE_URL = "/resources/index.html";
+	private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
+	public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
+//	public static final String REMEMBER_ME_KEY = "myAppKey";
+
 	public static final String PORTAL_PAGE_URL = "/scheduler/";
-
-    private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
-
-	private static final Logger LOGGER = Logger.getLogger( SecurityConfig.class );
-    public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
 
     @Autowired
 	private SecurityUserDetailsService userDetailsService;
