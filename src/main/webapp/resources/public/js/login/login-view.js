@@ -38,8 +38,6 @@ define( function ( require ) {
 
 		__authenticate: function( options ) {
 
-			console.log( options );
-
 			$.ajax( {
 				method: 'POST',
 				url: '/authenticate',
