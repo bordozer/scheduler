@@ -13,9 +13,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var t = new Translator( {
 		loadingLabel: 'Loading...'
-		, menuItemRefreshLabel: 'Menu item: Refresh'
-		, menuItemExpandLabel: 'Menu item: Expand widget'
-		, menuItemCollapseLabel: 'Menu item: Collapse widget'
+		, menuItemRefreshLabel: 'Refresh'
 		, widgetMenuHint: 'Widget menu'
 	} );
 
@@ -33,7 +31,6 @@ define( function ( require ) {
 			this.events = _.extend( this.builtinEvents, this.events );
 
 			this.on( 'view:render', this.render, this );
-			this.on( 'inner-view-rendered', this._onInnerViewRendered, this );
 
 			Backbone.View.apply( this, [ options ] );
 		},
@@ -131,7 +128,8 @@ define( function ( require ) {
 			mainMenu( options, menuEl );
 		},
 
-		_onInnerViewRendered: function() {
+		renderBodyFinished: function() {
+
 			this._hideProgress();
 
 			var title = this.$( '.js-widget-title' );
@@ -141,7 +139,6 @@ define( function ( require ) {
 			}
 
 			title.html( this.getTitle() );
-			title.attr( 'title', this.getTitleHint() );
 
 			this._renderDropDownMenu();
 		},

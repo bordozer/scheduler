@@ -33,6 +33,8 @@ define( function ( require ) {
 
 		renderBody: function() {
 			this.$bel().html( template( { t : t } ) );
+
+			this.renderBodyFinished();
 		}
 	} );
 } );
