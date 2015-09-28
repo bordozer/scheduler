@@ -16,7 +16,5 @@ public interface SystemVarsService {
 
 	String getDatabaseUserPassword();
 
-	String getLogosPath();
-
 	List<Integer> getAdminIds();
 }

@@ -1,4 +1,5 @@
-system.projectName=Totalizator
-system.admin.ids=1,2,3
+system.projectName=Scheduler Micro Service
 
-system.logos.path=/home/blu/dev/scheduler/logos/
+system.root-user-name=root
+system.root-user-password=password
+

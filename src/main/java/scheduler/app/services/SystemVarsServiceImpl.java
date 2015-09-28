@@ -82,11 +82,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public String getLogosPath() {
-		return config.getString( "system.logos.path" );
-	}
-
-	@Override
 	public List<Integer> getAdminIds() {
 		return adminIds;
 	}
