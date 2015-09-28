@@ -19,8 +19,28 @@
 
 	</div>
 
-	<div class="portal-page-container">
-		<h1>Portal page</h1>
-	</div>
+	<div class="portal-page-container"></div>
+
+	<script type="text/javascript">
+
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/portal-page/portal-page', 'translator' ], function ( $, Page, portal, Translator ) {
+
+			var t = new Translator( {
+				title: 'Portal page'
+			} );
+
+			var breadcrumbs = [
+				{ link: '#', title: t.title }
+			];
+
+			var pageView = new Page( {
+				el: $( '.portal-page-container' ),
+				bodyRenderer: portal,
+				breadcrumbs: breadcrumbs,
+				options: {}
+			} );
+			pageView.render();
+		} );
+	</script>
 
 </tags:page>

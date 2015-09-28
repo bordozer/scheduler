@@ -6,7 +6,7 @@ define( function ( require ) {
 	var bootbox = require( 'bootbox' );
 
 	var Translator = require( 'translator' );
-	var translator = new Translator( {
+	var t = new Translator( {
 		validationTitle: "Validation error"
 	} );
 
@@ -21,7 +21,7 @@ define( function ( require ) {
 		},
 
 		dialogValidationError: function( message ) {
-			this.dialogInfo( translator.validationTitle, message );
+			this.dialogInfo( t.validationTitle, message );
 		}
 	}
 } );
