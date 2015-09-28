@@ -26,8 +26,18 @@ public class DTOServiceImpl implements DTOService {
 		return new Function<TaskEntry, TaskEntryDTO>() {
 
 			@Override
-			public TaskEntryDTO apply( final TaskEntry taskEntry ) {
-				return null;
+			public TaskEntryDTO apply( final TaskEntry task ) {
+
+				final TaskEntryDTO dto = new TaskEntryDTO();
+
+				dto.setTaskId( task.getId() );
+				dto.setTaskName( task.getTaskName() );
+				dto.setDescription( task.getDescription() );
+				dto.setTaskParametersJSON( task.getTaskParametersJSON() );
+				dto.setRemoteURL( task.getRemoteURL() );
+				dto.setRemoteParametersJSON( task.getRemoteParametersJSON() );
+
+				return dto;
 			}
 		};
 	}

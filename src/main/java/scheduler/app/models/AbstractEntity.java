@@ -8,7 +8,7 @@ public class AbstractEntity {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 
 	@Version
 	private Long version;
@@ -43,11 +43,11 @@ public class AbstractEntity {
 		return uuid;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId( final int id ) {
+	public void setId( final long id ) {
 		this.id = id;
 	}
 

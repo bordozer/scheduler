@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.app.services.DTOService;
-import scheduler.app.services.tasks.TaskEntryService;
+import scheduler.app.services.tasks.TaskService;
 
 import java.util.List;
 
@@ -15,23 +15,23 @@ import java.util.List;
 public class TaskListRestController {
 
 	@Autowired
-	private TaskEntryService taskEntryService;
+	private TaskService taskService;
 
 	@Autowired
 	private DTOService dtoService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public List<TaskEntryDTO> tasks() {
-		return dtoService.transformTasks( taskEntryService.loadAll() );
+		return dtoService.transformTasks( taskService.loadAll() );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{taskId}/" )
 	public TaskEntryDTO taskEntry( final @PathVariable int taskId ) {
-		return dtoService.transformTask( taskEntryService.load( taskId ) );
+		return dtoService.transformTask( taskService.load( taskId ) );
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{taskId}/" )
-	public TaskEntryDTO delete( final @PathVariable int taskId ) {
-		return dtoService.transformTask( taskEntryService.delete( taskId ) );
+	public void delete( final @PathVariable int taskId ) {
+		taskService.delete( taskId );
 	}
 }

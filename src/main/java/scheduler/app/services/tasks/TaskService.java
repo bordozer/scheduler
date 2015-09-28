@@ -4,11 +4,11 @@ import scheduler.app.models.TaskEntry;
 
 import java.util.List;
 
-public interface TaskEntryService {
+public interface TaskService {
 
 	List<TaskEntry> loadAll();
 
-	TaskEntry load( final int taskId );
+	TaskEntry load( final long taskId );
 
-	TaskEntry delete( final int taskId );
+	void delete( final long taskId );
 }
