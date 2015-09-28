@@ -8,21 +8,28 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/login-template.html' ) );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		loginLabel: 'Login'
+		, passwordLabel: 'Password or credit card number'
+	} );
+
 	return Backbone.View.extend( {
 
-		events: {},
+		events: {
+			'click .js-login-button': '__onLoginClick'
+		},
 
 		initialize: function ( options ) {
 			this.render();
 		},
 
 		render: function () {
+			this.$el.html( template( { t : translator} ) );
+		},
 
-			var data = _.extend( {} );
+		___onLoginClick: function() {
 
-			this.$el.html( template( data ) );
-
-			return this;
 		}
 	} );
 } );

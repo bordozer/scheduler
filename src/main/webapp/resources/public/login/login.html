@@ -37,13 +37,13 @@
 
 		<div class="row" style="margin-top: 50px;">
 
-			<div class="col-lg-12 text-center">
+			<div class="col-lg-12">
 
 				<div class="login-container" style="width: 500px; margin-left: auto; margin-right: auto;"></div>
 
 				<script type="text/javascript">
 					require( [ 'jquery', 'public/js/login/login-view' ], function ( $, Login ) {
-						new Login( $( '.login-container') );
+						new Login( { el: $( '.login-container') } );
 					} );
 				</script>
 

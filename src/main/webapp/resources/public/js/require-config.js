@@ -18,6 +18,8 @@ var require = {
 		, datetimepicker: "bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min"
 		, moment: "bower_components/moment/min/moment-with-locales.min"
 		, bootbox: "bower_components/bootbox/bootbox"
+
+		, translator: "public/js/translator"
 	},
 
 	shim: {
@@ -48,7 +50,7 @@ var require = {
 		}
 	}
 
-	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap' ],
+	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap', 'translator' ],
 
 	callback: function ( $, Backbone, _, text, bootstrap ) {
 	}
