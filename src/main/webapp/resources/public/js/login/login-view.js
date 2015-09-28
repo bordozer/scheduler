@@ -47,8 +47,9 @@ define( function ( require ) {
 					"X-Login-Ajax-call": 'true'
 				},
 				success: function ( response ) {
+
 					if ( response === 'ok' ) {
-						window.location.replace( '/totalizator/' );
+						window.location.replace( '/scheduler/' );
 						return;
 					}
 

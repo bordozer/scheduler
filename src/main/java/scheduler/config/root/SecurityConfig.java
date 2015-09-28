@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,7 +18,8 @@ import scheduler.app.security.SecurityUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	public static final String PORTAL_PAGE_URL = "resources/js/pages/main/main-page.js";
+//	public static final String PORTAL_PAGE_URL = "/resources/js/pages/main/main-page.js";
+	public static final String PORTAL_PAGE_URL = "/scheduler/";
 
     private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
 
@@ -53,9 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers( "/resources/public/**" ).permitAll()
 					.antMatchers( "/resources/images*//**" ).permitAll()
 					.antMatchers( "/resources/bower_components*//**" ).permitAll()
-					.antMatchers( "/rest/app/" ).permitAll()
-					.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll()
-					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
+					.antMatchers( "/rest/translator/" ).permitAll()
+//					.antMatchers( "/rest/app/" ).permitAll()
+//					.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll()
+//					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
 					.anyRequest()
 					.authenticated()
 					.and()
@@ -65,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.usernameParameter( "login" )
 					.passwordParameter( "password" )
 					.successHandler( ajaxAuthenticationSuccessHandler )
-					.failureUrl( "/login?error" ) // TODO: implement
+					.failureUrl( "/login?error" ) // TODO: implement beautiful error page
 					.loginPage( LOGIN_PAGE_URL )
 					.and()
 				.logout()

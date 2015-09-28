@@ -8,8 +8,7 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		initialize: function ( nerds ) {
-			this.parse( { translations: nerds } );	// TODO: disable when translator works
-			//this._loadTranslations( nerds ); 		// TODO: enable when translator works
+			this._loadTranslations( nerds );
 		},
 
 		url: '/rest/translator/',
