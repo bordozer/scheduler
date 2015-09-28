@@ -19,7 +19,7 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		progressIcon: 'fa-spinner fa-spin',
+		progressIcon: 'fa fa-circle-o-notch fa-spin',
 		windowBodyContainerSelector: '.js-widget-body',
 
 		builtinEvents: {
@@ -57,7 +57,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function() {
-			return 'fa-windows';
+			return 'fa fa-windows';
 		},
 
 		renderBody: function() {

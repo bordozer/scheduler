@@ -7,13 +7,12 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
-	var schedulerTaskWidget = require( 'js/widgets/scheduler-task-widget/scheduler-task-widget' );
 
-	var template = _.template( require( 'text!./templates/scheduler-task-list-template.html' ) );
+	var template = _.template( require( 'text!./templates/scheduler-task-template.html' ) );
 
 	var Translator = require( 'translator' );
 	var t = new Translator( {
-		title: "Scheduler tasks"
+		title: "Scheduler task"
 	} );
 
 	return WidgetView.extend( {
@@ -33,15 +32,7 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
-
-			var $bel = this.$bel();
-
-			$bel.html( template( { t : t } ) );
-
-			var el = $( "<div class='col-xs-12 col-lg-3'></div>" );
-			$bel.append( el );
-
-			schedulerTaskWidget( el, {} );
+			this.$bel().html( template( { t : t } ) );
 
 			this.renderBodyFinished();
 		}
