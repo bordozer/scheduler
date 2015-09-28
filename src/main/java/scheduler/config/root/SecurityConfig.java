@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGIN_PAGE_URL = "/resources/public/login.html";
 
 	private static final Logger LOGGER = Logger.getLogger( SecurityConfig.class );
-    public static final String REMEMBER_ME_KEY = "myAppKey";
+    public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
 
     @Autowired
 	private SecurityUserDetailsService userDetailsService;

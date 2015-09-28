@@ -17,6 +17,6 @@ public class UserRepository implements UserDao {
 
 	@Override
 	public User findByLogin( final String login ) {
-		return new User(  );
+		return new User( "login", "name", "password" );
 	}
 }
