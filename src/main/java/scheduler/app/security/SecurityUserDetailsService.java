@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import scheduler.app.dao.UserDao;
 import scheduler.app.models.User;
+import scheduler.app.services.users.UserService;
 
 import java.util.List;
 
@@ -21,23 +21,21 @@ public class SecurityUserDetailsService implements UserDetailsService {
 	private static final Logger LOGGER = Logger.getLogger( SecurityUserDetailsService.class );
 
 	@Autowired
-	private UserDao userRepository;
+	private UserService userService;
 
 	@Override
 	public UserDetails loadUserByUsername( final String login ) throws UsernameNotFoundException {
 
-		final User user = userRepository.findByLogin( login );
+		final User user = userService.findByLogin( login );
 
 		if ( user == null ) {
-			LOGGER.debug ( String.format( "================================= User login not found: %s =================================", login ) );
+			LOGGER.debug( String.format( "================================= User login not found: %s =================================", login ) );
 
 			throw new UsernameNotFoundException( String.format( "Username not found: %s", login ) );
 		}
 
-		final String role = "ROLE_USER";
-
 		final List<GrantedAuthority> authorities = newArrayList();
-		authorities.add( new SimpleGrantedAuthority( role ) );
+		authorities.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
 
 		return new org.springframework.security.core.userdetails.User( login, user.getPassword(), authorities );
 	}

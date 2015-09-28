@@ -4,32 +4,36 @@
 		<h4>Login or go home</h4>
 	</div>
 
-	<div class="panel-body">
+	<form action="/authenticate" method="post" id="login-form">
 
-		<div class="row">
-			<div class="col-xs-12 col-lg-6">
-				<%= t.loginLabel %>
+		<div class="panel-body">
+
+			<div class="row">
+				<div class="col-xs-12 col-lg-6">
+					<%= t.loginLabel %>
+				</div>
+				<div class="col-xs-12 col-lg-6">
+					<input type="text" class="form-control" id="login" name="login" value="root">
+				</div>
 			</div>
-			<div class="col-xs-12 col-lg-6">
-				<input type="text" class="form-control" value="root">
+
+			<div class="row">
+				<div class="col-xs-12 col-lg-6">
+					<%= t.passwordLabel %>
+				</div>
+				<div class="col-xs-12 col-lg-6">
+					<input type="password" class="form-control" id="password" name="password" value="password">
+				</div>
+			</div>
+
+		</div>
+
+		<div class="panel-footer clearfix">
+			<div class="btn-group pull-right">
+				<button type="button" class="btn btn-primary fa fa-key js-login-button"><%= t.loginLabel %></button>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-lg-6">
-				<%= t.passwordLabel %>
-			</div>
-			<div class="col-xs-12 col-lg-6">
-				<input type="password" class="form-control" value="password">
-			</div>
-		</div>
-
-	</div>
-
-	<div class="panel-footer clearfix">
-		<div class="btn-group pull-right">
-			<button type="button" class="btn btn-primary fa fa-key js-login-button"><%= t.loginLabel %></button>
-		</div>
-	</div>
+	</form>
 
 </div>

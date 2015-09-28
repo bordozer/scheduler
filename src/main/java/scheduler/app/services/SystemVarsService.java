@@ -1,7 +1,5 @@
 package scheduler.app.services;
 
-import java.util.List;
-
 public interface SystemVarsService {
 
 	String getProjectName();
@@ -16,5 +14,7 @@ public interface SystemVarsService {
 
 	String getDatabaseUserPassword();
 
-	List<Integer> getAdminIds();
+	String getRootUserName();
+
+	String getRootUserPassword();
 }
