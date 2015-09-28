@@ -8,11 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/login-template.html' ) );
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		title: ""
-	} );
-
 	return Backbone.View.extend( {
 
 		events: {},
@@ -23,7 +18,7 @@ define( function ( require ) {
 
 		render: function () {
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var data = _.extend( {}, { translator: translator } );
 
 			this.$el.html( template( data ) );
 
