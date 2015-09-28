@@ -48,7 +48,7 @@ define( function ( require ) {
 
 			this._showProgress();
 
-			this.$( this.windowBodyContainerSelector ).fadeIn( 500, "swing" );
+			this.$bel().fadeIn( 500, "swing" );
 
 			this.renderBody();
 
@@ -59,10 +59,6 @@ define( function ( require ) {
 			return '...';
 		},
 
-		getTitleHint: function() {
-			return ''; // NO HTML here
-		},
-
 		getIcon: function() {
 			return 'fa-windows';
 		},
@@ -71,7 +67,7 @@ define( function ( require ) {
 			// render custom widget context here
 		},
 
-		getBodyContainer: function() {
+		$bel: function() {
 			return this.$( this.windowBodyContainerSelector );
 		},
 
