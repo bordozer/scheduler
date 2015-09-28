@@ -18,7 +18,7 @@ define( function ( require ) {
 
 		render: function () {
 
-			var data = _.extend( {}, { translator: translator } );
+			var data = _.extend( {} );
 
 			this.$el.html( template( data ) );
 
