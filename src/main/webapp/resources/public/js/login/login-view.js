@@ -6,12 +6,16 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var bootbox = require( 'bootbox' );
+
 	var template = _.template( require( 'text!./templates/login-template.html' ) );
 
 	var Translator = require( 'translator' );
-	var translator = new Translator( {
+	var t = new Translator( {
 		loginLabel: 'Login'
 		, passwordLabel: 'Password or credit card number'
+		, loginFailedLabel: 'Login failed'
+		, loginFailedMessage: "Login failed or there are not enough money on the credit card ( depends what you've filled in the field )"
 	} );
 
 	return Backbone.View.extend( {
@@ -25,11 +29,35 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			this.$el.html( template( { t : translator} ) );
+			this.$el.html( template( { t : t } ) );
 		},
 
-		___onLoginClick: function() {
+		__onLoginClick: function() {
+			this.__authenticate( this.$( '#login-form' ).serializeArray() );
+		},
 
+		__authenticate: function( options ) {
+
+			$.ajax( {
+				method: 'POST',
+				url: '/authenticate',
+				data: options,
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					"X-Login-Ajax-call": 'true'
+				},
+				success: function ( response ) {
+					if ( response === 'ok' ) {
+						window.location.replace( '/totalizator/' );
+						return;
+					}
+
+					bootbox.dialog( {
+						title: t.loginFailedLabel
+						, message: t.loginFailedMessage
+					} );
+				}
+			} )
 		}
 	} );
 } );
