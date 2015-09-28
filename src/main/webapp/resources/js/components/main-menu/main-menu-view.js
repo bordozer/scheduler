@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!./templates/main-menu-template.html' );
 
-	var MainMenuView = Backbone.View.extend( {
+	return Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -46,7 +46,5 @@ define( function ( require ) {
 			});
 		}
 	} );
-
-	return { MainMenuView: MainMenuView };
 } );
 

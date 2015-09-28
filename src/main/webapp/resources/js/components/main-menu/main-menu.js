@@ -11,8 +11,8 @@ define( function( require ) {
 
 	function init( options, container ) {
 
-		var model = new Model.MainMenuModel();
-		var view = new View.MainMenuView( { model: model, el: container, options: options } );
+		var model = new Model();
+		var view = new View( { model: model, el: container, options: options } );
 
 		return view.render();
 	}
