@@ -36,12 +36,15 @@ public class TaskEditRestController {
 
 		final TaskEntryEditDTO dto = new TaskEntryEditDTO();
 		dto.setTaskId( task.getId() );
+		dto.setTaskName( task.getTaskName() );
 		// TODO: init DTO from task
 
 		return dto;
 	}
 
 	private TaskEntry fromDTO( final TaskEntry entry, final TaskEntryEditDTO dto ) {
+
+		entry.setTaskName( dto.getTaskName() );
 		// TODO: init task from DTO
 
 		return entry;

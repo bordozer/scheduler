@@ -45,7 +45,7 @@ define( function ( require ) {
 
 			this.model.forEach( function( model ) {
 
-				var el = $( "<div class='col-xs-12 col-lg-3'></div>" );
+				var el = $( "<div class='col-xs-12 col-lg-4'></div>" );
 				$bel.append( el );
 
 				schedulerTaskWidget( el, { taskId: model.get( 'id' ) } );

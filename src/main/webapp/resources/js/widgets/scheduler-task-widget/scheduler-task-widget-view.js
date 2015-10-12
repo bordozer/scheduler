@@ -25,7 +25,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			return t.title;
+			return this.model.get( 'taskName' );
 		},
 
 		getIcon: function() {
