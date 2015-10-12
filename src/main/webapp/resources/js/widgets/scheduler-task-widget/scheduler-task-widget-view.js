@@ -20,6 +20,7 @@ define( function ( require ) {
 		events: {},
 
 		initialize: function ( options ) {
+			this.model.on( 'sync', this.__renderTask, this );
 			this.render();
 		},
 
@@ -33,7 +34,11 @@ define( function ( require ) {
 
 		renderBody: function() {
 			this.model.fetch( { cache: false } );
-			this.$bel().html( template( { t : t } ) );
+		},
+
+		__renderTask: function() {
+
+			this.$bel.html( template( { t : t } ) );
 
 			this.renderBodyFinished();
 		}

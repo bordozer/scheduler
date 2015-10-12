@@ -43,9 +43,11 @@ define( function ( require ) {
 				, t: t
 			} ) );
 
+			this.$bel = this.$( this.windowBodyContainerSelector );
+
 			this._showProgress();
 
-			this.$bel().fadeIn( 500, "swing" );
+			this.$bel.fadeIn( 500, "swing" );
 
 			this.renderBody();
 

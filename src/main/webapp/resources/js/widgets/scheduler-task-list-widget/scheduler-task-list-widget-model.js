@@ -14,7 +14,7 @@ define( function ( require ) {
 		},
 
 		url: function () {
-			return '/';
+			return '/rest/tasks/ids/';
 		}
 	} );
 } );

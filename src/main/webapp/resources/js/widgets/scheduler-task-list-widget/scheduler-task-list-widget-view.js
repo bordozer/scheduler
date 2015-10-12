@@ -21,7 +21,12 @@ define( function ( require ) {
 		events: {},
 
 		initialize: function ( options ) {
+			this.model.on( 'sync', this.__renderTaskList, this );
 			this.render();
+		},
+
+		renderBody: function() {
+			this.model.fetch( { cache: false } );
 		},
 
 		getTitle: function() {
@@ -32,9 +37,9 @@ define( function ( require ) {
 			return 'fa fa-list-alt';
 		},
 
-		renderBody: function() {
+		__renderTaskList: function() {
 
-			var $bel = this.$bel();
+			var $bel = this.$bel;
 
 			$bel.html( template( { t : t } ) );
 

@@ -10,6 +10,8 @@ import scheduler.app.services.DTOService;
 import scheduler.app.services.tasks.TaskService;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping( "/rest/tasks" )
@@ -26,18 +28,22 @@ public class TaskListRestController {
 		return dtoService.transformTasks( taskService.loadAll() );
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/{taskId}/" )
-	public TaskEntryDTO taskEntry( final @PathVariable int taskId ) {
+	@RequestMapping( method = RequestMethod.GET, value = "/ids/" )
+	public List<Long> taskIds() {
 
-		final TaskEntry taskEntry = new TaskEntry();
-		taskEntry.setTaskName( "Scheduler task" );
-		taskService.save( taskEntry );
-
-		return dtoService.transformTask( taskService.load( taskId ) );
+		return taskService.loadAll()
+				.stream()
+				.map( new Function<TaskEntry, Long>() {
+					@Override
+					public Long apply( final TaskEntry taskEntry ) {
+						return taskEntry.getId();
+					}
+				} )
+				.collect( Collectors.toList() );
 	}
 
-	@RequestMapping( method = RequestMethod.DELETE, value = "/{taskId}/" )
-	public void delete( final @PathVariable int taskId ) {
-		taskService.delete( taskId );
+	@RequestMapping( method = RequestMethod.GET, value = "/{taskId}/" )
+	public TaskEntryDTO taskEntry( final @PathVariable int taskId ) {
+		return dtoService.transformTask( taskService.load( taskId ) );
 	}
 }
