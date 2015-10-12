@@ -34,6 +34,10 @@ define( function ( require ) {
 
 		menuItems: function() {
 			return [];
+		},
+
+		save: function() {
+			console.log( 'save'); // TODO
 		}
 	} );
 } );

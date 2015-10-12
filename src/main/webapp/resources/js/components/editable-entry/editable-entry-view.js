@@ -88,6 +88,9 @@ define( function ( require ) {
 		},
 
 		_onSaveTaskClick: function() {
+
+			this.viewEdit.save();
+
 			this.viewMode = MODE_INFO;
 			this.render();
 		},
