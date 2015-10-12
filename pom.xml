@@ -103,8 +103,8 @@
 
 		<dependency>
 			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons-core</artifactId>
-			<version>1.0.0.RELEASE</version>
+			<artifactId>spring-data-commons</artifactId>
+			<version>1.11.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
