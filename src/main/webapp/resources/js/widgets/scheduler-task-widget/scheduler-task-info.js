@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var t = new Translator( {
-		title: ""
+		menuItem_TaskExecutionHistoryLabel: "Task execution history"
 	} );
 
 	return Backbone.View.extend( {
@@ -31,13 +31,13 @@ define( function ( require ) {
 		},
 
 		icon: function() {
-			return 'fa fa-bolt';
+			return 'fa fa-calendar-check-o';
 		},
 
-		getCustomMenuItems: function() {
+		menuItems: function() {
 
 			return [
-				//{ selector: 'js-menu-task-edit', icon: 'fa fa-edit', link: '#', text: t.menuItemTaskEditLabel }
+				{ selector: 'js-menu-task-execution-history', icon: 'fa fa-history', link: '#', text: t.menuItem_TaskExecutionHistoryLabel }
 			];
 		},
 

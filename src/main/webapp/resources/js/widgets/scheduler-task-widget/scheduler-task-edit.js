@@ -30,6 +30,10 @@ define( function ( require ) {
 			this.$el.html( template( { t : t } ) );
 
 			this.trigger( 'inner-view-rendered' );
+		},
+
+		menuItems: function() {
+			return [];
 		}
 	} );
 } );

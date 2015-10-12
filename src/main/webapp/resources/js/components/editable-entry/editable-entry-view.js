@@ -37,7 +37,7 @@ define( function ( require ) {
 
 		renderBody: function() {
 
-			var view = this.viewMode == MODE_INFO ? this.viewInfo : this.viewEdit ;
+			var view = this.viewMode == MODE_INFO ? this.viewInfo : this.viewEdit;
 
 			view.$el = this.$bel;
 			view.on( 'inner-view-rendered', this.renderBodyFinished, this );
@@ -59,17 +59,27 @@ define( function ( require ) {
 
 		getCustomMenuItems: function() {
 
-			if ( this.viewMode == MODE_EDIT ) {
+			var menuItems = [];
 
-				return [
+			if ( this.viewMode == MODE_INFO ) {
+				menuItems = [
+					{ selector: 'js-menu-task-edit', icon: 'fa fa-edit', link: '#', text: t.menuItemEditLabel }
+				];
+			} else {
+				menuItems = [
 					{ selector: 'js-menu-task-edit-save', icon: 'fa fa-save', link: '#', text: t.menuItemSaveLabel }
 					, { selector: 'js-menu-task-discard-editing', icon: 'fa fa-close', link: '#', text: t.menuItemDiscardEditingLabel }
 				];
 			}
 
-			return [
-				{ selector: 'js-menu-task-edit', icon: 'fa fa-edit', link: '#', text: t.menuItemEditLabel }
-			];
+			var menuSubItems = this.viewMode == MODE_INFO ? this.viewInfo.menuItems() : this.viewEdit.menuItems();
+
+			if ( menuSubItems.length > 0 ) {
+				menuItems = menuItems.concat( [ { selector: 'divider' } ] );
+				menuItems = menuItems.concat( menuSubItems );
+			}
+
+			return menuItems;
 		},
 
 		_onEditTaskClick: function() {
