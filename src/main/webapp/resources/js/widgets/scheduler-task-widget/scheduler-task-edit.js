@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var t = new Translator( {
-		title: ""
+		taskName: "Task name"
 	} );
 
 	return Backbone.View.extend( {
@@ -27,7 +27,11 @@ define( function ( require ) {
 		},
 
 		_renderTaskEdit: function() {
-			this.$el.html( template( { t : t } ) );
+
+			this.$el.html( template( {
+				model: this.model.toJSON()
+				t : t
+			} ) );
 
 			this.trigger( 'inner-view-rendered' );
 		},
