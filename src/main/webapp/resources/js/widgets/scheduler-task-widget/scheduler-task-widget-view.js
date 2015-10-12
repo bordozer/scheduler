@@ -12,16 +12,22 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var t = new Translator( {
-		title: "Scheduler task"
+		menuItemTaskEditLabel: "Edit scheduler task"
 	} );
 
 	return WidgetView.extend( {
 
-		events: {},
+		events: {
+			'click .js-menu-task-edit': '_onEditTaskClick'
+		},
 
 		initialize: function ( options ) {
-			this.model.on( 'sync', this.__renderTask, this );
+			this.model.on( 'sync', this._renderTask, this );
 			this.render();
+		},
+
+		renderBody: function() {
+			this.model.fetch( { cache: false } );
 		},
 
 		getTitle: function() {
@@ -32,15 +38,22 @@ define( function ( require ) {
 			return 'fa fa-list-alt';
 		},
 
-		renderBody: function() {
-			this.model.fetch( { cache: false } );
+		getCustomMenuItems: function() {
+
+			return [
+				{ selector: 'js-menu-task-edit', icon: 'fa fa-edit', link: '#', text: t.menuItemTaskEditLabel }
+			];
 		},
 
-		__renderTask: function() {
+		_renderTask: function() {
 
 			this.$bel.html( template( { t : t } ) );
 
 			this.renderBodyFinished();
+		},
+
+		_onEditTaskClick: function() {
+
 		}
 	} );
 } );

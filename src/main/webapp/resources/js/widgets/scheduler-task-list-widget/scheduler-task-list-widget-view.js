@@ -21,7 +21,7 @@ define( function ( require ) {
 		events: {},
 
 		initialize: function ( options ) {
-			this.model.on( 'sync', this.__renderTaskList, this );
+			this.model.on( 'sync', this._renderTaskList, this );
 			this.render();
 		},
 
@@ -37,7 +37,14 @@ define( function ( require ) {
 			return 'fa fa-list-alt';
 		},
 
-		__renderTaskList: function() {
+		getCustomMenuItems: function() {
+
+			return [
+				//{ selector: 'js-menu-task-edit', icon: 'fa fa-edit', link: '#', text: t.menuItemTaskEditLabel }
+			];
+		},
+
+		_renderTaskList: function() {
 
 			var $bel = this.$bel;
 
