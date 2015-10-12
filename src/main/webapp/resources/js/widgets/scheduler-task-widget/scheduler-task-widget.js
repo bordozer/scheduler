@@ -7,18 +7,25 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var Model = require( './scheduler-task-widget-model' );
-	var View = require( './scheduler-task-widget-view' );
+
+	var EditableEntry = require( 'js/components/editable-entry/editable-entry-view' );
+
+	var ViewInfo = require( './scheduler-task-info' );
+	var ViewEdit = require( './scheduler-task-edit' );
 
 	function init( container, options ) {
 
 		var model = new Model( { options: options } );
-		var view = new View( { model: model, el: container, options: options } );
 
-		return {
-			view: function () {
-				return view;
-			}
-		}
+		//var viewInfo = new ViewInfo( { model: model, el: container, options: options } );
+		//var viewEdit = new ViewEdit( { model: model, el: container, options: options } );
+
+		var view = new EditableEntry( {
+			model: model
+			, el: container
+			, viewInfo: new ViewInfo( { model: model } )
+			, viewEdit: new ViewEdit( { model: model } )
+		} );
 	}
 
 	return init;

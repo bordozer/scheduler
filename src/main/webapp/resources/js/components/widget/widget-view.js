@@ -31,6 +31,7 @@ define( function ( require ) {
 			this.events = _.extend( this.builtinEvents, this.events );
 
 			this.on( 'view:render', this.render, this );
+			this.on( 'inner-view-rendered', this.renderBodyFinished, this );
 
 			Backbone.View.apply( this, [ options ] );
 		},
