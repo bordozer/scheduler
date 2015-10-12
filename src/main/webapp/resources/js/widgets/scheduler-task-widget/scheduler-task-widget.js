@@ -17,9 +17,6 @@ define( function ( require ) {
 
 		var model = new Model( { options: options } );
 
-		//var viewInfo = new ViewInfo( { model: model, el: container, options: options } );
-		//var viewEdit = new ViewEdit( { model: model, el: container, options: options } );
-
 		var view = new EditableEntry( {
 			model: model
 			, el: container
