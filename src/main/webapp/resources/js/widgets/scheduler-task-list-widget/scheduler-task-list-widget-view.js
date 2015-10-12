@@ -43,10 +43,13 @@ define( function ( require ) {
 
 			$bel.html( template( { t : t } ) );
 
-			var el = $( "<div class='col-xs-12 col-lg-3'></div>" );
-			$bel.append( el );
+			this.model.forEach( function( model ) {
 
-			schedulerTaskWidget( el, {} );
+				var el = $( "<div class='col-xs-12 col-lg-3'></div>" );
+				$bel.append( el );
+
+				schedulerTaskWidget( el, { taskId: model.get( 'id' ) } );
+			});
 
 			this.renderBodyFinished();
 		}

@@ -29,14 +29,14 @@ public class TaskListRestController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/ids/" )
-	public List<Long> taskIds() {
+	public List<IdDTO> taskIds() {
 
 		return taskService.loadAll()
 				.stream()
-				.map( new Function<TaskEntry, Long>() {
+				.map( new Function<TaskEntry, IdDTO>() {
 					@Override
-					public Long apply( final TaskEntry taskEntry ) {
-						return taskEntry.getId();
+					public IdDTO apply( final TaskEntry taskEntry ) {
+						return new IdDTO( taskEntry.getId() );
 					}
 				} )
 				.collect( Collectors.toList() );

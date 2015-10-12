@@ -10,11 +10,11 @@ define( function ( require ) {
 		defaults: {},
 
 		initialize: function ( options ) {
-
+			this.taskId = options.options.taskId;
 		},
 
 		url: function () {
-			return '/rest/tasks/1/'; // TODO: pass ID here
+			return '/rest/tasks/' + this.taskId + '/';
 		}
 	} );
 } );

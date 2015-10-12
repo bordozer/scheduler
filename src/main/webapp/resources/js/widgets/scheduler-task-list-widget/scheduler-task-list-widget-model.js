@@ -5,7 +5,7 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 
-	return Backbone.Model.extend( {
+	return Backbone.Collection.extend( {
 
 		defaults: {},
 
