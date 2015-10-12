@@ -30,7 +30,7 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				model: this.model.toJSON()
-				t : t
+				, t : t
 			} ) );
 
 			this.trigger( 'inner-view-rendered' );
