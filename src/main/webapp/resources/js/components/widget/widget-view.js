@@ -66,10 +66,6 @@ define( function ( require ) {
 			// render custom widget context here
 		},
 
-		$bel: function() {
-			return this.$( this.windowBodyContainerSelector );
-		},
-
 		widgetBodyMinHeight: function() {
 			return '50px';
 		},
@@ -87,7 +83,6 @@ define( function ( require ) {
 			el.html( '' );
 			el.removeClass( this.progressIcon );
 			el.addClass( this.getIcon() );
-
 		},
 
 		getCustomMenuItems: function() {
