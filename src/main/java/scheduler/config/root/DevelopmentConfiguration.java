@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Configuration
 @Profile( "development" )
-@EnableJpaRepositories
+@EnableJpaRepositories( "scheduler.app.dao" )
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
 
