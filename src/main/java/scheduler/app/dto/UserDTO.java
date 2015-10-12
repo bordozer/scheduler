@@ -5,7 +5,7 @@ import scheduler.app.models.User;
 
 public class UserDTO {
 
-	private int userId;
+	private long userId;
 	private String userName;
 
 	public UserDTO( final User user ) {
@@ -13,11 +13,11 @@ public class UserDTO {
 		this.userName = StringEscapeUtils.escapeJavaScript( user.getUsername() );
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId( final int userId ) {
+	public void setUserId( final long userId ) {
 		this.userId = userId;
 	}
 

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import scheduler.app.models.TaskEntry;
 import scheduler.app.services.DTOService;
 import scheduler.app.services.tasks.TaskService;
 
@@ -27,6 +28,11 @@ public class TaskListRestController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{taskId}/" )
 	public TaskEntryDTO taskEntry( final @PathVariable int taskId ) {
+
+		final TaskEntry taskEntry = new TaskEntry();
+		taskEntry.setTaskName( "Scheduler task" );
+		taskService.save( taskEntry );
+
 		return dtoService.transformTask( taskService.load( taskId ) );
 	}
 

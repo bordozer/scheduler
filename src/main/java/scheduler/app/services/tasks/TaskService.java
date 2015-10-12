@@ -10,5 +10,7 @@ public interface TaskService {
 
 	TaskEntry load( final long taskId );
 
+	TaskEntry save( final TaskEntry taskEntry );
+
 	void delete( final long taskId );
 }

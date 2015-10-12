@@ -14,7 +14,7 @@ define( function ( require ) {
 		},
 
 		url: function () {
-			return '/';
+			return '/rest/tasks/1/'; // TODO: pass ID here
 		}
 	} );
 } );

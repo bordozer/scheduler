@@ -32,6 +32,7 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
+			this.model.fetch( { cache: false } );
 			this.$bel().html( template( { t : t } ) );
 
 			this.renderBodyFinished();

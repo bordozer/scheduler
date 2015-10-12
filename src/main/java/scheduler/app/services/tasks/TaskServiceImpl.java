@@ -24,6 +24,11 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	public TaskEntry save( final TaskEntry taskEntry ) {
+		return taskDao.save( taskEntry );
+	}
+
+	@Override
 	public void delete( final long taskId ) {
 		taskDao.delete( load( taskId ) );
 	}

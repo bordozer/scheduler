@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
-@Table(name = "users")
-@NamedQueries({
+@Table( name = "users" )
+@NamedQueries( {
 		@NamedQuery(
 				name = User.LOAD_ALL,
 				query = "select c from User c order by username"
@@ -16,7 +16,7 @@ import javax.persistence.*;
 				name = User.FIND_BY_LOGIN,
 				query = "select u from User u where login = :login"
 		)
-})
+} )
 public class User extends AbstractEntity {
 
 	public static final String LOAD_ALL = "user.loadAll";
@@ -66,7 +66,7 @@ public class User extends AbstractEntity {
 
 	@Override
 	public int hashCode() {
-		return 31 * getId();
+		return ( int ) ( 31 * getId() );
 	}
 
 	@Override
