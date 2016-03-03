@@ -10,7 +10,8 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var t = new Translator( {
-		menuItem_TaskExecutionHistoryLabel: "Task execution history"
+		menuItem_TaskExecutionHistoryLabel: "Task execution history",
+		taskName: "Task name"
 	} );
 
 	return Backbone.View.extend( {
@@ -42,7 +43,7 @@ define( function ( require ) {
 		},
 
 		_renderTaskInfo: function() {
-			this.$el.html( template( { t : t } ) );
+			this.$el.html( template( { model: this.model.toJSON(), t : t } ) );
 			this.trigger( 'inner-view-rendered' );
 		}
 	} );
