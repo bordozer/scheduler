@@ -4,7 +4,7 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 
-	var PortalPageModel = Backbone.Model.extend( {
+	return Backbone.Model.extend( {
 
 		defaults: {
 			id: 0
@@ -16,7 +16,5 @@ define( function ( require ) {
 			this.options = options.options;
 			this.url = '/rest/portal-page/';
 		}
-	});
-
-	return { PortalPageModel: PortalPageModel };
+	} );
 } );

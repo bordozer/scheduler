@@ -2,14 +2,8 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Backbone = require( 'backbone' );
-	var _ = require( 'underscore' );
-	var $ = require( 'jquery' );
-
 	var Model = require( './scheduler-task-widget-model' );
-
 	var EditableEntry = require( 'js/components/editable-entry/editable-entry-view' );
-
 	var ViewInfo = require( './scheduler-task-info' );
 	var ViewEdit = require( './scheduler-task-edit' );
 

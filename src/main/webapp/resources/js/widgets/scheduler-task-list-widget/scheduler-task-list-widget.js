@@ -2,10 +2,6 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Backbone = require( 'backbone' );
-	var _ = require( 'underscore' );
-	var $ = require( 'jquery' );
-
 	var Model = require( './scheduler-task-list-widget-model' );
 	var View = require( './scheduler-task-list-widget-view' );
 
