@@ -8,13 +8,13 @@ import scheduler.config.root.SecurityConfig;
 import java.security.Principal;
 
 @Controller
-@RequestMapping( SecurityConfig.PORTAL_PAGE_URL )
+@RequestMapping(SecurityConfig.PORTAL_PAGE_URL)
 public class PortalPageController {
 
-	private static final String VIEW = "/PortalPage";
+    private static final String VIEW = "/PortalPage";
 
-	@RequestMapping( method = RequestMethod.GET, value = "" )
-	public String portalPage( final Principal principal ) {
-		return VIEW;
-	}
+    @RequestMapping(method = RequestMethod.GET, value = "")
+    public String portalPage(final Principal principal) {
+        return VIEW;
+    }
 }

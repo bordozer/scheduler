@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import scheduler.app.models.User;
+import scheduler.app.entries.UserEntry;
 import scheduler.app.services.users.UserService;
 
 import java.util.List;
@@ -18,25 +18,25 @@ import static com.google.common.collect.Lists.newArrayList;
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
 
-	private static final Logger LOGGER = Logger.getLogger( SecurityUserDetailsService.class );
+    private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Override
-	public UserDetails loadUserByUsername( final String login ) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
 
-		final User user = userService.findByLogin( login );
+        final UserEntry userEntry = userService.findByLogin(login);
 
-		if ( user == null ) {
-			LOGGER.debug( String.format( "================================= User login not found: %s =================================", login ) );
+        if (userEntry == null) {
+            LOGGER.debug(String.format("================================= User login not found: %s =================================", login));
 
-			throw new UsernameNotFoundException( String.format( "Username not found: %s", login ) );
-		}
+            throw new UsernameNotFoundException(String.format("Username not found: %s", login));
+        }
 
-		final List<GrantedAuthority> authorities = newArrayList();
-		authorities.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
+        final List<GrantedAuthority> authorities = newArrayList();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-		return new org.springframework.security.core.userdetails.User( login, user.getPassword(), authorities );
-	}
+        return new org.springframework.security.core.userdetails.User(login, userEntry.getPassword(), authorities);
+    }
 }

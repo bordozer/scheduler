@@ -2,19 +2,19 @@ package scheduler.app.services;
 
 public interface SystemVarsService {
 
-	String getProjectName();
+    String getProjectName();
 
-	String getDatabaseHost();
+    String getDatabaseHost();
 
-	String getDatabasePort();
+    String getDatabasePort();
 
-	String getDatabaseName();
+    String getDatabaseName();
 
-	String getDatabaseUserName();
+    String getDatabaseUserName();
 
-	String getDatabaseUserPassword();
+    String getDatabaseUserPassword();
 
-	String getRootUserName();
+    String getRootUserName();
 
-	String getRootUserPassword();
+    String getRootUserPassword();
 }

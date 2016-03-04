@@ -1,11 +1,11 @@
 package scheduler.app.dao;
 
-import scheduler.app.models.User;
+import scheduler.app.entries.UserEntry;
 
 public interface UserDao {
 
-	String CACHE_ENTRY = "scheduler.app.cache.user";
-	String CACHE_QUERY = "scheduler.app.cache.users";
+    String CACHE_ENTRY = "scheduler.app.cache.user";
+    String CACHE_QUERY = "scheduler.app.cache.users";
 
-	User findByLogin( final String login );
+    UserEntry findByLogin(final String login);
 }

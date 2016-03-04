@@ -22,48 +22,48 @@ import java.io.IOException;
 
 @Configuration
 @EnableCaching // TODO: ENABLE
-@ComponentScan( {
-		"scheduler.app.services"
-		, "scheduler.app.dao"
-		, "scheduler.app.security"
-} )
+@ComponentScan({
+        "scheduler.app.services"
+        , "scheduler.app.dao"
+        , "scheduler.app.security"
+})
 public class RootContextConfig {
 
-	@Bean( name = "transactionManager" )
-	public PlatformTransactionManager transactionManager( final EntityManagerFactory entityManagerFactory, final DriverManagerDataSource dataSource ) {
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager(final EntityManagerFactory entityManagerFactory, final DriverManagerDataSource dataSource) {
 
-		final JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory( entityManagerFactory );
-		transactionManager.setDataSource( dataSource );
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        transactionManager.setDataSource(dataSource);
 
-		return transactionManager;
-	}
+        return transactionManager;
+    }
 
-	@Bean( name = "systemVarsService", initMethod = "init" )
-	public SystemVarsServiceImpl systemVarsService() {
-		return new SystemVarsServiceImpl();
-	}
+    @Bean(name = "systemVarsService", initMethod = "init")
+    public SystemVarsServiceImpl systemVarsService() {
+        return new SystemVarsServiceImpl();
+    }
 
-	@Bean
-	public EhCacheCacheManager cacheManager() throws IOException {
-		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
-	}
+    @Bean
+    public EhCacheCacheManager cacheManager() throws IOException {
+        return new EhCacheCacheManager(CacheManager.create(ConfigurationFactory.parseConfiguration(getConfigLocation().getInputStream())));
+    }
 
-	@Bean
-	public KeyGenerator keyGenerator() {
-		return new MyKeyGenerator();
-	}
+    @Bean
+    public KeyGenerator keyGenerator() {
+        return new MyKeyGenerator();
+    }
 
-	@Bean
-	public CommonsMultipartResolver multipartResolver(){
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
 
-		final CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-		resolver.setDefaultEncoding( "UTF-8" );
+        final CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
 
-		return resolver;
-	}
+        return resolver;
+    }
 
-	private Resource getConfigLocation() {
-		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );
-	}
+    private Resource getConfigLocation() {
+        return new FileSystemResource("src/main/webapp/WEB-INF/ehcache.xml");
+    }
 }

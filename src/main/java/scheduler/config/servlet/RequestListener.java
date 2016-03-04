@@ -8,16 +8,16 @@ import javax.servlet.http.HttpSession;
 
 public class RequestListener extends RequestContextListener {
 
-	@Override
-	public void requestInitialized( final ServletRequestEvent requestEvent ) {
-		super.requestInitialized( requestEvent );
+    @Override
+    public void requestInitialized(final ServletRequestEvent requestEvent) {
+        super.requestInitialized(requestEvent);
 
-		final HttpServletRequest request = ( HttpServletRequest ) requestEvent.getServletRequest();
+        final HttpServletRequest request = (HttpServletRequest) requestEvent.getServletRequest();
 
-		initContext( request );
-	}
+        initContext(request);
+    }
 
-	private void initContext( final HttpServletRequest request ) {
-		final HttpSession session = request.getSession();
-	}
+    private void initContext(final HttpServletRequest request) {
+        final HttpSession session = request.getSession();
+    }
 }

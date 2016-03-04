@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping( "/rest/translator" )
+@RequestMapping("/rest/translator")
 public class TranslatorController {
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public TranslationDTO getDefaultLogin( final TranslationDTO dto ) {
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public TranslationDTO getDefaultLogin(final TranslationDTO dto) {
 
-		return new TranslationDTO( Maps.transformValues( dto.getTranslations(), new Function<String, String>() {
+        return new TranslationDTO(Maps.transformValues(dto.getTranslations(), new Function<String, String>() {
 
-			@Override
-			public String apply( final String nerd ) {
-				return nerd; // TODO: translate
-			}
-		} ) );
-	}
+            @Override
+            public String apply(final String nerd) {
+                return nerd; // TODO: translate
+            }
+        }));
+    }
 }

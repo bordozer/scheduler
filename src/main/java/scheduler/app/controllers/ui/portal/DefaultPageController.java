@@ -12,11 +12,11 @@ import java.io.IOException;
  * Redirects to default page
  */
 @Controller
-@RequestMapping( "" )
+@RequestMapping("")
 public class DefaultPageController {
 
-	@RequestMapping( method = RequestMethod.GET )
-	public void redirectToPortalPage( HttpServletResponse response ) throws IOException {
-		response.sendRedirect( SecurityConfig.PORTAL_PAGE_URL );
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public void redirectToPortalPage(HttpServletResponse response) throws IOException {
+        response.sendRedirect(SecurityConfig.PORTAL_PAGE_URL);
+    }
 }

@@ -1,16 +1,16 @@
 package scheduler.app.services.tasks;
 
-import scheduler.app.models.TaskEntry;
+import scheduler.app.entries.TaskEntry;
 
 import java.util.List;
 
 public interface TaskService {
 
-	List<TaskEntry> loadAll();
+    List<TaskEntry> loadAll();
 
-	TaskEntry load( final long taskId );
+    TaskEntry load(final long taskId);
 
-	TaskEntry save( final TaskEntry taskEntry );
+    TaskEntry save(final TaskEntry taskEntry);
 
-	void delete( final long taskId );
+    void delete(final long taskId);
 }

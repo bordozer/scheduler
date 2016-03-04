@@ -14,36 +14,36 @@ import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[]{ RootContextConfig.class, DevelopmentConfiguration.class, SecurityConfig.class };
-	}
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[]{RootContextConfig.class, DevelopmentConfiguration.class, SecurityConfig.class};
+    }
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[]{ ServletContextConfig.class };
-	}
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[]{ServletContextConfig.class};
+    }
 
-	@Override
-	protected String[] getServletMappings() {
-		return new String[]{ "/" };
-	}
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
 
-	@Override
-	public void onStartup( final ServletContext servletContext ) throws ServletException {
-		super.onStartup( servletContext );
+    @Override
+    public void onStartup(final ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
 
-		servletContext.addListener( new SessionListener() );
-		servletContext.addListener( new RequestListener() );
-	}
+        servletContext.addListener(new SessionListener());
+        servletContext.addListener(new RequestListener());
+    }
 
-	@Override
-	protected Filter[] getServletFilters() {
+    @Override
+    protected Filter[] getServletFilters() {
 
-		final CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-		characterEncodingFilter.setEncoding( "UTF-8" );
-		characterEncodingFilter.setForceEncoding( true );
+        final CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
 
-		return new Filter[]{ characterEncodingFilter };
-	}
+        return new Filter[]{characterEncodingFilter};
+    }
 }

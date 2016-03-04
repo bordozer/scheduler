@@ -1,8 +1,8 @@
 package scheduler.app.services.users;
 
-import scheduler.app.models.User;
+import scheduler.app.entries.UserEntry;
 
 public interface UserService {
 
-	User findByLogin( final String login );
+    UserEntry findByLogin(final String login);
 }

@@ -15,19 +15,19 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan("scheduler.app.controllers")
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
 
-	@Override
-	public void addResourceHandlers( ResourceHandlerRegistry registry ) {
-		registry.addResourceHandler( "/resources/**" ).addResourceLocations( "/resources/" );
-	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
 
-	@Bean
-	public ViewResolver viewResolver() {
+    @Bean
+    public ViewResolver viewResolver() {
 
-		final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setViewClass( JstlView.class );
-		viewResolver.setPrefix( "/WEB-INF/jsp" );
-		viewResolver.setSuffix( ".jsp" );
+        final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/jsp");
+        viewResolver.setSuffix(".jsp");
 
-		return viewResolver;
-	}
+        return viewResolver;
+    }
 }

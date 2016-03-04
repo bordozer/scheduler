@@ -4,23 +4,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Map;
 
-@JsonIgnoreProperties( ignoreUnknown = true )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TranslationDTO {
 
-	private Map<String, String> translations;
+    private Map<String, String> translations;
 
-	public TranslationDTO() {
-	}
+    public TranslationDTO() {
+    }
 
-	public TranslationDTO( final Map<String, String> translations ) {
-		this.translations = translations;
-	}
+    public TranslationDTO(final Map<String, String> translations) {
+        this.translations = translations;
+    }
 
-	public Map<String, String> getTranslations() {
-		return translations;
-	}
+    public Map<String, String> getTranslations() {
+        return translations;
+    }
 
-	public void setTranslations( final Map<String, String> translations ) {
-		this.translations = translations;
-	}
+    public void setTranslations(final Map<String, String> translations) {
+        this.translations = translations;
+    }
 }
