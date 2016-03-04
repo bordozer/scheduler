@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import scheduler.app.dao.UserRepository;
 import scheduler.app.entries.UserEntry;
 import scheduler.app.models.User;
 import scheduler.app.services.users.UserService;
@@ -23,12 +24,12 @@ public class SecurityUserDetailsService implements UserDetailsService {
     private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
 
     @Inject
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
 
-        final User user = userService.findByLogin(login);
+        final UserEntry user = userRepository.findByLogin(login);
 
         if (user == null) {
             LOGGER.debug(String.format("================================= User login not found: %s =================================", login));
