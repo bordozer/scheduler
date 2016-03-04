@@ -15,7 +15,8 @@ public class UserEntry {
 
     @Id
     @Column(name = "C_USER_ID", unique = true)
-    @GeneratedValue
+    @GeneratedValue(generator = "T_USER_GEN")
+    @SequenceGenerator(name = "T_USER_GEN", sequenceName = "T_USER_SEQ", allocationSize = 20)
     private Long id;
 
     @Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")

@@ -15,7 +15,8 @@ public class TaskEntry {
 
     @Id
     @Column(name = "C_SCH_TASK_ID", unique = true)
-    @GeneratedValue
+    @GeneratedValue(generator = "T_SCH_TASK_GEN")
+    @SequenceGenerator(name = "T_SCH_TASK_GEN", sequenceName = "T_SCH_TASK_SEQ", allocationSize = 20)
     private Long id;
 
     @Column(name = "C_SCH_TASK_NAME", columnDefinition = "VARCHAR(255)")
