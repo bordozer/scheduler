@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SchedulerTaskEditDTO {
-    private long taskId;
+    private Long taskId;
     private String taskName;
     private String taskDescription;
 }

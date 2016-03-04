@@ -1,11 +1,11 @@
-package scheduler.app.controllers.rest.tasks.list;
+package scheduler.app.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SchedulerTaskDTO {
+public class SchedulerTaskDTO implements DTO {
     private long taskId;
     private String taskName;
     private String taskDescription;

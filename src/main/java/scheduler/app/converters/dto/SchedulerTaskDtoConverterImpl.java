@@ -2,7 +2,7 @@ package scheduler.app.converters.dto;
 
 import org.springframework.stereotype.Service;
 import scheduler.app.controllers.rest.tasks.item.edit.SchedulerTaskEditDTO;
-import scheduler.app.controllers.rest.tasks.list.SchedulerTaskDTO;
+import scheduler.app.dto.SchedulerTaskDTO;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 
@@ -33,12 +33,22 @@ public class SchedulerTaskDtoConverterImpl implements SchedulerTaskDtoConverter 
     }
 
     @Override
-    public SchedulerTask toModel(final User user, final SchedulerTaskEditDTO editDTO) {
+    public SchedulerTask toModel(final User user, final SchedulerTaskDTO dto) {
         SchedulerTask ret = new SchedulerTask();
-        ret.setId(editDTO.getTaskId());
+        ret.setId(dto.getTaskId());
         ret.setUser(user);
-        ret.setTaskName(editDTO.getTaskName());
-        ret.setTaskDescription(editDTO.getTaskDescription());
+        ret.setTaskName(dto.getTaskName());
+        ret.setTaskDescription(dto.getTaskDescription());
+        return ret;
+    }
+
+    @Override
+    public SchedulerTask toModel(final User user, final SchedulerTaskEditDTO editDto) {
+        SchedulerTask ret = new SchedulerTask();
+        ret.setId(editDto.getTaskId());
+        ret.setUser(user);
+        ret.setTaskName(editDto.getTaskName());
+        ret.setTaskDescription(editDto.getTaskDescription());
         return ret;
     }
 

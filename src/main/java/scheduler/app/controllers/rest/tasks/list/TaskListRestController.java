@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.app.converters.dto.SchedulerTaskDtoConverter;
+import scheduler.app.dto.SchedulerTaskDTO;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
 import javax.inject.Inject;

@@ -3,7 +3,7 @@ package scheduler.app.dto;
 import org.apache.commons.lang.StringEscapeUtils;
 import scheduler.app.entries.UserEntry;
 
-public class UserDTO {
+public class UserDTO implements DTO {
 
     private long userId;
     private String userName;

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.app.converters.dto.SchedulerTaskDtoConverter;
-import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 import scheduler.app.services.tasks.SchedulerTaskService;
@@ -31,24 +30,22 @@ public class TaskEditRestController {
     @RequestMapping(method = RequestMethod.PUT, value = "/0/")
     public SchedulerTaskEditDTO create(final @RequestBody SchedulerTaskEditDTO editDTO, final Principal principal) {
         SchedulerTask schedulerTask = schedulerTaskDtoConverter.toModel(getCurrentUser(principal), editDTO);
-        SchedulerTask createdEntry = schedulerTaskService.add(schedulerTask);
-        return schedulerTaskDtoConverter.toEditDto(createdEntry);
+        SchedulerTask created = schedulerTaskService.add(schedulerTask);
+        return schedulerTaskDtoConverter.toEditDto(created);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{taskId}/")
     public SchedulerTaskEditDTO edit(final @RequestBody SchedulerTaskEditDTO editDTO, final Principal principal) {
         SchedulerTask schedulerTask = schedulerTaskDtoConverter.toModel(getCurrentUser(principal), editDTO);
-        SchedulerTask createdEntry = schedulerTaskService.save(schedulerTask);
-        return schedulerTaskDtoConverter.toEditDto(createdEntry);
+        SchedulerTask saved = schedulerTaskService.save(schedulerTask);
+        return schedulerTaskDtoConverter.toEditDto(saved);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{taskId}/")
     public void delete(final @PathVariable int taskId) {
-
         if (taskId == 0) {
             return;
         }
-
         schedulerTaskService.delete(taskId);
     }
 
