@@ -7,4 +7,6 @@ import scheduler.app.entries.SchedulerTaskEntry;
 @Repository
 public interface TaskRepository extends JpaRepository<SchedulerTaskEntry, Long> {
 
+    SchedulerTaskEntry findById(Long id);
+
 }

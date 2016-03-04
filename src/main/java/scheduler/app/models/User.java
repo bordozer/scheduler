@@ -3,7 +3,6 @@ package scheduler.app.models;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import scheduler.app.entries.DBEntity;
 
 @Getter
 @Setter

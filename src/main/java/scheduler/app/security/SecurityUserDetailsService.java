@@ -1,7 +1,6 @@
 package scheduler.app.security;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import scheduler.app.dao.UserRepository;
 import scheduler.app.entries.UserEntry;
-import scheduler.app.models.User;
-import scheduler.app.services.users.UserService;
 
 import javax.inject.Inject;
 import java.util.List;

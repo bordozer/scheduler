@@ -23,8 +23,8 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 public class UserSecureDetailsEntry implements DBEntity {
 
-    @OneToOne(fetch= FetchType.LAZY, optional = false)
-    @JoinColumn(name="C_USER_ID", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "C_USER_ID", nullable = false)
     private UserEntry user;
 
     @Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")
