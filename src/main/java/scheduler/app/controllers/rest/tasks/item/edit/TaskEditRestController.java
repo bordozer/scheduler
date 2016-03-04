@@ -2,7 +2,7 @@ package scheduler.app.controllers.rest.tasks.item.edit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import scheduler.app.entries.TaskEntry;
+import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.services.tasks.TaskService;
 
 @RestController
@@ -14,7 +14,7 @@ public class TaskEditRestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0/")
     public TaskEntryEditDTO create(final @RequestBody TaskEntryEditDTO dto) {
-        return toDTO(taskService.save(fromDTO(new TaskEntry(), dto)));
+        return toDTO(taskService.save(fromDTO(new SchedulerTaskEntry(), dto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{taskId}/")
@@ -32,7 +32,7 @@ public class TaskEditRestController {
         taskService.delete(taskId);
     }
 
-    private TaskEntryEditDTO toDTO(final TaskEntry task) {
+    private TaskEntryEditDTO toDTO(final SchedulerTaskEntry task) {
 
         final TaskEntryEditDTO dto = new TaskEntryEditDTO();
         dto.setTaskId(task.getId());
@@ -42,7 +42,7 @@ public class TaskEditRestController {
         return dto;
     }
 
-    private TaskEntry fromDTO(final TaskEntry entry, final TaskEntryEditDTO dto) {
+    private SchedulerTaskEntry fromDTO(final SchedulerTaskEntry entry, final TaskEntryEditDTO dto) {
 
         entry.setTaskName(dto.getTaskName());
         // TODO: init task from DTO

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "T_SCH_TASK")
 @Getter
 @Setter
-public class TaskEntry {
+public class SchedulerTaskEntry {
 
     @Id
     @Column(name = "C_SCH_TASK_ID", unique = true)
@@ -19,11 +19,15 @@ public class TaskEntry {
     @SequenceGenerator(name = "T_SCH_TASK_GEN", sequenceName = "T_SCH_TASK_SEQ", allocationSize = 20)
     private Long id;
 
+    @OneToOne(fetch= FetchType.LAZY, optional = false)
+    @JoinColumn(name="C_USER_ID", nullable = false)
+    private UserEntry user;
+
     @Column(name = "C_SCH_TASK_NAME", columnDefinition = "VARCHAR(255)")
     private String taskName;
 
     @Column(name = "C_SCH_TASK_DESCR", columnDefinition = "VARCHAR(255)")
-    private String description;
+    private String taskDescription;
 
     /*@Column(name = "", columnDefinition = "VARCHAR(255)")
     private String taskParametersJSON;

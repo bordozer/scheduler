@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import scheduler.app.entries.TaskEntry;
+import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.services.DTOService;
 import scheduler.app.services.tasks.TaskService;
 
@@ -33,10 +33,10 @@ public class TaskListRestController {
 
         return taskService.loadAll()
                 .stream()
-                .map(new Function<TaskEntry, IdDTO>() {
+                .map(new Function<SchedulerTaskEntry, IdDTO>() {
                     @Override
-                    public IdDTO apply(final TaskEntry taskEntry) {
-                        return new IdDTO(taskEntry.getId());
+                    public IdDTO apply(final SchedulerTaskEntry schedulerTaskEntry) {
+                        return new IdDTO(schedulerTaskEntry.getId());
                     }
                 })
                 .collect(Collectors.toList());

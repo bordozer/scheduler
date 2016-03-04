@@ -3,7 +3,7 @@ package scheduler.app.services.tasks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scheduler.app.dao.TaskRepository;
-import scheduler.app.entries.TaskEntry;
+import scheduler.app.entries.SchedulerTaskEntry;
 
 import java.util.List;
 
@@ -16,18 +16,18 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
 
     @Override
-    public List<TaskEntry> loadAll() {
+    public List<SchedulerTaskEntry> loadAll() {
         return newArrayList(taskRepository.findAll());
     }
 
     @Override
-    public TaskEntry load(final long taskId) {
+    public SchedulerTaskEntry load(final long taskId) {
         return taskRepository.findOne(taskId);
     }
 
     @Override
-    public TaskEntry save(final TaskEntry taskEntry) {
-        return taskRepository.save(taskEntry);
+    public SchedulerTaskEntry save(final SchedulerTaskEntry schedulerTaskEntry) {
+        return taskRepository.save(schedulerTaskEntry);
     }
 
     @Override

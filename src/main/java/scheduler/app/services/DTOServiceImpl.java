@@ -2,7 +2,7 @@ package scheduler.app.services;
 
 import org.springframework.stereotype.Service;
 import scheduler.app.controllers.rest.tasks.list.TaskEntryDTO;
-import scheduler.app.entries.TaskEntry;
+import scheduler.app.entries.SchedulerTaskEntry;
 
 import java.util.List;
 import java.util.function.Function;
@@ -12,21 +12,21 @@ import java.util.stream.Collectors;
 public class DTOServiceImpl implements DTOService {
 
     @Override
-    public TaskEntryDTO transformTask(final TaskEntry task) {
+    public TaskEntryDTO transformTask(final SchedulerTaskEntry task) {
         return taskMapper().apply(task);
     }
 
     @Override
-    public List<TaskEntryDTO> transformTasks(final List<TaskEntry> taskEntries) {
+    public List<TaskEntryDTO> transformTasks(final List<SchedulerTaskEntry> taskEntries) {
         return taskEntries.stream().map(taskMapper()).collect(Collectors.toList());
     }
 
-    private Function<TaskEntry, TaskEntryDTO> taskMapper() {
+    private Function<SchedulerTaskEntry, TaskEntryDTO> taskMapper() {
 
-        return new Function<TaskEntry, TaskEntryDTO>() {
+        return new Function<SchedulerTaskEntry, TaskEntryDTO>() {
 
             @Override
-            public TaskEntryDTO apply(final TaskEntry task) {
+            public TaskEntryDTO apply(final SchedulerTaskEntry task) {
 
                 final TaskEntryDTO dto = new TaskEntryDTO();
 
