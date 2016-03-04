@@ -26,6 +26,7 @@ import java.io.IOException;
         "scheduler.app.services"
         , "scheduler.app.dao"
         , "scheduler.app.security"
+        , "scheduler.app.converters"
 })
 public class RootContextConfig {
 

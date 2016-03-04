@@ -1,13 +1,15 @@
 package scheduler.app.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SchedulerTask {
+@EqualsAndHashCode
+public class SchedulerTask implements Model {
     private Long id;
-    private Long userId;
+    private User user;
     private String taskName;
     private String taskDescription;
 }

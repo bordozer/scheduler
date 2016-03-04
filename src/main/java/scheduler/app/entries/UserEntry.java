@@ -1,5 +1,6 @@
 package scheduler.app.entries;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Table(name = "T_USER")
 @Getter
 @Setter
-public class UserEntry {
+@EqualsAndHashCode
+public class UserEntry implements DBEntity {
 
     @Id
     @Column(name = "C_USER_ID", unique = true)
@@ -28,7 +30,7 @@ public class UserEntry {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserSecureDetailsEntry secureDetails;
 
-    @Override
+    /*@Override
     public int hashCode() {
         return (int) (31 * id);
     }
@@ -55,5 +57,5 @@ public class UserEntry {
     @Override
     public String toString() {
         return String.format("#%d: %s ( %s )", getId(), login, username);
-    }
+    }*/
 }

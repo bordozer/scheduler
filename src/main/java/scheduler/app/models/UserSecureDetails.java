@@ -1,11 +1,13 @@
 package scheduler.app.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserSecureDetails {
+@EqualsAndHashCode
+public class UserSecureDetails implements Model {
     private Long id;
     private Long userId;
     private String login;

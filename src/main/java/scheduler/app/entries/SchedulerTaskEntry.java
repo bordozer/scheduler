@@ -1,5 +1,6 @@
 package scheduler.app.entries;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Table(name = "T_SCH_TASK")
 @Getter
 @Setter
-public class SchedulerTaskEntry {
+@EqualsAndHashCode
+public class SchedulerTaskEntry implements DBEntity {
 
     @Id
     @Column(name = "C_SCH_TASK_ID", unique = true)

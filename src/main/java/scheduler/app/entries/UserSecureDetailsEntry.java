@@ -1,5 +1,6 @@
 package scheduler.app.entries;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -19,7 +20,8 @@ import javax.persistence.Table;
 @Table(name = "T_USER_SECURITY")
 @Getter
 @Setter
-public class UserSecureDetailsEntry {
+@EqualsAndHashCode
+public class UserSecureDetailsEntry implements DBEntity {
 
     @OneToOne(fetch= FetchType.LAZY, optional = false)
     @JoinColumn(name="C_USER_ID", nullable = false)

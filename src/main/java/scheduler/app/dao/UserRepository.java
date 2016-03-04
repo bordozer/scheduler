@@ -1,22 +1,16 @@
 package scheduler.app.dao;
 
-import org.apache.log4j.Logger;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.entries.UserEntry;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 @Repository
-public class UserRepository implements UserDao {
+public interface UserRepository extends CrudRepository<SchedulerTaskEntry, Long> {
+//    String CACHE_ENTRY = "scheduler.app.cache.user";
+//    String CACHE_QUERY = "scheduler.app.cache.users";
 
-    private static final Logger LOGGER = Logger.getLogger(UserRepository.class);
+    UserEntry findById(final Long userId);
 
-    @PersistenceContext
-    private EntityManager em;
-
-    @Override
-    public UserEntry findByLogin(final String login) {
-        return new UserEntry("login", "name", "password");
-    }
+    UserEntry findByLogin(final String login);
 }
