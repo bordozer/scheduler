@@ -13,6 +13,21 @@ VALUES
 (2, 'userpss' , '2222222XYX', 'USER');
 
 
+/* SCHEDULER TASKS */
+
+INSERT INTO T_SCH_TASK(C_SCH_TASK_ID, C_SCH_TASK_NAME, C_SCH_TASK_DESCR)
+VALUES
+(1, 'NBA import', 'NBA import scheduler task'),
+(2, 'UEFA import', 'UEFA import scheduler task'),
+(3, 'NHL import', 'NHL import scheduler task')
+
+
+--SELECT * FROM T_USER;
+--SELECT * FROM T_USER_SECURITY;
+--SELECT * FROM T_SCH_TASK;
+
+
+
 
 
 

@@ -8,28 +8,28 @@ import javax.persistence.*;
 
 @Entity
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "tasks")
+@Table(name = "T_SCH_TASK")
 @Getter
 @Setter
 public class TaskEntry {
 
     @Id
-    @Column(name = "C_TASK_ID", unique = true)
+    @Column(name = "C_SCH_TASK_ID", unique = true)
     @GeneratedValue
     private Long id;
 
-    @Column(name = "", columnDefinition = "VARCHAR(255)")
+    @Column(name = "C_SCH_TASK_NAME", columnDefinition = "VARCHAR(255)")
     private String taskName;
 
-    @Column(name = "", columnDefinition = "TEXT")
+    @Column(name = "C_SCH_TASK_DESCR", columnDefinition = "VARCHAR(255)")
     private String description;
 
-    @Column(name = "", columnDefinition = "TEXT")
+    /*@Column(name = "", columnDefinition = "VARCHAR(255)")
     private String taskParametersJSON;
 
     @Column(name = "", columnDefinition = "TEXT")
     private String remoteURL;
 
     @Column(name = "", columnDefinition = "TEXT")
-    private String remoteParametersJSON;
+    private String remoteParametersJSON;*/
 }

@@ -1,11 +1,9 @@
+db.default.driver=org.h2.Driver
 
-database.host=localhost
+db.default.url=jdbc:h2:~/dev/db/h2-db/scheduler;MODE=Oracle;AUTO_SERVER=TRUE
 
-database.port=3306
+db.default.user=sa
 
-database.name=totalizator2
+db.default.password=
 
-database.user.name=root
-
-database.user.password=ThePassword
-
+db.default.logStatements=true
