@@ -13,6 +13,8 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import scheduler.app.security.AjaxAuthenticationSuccessHandler;
 import scheduler.app.security.SecurityUserDetailsService;
 
+import javax.inject.Inject;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,13 +25,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String PORTAL_PAGE_URL = "/scheduler/";
 
-    @Autowired
+    @Inject
     private SecurityUserDetailsService userDetailsService;
 
-    @Autowired
+    @Inject
     private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
 
-    @Autowired
+    @Inject
     private PersistentTokenRepository persistentTokenRepository;
 
     @Override

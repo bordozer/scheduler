@@ -1,9 +1,9 @@
-package scheduler.app.converters;
+package scheduler.app.converters.entity;
 
 import scheduler.app.entries.UserEntry;
 import scheduler.app.models.User;
 
-public class UserConvectionServiceImpl implements UserConvectionService {
+public class UserConverterImpl implements UserConverter {
 
     @Override
     public UserEntry populateEntity(final UserEntry entity, final User user) {

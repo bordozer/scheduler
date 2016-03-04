@@ -1,12 +1,12 @@
 package scheduler.app.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.entries.UserEntry;
 
 @Repository
-public interface UserRepository extends CrudRepository<SchedulerTaskEntry, Long> {
+public interface UserRepository extends JpaRepository<SchedulerTaskEntry, Long> {
 //    String CACHE_ENTRY = "scheduler.app.cache.user";
 //    String CACHE_QUERY = "scheduler.app.cache.users";
 

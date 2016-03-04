@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.*;
 import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.services.tasks.TaskService;
 
+import javax.inject.Inject;
+
 @RestController
 @RequestMapping("/rest/tasks")
 public class TaskEditRestController {
 
-    @Autowired
+    @Inject
     private TaskService taskService;
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0/")

@@ -21,9 +21,6 @@ public class UserEntry implements DBEntity {
     @SequenceGenerator(name = "T_USER_GEN", sequenceName = "T_USER_SEQ", allocationSize = 20)
     private Long id;
 
-    @Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")
-    private String login;
-
     @Column(name = "C_USER_NAME", unique = true, columnDefinition = "VARCHAR(100)")
     private String username;
 

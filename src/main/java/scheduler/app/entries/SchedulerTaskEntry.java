@@ -31,12 +31,15 @@ public class SchedulerTaskEntry implements DBEntity {
     @Column(name = "C_SCH_TASK_DESCR", columnDefinition = "VARCHAR(255)")
     private String taskDescription;
 
-    /*@Column(name = "", columnDefinition = "VARCHAR(255)")
+    /*Column(name = "C_SCH_TASK_DESCR", columnDefinition = "VARCHAR(255)")
+    private String taskDescription;
+
+    @Column(name = "C_SCH_TASK_PARAM_JSON", columnDefinition = "VARCHAR(255)")
     private String taskParametersJSON;
 
-    @Column(name = "", columnDefinition = "TEXT")
+    @Column(name = "C_SCH_TASK_REMOTE_URL", columnDefinition = "TEXT")
     private String remoteURL;
 
-    @Column(name = "", columnDefinition = "TEXT")
+    @Column(name = "C_SCH_TASK_REMOTE_PARAM_JSON", columnDefinition = "TEXT")
     private String remoteParametersJSON;*/
 }

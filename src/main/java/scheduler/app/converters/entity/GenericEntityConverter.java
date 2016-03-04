@@ -1,9 +1,9 @@
-package scheduler.app.converters;
+package scheduler.app.converters.entity;
 
 import scheduler.app.entries.DBEntity;
 import scheduler.app.models.Model;
 
-public interface GenericEntityConversionService<E extends DBEntity, M extends Model> {
+public interface GenericEntityConverter<E extends DBEntity, M extends Model> {
 
     E populateEntity(E entity, M model);
 

@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import scheduler.app.services.SystemVarsService;
 
+import javax.inject.Inject;
 import javax.persistence.SharedCacheMode;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class DevelopmentConfiguration {
 
     private static final Logger LOGGER = Logger.getLogger(DevelopmentConfiguration.class);
 
-    @Autowired
+    @Inject
     private SystemVarsService systemVarsService;
 
     @Bean(name = "datasource")

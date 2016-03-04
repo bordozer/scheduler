@@ -1,4 +1,4 @@
-package scheduler.app.converters;
+package scheduler.app.converters.entity;
 
 import com.google.inject.Inject;
 import scheduler.app.dao.UserRepository;
@@ -6,10 +6,10 @@ import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.entries.UserEntry;
 import scheduler.app.models.SchedulerTask;
 
-public class SchedulerTaskConverterServiceImpl implements SchedulerTaskConverterService {
+public class SchedulerTaskConverterImpl implements SchedulerTaskConverter {
 
     @Inject
-    private UserConvectionService userConvectionService;
+    private UserConverter userConverter;
 
     @Inject
     private UserRepository userRepository;
@@ -27,7 +27,7 @@ public class SchedulerTaskConverterServiceImpl implements SchedulerTaskConverter
     public SchedulerTask toModel(final SchedulerTaskEntry entity) {
         SchedulerTask model = new SchedulerTask();
         model.setId(entity.getId());
-        model.setUser(userConvectionService.toModel(getUser(model.getId())));
+        model.setUser(userConverter.toModel(getUser(model.getId())));
         model.setTaskName(entity.getTaskName());
         model.setTaskDescription(entity.getTaskDescription());
         return model;
