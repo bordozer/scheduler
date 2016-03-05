@@ -1,6 +1,5 @@
 package scheduler.app.entities;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -13,7 +12,6 @@ import javax.persistence.*;
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
-@EqualsAndHashCode
 public class UserSecureDetailsEntry implements DBEntity {
 
 	@Id
@@ -38,4 +36,9 @@ public class UserSecureDetailsEntry implements DBEntity {
 	@Enumerated(value = EnumType.STRING)
 	@Column(name = "C_USER_ROLE")
 	private UserRole role;
+
+	@Override
+	public String toString() {
+		return String.format("%s - security", user);
+	}
 }

@@ -64,6 +64,7 @@ public class DevelopmentConfiguration {
 		jpaProperties.put("hibernate.format_sql", "true");
 		jpaProperties.put("hibernate.use_sql_comments", "true");
 		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		jpaProperties.put("hibernate.enable_lazy_load_no_trans", "true");
 
 		jpaProperties.put("javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE);
 		jpaProperties.put(Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName());

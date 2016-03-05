@@ -29,7 +29,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 	public SchedulerTask toModel(final SchedulerTaskEntry entity) {
 		SchedulerTask model = new SchedulerTask();
 		model.setId(entity.getId());
-		model.setUser(userEntityConverter.toModel(getUser(model.getId())));
+		model.setUser(userEntityConverter.toModel(entity.getUser()));
 		model.setTaskName(entity.getTaskName());
 		model.setTaskDescription(entity.getTaskDescription());
 		return model;
