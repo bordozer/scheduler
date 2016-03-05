@@ -29,7 +29,7 @@ public class UserSecureDetailsEntry implements DBEntity {
 	@Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")
 	private String login;
 
-	@Column(name = "C_USER_PASSWORD", unique = true, columnDefinition = "VARCHAR(16)")
+	@Column(name = "C_USER_PASSWORD", unique = true, columnDefinition = "VARCHAR(255)")
 	private String password;
 
 	@Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(16)")
