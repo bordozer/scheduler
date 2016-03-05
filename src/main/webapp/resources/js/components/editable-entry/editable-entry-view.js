@@ -63,12 +63,28 @@ define( function ( require ) {
 
 			if ( this.viewMode == MODE_INFO ) {
 				menuItems = [
-					{ selector: 'js-menu-task-edit', icon: 'fa fa-edit', link: '#', text: t.menuItemEditLabel }
+					{ selector: 'js-menu-task-edit',
+						icon: 'fa fa-edit',
+						link: '#',
+						text: t.menuItemEditLabel,
+						button: true
+					}
 				];
 			} else {
 				menuItems = [
-					{ selector: 'js-menu-task-edit-save', icon: 'fa fa-save', link: '#', text: t.menuItemSaveLabel }
-					, { selector: 'js-menu-task-discard-editing', icon: 'fa fa-close', link: '#', text: t.menuItemDiscardEditingLabel }
+					{ selector: 'js-menu-task-edit-save',
+						icon: 'fa fa-save',
+						link: '#',
+						text: t.menuItemSaveLabel,
+						button: true,
+						cssClass: 'btn-primary'
+					}
+					, { selector: 'js-menu-task-discard-editing',
+						icon: 'fa fa-close',
+						link: '#',
+						text: t.menuItemDiscardEditingLabel,
+						button: true
+					}
 				];
 			}
 
