@@ -11,7 +11,9 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var t = new Translator( {
 		menuItem_TaskExecutionHistoryLabel: "Task execution history",
-		taskName: "Task name"
+		taskName: "Task name",
+		taskUrl: "Url",
+		taskRemoteParametersJSON: "Remote parameters JSON"
 	} );
 
 	return Backbone.View.extend( {
@@ -46,6 +48,7 @@ define( function ( require ) {
 		},
 
 		_renderTaskInfo: function () {
+			console.log(this.model.toJSON());
 			this.$el.html( template( { model: this.model.toJSON(), t: t } ) );
 			this.trigger( 'inner-view-rendered' );
 		}

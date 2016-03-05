@@ -17,7 +17,7 @@ public class UserSecureDetailsEntry implements DBEntity {
 	@Id
 	@Column(name = "T_USER_SECURITY_ID", unique = true)
 	@GeneratedValue(generator = "T_USER_SECURITY_GEN")
-	@SequenceGenerator(name = "T_USER_SECURITY_GEN", sequenceName = "T_USER_SECURITY_ID_SEQ", allocationSize = 20)
+	@SequenceGenerator(name = "T_USER_SECURITY_GEN", sequenceName = "T_USER_SECURITY_SEQ", allocationSize = 20)
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -30,11 +30,11 @@ public class UserSecureDetailsEntry implements DBEntity {
 	@Column(name = "C_USER_PASSWORD", unique = true, columnDefinition = "VARCHAR(255)")
 	private String password;
 
-	@Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(16)")
+	@Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(255)")
 	private String authString;
 
 	@Enumerated(value = EnumType.STRING)
-	@Column(name = "C_USER_ROLE")
+	@Column(name = "C_USER_ROLE", columnDefinition = "VARCHAR(10)")
 	private UserRole role;
 
 	@Override

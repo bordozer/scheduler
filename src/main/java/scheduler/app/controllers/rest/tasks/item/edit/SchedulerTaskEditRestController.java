@@ -1,7 +1,7 @@
 package scheduler.app.controllers.rest.tasks.item.edit;
 
 import org.springframework.web.bind.annotation.*;
-import scheduler.app.converters.dto.SchedulerTaskDtoConverter;
+import scheduler.app.converters.dto.SchedulerTaskEditDtoConverter;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 import scheduler.app.services.tasks.SchedulerTaskService;
@@ -12,7 +12,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/rest/tasks")
-public class TaskEditRestController {
+public class SchedulerTaskEditRestController {
 
 	@Inject
 	private UserService userService;
@@ -21,20 +21,20 @@ public class TaskEditRestController {
 	private SchedulerTaskService schedulerTaskService;
 
 	@Inject
-	private SchedulerTaskDtoConverter schedulerTaskDtoConverter;
+	private SchedulerTaskEditDtoConverter schedulerTaskEditDtoConverter;
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/0/")
 	public SchedulerTaskEditDTO create(final @RequestBody SchedulerTaskEditDTO editDTO, final Principal principal) {
-		SchedulerTask schedulerTask = schedulerTaskDtoConverter.toModel(getCurrentUser(principal.getName()), editDTO);
+		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(getCurrentUser(principal.getName()), editDTO);
 		SchedulerTask created = schedulerTaskService.add(schedulerTask);
-		return schedulerTaskDtoConverter.toEditDto(created);
+		return schedulerTaskEditDtoConverter.toDto(created);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{taskId}/")
 	public SchedulerTaskEditDTO edit(final @RequestBody SchedulerTaskEditDTO editDTO, final Principal principal) {
-		SchedulerTask schedulerTask = schedulerTaskDtoConverter.toModel(getCurrentUser(principal.getName()), editDTO);
+		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(getCurrentUser(principal.getName()), editDTO);
 		SchedulerTask saved = schedulerTaskService.save(schedulerTask);
-		return schedulerTaskDtoConverter.toEditDto(saved);
+		return schedulerTaskEditDtoConverter.toDto(saved);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{taskId}/")

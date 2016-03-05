@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import scheduler.app.models.SchedulerTaskType;
 
 import javax.persistence.*;
 
@@ -25,21 +26,19 @@ public class SchedulerTaskEntry implements DBEntity {
 	@JoinColumn(name = "C_USER_ID", nullable = false)
 	private UserEntry user;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "C_SCH_TASK_TYPE", columnDefinition = "VARCHAR(10)")
+	private SchedulerTaskType schedulerTaskType;
+
 	@Column(name = "C_SCH_TASK_NAME", columnDefinition = "VARCHAR(255)")
 	private String taskName;
 
-	@Column(name = "C_SCH_TASK_DESCR", columnDefinition = "VARCHAR(255)")
+	@Column(name = "C_SCH_TASK_DESCR", columnDefinition = "CLOB")
 	private String taskDescription;
 
-    /*Column(name = "C_SCH_TASK_DESCR", columnDefinition = "VARCHAR(255)")
-	private String taskDescription;
-
-    @Column(name = "C_SCH_TASK_PARAM_JSON", columnDefinition = "VARCHAR(255)")
+    @Column(name = "C_SCH_TASK_PARAM_JSON", columnDefinition = "CLOB")
     private String taskParametersJSON;
 
-    @Column(name = "C_SCH_TASK_REMOTE_URL", columnDefinition = "TEXT")
-    private String remoteURL;
-
-    @Column(name = "C_SCH_TASK_REMOTE_PARAM_JSON", columnDefinition = "TEXT")
-    private String remoteParametersJSON;*/
+	@OneToOne(mappedBy = "schedulerTask", cascade = CascadeType.ALL)
+	private RemoteJobEntity remoteJob;
 }
