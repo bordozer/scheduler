@@ -40,7 +40,7 @@ public class SchedulerTaskEditRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{taskId}/")
-	public void delete(final @PathVariable int taskId) {
+	public void delete(final @PathVariable Long taskId) {
 		if (taskId == 0) {
 			return;
 		}
