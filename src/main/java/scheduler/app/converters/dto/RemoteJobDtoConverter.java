@@ -8,7 +8,7 @@ import scheduler.app.models.User;
 import java.util.function.Function;
 
 @Service
-public class RemoteJobDtoConverter extends AbstractDtoConverter<RemoteJob, RemoteJobDto> {
+public class RemoteJobDtoConverter extends AbstractGenericDtoConverter<RemoteJob, RemoteJobDto> {
 
 	@Override
 	public RemoteJob toModel(final User user, final RemoteJobDto dto) {
