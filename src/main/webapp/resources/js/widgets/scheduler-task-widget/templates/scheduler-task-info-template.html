@@ -1,13 +1,13 @@
-<div class="row">
+<div class="row small">
 	<div class="col-xs-12 col-lg-6 text-muted">
 		<%= t.taskName %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<%= model.taskName %> (<%= model.taskId %>)
+		#<%= model.taskId %>: <%= model.taskName %>
 	</div>
 </div>
 
-<div class="row">
+<div class="row small">
 	<div class="col-xs-12 col-lg-6 text-muted">
 		<%= t.taskType %>
 	</div>
@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row small">
 	<div class="col-xs-12 col-lg-6 text-muted">
 		<%= t.taskDescription %>
 	</div>
@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row small">
 	<div class="col-xs-12 col-lg-6 text-muted">
 		<%= t.taskParametersJSON %>
 	</div>
