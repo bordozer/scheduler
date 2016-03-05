@@ -1,8 +1,11 @@
 package scheduler.app.services.users;
 
 import scheduler.app.models.User;
+import scheduler.app.models.UserSecureDetails;
 
 public interface UserService {
 
-	User findByLogin(final String login);
+	User findByLogin(String login);
+
+	UserSecureDetails getUserSecureDetails(Long userId);
 }
