@@ -28,63 +28,63 @@ import java.util.Map;
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
 
-    private static final Logger LOGGER = Logger.getLogger(DevelopmentConfiguration.class);
+	private static final Logger LOGGER = Logger.getLogger(DevelopmentConfiguration.class);
 
-    @Inject
-    private SystemVarsService systemVarsService;
+	@Inject
+	private SystemVarsService systemVarsService;
 
-    @Bean(name = "datasource")
-    public DriverManagerDataSource dataSource() {
+	@Bean(name = "datasource")
+	public DriverManagerDataSource dataSource() {
 
-        LOGGER.debug(String.format("Connection information: host=%s; port=%s; db=%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName()));
+		LOGGER.debug(String.format("Connection information: host=%s; port=%s; db=%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName()));
 
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl(String.format("jdbc:mysql://%s:%s/%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName()));
-        dataSource.setUsername(systemVarsService.getDatabaseUserName());
-        dataSource.setPassword(systemVarsService.getDatabaseUserPassword());
+		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl(String.format("jdbc:mysql://%s:%s/%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName()));
+		dataSource.setUsername(systemVarsService.getDatabaseUserName());
+		dataSource.setPassword(systemVarsService.getDatabaseUserPassword());
 
-        return dataSource;
-    }
+		return dataSource;
+	}
 
-    @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DriverManagerDataSource dataSource) {
+	@Bean(name = "entityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DriverManagerDataSource dataSource) {
 
-        final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("scheduler.app.models");
-        entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
-        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		entityManagerFactoryBean.setDataSource(dataSource);
+		entityManagerFactoryBean.setPackagesToScan("scheduler.app.models");
+		entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
+		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
-        final Map<String, Object> jpaProperties = new HashMap<String, Object>();
+		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
 //		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" ); // TODO: for DB upgrade only
-        jpaProperties.put("hibernate.connection.CharSet", "utf8");
-        jpaProperties.put("hibernate.connection.characterEncoding", "utf8");
-        jpaProperties.put("hibernate.connection.useUnicode", "true");
-        jpaProperties.put("hibernate.show_sql", "true");
-        jpaProperties.put("hibernate.format_sql", "true");
-        jpaProperties.put("hibernate.use_sql_comments", "true");
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		jpaProperties.put("hibernate.connection.CharSet", "utf8");
+		jpaProperties.put("hibernate.connection.characterEncoding", "utf8");
+		jpaProperties.put("hibernate.connection.useUnicode", "true");
+		jpaProperties.put("hibernate.show_sql", "true");
+		jpaProperties.put("hibernate.format_sql", "true");
+		jpaProperties.put("hibernate.use_sql_comments", "true");
+		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 
-        jpaProperties.put("javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE);
-        jpaProperties.put(Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName());
-        jpaProperties.put(Environment.USE_SECOND_LEVEL_CACHE, true);
-        jpaProperties.put(Environment.USE_QUERY_CACHE, true);
-        jpaProperties.put(Environment.GENERATE_STATISTICS, true);
-        jpaProperties.put(Environment.USE_STRUCTURED_CACHE, true);
+		jpaProperties.put("javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE);
+		jpaProperties.put(Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName());
+		jpaProperties.put(Environment.USE_SECOND_LEVEL_CACHE, true);
+		jpaProperties.put(Environment.USE_QUERY_CACHE, true);
+		jpaProperties.put(Environment.GENERATE_STATISTICS, true);
+		jpaProperties.put(Environment.USE_STRUCTURED_CACHE, true);
 
-        entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
+		entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
 
-        return entityManagerFactoryBean;
-    }
+		return entityManagerFactoryBean;
+	}
 
-    @Bean
-    public PersistentTokenRepository rememberMeTokenRepository() {
+	@Bean
+	public PersistentTokenRepository rememberMeTokenRepository() {
 
-        final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
-        jdbcTokenRepository.setDataSource(dataSource());
+		final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+		jdbcTokenRepository.setDataSource(dataSource());
 //		jdbcTokenRepository.setCreateTableOnStartup( true ); // TODO: for DB upgrade only
 
-        return jdbcTokenRepository;
-    }
+		return jdbcTokenRepository;
+	}
 }

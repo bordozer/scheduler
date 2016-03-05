@@ -18,25 +18,25 @@ import static com.google.common.collect.Lists.newArrayList;
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
 
-    private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
+	private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
 
-    @Inject
-    private UserRepository userRepository;
+	@Inject
+	private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
+	@Override
+	public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
 
-        final UserEntry user = userRepository.findByLogin(login);
+		final UserEntry user = userRepository.findByLogin(login);
 
-        if (user == null) {
-            LOGGER.debug(String.format("================================= User login not found: %s =================================", login));
+		if (user == null) {
+			LOGGER.debug(String.format("================================= User login not found: %s =================================", login));
 
-            throw new UsernameNotFoundException(String.format("Username not found: %s", login));
-        }
+			throw new UsernameNotFoundException(String.format("Username not found: %s", login));
+		}
 
-        final List<GrantedAuthority> authorities = newArrayList();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		final List<GrantedAuthority> authorities = newArrayList();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new org.springframework.security.core.userdetails.User(login, user.getSecureDetails().getPassword(), authorities);
-    }
+		return new org.springframework.security.core.userdetails.User(login, user.getSecureDetails().getPassword(), authorities);
+	}
 }

@@ -23,20 +23,20 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 public class UserSecureDetailsEntry implements DBEntity {
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "C_USER_ID", nullable = false)
-    private UserEntry user;
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "C_USER_ID", nullable = false)
+	private UserEntry user;
 
-    @Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")
-    private String login;
+	@Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")
+	private String login;
 
-    @Column(name = "C_USER_PASSWORD", unique = true, columnDefinition = "VARCHAR(16)")
-    private String password;
+	@Column(name = "C_USER_PASSWORD", unique = true, columnDefinition = "VARCHAR(16)")
+	private String password;
 
-    @Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(16)")
-    private String authString;
+	@Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(16)")
+	private String authString;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "C_USER_LOGIN")
-    private UserRole role;
+	@Enumerated(value = EnumType.STRING)
+	@Column(name = "C_USER_LOGIN")
+	private UserRole role;
 }

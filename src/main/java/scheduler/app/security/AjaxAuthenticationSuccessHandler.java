@@ -14,24 +14,24 @@ import java.io.IOException;
 @Component
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private AuthenticationSuccessHandler defaultHandler;
+	private AuthenticationSuccessHandler defaultHandler;
 
-    public AjaxAuthenticationSuccessHandler() {
+	public AjaxAuthenticationSuccessHandler() {
 
-        final SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-        savedRequestAwareSuccessHandler.setTargetUrlParameter(SecurityConfig.PORTAL_PAGE_URL);
+		final SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+		savedRequestAwareSuccessHandler.setTargetUrlParameter(SecurityConfig.PORTAL_PAGE_URL);
 
-        this.defaultHandler = savedRequestAwareSuccessHandler;
-    }
+		this.defaultHandler = savedRequestAwareSuccessHandler;
+	}
 
-    @Override
-    public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException, ServletException {
+	@Override
+	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException, ServletException {
 
-        if ("true".equals(request.getHeader("X-Login-Ajax-call"))) {
-            response.getWriter().print("ok");
-            response.getWriter().flush();
-        } else {
-            defaultHandler.onAuthenticationSuccess(request, response, authentication);
-        }
-    }
+		if ("true".equals(request.getHeader("X-Login-Ajax-call"))) {
+			response.getWriter().print("ok");
+			response.getWriter().flush();
+		} else {
+			defaultHandler.onAuthenticationSuccess(request, response, authentication);
+		}
+	}
 }

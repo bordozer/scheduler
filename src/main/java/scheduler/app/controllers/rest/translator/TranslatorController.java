@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/translator")
 public class TranslatorController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
-    public TranslationDTO getDefaultLogin(final TranslationDTO dto) {
-        return new TranslationDTO(Maps.transformValues(dto.getTranslations(), this::translate));
-    }
+	@RequestMapping(method = RequestMethod.GET, value = "/")
+	public TranslationDTO getDefaultLogin(final TranslationDTO dto) {
+		return new TranslationDTO(Maps.transformValues(dto.getTranslations(), this::translate));
+	}
 
-    private String translate(final String nerd) {
-        return nerd; // TODO: translate
-    }
+	private String translate(final String nerd) {
+		return nerd; // TODO: translate
+	}
 }

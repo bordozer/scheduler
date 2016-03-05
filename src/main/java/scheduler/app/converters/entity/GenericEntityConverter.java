@@ -5,7 +5,7 @@ import scheduler.app.models.Model;
 
 public interface GenericEntityConverter<E extends DBEntity, M extends Model> {
 
-    void populateEntity(E entity, M model);
+	void populateEntity(E entity, M model);
 
-    M toModel(E entity);
+	M toModel(E entity);
 }

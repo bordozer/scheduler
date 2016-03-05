@@ -13,42 +13,42 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
-    @Inject
-    private TaskRepository taskRepository;
+	@Inject
+	private TaskRepository taskRepository;
 
-    @Inject
-    private SchedulerTaskEntityConverter schedulerTaskEntityConverter;
+	@Inject
+	private SchedulerTaskEntityConverter schedulerTaskEntityConverter;
 
-    @Override
-    public List<SchedulerTask> loadAll() {
-        return taskRepository.findAll().stream()
-                .map(entity -> schedulerTaskEntityConverter.toModel(entity))
-                .collect(Collectors.toList());
-    }
+	@Override
+	public List<SchedulerTask> loadAll() {
+		return taskRepository.findAll().stream()
+				.map(entity -> schedulerTaskEntityConverter.toModel(entity))
+				.collect(Collectors.toList());
+	}
 
-    @Override
-    public SchedulerTask load(final long taskId) {
-        return schedulerTaskEntityConverter.toModel(taskRepository.findOne(taskId));
-    }
+	@Override
+	public SchedulerTask load(final long taskId) {
+		return schedulerTaskEntityConverter.toModel(taskRepository.findOne(taskId));
+	}
 
-    @Override
-    public SchedulerTask add(final SchedulerTask schedulerTask) {
-        return populateAndSave(schedulerTask, new SchedulerTaskEntry());
-    }
+	@Override
+	public SchedulerTask add(final SchedulerTask schedulerTask) {
+		return populateAndSave(schedulerTask, new SchedulerTaskEntry());
+	}
 
-    @Override
-    public SchedulerTask save(final SchedulerTask schedulerTask) {
-        return populateAndSave(schedulerTask, taskRepository.findById(schedulerTask.getId()));
-    }
+	@Override
+	public SchedulerTask save(final SchedulerTask schedulerTask) {
+		return populateAndSave(schedulerTask, taskRepository.findById(schedulerTask.getId()));
+	}
 
-    @Override
-    public void delete(final long taskId) {
-        taskRepository.delete(taskId);
-    }
+	@Override
+	public void delete(final long taskId) {
+		taskRepository.delete(taskId);
+	}
 
-    private SchedulerTask populateAndSave(final SchedulerTask schedulerTask, final SchedulerTaskEntry dbEntry) {
-        schedulerTaskEntityConverter.populateEntity(dbEntry, schedulerTask);
-        SchedulerTaskEntry savedEntity = taskRepository.save(dbEntry);
-        return schedulerTaskEntityConverter.toModel(savedEntity);
-    }
+	private SchedulerTask populateAndSave(final SchedulerTask schedulerTask, final SchedulerTaskEntry dbEntry) {
+		schedulerTaskEntityConverter.populateEntity(dbEntry, schedulerTask);
+		SchedulerTaskEntry savedEntity = taskRepository.save(dbEntry);
+		return schedulerTaskEntityConverter.toModel(savedEntity);
+	}
 }

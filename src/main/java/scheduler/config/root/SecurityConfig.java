@@ -19,74 +19,74 @@ import javax.inject.Inject;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
-    //	public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
-    public static final String REMEMBER_ME_KEY = "myAppKey";
+	private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
+	//	public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
+	public static final String REMEMBER_ME_KEY = "myAppKey";
 
-    public static final String PORTAL_PAGE_URL = "/scheduler/";
+	public static final String PORTAL_PAGE_URL = "/scheduler/";
 
-    @Inject
-    private SecurityUserDetailsService userDetailsService;
+	@Inject
+	private SecurityUserDetailsService userDetailsService;
 
-    @Inject
-    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+	@Inject
+	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
 
-    @Inject
-    private PersistentTokenRepository persistentTokenRepository;
+	@Inject
+	private PersistentTokenRepository persistentTokenRepository;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .eraseCredentials(true)
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+				.eraseCredentials(true)
+				.userDetailsService(userDetailsService)
+				.passwordEncoder(new BCryptPasswordEncoder());
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
 
 
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/resources/public/**").permitAll()
-                .antMatchers("/resources/images*//**").permitAll()
-                .antMatchers("/resources/bower_components*//**").permitAll()
-                .antMatchers("/rest/translator/").permitAll()
+		http
+				.csrf().disable()
+				.authorizeRequests()
+				.antMatchers("/resources/public/**").permitAll()
+				.antMatchers("/resources/images*//**").permitAll()
+				.antMatchers("/resources/bower_components*//**").permitAll()
+				.antMatchers("/rest/translator/").permitAll()
 //					.antMatchers( "/rest/app/" ).permitAll()
 //					.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll()
 //					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .defaultSuccessUrl(PORTAL_PAGE_URL)
-                .loginProcessingUrl("/authenticate")
-                .usernameParameter("login")
-                .passwordParameter("password")
-                .successHandler(ajaxAuthenticationSuccessHandler)
-                .failureUrl("/login?error") // TODO: implement beautiful error page
-                .loginPage(LOGIN_PAGE_URL)
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl(LOGIN_PAGE_URL)
-                .invalidateHttpSession(true)
-                .permitAll()
-                .and()
-                .rememberMe()
-                .tokenRepository(persistentTokenRepository)
-                .rememberMeServices(rememberMeServices())
-                .key(REMEMBER_ME_KEY);
-    }
+				.anyRequest()
+				.authenticated()
+				.and()
+				.formLogin()
+				.defaultSuccessUrl(PORTAL_PAGE_URL)
+				.loginProcessingUrl("/authenticate")
+				.usernameParameter("login")
+				.passwordParameter("password")
+				.successHandler(ajaxAuthenticationSuccessHandler)
+				.failureUrl("/login?error") // TODO: implement beautiful error page
+				.loginPage(LOGIN_PAGE_URL)
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl(LOGIN_PAGE_URL)
+				.invalidateHttpSession(true)
+				.permitAll()
+				.and()
+				.rememberMe()
+				.tokenRepository(persistentTokenRepository)
+				.rememberMeServices(rememberMeServices())
+				.key(REMEMBER_ME_KEY);
+	}
 
-    @Bean
-    public TokenBasedRememberMeServices rememberMeServices() {
+	@Bean
+	public TokenBasedRememberMeServices rememberMeServices() {
 
-        final TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(REMEMBER_ME_KEY, userDetailsService);
-        rememberMeServices.setTokenValiditySeconds(1209600);
-        rememberMeServices.setCookieName("Scheduler_Micro_Service_Remember_Me_Cookie");
+		final TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(REMEMBER_ME_KEY, userDetailsService);
+		rememberMeServices.setTokenValiditySeconds(1209600);
+		rememberMeServices.setCookieName("Scheduler_Micro_Service_Remember_Me_Cookie");
 
-        return rememberMeServices;
-    }
+		return rememberMeServices;
+	}
 }

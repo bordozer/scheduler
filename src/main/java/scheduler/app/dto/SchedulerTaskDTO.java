@@ -6,10 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SchedulerTaskDTO implements DTO {
-    private long taskId;
-    private String taskName;
-    private String taskDescription;
-    private String taskParametersJSON;
-    private String remoteURL;
-    private String remoteParametersJSON;
+
+	private long taskId;
+	private String taskName;
+	private String taskDescription;
+	private String taskParametersJSON;
+	private String remoteURL;
+	private String remoteParametersJSON;
+
+	@Override
+	public String toString() {
+		return String.format("#%d: %s", taskId, taskName);
+	}
 }

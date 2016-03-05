@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class User implements Model {
-    private Long id;
-    private String username;
+
+	private Long id;
+	private String username;
 }

@@ -5,9 +5,9 @@ import scheduler.app.dto.SchedulerTaskDTO;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 
-public interface SchedulerTaskDtoConverter extends GenericDtoConverter<SchedulerTask, SchedulerTaskDTO>{
+public interface SchedulerTaskDtoConverter extends GenericDtoConverter<SchedulerTask, SchedulerTaskDTO> {
 
-    SchedulerTaskEditDTO toEditDto(SchedulerTask task);
+	SchedulerTaskEditDTO toEditDto(SchedulerTask task);
 
-    SchedulerTask toModel(final User user, SchedulerTaskEditDTO editDTO);
+	SchedulerTask toModel(final User user, SchedulerTaskEditDTO editDTO);
 }

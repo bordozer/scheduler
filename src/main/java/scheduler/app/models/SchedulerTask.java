@@ -8,8 +8,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class SchedulerTask implements Model {
-    private Long id;
-    private User user;
-    private String taskName;
-    private String taskDescription;
+
+	private Long id;
+	private User user;
+	private String taskName;
+	private String taskDescription;
 }

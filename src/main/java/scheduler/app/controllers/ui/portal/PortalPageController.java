@@ -11,10 +11,10 @@ import java.security.Principal;
 @RequestMapping(SecurityConfig.PORTAL_PAGE_URL)
 public class PortalPageController {
 
-    private static final String VIEW = "/PortalPage";
+	private static final String VIEW = "/PortalPage";
 
-    @RequestMapping(method = RequestMethod.GET, value = "")
-    public String portalPage(final Principal principal) {
-        return VIEW;
-    }
+	@RequestMapping(method = RequestMethod.GET, value = "")
+	public String portalPage(final Principal principal) {
+		return VIEW;
+	}
 }

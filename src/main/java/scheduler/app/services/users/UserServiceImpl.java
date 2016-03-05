@@ -11,18 +11,18 @@ import javax.inject.Inject;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Inject
-    private UserRepository userRepository;
+	@Inject
+	private UserRepository userRepository;
 
-    @Inject
-    private UserEntityConverter userEntityConverter;
+	@Inject
+	private UserEntityConverter userEntityConverter;
 
-    @Override
-    public User findByLogin(final String login) {
-        return userEntityConverter.toModel(userRepository.findByLogin(login));
-    }
+	@Override
+	public User findByLogin(final String login) {
+		return userEntityConverter.toModel(userRepository.findByLogin(login));
+	}
 
-    private String encodePassword(final String password) {
-        return new BCryptPasswordEncoder().encode(password);
-    }
+	private String encodePassword(final String password) {
+		return new BCryptPasswordEncoder().encode(password);
+	}
 }

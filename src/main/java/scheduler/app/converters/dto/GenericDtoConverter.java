@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface GenericDtoConverter<M extends Model, D extends DTO> {
 
-    D toDto(M task);
+	D toDto(M task);
 
-    List<D> toDtos(List<M> task);
+	List<D> toDtos(List<M> task);
 
-    M toModel(User user, D dto);
+	M toModel(User user, D dto);
 }

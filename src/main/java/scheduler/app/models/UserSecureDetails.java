@@ -8,9 +8,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class UserSecureDetails implements Model {
-    private Long id;
-    private Long userId;
-    private String login;
-    private String authString;
-    private UserRole role;
+
+	private Long id;
+	private Long userId;
+	private String login;
+	private String authString;
+	private UserRole role;
 }

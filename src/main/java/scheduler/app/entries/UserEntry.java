@@ -22,20 +22,20 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 public class UserEntry implements DBEntity {
 
-    @Id
-    @Column(name = "C_USER_ID", unique = true)
-    @GeneratedValue(generator = "T_USER_GEN")
-    @SequenceGenerator(name = "T_USER_GEN", sequenceName = "T_USER_SEQ", allocationSize = 20)
-    private Long id;
+	@Id
+	@Column(name = "C_USER_ID", unique = true)
+	@GeneratedValue(generator = "T_USER_GEN")
+	@SequenceGenerator(name = "T_USER_GEN", sequenceName = "T_USER_SEQ", allocationSize = 20)
+	private Long id;
 
-    @Column(name = "C_USER_NAME", unique = true, columnDefinition = "VARCHAR(100)")
-    private String username;
+	@Column(name = "C_USER_NAME", unique = true, columnDefinition = "VARCHAR(100)")
+	private String username;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserSecureDetailsEntry secureDetails;
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private UserSecureDetailsEntry secureDetails;
 
     /*@Override
-    public int hashCode() {
+	public int hashCode() {
         return (int) (31 * id);
     }
 

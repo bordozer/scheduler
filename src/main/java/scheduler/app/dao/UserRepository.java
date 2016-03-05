@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<SchedulerTaskEntry, Long> 
 //    String CACHE_ENTRY = "scheduler.app.cache.user";
 //    String CACHE_QUERY = "scheduler.app.cache.users";
 
-    UserEntry findById(final Long userId);
+	UserEntry findById(final Long userId);
 
-    UserEntry findByLogin(final String login);
+	UserEntry findByLogin(final String login);
 }
