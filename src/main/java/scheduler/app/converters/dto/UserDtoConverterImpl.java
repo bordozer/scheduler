@@ -7,7 +7,7 @@ import scheduler.app.models.User;
 import java.util.function.Function;
 
 @Service
-public class UserDtoConverterImpl extends AbstractToDtoConverter<User, UserDto> {
+public class UserDtoConverterImpl extends AbstractToDtoConverter<User, UserDto> implements UserDtoConverter {
 
 	@Override
 	public User toModel(final User user, final UserDto dto) {

@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.util.function.Function;
 
 @Service
-public class SchedulerTaskEditDtoConverterImpl extends AbstractToDtoConverter<SchedulerTask, SchedulerTaskEditDto> {
+public class SchedulerTaskEditDtoConverterImpl extends AbstractToDtoConverter<SchedulerTask, SchedulerTaskEditDto> implements SchedulerTaskEditDtoConverter {
 
 	@Inject
 	private RemoteJobEditDtoConverter remoteJobEditDtoConverter;
