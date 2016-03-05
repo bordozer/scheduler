@@ -6,14 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import scheduler.app.models.UserRole;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "T_USER_SECURITY")
@@ -22,6 +15,12 @@ import javax.persistence.Table;
 @Setter
 @EqualsAndHashCode
 public class UserSecureDetailsEntry implements DBEntity {
+
+	@Id
+	@Column(name = "T_USER_SECURITY_ID", unique = true)
+	@GeneratedValue(generator = "T_USER_SECURITY_GEN")
+	@SequenceGenerator(name = "T_USER_SECURITY_GEN", sequenceName = "T_USER_SECURITY_ID_SEQ", allocationSize = 20)
+	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "C_USER_ID", nullable = false)
@@ -37,6 +36,6 @@ public class UserSecureDetailsEntry implements DBEntity {
 	private String authString;
 
 	@Enumerated(value = EnumType.STRING)
-	@Column(name = "C_USER_LOGIN")
+	@Column(name = "C_USER_ROLE")
 	private UserRole role;
 }
