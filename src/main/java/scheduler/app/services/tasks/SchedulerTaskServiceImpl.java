@@ -2,6 +2,7 @@ package scheduler.app.services.tasks;
 
 import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
+import scheduler.app.models.User;
 import scheduler.app.repositories.SchedulerTaskRepository;
 import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.models.SchedulerTask;
@@ -21,13 +22,16 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
 	@Override
 	public List<SchedulerTask> loadAll() {
-		return schedulerTaskRepository.findAll().stream()
-				.map(schedulerTaskEntityConverter::toModel)
-				.collect(Collectors.toList());
+		return toModel(schedulerTaskRepository.findAll());
 	}
 
 	@Override
-	public SchedulerTask load(final long taskId) {
+	public List<SchedulerTask> loadAll(final Long userId) {
+		return toModel(schedulerTaskRepository.findAllByUserId(userId));
+	}
+
+	@Override
+	public SchedulerTask load(final Long taskId) {
 		return schedulerTaskEntityConverter.toModel(schedulerTaskRepository.findOne(taskId));
 	}
 
@@ -42,8 +46,14 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 
 	@Override
-	public void delete(final long taskId) {
+	public void delete(final Long taskId) {
 		schedulerTaskRepository.delete(taskId);
+	}
+
+	private List<SchedulerTask> toModel(final List<SchedulerTaskEntity> allByUserId) {
+		return allByUserId.stream()
+				.map(schedulerTaskEntityConverter::toModel)
+				.collect(Collectors.toList());
 	}
 
 	private SchedulerTask populateAndSave(final SchedulerTaskEntity taskEntity, final SchedulerTask schedulerTask) {

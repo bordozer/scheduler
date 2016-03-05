@@ -9,14 +9,16 @@ public interface SchedulerTaskService {
 
 	List<SchedulerTask> loadAll();
 
-	SchedulerTask load(final long taskId);
+	List<SchedulerTask> loadAll(Long userId);
+
+	SchedulerTask load(Long taskId);
 
 	@Transactional
-	SchedulerTask add(final SchedulerTask schedulerTask);
+	SchedulerTask add(SchedulerTask schedulerTask);
 
 	@Transactional
-	SchedulerTask save(final SchedulerTask schedulerTask);
+	SchedulerTask save(SchedulerTask schedulerTask);
 
 	@Transactional
-	void delete(final long taskId);
+	void delete(Long taskId);
 }
