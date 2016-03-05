@@ -15,7 +15,7 @@ public class SchedulerTaskDtoConverterImpl extends AbstractToDtoConverter<Schedu
 	private RemoteJobDtoConverter remoteJobDtoConverter;
 
 	@Inject
-	private UserDtoConverterImpl userDtoConverter;
+	private UserDtoConverter userDtoConverter;
 
 	@Override
 	public SchedulerTask toModel(final User user, final SchedulerTaskDto dto) {
