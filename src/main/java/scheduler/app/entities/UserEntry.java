@@ -5,22 +5,25 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import static scheduler.app.entities.UserEntry.NAMED_QUERY_FIND_BY_LOGIN;
 
 @Entity
 @Table(name = "T_USER")
+@NamedQueries( {
+		@NamedQuery(
+				name = NAMED_QUERY_FIND_BY_LOGIN,
+				query = "select u from UserEntry u inner join u.secureDetails ud where u.id = ud.user.id and ud.login = :login"
+		)
+} )
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
 @EqualsAndHashCode
 public class UserEntry implements DBEntity {
+
+    public static final String NAMED_QUERY_FIND_BY_LOGIN = "UserEntry.NAMED_QUERY_FIND_BY_LOGIN";
 
 	@Id
 	@Column(name = "C_USER_ID", unique = true)
