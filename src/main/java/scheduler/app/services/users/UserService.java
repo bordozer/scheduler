@@ -12,7 +12,7 @@ public interface UserService {
 	User save(User user);
 
 	@Transactional
-	User save(User user, UserSecureDetails userSecureDetails);
+	User save(Long userId, UserSecureDetails userSecureDetails);
 
 	UserSecureDetails getUserSecureDetails(Long userId);
 }

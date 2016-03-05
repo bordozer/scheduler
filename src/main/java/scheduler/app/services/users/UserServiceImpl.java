@@ -38,9 +38,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User save(final User user, final UserSecureDetails userSecureDetails) {
-		final UserEntity userEntity = userRepository.findById(user.getId());
-		userEntityConverter.populateEntity(userEntity, user);
+	public User save(final Long userId, final UserSecureDetails userSecureDetails) {
+		final UserEntity userEntity = userRepository.findById(userId);
 		userSecureDetailsConverter.populateEntity(userEntity.getSecureDetails(), userSecureDetails);
 		final UserEntity saved = userRepository.saveAndFlush(userEntity);
 		return userEntityConverter.toModel(saved);
