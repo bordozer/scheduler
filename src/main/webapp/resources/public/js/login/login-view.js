@@ -50,7 +50,7 @@ define( function ( require ) {
 				success: function ( response ) {
 
 					if ( response === 'ok' ) {
-						window.location.replace( '/' );
+						window.location.replace( '/scheduler/' );
 						return;
 					}
 
