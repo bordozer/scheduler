@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public abstract class AbstractToDtoConverter<M extends Model, D extends Dto> {
+public abstract class AbstractToDtoConverter<M extends Model, D extends Dto> implements GenericDtoConverter<M, D> {
 
 	protected abstract Function<M, D> taskMapper();
 
