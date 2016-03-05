@@ -1,8 +1,10 @@
 package scheduler.app.converters.entity;
 
+import org.springframework.stereotype.Service;
 import scheduler.app.entities.UserEntry;
 import scheduler.app.models.User;
 
+@Service
 public class UserEntityConverterImpl implements UserEntityConverter {
 
 	@Override

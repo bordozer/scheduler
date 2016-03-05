@@ -1,11 +1,13 @@
 package scheduler.app.converters.entity;
 
 import com.google.inject.Inject;
+import org.springframework.stereotype.Service;
 import scheduler.app.repositories.UserRepository;
 import scheduler.app.entities.SchedulerTaskEntry;
 import scheduler.app.entities.UserEntry;
 import scheduler.app.models.SchedulerTask;
 
+@Service
 public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConverter {
 
 	@Inject
