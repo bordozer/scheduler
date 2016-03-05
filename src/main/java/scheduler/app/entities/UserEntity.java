@@ -15,8 +15,6 @@ import javax.persistence.*;
 @EqualsAndHashCode
 public class UserEntity implements DBEntity {
 
-    public static final String NAMED_QUERY_FIND_BY_LOGIN = "UserEntry.NAMED_QUERY_FIND_BY_LOGIN";
-
 	@Id
 	@Column(name = "C_USER_ID", unique = true)
 	@GeneratedValue(generator = "T_USER_GEN")

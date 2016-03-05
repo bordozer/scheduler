@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	UserEntity findById(Long userId);
 
 	@Cacheable( value = CACHE_ENTRY, key = "#p0" )
-	@Query(value = "select u from UserEntry u inner join u.secureDetails sd where u.secureDetails.login = :login")
+	@Query(value = "select u from UserEntity u inner join u.secureDetails sd where u.secureDetails.login = :login")
 	UserEntity findByLogin(@Param("login") String login);
 }
