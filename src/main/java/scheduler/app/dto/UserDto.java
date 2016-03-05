@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class UserDto implements Dto {
-
 	private Long userId;
 	private String userName;
 

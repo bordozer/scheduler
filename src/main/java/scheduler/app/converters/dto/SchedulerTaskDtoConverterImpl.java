@@ -14,6 +14,9 @@ public class SchedulerTaskDtoConverterImpl extends AbstractToDtoConverter<Schedu
 	@Inject
 	private RemoteJobDtoConverter remoteJobDtoConverter;
 
+	@Inject
+	private UserDtoConverter userDtoConverter;
+
 	@Override
 	public SchedulerTask toModel(final User user, final SchedulerTaskDto dto) {
 		SchedulerTask model = new SchedulerTask();
@@ -31,6 +34,7 @@ public class SchedulerTaskDtoConverterImpl extends AbstractToDtoConverter<Schedu
 		return model -> {
 			final SchedulerTaskDto dto = new SchedulerTaskDto();
 			dto.setTaskId(model.getId());
+			dto.setUser(userDtoConverter.toDto(model.getUser()));
 			dto.setTaskType(model.getTaskType());
 			dto.setTaskName(model.getTaskName());
 			dto.setTaskDescription(model.getTaskDescription());
