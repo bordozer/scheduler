@@ -19,12 +19,8 @@ INSERT INTO T_SCH_TASK(C_SCH_TASK_ID, C_USER_ID, C_SCH_TASK_NAME, C_SCH_TASK_DES
 VALUES
 (1, 1, 'NBA import', 'NBA import scheduler task'),
 (2, 1, 'UEFA import', 'UEFA import scheduler task'),
-(3, 2, 'NHL import', 'NHL import scheduler task')
+(3, 2, 'NHL import', 'NHL import scheduler task');
 
-
---SELECT * FROM T_USER;
---SELECT * FROM T_USER_SECURITY;
---SELECT * FROM T_SCH_TASK;
 
 
 
