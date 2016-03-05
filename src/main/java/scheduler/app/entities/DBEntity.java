@@ -1,4 +1,4 @@
-package scheduler.app.entries;
+package scheduler.app.entities;
 
 public interface DBEntity {
 

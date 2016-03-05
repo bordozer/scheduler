@@ -35,11 +35,19 @@ public class DevelopmentConfiguration {
 	@Bean(name = "datasource")
 	public DriverManagerDataSource dataSource() {
 
-		LOGGER.debug(String.format("Connection information: host=%s; port=%s; db=%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName()));
+		LOGGER.debug(String.format("Connection information: host=%s; port=%s; db=%s",
+				systemVarsService.getDatabaseHost(),
+				systemVarsService.getDatabasePort(),
+				systemVarsService.getDatabaseName())
+		);
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl(String.format("jdbc:mysql://%s:%s/%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName()));
+		dataSource.setUrl(String.format("jdbc:mysql://%s:%s/%s",
+				systemVarsService.getDatabaseHost(),
+				systemVarsService.getDatabasePort(),
+				systemVarsService.getDatabaseName())
+		);
 		dataSource.setUsername(systemVarsService.getDatabaseUserName());
 		dataSource.setPassword(systemVarsService.getDatabaseUserPassword());
 
@@ -51,7 +59,7 @@ public class DevelopmentConfiguration {
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
-		entityManagerFactoryBean.setPackagesToScan("scheduler.app.models");
+		entityManagerFactoryBean.setPackagesToScan("scheduler.app.entities");
 		entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
 		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 

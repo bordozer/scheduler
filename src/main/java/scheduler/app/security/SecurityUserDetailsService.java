@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import scheduler.app.repositories.UserRepository;
-import scheduler.app.entries.UserEntry;
+import scheduler.app.entities.UserEntry;
 
 import javax.inject.Inject;
 import java.util.List;

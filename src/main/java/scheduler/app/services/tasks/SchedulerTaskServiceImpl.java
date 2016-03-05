@@ -3,7 +3,7 @@ package scheduler.app.services.tasks;
 import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
 import scheduler.app.repositories.TaskRepository;
-import scheduler.app.entries.SchedulerTaskEntry;
+import scheduler.app.entities.SchedulerTaskEntry;
 import scheduler.app.models.SchedulerTask;
 
 import javax.inject.Inject;

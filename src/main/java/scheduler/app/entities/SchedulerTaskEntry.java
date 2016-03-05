@@ -1,4 +1,4 @@
-package scheduler.app.entries;
+package scheduler.app.entities;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

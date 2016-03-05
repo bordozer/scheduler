@@ -2,8 +2,8 @@ package scheduler.app.converters.entity;
 
 import com.google.inject.Inject;
 import scheduler.app.repositories.UserRepository;
-import scheduler.app.entries.SchedulerTaskEntry;
-import scheduler.app.entries.UserEntry;
+import scheduler.app.entities.SchedulerTaskEntry;
+import scheduler.app.entities.UserEntry;
 import scheduler.app.models.SchedulerTask;
 
 public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConverter {

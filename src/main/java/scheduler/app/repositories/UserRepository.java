@@ -2,8 +2,8 @@ package scheduler.app.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import scheduler.app.entries.SchedulerTaskEntry;
-import scheduler.app.entries.UserEntry;
+import scheduler.app.entities.SchedulerTaskEntry;
+import scheduler.app.entities.UserEntry;
 
 @Repository
 public interface UserRepository extends JpaRepository<SchedulerTaskEntry, Long> {
