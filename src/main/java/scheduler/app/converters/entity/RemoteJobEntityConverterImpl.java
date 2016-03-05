@@ -12,6 +12,7 @@ public class RemoteJobEntityConverterImpl implements RemoteJobEntityConverter {
 		entity.setId(model.getId());
 		entity.setUrl(model.getUrl());
 		entity.setRequestMethod(model.getRequestMethod());
+		entity.setAuthString(model.getAuthString());
 		entity.setPostJson(model.getPostJson());
 	}
 
@@ -21,6 +22,7 @@ public class RemoteJobEntityConverterImpl implements RemoteJobEntityConverter {
 		model.setId(entity.getId());
 		model.setUrl(entity.getUrl());
 		model.setRequestMethod(entity.getRequestMethod());
+		model.setAuthString(entity.getAuthString());
 		model.setPostJson(entity.getPostJson());
 		return model;
 	}

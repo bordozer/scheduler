@@ -16,6 +16,7 @@ public class RemoteJobEditDtoConverterImpl extends AbstractToDtoConverter<Remote
 		model.setId(dto.getId());
 		model.setUrl(dto.getUrl());
 		model.setRequestMethod(dto.getRequestMethod());
+		model.setAuthString(dto.getAuthString());
 		model.setPostJson(dto.getPostJson());
 		return model;
 	}
@@ -23,12 +24,13 @@ public class RemoteJobEditDtoConverterImpl extends AbstractToDtoConverter<Remote
 	@Override
 	protected Function<RemoteJob, RemoteJobEditDto> taskMapper() {
 		return model -> {
-			RemoteJobEditDto ret = new RemoteJobEditDto();
-			ret.setId(model.getId());
-			ret.setUrl(model.getUrl());
-			ret.setRequestMethod(model.getRequestMethod());
-			ret.setPostJson(model.getPostJson());
-			return ret;
+			RemoteJobEditDto dto = new RemoteJobEditDto();
+			dto.setId(model.getId());
+			dto.setUrl(model.getUrl());
+			dto.setRequestMethod(model.getRequestMethod());
+			dto.setAuthString(model.getAuthString());
+			dto.setPostJson(model.getPostJson());
+			return dto;
 		};
 	}
 }

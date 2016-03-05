@@ -1,7 +1,6 @@
 package scheduler.app.converters.entity;
 
 import org.springframework.stereotype.Service;
-import scheduler.app.entities.RemoteJobEntity;
 import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.models.SchedulerTask;
@@ -29,10 +28,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 		entity.setTaskName(model.getTaskName());
 		entity.setTaskDescription(model.getTaskDescription());
 		entity.setTaskParametersJSON(model.getTaskParametersJSON());
-
-		final RemoteJobEntity remoteJob = entity.getRemoteJob();
-		remoteJobEntityConverter.populateEntity(remoteJob, model.getRemoteJob());
-		entity.setRemoteJob(remoteJob);
+		remoteJobEntityConverter.populateEntity(entity.getRemoteJob(), model.getRemoteJob());
 	}
 
 	@Override

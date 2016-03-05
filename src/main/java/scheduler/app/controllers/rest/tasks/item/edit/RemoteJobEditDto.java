@@ -13,6 +13,7 @@ public class RemoteJobEditDto implements Dto {
 	private Long id;
 	private String url;
 	private RequestMethod requestMethod;
+	private String authString;
 	private String postJson;
 
 	@Override

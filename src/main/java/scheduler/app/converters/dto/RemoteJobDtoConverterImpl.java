@@ -14,6 +14,7 @@ public class RemoteJobDtoConverterImpl extends AbstractToDtoConverter<RemoteJob,
 		model.setId(dto.getId());
 		model.setUrl(dto.getUrl());
 		model.setRequestMethod(dto.getRequestMethod());
+		model.setAuthString(dto.getAuthString());
 		model.setPostJson(dto.getPostJson());
 		return model;
 	}
@@ -25,6 +26,7 @@ public class RemoteJobDtoConverterImpl extends AbstractToDtoConverter<RemoteJob,
 			dto.setId(model.getId());
 			dto.setUrl(model.getUrl());
 			dto.setRequestMethod(model.getRequestMethod());
+			dto.setAuthString(model.getAuthString());
 			dto.setPostJson(model.getPostJson());
 			return dto;
 		};
