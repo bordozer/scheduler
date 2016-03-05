@@ -1,11 +1,13 @@
 package scheduler.app.converters.dto;
 
+import org.springframework.stereotype.Service;
 import scheduler.app.dto.RemoteJobDto;
 import scheduler.app.models.RemoteJob;
 import scheduler.app.models.User;
 
 import java.util.function.Function;
 
+@Service
 public class RemoteJobDtoConverterImpl extends AbstractToDtoConverter<RemoteJob, RemoteJobDto> implements RemoteJobDtoConverter {
 
 	@Override
