@@ -6,8 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import scheduler.app.entities.UserEntry;
 
-
-
 @Repository
 public interface UserRepository extends JpaRepository<UserEntry, Long> {
 //    String CACHE_ENTRY = "scheduler.app.cache.user";
@@ -15,6 +13,6 @@ public interface UserRepository extends JpaRepository<UserEntry, Long> {
 
 	UserEntry findById(Long userId);
 
-	@Query(value = UserEntry.NAMED_QUERY_FIND_BY_LOGIN)
+	@Query(value = "select u from UserEntry u inner join u.secureDetails sd where u.secureDetails.login = :login")
 	UserEntry findByLogin(@Param("login") String login);
 }

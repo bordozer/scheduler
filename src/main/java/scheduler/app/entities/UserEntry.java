@@ -7,16 +7,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
-import static scheduler.app.entities.UserEntry.NAMED_QUERY_FIND_BY_LOGIN;
-
 @Entity
 @Table(name = "T_USER")
-@NamedQueries( {
+/*@NamedQueries( {
 		@NamedQuery(
 				name = NAMED_QUERY_FIND_BY_LOGIN,
-				query = "select u from UserEntry u inner join u.secureDetails ud where u.id = ud.user.id and ud.login = :login"
+				query = "select u from UserEntry u inner join u.secureDetails sd where u.secureDetails.login = :login"
 		)
-} )
+} )*/
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
