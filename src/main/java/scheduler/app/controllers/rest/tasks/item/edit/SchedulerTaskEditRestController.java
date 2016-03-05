@@ -1,7 +1,7 @@
 package scheduler.app.controllers.rest.tasks.item.edit;
 
 import org.springframework.web.bind.annotation.*;
-import scheduler.app.converters.dto.SchedulerTaskEditDtoConverterImpl;
+import scheduler.app.converters.dto.SchedulerTaskEditDtoConverter;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 import scheduler.app.services.tasks.SchedulerTaskService;
@@ -21,7 +21,7 @@ public class SchedulerTaskEditRestController {
 	private SchedulerTaskService schedulerTaskService;
 
 	@Inject
-	private SchedulerTaskEditDtoConverterImpl schedulerTaskEditDtoConverter;
+	private SchedulerTaskEditDtoConverter schedulerTaskEditDtoConverter;
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/0/")
 	public SchedulerTaskEditDto create(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {

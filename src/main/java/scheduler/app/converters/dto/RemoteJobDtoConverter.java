@@ -1,18 +1,18 @@
 package scheduler.app.converters.dto;
 
 import org.springframework.stereotype.Service;
-import scheduler.app.controllers.rest.tasks.item.edit.RemoteJobEditDto;
+import scheduler.app.dto.RemoteJobDto;
 import scheduler.app.models.RemoteJob;
 import scheduler.app.models.User;
 
 import java.util.function.Function;
 
 @Service
-public class RemoteJobEditDtoConverterImpl extends AbstractDtoConverter<RemoteJob, RemoteJobEditDto> {
+public class RemoteJobDtoConverter extends AbstractDtoConverter<RemoteJob, RemoteJobDto> {
 
 	@Override
-	public RemoteJob toModel(final User user, final RemoteJobEditDto dto) {
-		RemoteJob model = new RemoteJob();
+	public RemoteJob toModel(final User user, final RemoteJobDto dto) {
+		final RemoteJob model = new RemoteJob();
 		model.setId(dto.getId());
 		model.setRequestUrl(dto.getRequestUrl());
 		model.setRequestMethod(dto.getRequestMethod());
@@ -22,9 +22,9 @@ public class RemoteJobEditDtoConverterImpl extends AbstractDtoConverter<RemoteJo
 	}
 
 	@Override
-	protected Function<RemoteJob, RemoteJobEditDto> taskMapper() {
+	protected Function<RemoteJob, RemoteJobDto> taskMapper() {
 		return model -> {
-			RemoteJobEditDto dto = new RemoteJobEditDto();
+			final RemoteJobDto dto = new RemoteJobDto();
 			dto.setId(model.getId());
 			dto.setRequestUrl(model.getRequestUrl());
 			dto.setRequestMethod(model.getRequestMethod());
