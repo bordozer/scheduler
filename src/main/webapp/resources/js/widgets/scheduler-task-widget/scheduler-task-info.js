@@ -11,9 +11,11 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var t = new Translator( {
 		menuItem_TaskExecutionHistoryLabel: "Task execution history",
+		taskType: "Task type",
 		taskName: "Task name",
-		taskUrl: "Url",
-		taskRemoteParametersJSON: "Remote parameters JSON"
+		taskDescription: "Description",
+		taskParametersJSON: "Task parameters JSON",
+		taskUrl: "Url"
 	} );
 
 	return Backbone.View.extend( {

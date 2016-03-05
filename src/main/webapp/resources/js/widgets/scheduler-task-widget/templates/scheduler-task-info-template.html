@@ -3,24 +3,33 @@
 		<%= t.taskName %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<%= model.taskName %>
+		<%= model.taskName %> (<%= model.taskId %>)
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-xs-12 col-lg-6 text-muted">
-		<%= t.taskUrl %>
+		<%= t.taskType %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<%= model.remoteURL %>
+		<%= model.taskType %>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-xs-12 col-lg-6 text-muted">
-		<%= t.taskRemoteParametersJSON %>
+		<%= t.taskDescription %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<%= model.remoteParametersJSON %>
+		<%= model.taskDescription %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.taskParametersJSON %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<%= model.taskParametersJSON %>
 	</div>
 </div>
