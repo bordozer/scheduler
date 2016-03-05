@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import scheduler.app.converters.dto.SchedulerTaskDtoConverter;
+import scheduler.app.converters.dto.SchedulerTaskDtoConverterImpl;
 import scheduler.app.dto.IdDto;
 import scheduler.app.dto.SchedulerTaskDto;
 import scheduler.app.models.User;
@@ -27,7 +27,7 @@ public class TaskListRestController {
 	private SchedulerTaskService schedulerTaskService;
 
 	@Inject
-	private SchedulerTaskDtoConverter schedulerTaskDtoConverter;
+	private SchedulerTaskDtoConverterImpl schedulerTaskDtoConverter;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public List<SchedulerTaskDto> tasks(final Principal principal) {
