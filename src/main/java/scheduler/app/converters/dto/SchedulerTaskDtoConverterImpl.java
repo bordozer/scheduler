@@ -16,15 +16,15 @@ public class SchedulerTaskDtoConverterImpl extends AbstractToDtoConverter<Schedu
 
 	@Override
 	public SchedulerTask toModel(final User user, final SchedulerTaskDto dto) {
-		SchedulerTask ret = new SchedulerTask();
-		ret.setId(dto.getTaskId());
-		ret.setUser(user);
-		ret.setTaskType(dto.getTaskType());
-		ret.setTaskName(dto.getTaskName());
-		ret.setTaskDescription(dto.getTaskDescription());
-		ret.setTaskParametersJSON(dto.getTaskParametersJSON());
-		ret.setRemoteJob(remoteJobDtoConverter.toModel(user, dto.getRemoteJob()));
-		return ret;
+		SchedulerTask model = new SchedulerTask();
+		model.setId(dto.getTaskId());
+		model.setUser(user);
+		model.setTaskType(dto.getTaskType());
+		model.setTaskName(dto.getTaskName());
+		model.setTaskDescription(dto.getTaskDescription());
+		model.setTaskParametersJSON(dto.getTaskParametersJSON());
+		model.setRemoteJob(remoteJobDtoConverter.toModel(user, dto.getRemoteJob()));
+		return model;
 	}
 
 	protected Function<SchedulerTask, SchedulerTaskDto> taskMapper() {

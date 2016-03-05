@@ -9,4 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class IdDto {
 	private final Long id;
+
+	@Override
+	public String toString() {
+		return String.format("#%d", id);
+	}
 }
