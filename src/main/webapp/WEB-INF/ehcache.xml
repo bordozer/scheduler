@@ -16,4 +16,16 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
+	<cache name="scheduler.app.cache.scheduler-task"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="scheduler.app.cache.scheduler-tasks"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 </ehcache>
