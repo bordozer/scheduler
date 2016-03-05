@@ -1,5 +1,6 @@
 package scheduler.app.controllers.rest.tasks.item.edit;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import scheduler.app.dto.Dto;
@@ -7,6 +8,7 @@ import scheduler.app.models.SchedulerTaskType;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class SchedulerTaskEditDto implements Dto {
 	private Long taskId;
 	private SchedulerTaskType taskType;

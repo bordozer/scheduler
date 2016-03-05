@@ -1,10 +1,12 @@
 package scheduler.app.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class UserDto implements Dto {
 
 	private Long userId;
