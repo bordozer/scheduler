@@ -4,17 +4,11 @@ public interface SystemVarsService {
 
 	String getProjectName();
 
-	String getDatabaseHost();
+	String getDbUrl();
 
-	String getDatabasePort();
+	String getDbUser();
 
-	String getDatabaseName();
+	String getDbPassword();
 
-	String getDatabaseUserName();
-
-	String getDatabaseUserPassword();
-
-	String getRootUserName();
-
-	String getRootUserPassword();
+	boolean showDbLog();
 }

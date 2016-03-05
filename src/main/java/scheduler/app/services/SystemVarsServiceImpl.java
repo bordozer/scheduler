@@ -50,38 +50,23 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public String getDatabaseHost() {
-		return config.getString("database.host");
+	public String getDbUrl() {
+		return config.getString("db.default.url");
 	}
 
 	@Override
-	public String getDatabasePort() {
-		return config.getString("database.port");
+	public String getDbUser() {
+		return config.getString("db.default.user");
 	}
 
 	@Override
-	public String getDatabaseName() {
-		return config.getString("database.name");
+	public String getDbPassword() {
+		return config.getString("db.default.password");
 	}
 
 	@Override
-	public String getDatabaseUserName() {
-		return config.getString("database.user.name");
-	}
-
-	@Override
-	public String getDatabaseUserPassword() {
-		return config.getString("database.user.password");
-	}
-
-	@Override
-	public String getRootUserName() {
-		return config.getString("system.root-user-name");
-	}
-
-	@Override
-	public String getRootUserPassword() {
-		return config.getString("system.root-user-password");
+	public boolean showDbLog() {
+		return config.getBoolean("db.default.logStatements", false);
 	}
 
 	private File getPropertyFile(final String fileName) {
