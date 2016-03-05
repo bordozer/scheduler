@@ -48,7 +48,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
 	private SchedulerTask populateAndSave(final SchedulerTask schedulerTask, final SchedulerTaskEntry dbEntry) {
 		schedulerTaskEntityConverter.populateEntity(dbEntry, schedulerTask);
-		SchedulerTaskEntry savedEntity = schedulerTaskRepository.save(dbEntry);
+		SchedulerTaskEntry savedEntity = schedulerTaskRepository.saveAndFlush(dbEntry);
 		return schedulerTaskEntityConverter.toModel(savedEntity);
 	}
 }
