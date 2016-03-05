@@ -25,14 +25,16 @@ public class SchedulerTaskEditRestController {
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/0/")
 	public SchedulerTaskEditDto create(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {
-		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(getCurrentUser(principal.getName()), editDTO);
+		final User currentUser = getCurrentUser(principal.getName());
+		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(currentUser, editDTO);
 		SchedulerTask created = schedulerTaskService.add(schedulerTask);
 		return schedulerTaskEditDtoConverter.toDto(created);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{taskId}/")
 	public SchedulerTaskEditDto edit(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {
-		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(getCurrentUser(principal.getName()), editDTO);
+		final User currentUser = getCurrentUser(principal.getName());
+		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(currentUser, editDTO);
 		SchedulerTask saved = schedulerTaskService.save(schedulerTask);
 		return schedulerTaskEditDtoConverter.toDto(saved);
 	}

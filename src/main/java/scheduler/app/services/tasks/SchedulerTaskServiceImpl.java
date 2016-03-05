@@ -33,12 +33,12 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
 	@Override
 	public SchedulerTask add(final SchedulerTask schedulerTask) {
-		return populateAndSave(schedulerTask, new SchedulerTaskEntity());
+		return populateAndSave(new SchedulerTaskEntity(), schedulerTask);
 	}
 
 	@Override
 	public SchedulerTask save(final SchedulerTask schedulerTask) {
-		return populateAndSave(schedulerTask, schedulerTaskRepository.findById(schedulerTask.getId()));
+		return populateAndSave(schedulerTaskRepository.findById(schedulerTask.getId()), schedulerTask);
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 		schedulerTaskRepository.delete(taskId);
 	}
 
-	private SchedulerTask populateAndSave(final SchedulerTask schedulerTask, final SchedulerTaskEntity dbEntry) {
-		schedulerTaskEntityConverter.populateEntity(dbEntry, schedulerTask);
-		SchedulerTaskEntity savedEntity = schedulerTaskRepository.saveAndFlush(dbEntry);
+	private SchedulerTask populateAndSave(final SchedulerTaskEntity taskEntity, final SchedulerTask schedulerTask) {
+		schedulerTaskEntityConverter.populateEntity(taskEntity, schedulerTask);
+		SchedulerTaskEntity savedEntity = schedulerTaskRepository.saveAndFlush(taskEntity);
 		return schedulerTaskEntityConverter.toModel(savedEntity);
 	}
 }
