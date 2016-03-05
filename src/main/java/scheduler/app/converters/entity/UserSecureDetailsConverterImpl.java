@@ -21,7 +21,7 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 		entity.setId(model.getId());
 		entity.setUser(userRepository.findById(model.getUser().getId()));
 		entity.setLogin(model.getLogin());
-		entity.setPassword(model.getPassword());
+		entity.setPassword(model.getPasswordEncrypted());
 		entity.setRole(model.getRole());
 	}
 
@@ -31,7 +31,7 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 		model.setId(entity.getId());
 		model.setUser(userEntityConverter.toModel(entity.getUser()));
 		model.setLogin(entity.getLogin());
-		model.setPassword(entity.getPassword());
+		model.setPasswordEncrypted(entity.getPassword());
 		model.setRole(entity.getRole());
 		return model;
 	}

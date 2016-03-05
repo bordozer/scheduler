@@ -12,7 +12,7 @@ public class UserSecureDetails implements Model {
 	private User user;
 	private String login;
 	private UserRole role;
-	private String password;
+	private String passwordEncrypted;
 
 	@Override
 	public String toString() {
