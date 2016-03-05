@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.app.converters.dto.SchedulerTaskDtoConverter;
 import scheduler.app.dto.IdDto;
-import scheduler.app.dto.SchedulerTaskDTO;
+import scheduler.app.dto.SchedulerTaskDto;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ public class TaskListRestController {
 	private SchedulerTaskDtoConverter schedulerTaskDtoConverter;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
-	public List<SchedulerTaskDTO> tasks() {
+	public List<SchedulerTaskDto> tasks() {
 		return schedulerTaskDtoConverter.toDtos(schedulerTaskService.loadAll());
 	}
 
@@ -37,7 +37,7 @@ public class TaskListRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{taskId}/")
-	public SchedulerTaskDTO taskEntry(final @PathVariable int taskId) {
+	public SchedulerTaskDto taskEntry(final @PathVariable int taskId) {
 		return schedulerTaskDtoConverter.toDto(schedulerTaskService.load(taskId));
 	}
 }

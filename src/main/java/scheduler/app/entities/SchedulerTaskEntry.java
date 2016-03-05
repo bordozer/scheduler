@@ -28,7 +28,7 @@ public class SchedulerTaskEntry implements DBEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "C_SCH_TASK_TYPE", columnDefinition = "VARCHAR(10)")
-	private SchedulerTaskType schedulerTaskType;
+	private SchedulerTaskType taskType;
 
 	@Column(name = "C_SCH_TASK_NAME", columnDefinition = "VARCHAR(255)")
 	private String taskName;

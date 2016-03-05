@@ -13,4 +13,9 @@ public class RemoteJob implements Model {
 	private String url;
 	private RequestMethod requestMethod;
 	private String postJson;
+
+	@Override
+	public String toString() {
+		return String.format("#%d: %s (%s)", id, url, requestMethod);
+	}
 }

@@ -8,10 +8,14 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class UserSecureDetails implements Model {
-
 	private Long id;
-	private Long userId;
+//	private User user;
 	private String login;
 	private String authString;
 	private UserRole role;
+
+	@Override
+	public String toString() {
+		return String.format("#%d, user: %s", id, login);
+	}
 }

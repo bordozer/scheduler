@@ -3,20 +3,19 @@ package scheduler.app.dto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import scheduler.app.models.RemoteJob;
 import scheduler.app.models.SchedulerTaskType;
 
 @Getter
 @Setter
 @EqualsAndHashCode
-public class SchedulerTaskDTO implements DTO {
+public class SchedulerTaskDto implements Dto {
 	private Long taskId;
 	private UserDto user;
 	private SchedulerTaskType taskType;
 	private String taskName;
 	private String taskDescription;
 	private String taskParametersJSON;
-	private RemoteJob remoteJob;
+	private RemoteJobDto remoteJob;
 
 	@Override
 	public String toString() {

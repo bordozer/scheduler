@@ -1,47 +1,41 @@
 package scheduler.app.converters.dto;
 
 import org.springframework.stereotype.Service;
-import scheduler.app.dto.SchedulerTaskDTO;
+import scheduler.app.dto.SchedulerTaskDto;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 
-import java.util.List;
+import javax.inject.Inject;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
-public class SchedulerTaskDtoConverterImpl implements SchedulerTaskDtoConverter {
+public class SchedulerTaskDtoConverterImpl extends AbstractToDtoConverter<SchedulerTask, SchedulerTaskDto>  implements SchedulerTaskDtoConverter {
+
+	@Inject
+	private RemoteJobDtoConverter remoteJobDtoConverter;
 
 	@Override
-	public SchedulerTaskDTO toDto(final SchedulerTask task) {
-		return taskMapper().apply(task);
-	}
-
-	@Override
-	public List<SchedulerTaskDTO> toDtos(final List<SchedulerTask> taskEntries) {
-		return taskEntries.stream().map(taskMapper()).collect(Collectors.toList());
-	}
-
-	@Override
-	public SchedulerTask toModel(final User user, final SchedulerTaskDTO dto) {
+	public SchedulerTask toModel(final User user, final SchedulerTaskDto dto) {
 		SchedulerTask ret = new SchedulerTask();
 		ret.setId(dto.getTaskId());
 		ret.setUser(user);
+		ret.setTaskType(dto.getTaskType());
 		ret.setTaskName(dto.getTaskName());
 		ret.setTaskDescription(dto.getTaskDescription());
+		ret.setTaskParametersJSON(dto.getTaskParametersJSON());
+		ret.setRemoteJob(remoteJobDtoConverter.toModel(user, dto.getRemoteJob()));
 		return ret;
 	}
 
-	private Function<SchedulerTask, SchedulerTaskDTO> taskMapper() {
+	protected Function<SchedulerTask, SchedulerTaskDto> taskMapper() {
 		return model -> {
-			final SchedulerTaskDTO dto = new SchedulerTaskDTO();
+			final SchedulerTaskDto dto = new SchedulerTaskDto();
 			dto.setTaskId(model.getId());
+			dto.setTaskType(model.getTaskType());
 			dto.setTaskName(model.getTaskName());
 			dto.setTaskDescription(model.getTaskDescription());
-//                dto.setDescription(task.getTaskDescription());
-//                dto.setTaskParametersJSON(task.getTaskParametersJSON());
-//                dto.setRemoteURL(task.getRemoteURL());
-//                dto.setRemoteParametersJSON(task.getRemoteParametersJSON());
+			dto.setTaskParametersJSON(model.getTaskParametersJSON());
+			dto.setRemoteJob(remoteJobDtoConverter.toDto(model.getRemoteJob()));
 			return dto;
 		};
 	}

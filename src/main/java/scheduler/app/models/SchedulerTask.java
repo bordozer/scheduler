@@ -10,9 +10,14 @@ import lombok.Setter;
 public class SchedulerTask implements Model {
 	private Long id;
 	private User user;
-	private SchedulerTaskType schedulerTaskType;
+	private SchedulerTaskType taskType;
 	private String taskName;
 	private String taskDescription;
 	private String taskParametersJSON;
 	private RemoteJob remoteJob;
+
+	@Override
+	public String toString() {
+		return String.format("#%s, %s, %s, %s", id, user, taskName, taskType);
+	}
 }

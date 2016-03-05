@@ -1,5 +1,5 @@
 package scheduler.app.dto;
 
-public interface DTO {
+public interface Dto {
 
 }

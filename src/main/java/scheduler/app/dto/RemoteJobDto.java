@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class RemoteJobDTO implements DTO {
+public class RemoteJobDto implements Dto {
 	private Long id;
 	private String url;
 	private RequestMethod requestMethod;

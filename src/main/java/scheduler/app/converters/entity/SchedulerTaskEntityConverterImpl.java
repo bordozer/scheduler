@@ -25,7 +25,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 	public void populateEntity(final SchedulerTaskEntry entity, final SchedulerTask model) {
 		entity.setId(model.getId());
 		entity.setUser(getUser(model.getId()));
-		entity.setSchedulerTaskType(model.getSchedulerTaskType());
+		entity.setTaskType(model.getTaskType());
 		entity.setTaskName(model.getTaskName());
 		entity.setTaskDescription(model.getTaskDescription());
 		entity.setTaskParametersJSON(model.getTaskParametersJSON());
@@ -40,7 +40,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 		SchedulerTask model = new SchedulerTask();
 		model.setId(entity.getId());
 		model.setUser(userEntityConverter.toModel(entity.getUser()));
-		model.setSchedulerTaskType(entity.getSchedulerTaskType());
+		model.setTaskType(entity.getTaskType());
 		model.setTaskName(entity.getTaskName());
 		model.setTaskDescription(entity.getTaskDescription());
 		model.setTaskParametersJSON(entity.getTaskParametersJSON());
