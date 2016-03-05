@@ -3,7 +3,6 @@ package scheduler.config.root;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,7 +23,7 @@ import java.util.Map;
 
 @Configuration
 @Profile("development")
-@EnableJpaRepositories("scheduler.app.dao")
+@EnableJpaRepositories("scheduler.app.repositories")
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
 

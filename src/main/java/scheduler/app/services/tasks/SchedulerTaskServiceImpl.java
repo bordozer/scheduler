@@ -2,7 +2,7 @@ package scheduler.app.services.tasks;
 
 import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
-import scheduler.app.dao.TaskRepository;
+import scheduler.app.repositories.TaskRepository;
 import scheduler.app.entries.SchedulerTaskEntry;
 import scheduler.app.models.SchedulerTask;
 
@@ -22,7 +22,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	@Override
 	public List<SchedulerTask> loadAll() {
 		return taskRepository.findAll().stream()
-				.map(entity -> schedulerTaskEntityConverter.toModel(entity))
+				.map(schedulerTaskEntityConverter::toModel)
 				.collect(Collectors.toList());
 	}
 

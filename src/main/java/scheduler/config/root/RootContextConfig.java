@@ -24,7 +24,7 @@ import java.io.IOException;
 @EnableCaching // TODO: ENABLE
 @ComponentScan({
 		"scheduler.app.services"
-		, "scheduler.app.dao"
+		, "scheduler.app.repositories"
 		, "scheduler.app.security"
 		, "scheduler.app.converters"
 })
