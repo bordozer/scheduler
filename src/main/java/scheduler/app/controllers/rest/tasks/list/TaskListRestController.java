@@ -35,8 +35,8 @@ public class TaskListRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/ids/")
-	public List<IdDto> taskIds() {
-		return schedulerTaskService.loadAll()
+	public List<IdDto> taskIds(final Principal principal) {
+		return schedulerTaskService.loadAll(getCurrentUser(principal).getId())
 				.stream()
 				.map(schedulerTaskEntry -> new IdDto(schedulerTaskEntry.getId()))
 				.collect(Collectors.toList());
