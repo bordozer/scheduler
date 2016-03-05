@@ -9,13 +9,13 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class UserSecureDetails implements Model {
 	private Long id;
-//	private User user;
+	private User user;
 	private String login;
-	private String authString;
 	private UserRole role;
+	private String password;
 
 	@Override
 	public String toString() {
-		return String.format("#%d, user: %s", id, login);
+		return String.format("#%d, user: %s", id, user);
 	}
 }

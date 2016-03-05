@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class SchedulerTaskEntry implements DBEntity {
+public class SchedulerTaskEntity implements DBEntity {
 
 	@Id
 	@Column(name = "C_SCH_TASK_ID", unique = true)
@@ -24,7 +24,7 @@ public class SchedulerTaskEntry implements DBEntity {
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "C_USER_ID", nullable = false)
-	private UserEntry user;
+	private UserEntity user;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "C_SCH_TASK_TYPE", columnDefinition = "VARCHAR(10)")

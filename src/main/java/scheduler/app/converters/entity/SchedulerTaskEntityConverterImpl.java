@@ -2,8 +2,8 @@ package scheduler.app.converters.entity;
 
 import org.springframework.stereotype.Service;
 import scheduler.app.entities.RemoteJobEntity;
-import scheduler.app.entities.SchedulerTaskEntry;
-import scheduler.app.entities.UserEntry;
+import scheduler.app.entities.SchedulerTaskEntity;
+import scheduler.app.entities.UserEntity;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.repositories.UserRepository;
 
@@ -22,7 +22,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 	private RemoteJobEntityConverter remoteJobEntityConverter;
 
 	@Override
-	public void populateEntity(final SchedulerTaskEntry entity, final SchedulerTask model) {
+	public void populateEntity(final SchedulerTaskEntity entity, final SchedulerTask model) {
 		entity.setId(model.getId());
 		entity.setUser(getUser(model.getId()));
 		entity.setTaskType(model.getTaskType());
@@ -36,7 +36,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 	}
 
 	@Override
-	public SchedulerTask toModel(final SchedulerTaskEntry entity) {
+	public SchedulerTask toModel(final SchedulerTaskEntity entity) {
 		SchedulerTask model = new SchedulerTask();
 		model.setId(entity.getId());
 		model.setUser(userEntityConverter.toModel(entity.getUser()));
@@ -48,7 +48,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 		return model;
 	}
 
-	private UserEntry getUser(final Long userId) {
+	private UserEntity getUser(final Long userId) {
 		return userRepository.findById(userId);
 	}
 }

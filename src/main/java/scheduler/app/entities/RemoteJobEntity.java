@@ -24,7 +24,7 @@ public class RemoteJobEntity implements DBEntity {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "C_SCH_TASK_ID", nullable = false)
-	private SchedulerTaskEntry schedulerTask;
+	private SchedulerTaskEntity schedulerTask;
 
 	@Column(name = "C_URL", columnDefinition = "CLOB")
 	private String url;
@@ -32,6 +32,9 @@ public class RemoteJobEntity implements DBEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "C_REQUEST_METHOD", columnDefinition = "VARCHAR(10)")
 	private RequestMethod requestMethod;
+
+	@Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(255)")
+	private String authString;
 
     @Column(name = "C_POST_JSON", columnDefinition = "CLOB")
     private String postJson;

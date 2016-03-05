@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class UserEntry implements DBEntity {
+public class UserEntity implements DBEntity {
 
     public static final String NAMED_QUERY_FIND_BY_LOGIN = "UserEntry.NAMED_QUERY_FIND_BY_LOGIN";
 
@@ -27,7 +27,7 @@ public class UserEntry implements DBEntity {
 	private String username;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private UserSecureDetailsEntry secureDetails;
+	private UserSecureDetailsEntity secureDetails;
 
 	@Override
 	public String toString() {

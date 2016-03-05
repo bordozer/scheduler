@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class UserSecureDetailsEntry implements DBEntity {
+public class UserSecureDetailsEntity implements DBEntity {
 
 	@Id
 	@Column(name = "T_USER_SECURITY_ID", unique = true)
@@ -24,16 +24,13 @@ public class UserSecureDetailsEntry implements DBEntity {
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "C_USER_ID", nullable = false)
-	private UserEntry user;
+	private UserEntity user;
 
 	@Column(name = "C_USER_LOGIN", unique = true, columnDefinition = "VARCHAR(16)")
 	private String login;
 
 	@Column(name = "C_USER_PASSWORD", unique = true, columnDefinition = "VARCHAR(255)")
 	private String password;
-
-	@Column(name = "C_USER_AUTH_STRING", columnDefinition = "VARCHAR(255)")
-	private String authString;
 
 	@Enumerated(value = EnumType.STRING)
 	@Column(name = "C_USER_ROLE", columnDefinition = "VARCHAR(10)")

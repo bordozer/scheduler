@@ -3,7 +3,7 @@ package scheduler.app.services.tasks;
 import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
 import scheduler.app.repositories.SchedulerTaskRepository;
-import scheduler.app.entities.SchedulerTaskEntry;
+import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.models.SchedulerTask;
 
 import javax.inject.Inject;
@@ -33,7 +33,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
 	@Override
 	public SchedulerTask add(final SchedulerTask schedulerTask) {
-		return populateAndSave(schedulerTask, new SchedulerTaskEntry());
+		return populateAndSave(schedulerTask, new SchedulerTaskEntity());
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 		schedulerTaskRepository.delete(taskId);
 	}
 
-	private SchedulerTask populateAndSave(final SchedulerTask schedulerTask, final SchedulerTaskEntry dbEntry) {
+	private SchedulerTask populateAndSave(final SchedulerTask schedulerTask, final SchedulerTaskEntity dbEntry) {
 		schedulerTaskEntityConverter.populateEntity(dbEntry, schedulerTask);
-		SchedulerTaskEntry savedEntity = schedulerTaskRepository.saveAndFlush(dbEntry);
+		SchedulerTaskEntity savedEntity = schedulerTaskRepository.saveAndFlush(dbEntry);
 		return schedulerTaskEntityConverter.toModel(savedEntity);
 	}
 }
