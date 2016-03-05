@@ -15,33 +15,32 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {
-		},
+		events: {},
 
 		initialize: function ( options ) {
 			this.model.on( 'sync', this._renderTaskEdit, this );
 		},
 
-		render: function() {
+		render: function () {
 			this.model.fetch( { cache: false } );
 		},
 
-		_renderTaskEdit: function() {
+		_renderTaskEdit: function () {
 
 			this.$el.html( template( {
 				model: this.model.toJSON()
-				, t : t
+				, t: t
 			} ) );
 
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		menuItems: function() {
+		menuItems: function () {
 			return [];
 		},
 
-		save: function() {
-			console.log( 'save'); // TODO
+		save: function () {
+			console.log( 'save' ); // TODO
 		}
 	} );
 } );
