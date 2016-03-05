@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @EqualsAndHashCode
 public class RemoteJob implements Model {
 	private Long id;
-	private String url;
+	private String requestUrl;
 	private RequestMethod requestMethod;
 	private String authString;
 	private String postJson;
 
 	@Override
 	public String toString() {
-		return String.format("#%d: %s (%s)", id, url, requestMethod);
+		return String.format("#%d: %s (%s)", id, requestUrl, requestMethod);
 	}
 }

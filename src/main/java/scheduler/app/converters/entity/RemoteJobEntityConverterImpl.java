@@ -10,7 +10,7 @@ public class RemoteJobEntityConverterImpl implements RemoteJobEntityConverter {
 	@Override
 	public void populateEntity(final RemoteJobEntity entity, final RemoteJob model) {
 		entity.setId(model.getId());
-		entity.setUrl(model.getUrl());
+		entity.setRequestUrl(model.getRequestUrl());
 		entity.setRequestMethod(model.getRequestMethod());
 		entity.setAuthString(model.getAuthString());
 		entity.setPostJson(model.getPostJson());
@@ -20,7 +20,7 @@ public class RemoteJobEntityConverterImpl implements RemoteJobEntityConverter {
 	public RemoteJob toModel(final RemoteJobEntity entity) {
 		final RemoteJob model = new RemoteJob();
 		model.setId(entity.getId());
-		model.setUrl(entity.getUrl());
+		model.setRequestUrl(entity.getRequestUrl());
 		model.setRequestMethod(entity.getRequestMethod());
 		model.setAuthString(entity.getAuthString());
 		model.setPostJson(entity.getPostJson());

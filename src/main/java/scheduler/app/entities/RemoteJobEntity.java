@@ -26,8 +26,8 @@ public class RemoteJobEntity implements DBEntity {
 	@JoinColumn(name = "C_SCH_TASK_ID", nullable = false)
 	private SchedulerTaskEntity schedulerTask;
 
-	@Column(name = "C_URL", columnDefinition = "CLOB")
-	private String url;
+	@Column(name = "C_REQUEST_URL", columnDefinition = "CLOB")
+	private String requestUrl;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "C_REQUEST_METHOD", columnDefinition = "VARCHAR(10)")
