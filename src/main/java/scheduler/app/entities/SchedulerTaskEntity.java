@@ -1,6 +1,5 @@
 package scheduler.app.entities;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -13,7 +12,6 @@ import javax.persistence.*;
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
-@EqualsAndHashCode
 public class SchedulerTaskEntity implements DBEntity {
 
 	@Id

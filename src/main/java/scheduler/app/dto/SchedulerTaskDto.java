@@ -1,13 +1,11 @@
 package scheduler.app.dto;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import scheduler.app.models.SchedulerTaskType;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 public class SchedulerTaskDto implements Dto {
 	private Long taskId;
 	private UserDto user;
