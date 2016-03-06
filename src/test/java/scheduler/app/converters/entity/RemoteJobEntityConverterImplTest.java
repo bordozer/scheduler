@@ -5,7 +5,7 @@ import org.mockito.InjectMocks;
 import org.springframework.web.bind.annotation.RequestMethod;
 import scheduler.app.entities.RemoteJobEntity;
 import scheduler.app.models.RemoteJob;
-import scheduler.app.utils.TestEntitiesUtils;
+import scheduler.app.utils.TestDataEntityConstructor;
 
 import static org.junit.Assert.assertEquals;
 
@@ -35,7 +35,7 @@ public class RemoteJobEntityConverterImplTest {
 	@Test
 	public void shouldConvertEntityToModel() {
 
-		final RemoteJob model = sut.toModel(TestEntitiesUtils.constructRemoteJobEntity(TestEntitiesUtils.constructSchedulerTaskEntity(user)));
+		final RemoteJob model = sut.toModel(TestDataEntityConstructor.remoteJobEntity(TestDataEntityConstructor.schedulerTaskEntity(user)));
 
 		assertEquals(REMOTE_JOB_ID, model.getId());
 		assertEquals(REQUEST_URL, model.getRequestUrl());
