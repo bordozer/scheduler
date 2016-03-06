@@ -14,6 +14,7 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 
 	private static final String ENTITY_MUST_NOT_BE_NULL = "Entity must not be null";
 	private static final String USER_MUST_NOT_BE_NULL = "User must not be null";
+	private static final String REMOTE_JOB_MUST_NOT_BE_NULL = "Remote job must not be null";
 
 	@Inject
 	private UserEntityConverter userEntityConverter;
@@ -27,7 +28,9 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 	@Override
 	public void populateEntity(final SchedulerTaskEntity entity, final SchedulerTask model) {
 		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
+		Assert.notNull(entity.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 		Assert.notNull(model, USER_MUST_NOT_BE_NULL);
+		Assert.notNull(model.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 
 		entity.setId(model.getId());
 		entity.setUser(getUser(model.getId()));
@@ -41,6 +44,8 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 	@Override
 	public SchedulerTask toModel(final SchedulerTaskEntity entity) {
 		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
+		Assert.notNull(entity.getUser(), USER_MUST_NOT_BE_NULL);
+		Assert.notNull(entity.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 
 		SchedulerTask model = new SchedulerTask();
 		model.setId(entity.getId());

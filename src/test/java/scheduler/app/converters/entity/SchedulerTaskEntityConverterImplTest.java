@@ -45,8 +45,32 @@ public class SchedulerTaskEntityConverterImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityRemoteJobIsNullWhenPopulatesEntity() {
+        sut.populateEntity(new SchedulerTaskEntity(), new SchedulerTask());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfModelRemoteJobIsNullWhenPopulatesEntity() {
+        final SchedulerTaskEntity entity = new SchedulerTaskEntity();
+        entity.setRemoteJob(new RemoteJobEntity());
+        sut.populateEntity(entity, new SchedulerTask());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfUserIsNullWhenConvertsToModel() {
         sut.toModel(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityUserIsNullWhenConvertsToModel() {
+        sut.toModel(new SchedulerTaskEntity());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityRemoteJobIsNullWhenConvertsToModel() {
+        final SchedulerTaskEntity entity = new SchedulerTaskEntity();
+        entity.setUser(new UserEntity());
+        sut.toModel(entity);
     }
 
     @Test
