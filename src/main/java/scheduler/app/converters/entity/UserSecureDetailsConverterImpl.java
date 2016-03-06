@@ -12,6 +12,7 @@ import javax.inject.Inject;
 public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverter {
 
 	private static final String ENTITY_MUST_NOT_BE_NULL = "Entity must not be null";
+	private static final String MODEL_MUST_NOT_BE_NULL = "Model must not be null";
 	private static final String USER_MUST_NOT_BE_NULL = "User must not be null";
 
 	@Inject
@@ -23,7 +24,8 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 	@Override
 	public void populateEntity(final UserSecureDetailsEntity entity, final UserSecureDetails model) {
 		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
-		Assert.notNull(model, USER_MUST_NOT_BE_NULL);
+		Assert.notNull(model, MODEL_MUST_NOT_BE_NULL);
+		Assert.notNull(model.getUser(), USER_MUST_NOT_BE_NULL);
 
 		entity.setId(model.getId());
 		entity.setUser(userRepository.findById(model.getUser().getId()));
@@ -35,6 +37,7 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 	@Override
 	public UserSecureDetails toModel(final UserSecureDetailsEntity entity) {
 		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
+		Assert.notNull(entity.getUser(), USER_MUST_NOT_BE_NULL);
 
 		final UserSecureDetails model = new UserSecureDetails();
 		model.setId(entity.getId());

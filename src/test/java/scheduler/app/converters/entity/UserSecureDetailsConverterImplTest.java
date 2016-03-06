@@ -43,8 +43,18 @@ public class UserSecureDetailsConverterImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfModelUserIsNullWhenPopulatesEntity() {
+        sut.populateEntity(new UserSecureDetailsEntity(), new UserSecureDetails());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfUserIsNullWhenConvertsToModel() {
         sut.toModel(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityUserIsNullWhenConvertsToModel() {
+        sut.toModel(new UserSecureDetailsEntity());
     }
 
     @Test
