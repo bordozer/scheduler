@@ -12,12 +12,12 @@ public class UserEntityConverterImpl implements UserEntityConverter {
 	private static final String USER_MUST_NOT_BE_NULL = "User must not be null";
 
 	@Override
-	public void populateEntity(final UserEntity entity, final User user) {
+	public void populateEntity(final UserEntity entity, final User model) {
 		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
-		Assert.notNull(user, USER_MUST_NOT_BE_NULL);
+		Assert.notNull(model, USER_MUST_NOT_BE_NULL);
 
-		entity.setId(user.getId());
-		entity.setUsername(user.getUsername());
+		entity.setId(model.getId());
+		entity.setUsername(model.getUsername());
 	}
 
 	@Override

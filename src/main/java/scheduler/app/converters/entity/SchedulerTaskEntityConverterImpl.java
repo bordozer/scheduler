@@ -1,6 +1,7 @@
 package scheduler.app.converters.entity;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.models.SchedulerTask;
@@ -10,6 +11,9 @@ import javax.inject.Inject;
 
 @Service
 public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConverter {
+
+	private static final String ENTITY_MUST_NOT_BE_NULL = "Entity must not be null";
+	private static final String USER_MUST_NOT_BE_NULL = "User must not be null";
 
 	@Inject
 	private UserEntityConverter userEntityConverter;
@@ -22,6 +26,9 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 
 	@Override
 	public void populateEntity(final SchedulerTaskEntity entity, final SchedulerTask model) {
+		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
+		Assert.notNull(model, USER_MUST_NOT_BE_NULL);
+
 		entity.setId(model.getId());
 		entity.setUser(getUser(model.getId()));
 		entity.setTaskType(model.getTaskType());
@@ -33,6 +40,8 @@ public class SchedulerTaskEntityConverterImpl implements SchedulerTaskEntityConv
 
 	@Override
 	public SchedulerTask toModel(final SchedulerTaskEntity entity) {
+		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
+
 		SchedulerTask model = new SchedulerTask();
 		model.setId(entity.getId());
 		model.setUser(userEntityConverter.toModel(entity.getUser()));

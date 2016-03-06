@@ -15,6 +15,21 @@ public class RemoteJobEntityConverterImplTest {
     @InjectMocks
     private RemoteJobEntityConverterImpl sut = new RemoteJobEntityConverterImpl();
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityIsNullWhenPopulatesEntity() {
+        sut.populateEntity(null, new RemoteJob());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfUserIsNullWhenPopulatesEntity() {
+        sut.populateEntity(new RemoteJobEntity(), null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfUserIsNullWhenConvertsToModel() {
+        sut.toModel(null);
+    }
+
     @Test
     public void shouldPopulateEntity() {
         final RemoteJobEntity entity = new RemoteJobEntity();

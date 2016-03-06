@@ -34,6 +34,21 @@ public class SchedulerTaskEntityConverterImplTest {
     @Mock
     private UserEntityConverter userEntityConverter;
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityIsNullWhenPopulatesEntity() {
+        sut.populateEntity(null, new SchedulerTask());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfUserIsNullWhenPopulatesEntity() {
+        sut.populateEntity(new SchedulerTaskEntity(), null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfUserIsNullWhenConvertsToModel() {
+        sut.toModel(null);
+    }
+
     @Test
     public void shouldPopulateEntity() {
         final SchedulerTask schedulerTask = TestDataModels.schedulerTask();
