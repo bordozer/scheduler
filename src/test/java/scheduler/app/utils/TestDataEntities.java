@@ -8,7 +8,7 @@ import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.SchedulerTaskType;
 import scheduler.app.models.UserRole;
 
-public class TestDataEntityConstructor {
+public class TestDataEntities {
 
     public static final Long USER_ID = 33L;
     public static final String USER_NAME = "User name";
@@ -30,15 +30,15 @@ public class TestDataEntityConstructor {
     public static final String AUTH_STRING = "ABCDE";
     public static final String POST_JSON = "{value:111}";
 
-    public static UserEntity userEntity() {
+    public static UserEntity user() {
         final UserEntity user = new UserEntity();
         user.setId(USER_ID);
         user.setUsername(USER_NAME);
-        user.setSecureDetails(userSecureDetailsEntity(user));
+        user.setSecureDetails(userSecureDetails(user));
         return user;
     }
 
-    public static UserSecureDetailsEntity userSecureDetailsEntity(final UserEntity user) {
+    public static UserSecureDetailsEntity userSecureDetails(final UserEntity user) {
         final UserSecureDetailsEntity secureDetails = new UserSecureDetailsEntity();
         secureDetails.setId(USER_SECURE_DETAILS_ID);
         secureDetails.setUser(user);
@@ -49,7 +49,7 @@ public class TestDataEntityConstructor {
         return secureDetails;
     }
 
-    public static SchedulerTaskEntity schedulerTaskEntity(final UserEntity user) {
+    public static SchedulerTaskEntity schedulerTask(final UserEntity user) {
         final SchedulerTaskEntity schedulerTask = new SchedulerTaskEntity();
         schedulerTask.setId(SCHEDULER_TASK_ID);
         schedulerTask.setUser(user);
@@ -57,11 +57,11 @@ public class TestDataEntityConstructor {
         schedulerTask.setTaskDescription(SCHEDULER_TASK_DESCRIPTION);
         schedulerTask.setTaskType(SCHEDULER_TASK_TYPE);
         schedulerTask.setTaskParametersJSON(SCHEDULER_TASK_PARAMETERS_JSON);
-        schedulerTask.setRemoteJob(remoteJobEntity(schedulerTask));
+        schedulerTask.setRemoteJob(remoteJob(schedulerTask));
         return schedulerTask;
     }
 
-    public static RemoteJobEntity remoteJobEntity(final SchedulerTaskEntity schedulerTaskEntity) {
+    public static RemoteJobEntity remoteJob(final SchedulerTaskEntity schedulerTaskEntity) {
         final RemoteJobEntity remoteJobEntity = new RemoteJobEntity();
         remoteJobEntity.setId(REMOTE_JOB_ID);
         remoteJobEntity.setRequestUrl(REQUEST_URL);
@@ -73,4 +73,15 @@ public class TestDataEntityConstructor {
         return remoteJobEntity;
     }
 
+    public static UserSecureDetailsEntity userSecureDetails() {
+        return userSecureDetails(user());
+    }
+
+    public static SchedulerTaskEntity schedulerTask() {
+        return schedulerTask(user());
+    }
+
+    public static RemoteJobEntity remoteJob() {
+        return remoteJob(schedulerTask(user()));
+    }
 }
