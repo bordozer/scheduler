@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
+import scheduler.app.models.User;
+import scheduler.app.models.UserSecureDetails;
 import scheduler.app.repositories.UserRepository;
 import scheduler.app.utils.TestData;
 import scheduler.app.utils.TestDataEntities;
@@ -27,6 +29,9 @@ public class UserSecureDetailsConverterImplTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private UserEntityConverter userEntityConverter;
+
     @Test
     public void shouldPopulateEntity() {
         final UserEntity user = TestDataEntities.user();
@@ -42,5 +47,21 @@ public class UserSecureDetailsConverterImplTest {
         assertEquals(TestData.USER_PASSWORD, entity.getPassword());
         assertEquals(TestData.USER_ROLE, entity.getRole());
         assertTrue(user == entity.getUser());
+    }
+
+    @Test
+    public void shouldConvertEntityToModel() {
+        final UserSecureDetailsEntity entity = TestDataEntities.userSecureDetails();
+        final UserEntity userEntity = entity.getUser();
+        User user = TestDataModels.user();
+        when(userEntityConverter.toModel(userEntity)).thenReturn(user);
+
+        final UserSecureDetails model = sut.toModel(entity);
+
+        assertEquals(TestData.USER_SECURE_DETAILS_ID, model.getId());
+        assertEquals(TestData.USER_LOGIN, model.getLogin());
+        assertEquals(TestData.USER_PASSWORD, model.getPasswordEncrypted());
+        assertEquals(TestData.USER_ROLE, model.getRole());
+        assertTrue(user == model.getUser());
     }
 }
