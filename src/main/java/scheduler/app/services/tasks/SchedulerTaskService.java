@@ -14,7 +14,7 @@ public interface SchedulerTaskService {
 	SchedulerTask load(Long taskId);
 
 	@Transactional
-	SchedulerTask add(SchedulerTask schedulerTask);
+	SchedulerTask create(SchedulerTask schedulerTask);
 
 	@Transactional
 	SchedulerTask save(SchedulerTask schedulerTask);

@@ -1,4 +1,4 @@
-package scheduler.app.controllers.rest.tasks.list;
+package scheduler.app.controllers.rest.scheduler.tasks.list;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

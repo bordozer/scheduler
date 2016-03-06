@@ -1,4 +1,4 @@
-package scheduler.app.controllers.rest.tasks.item.edit;
+package scheduler.app.controllers.rest.scheduler.tasks.item.edit.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

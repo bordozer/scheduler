@@ -36,7 +36,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 
 	@Override
-	public SchedulerTask add(final SchedulerTask schedulerTask) {
+	public SchedulerTask create(final SchedulerTask schedulerTask) {
 		return populateAndSave(new SchedulerTaskEntity(), schedulerTask);
 	}
 

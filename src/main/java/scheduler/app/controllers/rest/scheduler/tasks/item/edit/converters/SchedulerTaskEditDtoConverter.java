@@ -1,7 +1,8 @@
-package scheduler.app.converters.dto;
+package scheduler.app.controllers.rest.scheduler.tasks.item.edit.converters;
 
 import org.springframework.stereotype.Service;
-import scheduler.app.controllers.rest.tasks.item.edit.SchedulerTaskEditDto;
+import scheduler.app.controllers.rest.scheduler.tasks.item.edit.dto.SchedulerTaskEditDto;
+import scheduler.app.converters.dto.AbstractGenericDtoConverter;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.models.User;
 
