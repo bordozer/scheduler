@@ -17,6 +17,21 @@ public class UserEntityConverterImplTest {
     @InjectMocks
     private UserEntityConverterImpl sut = new UserEntityConverterImpl();
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfEntityIsNullWhenPopulatesEntity() {
+        sut.populateEntity(null, new User());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfUserIsNullWhenPopulatesEntity() {
+        sut.populateEntity(new UserEntity(), null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionIfUserIsNullWhenConvertsToModel() {
+        sut.toModel(null);
+    }
+
     @Test
     public void shouldPopulateEntityIfUserDetailsIsNull() {
         final UserEntity userEntity = new UserEntity();
