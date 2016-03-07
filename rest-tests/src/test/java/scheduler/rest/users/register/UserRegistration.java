@@ -11,6 +11,8 @@ import scheduler.rest.dto.RegistrationResponse;
 import scheduler.rest.dto.UserDto;
 import scheduler.rest.errors.ResponseExceptionsHolder;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -29,6 +31,8 @@ public class UserRegistration {
         Response response = RestTestHelper.doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_BAD_REQUEST);
 
         ResponseExceptionsHolder registrationResponse = response.as(ResponseExceptionsHolder.class);
+
+        assertThat(8, is(registrationResponse.errorsCount()));
 
         assertNotNull(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.user_login_must_not_be_empty"));
         assertNotNull(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_too_long"));
