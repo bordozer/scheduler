@@ -21,7 +21,7 @@ public class DataGenerator {
     }
 
     private static String generate() {
-        return UUID.randomUUID().toString().substring(0, 15);
+        return UUID.randomUUID().toString();
     }
 
     private static String crypt(final String salt) {
