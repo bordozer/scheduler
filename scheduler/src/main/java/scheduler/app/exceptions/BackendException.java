@@ -1,4 +1,4 @@
-package scheduler.app.esceptions;
+package scheduler.app.exceptions;
 
 import lombok.Getter;
 import lombok.Setter;

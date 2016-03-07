@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import scheduler.app.esceptions.FieldErrorResource;
+import scheduler.app.exceptions.FieldErrorResource;
 
 import java.io.IOException;
 import java.io.Writer;

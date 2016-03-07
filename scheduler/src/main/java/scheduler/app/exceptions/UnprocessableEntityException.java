@@ -1,4 +1,4 @@
-package scheduler.app.esceptions;
+package scheduler.app.exceptions;
 
 import java.util.Optional;
 import java.util.Set;

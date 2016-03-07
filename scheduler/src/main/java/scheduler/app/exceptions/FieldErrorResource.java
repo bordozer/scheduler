@@ -1,4 +1,4 @@
-package scheduler.app.esceptions;
+package scheduler.app.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
