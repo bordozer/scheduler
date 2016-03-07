@@ -23,12 +23,25 @@ public class RestTestHelper {
 
     public static Response doJsonPost(final String jsonBody, final UserRoutes route, final int expectedStatusCode) {
         return given()
-                .log().ifValidationFails()
+                .log()
+                .ifValidationFails()
                 .contentType(ContentType.JSON)
                 .body(jsonBody)
                 .when()
                 .response().log().ifStatusCodeMatches(not(equalTo(expectedStatusCode)))
                 .then().statusCode(expectedStatusCode)
                 .post(buildRoute(route));
+    }
+
+    public static Response doJsonPut(final String jsonBody, final UserRoutes route, final int expectedStatusCode) {
+        return given()
+                .log()
+                .ifValidationFails()
+                .contentType(ContentType.JSON)
+                .body(jsonBody)
+                .when()
+                .response().log().ifStatusCodeMatches(not(equalTo(expectedStatusCode)))
+                .then().statusCode(expectedStatusCode)
+                .put(buildRoute(route));
     }
 }

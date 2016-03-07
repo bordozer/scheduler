@@ -22,7 +22,7 @@ public class UserRegistration {
                 userData.getPassword()
         );
 
-        Response response = RestTestHelper.doJsonPost(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_OK);
+        Response response = RestTestHelper.doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_OK);
 
         response.then().body("fieldErrors.get('contactDetails.phoneDetails.phone')[0]", is("errors.phone_number_is_wrong"));
     }

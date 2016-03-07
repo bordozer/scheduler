@@ -13,7 +13,7 @@ import java.security.Principal;
 public class UserEditRestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/register/")
-    public boolean create(final @RequestBody UserEditDto editDTO) {
-        return true;
+    public RegistrationResponse create(final @RequestBody UserEditDto editDTO) {
+        return new RegistrationResponse(true);
     }
 }
