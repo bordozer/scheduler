@@ -30,9 +30,8 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 		Assert.notNull(model.getUser(), USER_MUST_NOT_BE_NULL);
 
 		entity.setId(model.getId());
-		entity.setUser(userRepository.findById(model.getUser().getId()));
 		entity.setLogin(model.getLogin());
-		entity.setPassword(model.getPasswordEncrypted());
+		entity.setPassword(encodePassword(model.getPasswordEncrypted()));
 		entity.setRole(model.getRole());
 	}
 
@@ -48,20 +47,6 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 		model.setPasswordEncrypted(entity.getPassword());
 		model.setRole(entity.getRole());
 		return model;
-	}
-
-	@Override
-	public void createEntity(final UserEntity userEntity, final UserSecureDetails model) {
-		Assert.notNull(userEntity, USER_MUST_NOT_BE_NULL);
-		Assert.notNull(model, MODEL_MUST_NOT_BE_NULL);
-
-		final UserSecureDetailsEntity entity = new UserSecureDetailsEntity();
-
-		entity.setId(model.getId());
-		entity.setUser(userEntity);
-		entity.setLogin(model.getLogin());
-		entity.setPassword(encodePassword(model.getPasswordEncrypted()));
-		entity.setRole(model.getRole());
 	}
 
 	private String encodePassword(final String password) {

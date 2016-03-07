@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.UserEntityConverter;
 import scheduler.app.converters.entity.UserSecureDetailsConverter;
 import scheduler.app.entities.UserEntity;
+import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.User;
 import scheduler.app.models.UserSecureDetails;
 import scheduler.app.repositories.UserRepository;
@@ -29,10 +30,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User create(final User user, final UserSecureDetails userSecureDetails) {
+		UserSecureDetailsEntity userSecureDetailsEntity = new UserSecureDetailsEntity();
 		final UserEntity userEntity = new UserEntity();
+		userEntity.setSecureDetails(userSecureDetailsEntity);
+		userSecureDetailsEntity.setUser(userEntity);
 
 		userEntityConverter.populateEntity(userEntity, user);
-		userSecureDetailsConverter.createEntity(userEntity, userSecureDetails);
+		userSecureDetailsConverter.populateEntity(userSecureDetailsEntity, userSecureDetails);
 
 		final UserEntity saved = userRepository.saveAndFlush(userEntity);
 
