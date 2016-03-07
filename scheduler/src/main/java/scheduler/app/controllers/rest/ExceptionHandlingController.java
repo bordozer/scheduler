@@ -17,6 +17,7 @@ import scheduler.app.exceptions.FieldErrorResource;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,7 +35,15 @@ public class ExceptionHandlingController {
                         fieldError.getDefaultMessage()))
                 .collect(Collectors.toList()
                 );
-        writer.write(new Gson().toJson(new ResponseExceptionsHolder(response)));
+        final Map<String, List<FieldErrorResource>> fields = response.stream()
+                .collect(Collectors.toMap(
+                        FieldErrorResource::getField,
+                        item -> response.stream()
+                                .filter(fieldErrorResource -> fieldErrorResource.getField().equalsIgnoreCase(item.getField()))
+                                .collect(Collectors.toList()))
+                );
+
+        writer.write(new Gson().toJson(new ResponseExceptionsHolder(fields)));
     }
 
     @Getter
@@ -42,6 +51,6 @@ public class ExceptionHandlingController {
     @NoArgsConstructor
     @AllArgsConstructor
     private class ResponseExceptionsHolder {
-        List<FieldErrorResource> errors;
+        Map<String, List<FieldErrorResource>> errorsMap;
     }
 }

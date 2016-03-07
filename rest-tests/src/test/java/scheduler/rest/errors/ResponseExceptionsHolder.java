@@ -6,23 +6,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseExceptionsHolder {
-    List<FieldErrorResource> errors;
 
-    public FieldErrorResource getFieldError(final String field) {
-        return errors.stream()
-                .filter(fieldError -> fieldError.getField().equalsIgnoreCase(field))
-                .findFirst()
-                .orElseGet(null);
+    Map<String, List<FieldErrorResource>> errorsMap;
+
+    public List<FieldErrorResource> getFieldError(final String field) {
+        return errorsMap.get(field);
     }
 
     public int errorsCount() {
-        return Optional.ofNullable(errors).map(List::size).orElse(0);
+        if (errorsMap == null || errorsMap.size() == 0) {
+            return 0;
+        }
+
+        final List<Integer> collect = errorsMap.keySet().stream()
+                .map(field -> errorsMap.get(field).size()).collect(Collectors.toList());
+        return collect.stream().mapToInt(Integer::intValue).sum();
     }
 }

@@ -13,6 +13,8 @@ import scheduler.rest.dto.UserDto;
 import scheduler.rest.errors.FieldErrorResource;
 import scheduler.rest.errors.ResponseExceptionsHolder;
 
+import java.util.List;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -25,28 +27,28 @@ public class UserRegistration {
         Response response = RestTestHelper.doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_BAD_REQUEST);
 
         ResponseExceptionsHolder registrationResponse = response.as(ResponseExceptionsHolder.class);
-        FieldErrorResource loginError = registrationResponse.getFieldError("login");
-        FieldErrorResource nameError = registrationResponse.getFieldError("name");
-        FieldErrorResource passwordError = registrationResponse.getFieldError("password");
-        FieldErrorResource passwordConfirmError = registrationResponse.getFieldError("passwordConfirm");
+        List<FieldErrorResource> loginErrors = registrationResponse.getFieldError("login");
+        List<FieldErrorResource> nameErrors = registrationResponse.getFieldError("name");
+        List<FieldErrorResource> passwordErrors = registrationResponse.getFieldError("password");
+        List<FieldErrorResource> passwordConfirmErrors = registrationResponse.getFieldError("passwordConfirm");
 
         assertEquals(8, registrationResponse.errorsCount());
 
-        assertEquals("login", loginError.getField());
-        assertEquals("errors.user_login_must_not_be_empty", loginError.getErrorCode());
-        assertTrue(StringUtils.isEmpty(loginError.getRejectedValue()));
+        assertEquals("login", loginErrors.get(0).getField());
+        assertEquals("errors.user_login_must_not_be_empty", loginErrors.get(0).getErrorCode());
+        assertTrue(StringUtils.isEmpty(loginErrors.get(0).getRejectedValue()));
 
-        assertEquals("name", nameError.getField());
-        assertEquals("errors.user_name_must_not_be_empty", nameError.getErrorCode());
-        assertTrue(StringUtils.isEmpty(nameError.getRejectedValue()));
+        assertEquals("name", nameErrors.get(0).getField());
+        assertEquals("errors.user_name_must_not_be_empty", nameErrors.get(0).getErrorCode());
+        assertTrue(StringUtils.isEmpty(nameErrors.get(0).getRejectedValue()));
 
-        assertEquals("password", passwordError.getField());
-        assertEquals("errors.user_password_must_not_be_empty", passwordError.getErrorCode());
-        assertTrue(StringUtils.isEmpty(passwordError.getRejectedValue()));
+        assertEquals("password", passwordErrors.get(0).getField());
+        assertEquals("errors.user_password_must_not_be_empty", passwordErrors.get(0).getErrorCode());
+        assertTrue(StringUtils.isEmpty(passwordErrors.get(0).getRejectedValue()));
 
-        assertEquals("passwordConfirm", passwordConfirmError.getField());
-        assertEquals("errors.user_password_confirm_must_not_be_empty", passwordConfirmError.getErrorCode());
-        assertTrue(StringUtils.isEmpty(passwordConfirmError.getRejectedValue()));
+        assertEquals("passwordConfirm", passwordConfirmErrors.get(0).getField());
+        assertEquals("errors.user_password_confirm_must_not_be_empty", passwordConfirmErrors.get(0).getErrorCode());
+        assertTrue(StringUtils.isEmpty(passwordConfirmErrors.get(0).getRejectedValue()));
     }
 
     @Test
