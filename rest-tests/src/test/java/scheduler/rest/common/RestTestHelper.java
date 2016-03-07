@@ -1,6 +1,8 @@
 package scheduler.rest.common;
 
+import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 import org.apache.commons.io.IOUtils;
 
@@ -22,6 +24,7 @@ public class RestTestHelper {
     }
 
     public static Response doJsonPost(final String jsonBody, final UserRoutes route, final int expectedStatusCode) {
+        RestAssured.defaultParser = Parser.JSON;
         return given()
                 .log()
                 .ifValidationFails()
@@ -34,6 +37,7 @@ public class RestTestHelper {
     }
 
     public static Response doJsonPut(final String jsonBody, final UserRoutes route, final int expectedStatusCode) {
+        RestAssured.defaultParser = Parser.JSON;
         return given()
                 .log()
                 .ifValidationFails()

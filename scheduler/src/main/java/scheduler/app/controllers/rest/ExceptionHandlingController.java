@@ -1,12 +1,15 @@
 package scheduler.app.controllers.rest;
 
 import com.google.gson.Gson;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.app.esceptions.FieldErrorResource;
@@ -31,6 +34,14 @@ public class ExceptionHandlingController {
                         fieldError.getDefaultMessage()))
                 .collect(Collectors.toList()
                 );
-        writer.write(new Gson().toJson(response));
+        writer.write(new Gson().toJson(new ResponseExceptionsHolder(response)));
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    private class ResponseExceptionsHolder {
+        List<FieldErrorResource> errors;
     }
 }
