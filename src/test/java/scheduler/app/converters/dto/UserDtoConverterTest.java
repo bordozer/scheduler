@@ -33,9 +33,7 @@ public class UserDtoConverterTest {
     @Test
     public void shouldConvertToDto() {
         UserDto dto = sut.toDto(TestDataModels.user());
-
-        assertEquals(TestData.USER_ID, dto.getUserId());
-        assertEquals(TestData.USER_NAME, dto.getUserName());
+        checkDto(dto);
     }
 
     @Test
@@ -46,6 +44,10 @@ public class UserDtoConverterTest {
         assertTrue(models.size() == 1);
 
         UserDto dto = models.get(0);
+        checkDto(dto);
+    }
+
+    private void checkDto(final UserDto dto) {
         assertEquals(TestData.USER_ID, dto.getUserId());
         assertEquals(TestData.USER_NAME, dto.getUserName());
     }

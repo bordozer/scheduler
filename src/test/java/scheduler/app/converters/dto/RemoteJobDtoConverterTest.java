@@ -19,37 +19,12 @@ import static org.junit.Assert.assertTrue;
 
 public class RemoteJobDtoConverterTest {
 
-    private static final User CURRENT_USER = new User();
-    private static final long CURRENT_USER_ID = 111L;
-    private static final String CURRENT_USER_NAME = "Current User";
-
     @InjectMocks
     private RemoteJobDtoConverter sut = new RemoteJobDtoConverter();
 
-    @BeforeSuite
-    public void init() {
-        CURRENT_USER.setId(CURRENT_USER_ID);
-        CURRENT_USER.setUsername(CURRENT_USER_NAME);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionIfCurrentUserIsNull() {
-        sut.toModel(null, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionIfDtoIsNull() {
-        sut.toModel(CURRENT_USER, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionIfModelIsNull() {
-        sut.toDto(null);
-    }
-
     @Test
     public void shouldConvertToModel() {
-        RemoteJob model = sut.toModel(CURRENT_USER, TestDataDto.remoteJob());
+        RemoteJob model = sut.toModel(TestDataModels.currentUser(), TestDataDto.remoteJob());
 
         assertEquals(TestData.REMOTE_JOB_ID, model.getId());
         assertEquals(TestData.REMOTE_JOB_REQUEST_URL, model.getRequestUrl());
@@ -61,25 +36,7 @@ public class RemoteJobDtoConverterTest {
     @Test
     public void shouldConvertToDto() {
         RemoteJobDto dto = sut.toDto(TestDataModels.remoteJob());
-
-//        assertEquals(TestData.USER_ID, dto.getUserId());
-//        assertEquals(TestData.USER_NAME, dto.getUserName());
-    }
-
-    @Test
-    public void shouldConvertToDtosIfNullIsPassed() {
-        List<RemoteJobDto> dtos = sut.toDtos(null);
-
-        assertNotNull(dtos);
-        assertTrue(dtos.size() == 0);
-    }
-
-    @Test
-    public void shouldConvertToDtosIfEmptyListIsPassed() {
-        List<RemoteJobDto> dtos = sut.toDtos(Lists.newArrayList());
-
-        assertNotNull(dtos);
-        assertTrue(dtos.size() == 0);
+        checkDto(dto);
     }
 
     @Test
@@ -90,7 +47,14 @@ public class RemoteJobDtoConverterTest {
         assertTrue(models.size() == 1);
 
         RemoteJobDto dto = models.get(0);
-//        assertEquals(TestData.USER_ID, dto.getUserId());
-//        assertEquals(TestData.USER_NAME, dto.getUserName());
+        checkDto(dto);
+    }
+
+    private void checkDto(final RemoteJobDto dto) {
+        assertEquals(TestData.REMOTE_JOB_ID, dto.getId());
+        assertEquals(TestData.REMOTE_JOB_REQUEST_URL, dto.getRequestUrl());
+        assertEquals(TestData.REMOTE_JOB_REQUEST_METHOD, dto.getRequestMethod());
+        assertEquals(TestData.REMOTE_JOB_AUTH_STRING, dto.getAuthString());
+        assertEquals(TestData.REMOTE_JOB_POST_JSON, dto.getPostJson());
     }
 }
