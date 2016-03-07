@@ -9,6 +9,7 @@ import scheduler.rest.common.ResourcePath;
 import scheduler.rest.common.RestTestHelper;
 import scheduler.rest.common.UserData;
 import scheduler.rest.common.UserRoutes;
+import scheduler.rest.dto.RegistrationResponse;
 import scheduler.rest.dto.UserDto;
 import scheduler.rest.errors.FieldErrorResource;
 import scheduler.rest.errors.ResponseExceptionsHolder;
@@ -20,7 +21,6 @@ public class UserRegistration {
 
     @Test
     public void shouldNotRegisterUserIfNoDataProvided() {
-        UserData userData = DataGenerator.generateUserData();
         String requestBody = RestTestHelper.readJson(ResourcePath.USER_REGISTRATION_EMPTY_DATA_JSON);
 
         Response response = RestTestHelper.doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_BAD_REQUEST);
@@ -29,9 +29,9 @@ public class UserRegistration {
         FieldErrorResource loginError = registrationResponse.getFieldError("login");
         FieldErrorResource nameError = registrationResponse.getFieldError("name");
         FieldErrorResource passwordError = registrationResponse.getFieldError("password");
+        FieldErrorResource passwordConfirmError = registrationResponse.getFieldError("passwordConfirm");
 
-
-        assertTrue(registrationResponse.errorsCount() == 3);
+        assertTrue(registrationResponse.errorsCount() == 4);
 
         assertEquals("login", loginError.getField());
         assertEquals("errors.user_login_must_not_be_empty", loginError.getErrorCode());
@@ -44,6 +44,10 @@ public class UserRegistration {
         assertEquals("password", passwordError.getField());
         assertEquals("errors.user_password_must_not_be_empty", passwordError.getErrorCode());
         assertTrue(StringUtils.isEmpty(passwordError.getRejectedValue()));
+
+        assertEquals("passwordConfirm", passwordError.getField());
+        assertEquals("errors.user_password_confirm_must_not_be_empty", passwordError.getErrorCode());
+        assertTrue(StringUtils.isEmpty(passwordError.getRejectedValue()));
     }
 
     @Test
@@ -52,6 +56,7 @@ public class UserRegistration {
         String requestBody = String.format(RestTestHelper.readJson(ResourcePath.USER_REGISTRATION_DATA_JSON),
                 userData.getLogin(),
                 userData.getName(),
+                userData.getPassword(),
                 userData.getPassword()
         );
 

@@ -1,5 +1,6 @@
 {
   "login": "",
   "name": "",
-  "password": ""
+  "password": "",
+  "passwordConfirm": ""
 }

@@ -1,9 +1,9 @@
-package scheduler.app.controllers.rest.users.edit;
+package scheduler.rest.dto;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
-import scheduler.app.dto.UserDto;
+import scheduler.rest.dto.UserDto;
 
 import java.util.List;
 
@@ -13,11 +13,4 @@ public class RegistrationResponse {
     private boolean success;
     private UserDto user;
     private List<String> errors = Lists.newArrayList();
-
-    public RegistrationResponse() {
-    }
-
-    public RegistrationResponse(final boolean success) {
-        this.success = success;
-    }
 }
