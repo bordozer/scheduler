@@ -61,9 +61,8 @@ public class SchedulerTaskDtoConverterTest {
         SchedulerTask schedulerTask = TestDataModels.schedulerTask();
         RemoteJob remoteJob = schedulerTask.getRemoteJob();
 
-        SchedulerTaskDto schedulerTaskDto = TestDataDto.schedulerTask();
-        UserDto userDto = schedulerTaskDto.getUser();
-        RemoteJobDto remoteJobDto = schedulerTaskDto.getRemoteJob();
+        UserDto userDto = TestDataDto.user();
+        RemoteJobDto remoteJobDto = TestDataDto.remoteJob();
 
         when(userDtoConverter.toDto(user)).thenReturn(userDto);
         when(remoteJobDtoConverter.toModel(currentUser, remoteJobDto)).thenReturn(remoteJob);
@@ -79,9 +78,8 @@ public class SchedulerTaskDtoConverterTest {
         SchedulerTask schedulerTask = TestDataModels.schedulerTask();
         RemoteJob remoteJob = schedulerTask.getRemoteJob();
 
-        SchedulerTaskDto schedulerTaskDto = TestDataDto.schedulerTask();
-        UserDto userDto = schedulerTaskDto.getUser();
-        RemoteJobDto remoteJobDto = schedulerTaskDto.getRemoteJob();
+        UserDto userDto = TestDataDto.user();
+        RemoteJobDto remoteJobDto = TestDataDto.remoteJob();
 
         when(userDtoConverter.toDto(user)).thenReturn(userDto);
         when(remoteJobDtoConverter.toModel(currentUser, remoteJobDto)).thenReturn(remoteJob);
