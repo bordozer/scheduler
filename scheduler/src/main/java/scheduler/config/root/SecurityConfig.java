@@ -2,6 +2,7 @@ package scheduler.config.root;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,8 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resources/images*//**").permitAll()
 				.antMatchers("/resources/bower_components*//**").permitAll()
 				.antMatchers("/rest/translator/").permitAll()
+				.antMatchers( HttpMethod.PUT, "/rest/users/register/" ).permitAll()
 //					.antMatchers( "/rest/app/" ).permitAll()
-//					.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll()
 //					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
 				.anyRequest()
 				.authenticated()

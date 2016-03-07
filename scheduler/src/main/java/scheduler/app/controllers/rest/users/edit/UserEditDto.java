@@ -1,5 +1,12 @@
 package scheduler.app.controllers.rest.users.edit;
 
-public class UserEditDto {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class UserEditDto {
+    private String login;
+    private String name;
+    private String password;
 }

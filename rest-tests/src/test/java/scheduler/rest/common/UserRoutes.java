@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum UserRoutes implements Route{
-    USER_REGISTRATION("/users/register/");
+    USER_REGISTRATION("/rest/users/register/");
 
     private final String route;
 

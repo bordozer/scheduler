@@ -9,7 +9,7 @@ import scheduler.app.controllers.rest.scheduler.tasks.item.edit.dto.SchedulerTas
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/rest/users")
 public class UserEditRestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/register/")
