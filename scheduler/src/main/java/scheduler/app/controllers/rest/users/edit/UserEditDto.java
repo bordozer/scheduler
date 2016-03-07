@@ -8,12 +8,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter
 public class UserEditDto {
 
-    @NotBlank
+    @NotBlank(message = "errors.user_login_must_not_be_empty")
     private String login;
 
-    @NotBlank
+    @NotBlank(message = "errors.user_name_must_not_be_empty")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "errors.user_password_must_not_be_empty")
     private String password;
 }
