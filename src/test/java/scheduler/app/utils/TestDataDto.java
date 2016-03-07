@@ -1,6 +1,7 @@
 package scheduler.app.utils;
 
 import scheduler.app.controllers.rest.scheduler.tasks.item.edit.dto.RemoteJobEditDto;
+import scheduler.app.controllers.rest.scheduler.tasks.item.edit.dto.SchedulerTaskEditDto;
 import scheduler.app.dto.RemoteJobDto;
 import scheduler.app.dto.SchedulerTaskDto;
 import scheduler.app.dto.UserDto;
@@ -41,6 +42,17 @@ public class TestDataDto {
         model.setRequestMethod(TestData.REMOTE_JOB_REQUEST_METHOD);
         model.setAuthString(TestData.REMOTE_JOB_AUTH_STRING);
         model.setPostJson(TestData.REMOTE_JOB_POST_JSON);
+        return model;
+    }
+
+    public static SchedulerTaskEditDto schedulerTaskEdit() {
+        final SchedulerTaskEditDto model = new SchedulerTaskEditDto();
+        model.setTaskId(TestData.SCHEDULER_TASK_ID);
+        model.setTaskName(TestData.SCHEDULER_TASK_NAME);
+        model.setTaskType(TestData.SCHEDULER_TASK_TYPE);
+        model.setTaskDescription(TestData.SCHEDULER_TASK_DESCRIPTION);
+        model.setTaskParametersJSON(TestData.SCHEDULER_TASK_PARAMETERS_JSON);
+        model.setRemoteJob(remoteJobEdit());
         return model;
     }
 
