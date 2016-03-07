@@ -109,7 +109,8 @@ public class SchedulerTaskEntityConverterImplTest {
 
         final SchedulerTask model = sut.toModel(entity);
 
-        assertEquals(TestData.SCHEDULER_TASK_ID, model.getId());assertEquals(TestData.SCHEDULER_TASK_NAME, entity.getTaskName());
+        assertEquals(TestData.SCHEDULER_TASK_ID, model.getId());
+        assertEquals(TestData.SCHEDULER_TASK_NAME, entity.getTaskName());
         assertEquals(TestData.SCHEDULER_TASK_TYPE, model.getTaskType());
         assertEquals(TestData.SCHEDULER_TASK_DESCRIPTION, model.getTaskDescription());
         assertEquals(TestData.SCHEDULER_TASK_PARAMETERS_JSON, model.getTaskParametersJSON());
