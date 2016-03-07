@@ -11,7 +11,7 @@ import java.util.function.Function;
 public class RemoteJobDtoConverter extends AbstractGenericDtoConverter<RemoteJob, RemoteJobDto> {
 
 	@Override
-	public RemoteJob toModel(final User user, final RemoteJobDto dto) {
+	protected RemoteJob doConvertToModel(final User user, final RemoteJobDto dto) {
 		final RemoteJob model = new RemoteJob();
 		model.setId(dto.getId());
 		model.setRequestUrl(dto.getRequestUrl());

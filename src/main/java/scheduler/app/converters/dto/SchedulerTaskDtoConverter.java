@@ -18,7 +18,7 @@ public class SchedulerTaskDtoConverter extends AbstractGenericDtoConverter<Sched
 	private UserDtoConverter userDtoConverter;
 
 	@Override
-	public SchedulerTask toModel(final User user, final SchedulerTaskDto dto) {
+	protected SchedulerTask doConvertToModel(final User user, final SchedulerTaskDto dto) {
 		SchedulerTask model = new SchedulerTask();
 		model.setId(dto.getTaskId());
 		model.setUser(user);

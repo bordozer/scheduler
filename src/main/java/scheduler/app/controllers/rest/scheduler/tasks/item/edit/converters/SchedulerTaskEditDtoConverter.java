@@ -16,7 +16,7 @@ public class SchedulerTaskEditDtoConverter extends AbstractGenericDtoConverter<S
 	private RemoteJobEditDtoConverter remoteJobEditDtoConverter;
 
 	@Override
-	public SchedulerTask toModel(final User user, final SchedulerTaskEditDto editDto) {
+	protected SchedulerTask doConvertToModel(final User user, final SchedulerTaskEditDto editDto) {
 		SchedulerTask model = new SchedulerTask();
 		model.setId(editDto.getTaskId());
 		model.setUser(user);

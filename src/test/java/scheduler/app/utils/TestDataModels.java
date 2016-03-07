@@ -14,6 +14,13 @@ public class TestDataModels {
         return model;
     }
 
+    public static User currentUser() {
+        final User model = new User();
+        model.setId(TestData.CURRENT_USER_ID);
+        model.setUsername(TestData.CURRENT_USER_NAME);
+        return model;
+    }
+
     public static UserSecureDetails userSecureDetails(final User user) {
         final UserSecureDetails model = new UserSecureDetails();
         model.setId(TestData.USER_SECURE_DETAILS_ID);

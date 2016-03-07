@@ -11,10 +11,7 @@ import java.util.function.Function;
 public class UserDtoConverter extends AbstractGenericDtoConverter<User, UserDto> {
 
 	@Override
-	public User toModel(final User user, final UserDto dto) {
-		Assert.notNull(user, MODEL_MUST_NOT_BE_NULL);
-		Assert.notNull(dto, DTO_MUST_NOT_BE_NULL);
-
+	protected User doConvertToModel(final User user, final UserDto dto) {
 		final User model = new User();
 		model.setId(dto.getUserId());
 		model.setUsername(dto.getUserName());

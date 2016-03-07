@@ -9,6 +9,9 @@ public class TestData {
     public static final Long USER_ID = 33L;
     public static final String USER_NAME = "User name";
 
+    public static final Long CURRENT_USER_ID = 55L;
+    public static final String CURRENT_USER_NAME = "Current user name";
+
     public static final Long USER_SECURE_DETAILS_ID = 55L;
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "password";
