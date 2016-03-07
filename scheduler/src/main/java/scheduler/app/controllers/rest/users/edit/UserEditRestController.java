@@ -1,22 +1,24 @@
 package scheduler.app.controllers.rest.users.edit;
 
-import com.beust.jcommander.internal.Maps;
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import scheduler.app.esceptions.BackendException;
 import scheduler.app.dto.UserDto;
+import scheduler.app.esceptions.FieldErrorResource;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rest/users")
@@ -34,9 +36,17 @@ public class UserEditRestController {
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = Exception.class)
-    public @ResponseBody Map<String, Object> handleException(final Exception e, final Writer writer) throws IOException {
-        writer.write(new Gson().toJson(e));
-        return Maps.newHashMap();
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public void handleException(final Exception e, final Writer writer) throws IOException {
+        List<FieldError> fieldErrors = ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors();
+        List<FieldErrorResource> response = fieldErrors.stream()
+                .map(fieldError -> new FieldErrorResource(
+                        fieldError.getField(),
+                        fieldError.getRejectedValue().toString(),
+                        fieldError.getDefaultMessage()))
+                .collect(Collectors.toList()
+                );
+        writer.write(new Gson().toJson(response));
+//        writer.write(new Gson().toJson(((MethodArgumentNotValidException) e).getBindingResult().getAllErrors()));
     }
 }
