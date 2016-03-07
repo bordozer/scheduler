@@ -45,7 +45,7 @@ public class UserRegistration {
 
     @Test
     public void shouldRegisterUser() {
-        UserData userData = new UserData(FIELD_LOGIN, "user_name", FIELD_PASSWORD);
+        UserData userData = new UserData("login", "user_name", "password");
         String requestBody = String.format(RestTestHelper.readJson(ResourcePath.USER_REGISTRATION_DATA_JSON),
                 userData.getLogin(),
                 userData.getName(),
