@@ -30,4 +30,19 @@ public class ResponseExceptionsHolder {
                 .map(field -> errorsMap.get(field).size()).collect(Collectors.toList());
         return collect.stream().mapToInt(Integer::intValue).sum();
     }
+
+    public int errorsCount(final String field) {
+        return errorsMap.get(field).size();
+    }
+
+    public boolean containsError(final String field, final String errorCode ) {
+        return getFieldErrorResource(field, errorCode) != null;
+    }
+
+    public FieldErrorResource getFieldErrorResource(final String field, final String errorCode) {
+        return errorsMap.get(field).stream()
+                .filter(fieldErrorResource -> fieldErrorResource.getErrorCode().equalsIgnoreCase(errorCode))
+                .findFirst()
+                .orElse(null);
+    }
 }

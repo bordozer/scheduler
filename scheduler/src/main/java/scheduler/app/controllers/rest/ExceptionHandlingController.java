@@ -36,12 +36,7 @@ public class ExceptionHandlingController {
                 .collect(Collectors.toList()
                 );
         final Map<String, List<FieldErrorResource>> fields = response.stream()
-                .collect(Collectors.toMap(
-                        FieldErrorResource::getField,
-                        item -> response.stream()
-                                .filter(fieldErrorResource -> fieldErrorResource.getField().equalsIgnoreCase(item.getField()))
-                                .collect(Collectors.toList()))
-                );
+                .collect(Collectors.groupingBy(FieldErrorResource::getField));
 
         writer.write(new Gson().toJson(new ResponseExceptionsHolder(fields)));
     }
