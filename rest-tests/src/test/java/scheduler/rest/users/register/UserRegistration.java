@@ -9,7 +9,6 @@ import scheduler.rest.common.UserData;
 import scheduler.rest.common.UserRoutes;
 import scheduler.rest.dto.RegistrationResponse;
 import scheduler.rest.dto.UserDto;
-import scheduler.rest.errors.FieldErrorResource;
 import scheduler.rest.errors.ResponseExceptionsHolder;
 
 import static org.testng.Assert.assertEquals;
@@ -30,41 +29,18 @@ public class UserRegistration {
         Response response = RestTestHelper.doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_BAD_REQUEST);
 
         ResponseExceptionsHolder registrationResponse = response.as(ResponseExceptionsHolder.class);
-//        List<FieldErrorResource> loginErrors = registrationResponse.getFieldError(FIELD_LOGIN);
-//        List<FieldErrorResource> nameErrors = registrationResponse.getFieldError(FIELD_NAME);
-//        List<FieldErrorResource> passwordErrors = registrationResponse.getFieldError(FIELD_PASSWORD);
-//        List<FieldErrorResource> passwordConfirmErrors = registrationResponse.getFieldError(FIELD_PASSWORD_CONFIRM);
 
-        final FieldErrorResource userLoginMustNotBeEmptyError =
-                registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.user_login_must_not_be_empty");
-        assertNotNull(userLoginMustNotBeEmptyError);
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.user_login_must_not_be_empty"));
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_too_long"));
 
-        final FieldErrorResource useNameMustNotBeEmptyError =
-                registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.user_name_must_not_be_empty");
-        assertNotNull(useNameMustNotBeEmptyError);
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.user_name_must_not_be_empty"));
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.name_too_long"));
 
-        final FieldErrorResource userPasswordMustNotBeEmptyError =
-                registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.user_password_must_not_be_empty");
-        assertNotNull(userPasswordMustNotBeEmptyError);
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.user_password_must_not_be_empty"));
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.password_too_long"));
 
-        final FieldErrorResource userPasswordConfirmationMustNotBeEmptyError =
-                registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.user_password_confirm_must_not_be_empty");
-        assertNotNull(userPasswordConfirmationMustNotBeEmptyError);
-
-        /*assertEquals(2, registrationResponse.errorsCount(FIELD_NAME));
-        assertEquals(FIELD_NAME, nameErrors.get(0).getField());
-        assertEquals("errors.user_name_must_not_be_empty", nameErrors.get(0).getErrorCode());
-        assertTrue(StringUtils.isEmpty(nameErrors.get(0).getRejectedValue()));
-
-        assertEquals(2, registrationResponse.errorsCount(FIELD_PASSWORD));
-        assertEquals(FIELD_PASSWORD, passwordErrors.get(0).getField());
-        assertEquals("errors.user_password_must_not_be_empty", passwordErrors.get(0).getErrorCode());
-        assertTrue(StringUtils.isEmpty(passwordErrors.get(0).getRejectedValue()));
-
-        assertEquals(2, registrationResponse.errorsCount(FIELD_PASSWORD_CONFIRM));
-        assertEquals(FIELD_PASSWORD_CONFIRM, passwordConfirmErrors.get(0).getField());
-        assertEquals("errors.user_password_confirm_must_not_be_empty", passwordConfirmErrors.get(0).getErrorCode());
-        assertTrue(StringUtils.isEmpty(passwordConfirmErrors.get(0).getRejectedValue()));*/
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.user_password_confirm_must_not_be_empty"));
+        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.password_confirmation_too_long"));
     }
 
     @Test
