@@ -45,9 +45,9 @@ public class UserRegistration {
         assertEquals("errors.user_password_must_not_be_empty", passwordError.getErrorCode());
         assertTrue(StringUtils.isEmpty(passwordError.getRejectedValue()));
 
-        assertEquals("passwordConfirm", passwordError.getField());
-        assertEquals("errors.user_password_confirm_must_not_be_empty", passwordError.getErrorCode());
-        assertTrue(StringUtils.isEmpty(passwordError.getRejectedValue()));
+        assertEquals("passwordConfirm", passwordConfirmError.getField());
+        assertEquals("errors.user_password_confirm_must_not_be_empty", passwordConfirmError.getErrorCode());
+        assertTrue(StringUtils.isEmpty(passwordConfirmError.getRejectedValue()));
     }
 
     @Test

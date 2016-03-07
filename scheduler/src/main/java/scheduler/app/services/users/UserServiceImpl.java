@@ -1,6 +1,5 @@
 package scheduler.app.services.users;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.UserEntityConverter;
 import scheduler.app.converters.entity.UserSecureDetailsConverter;
@@ -51,9 +50,5 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserSecureDetails getUserSecureDetails(final Long userId) {
 		return userSecureDetailsConverter.toModel(userRepository.findById(userId).getSecureDetails());
-	}
-
-	private String encodePassword(final String password) {
-		return new BCryptPasswordEncoder().encode(password);
 	}
 }

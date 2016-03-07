@@ -1,5 +1,6 @@
 package scheduler.app.converters.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import scheduler.app.entities.UserEntity;
@@ -59,7 +60,11 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 		entity.setId(model.getId());
 		entity.setUser(userEntity);
 		entity.setLogin(model.getLogin());
-		entity.setPassword(model.getPasswordEncrypted());
+		entity.setPassword(encodePassword(model.getPasswordEncrypted()));
 		entity.setRole(model.getRole());
+	}
+
+	private String encodePassword(final String password) {
+		return new BCryptPasswordEncoder().encode(password);
 	}
 }
