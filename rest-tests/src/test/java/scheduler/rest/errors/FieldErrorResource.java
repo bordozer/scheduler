@@ -15,4 +15,9 @@ public class FieldErrorResource {
     private String field;
     private String rejectedValue;
     private String errorCode;
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s", field, errorCode);
+    }
 }

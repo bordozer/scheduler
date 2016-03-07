@@ -4,7 +4,6 @@ import com.jayway.restassured.response.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
-import scheduler.rest.common.DataGenerator;
 import scheduler.rest.common.ResourcePath;
 import scheduler.rest.common.RestTestHelper;
 import scheduler.rest.common.UserData;
@@ -31,7 +30,7 @@ public class UserRegistration {
         FieldErrorResource passwordError = registrationResponse.getFieldError("password");
         FieldErrorResource passwordConfirmError = registrationResponse.getFieldError("passwordConfirm");
 
-        assertTrue(registrationResponse.errorsCount() == 4);
+        assertEquals(8, registrationResponse.errorsCount());
 
         assertEquals("login", loginError.getField());
         assertEquals("errors.user_login_must_not_be_empty", loginError.getErrorCode());
