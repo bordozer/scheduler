@@ -46,6 +46,6 @@ public class UserRegistration {
 
         UserDto user = registrationResponse.getUser();
         assertTrue(user.getUserId() != null && user.getUserId() > 0);
-        assertEquals("name", user.getUserName());
+        assertEquals(userData.getName(), user.getUserName());
     }
 }
