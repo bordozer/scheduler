@@ -2,6 +2,7 @@ package scheduler.app.converters.entity;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.UserSecureDetails;
 import scheduler.app.repositories.UserRepository;
@@ -46,5 +47,19 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 		model.setPasswordEncrypted(entity.getPassword());
 		model.setRole(entity.getRole());
 		return model;
+	}
+
+	@Override
+	public void createEntity(final UserEntity userEntity, final UserSecureDetails model) {
+		Assert.notNull(userEntity, USER_MUST_NOT_BE_NULL);
+		Assert.notNull(model, MODEL_MUST_NOT_BE_NULL);
+
+		final UserSecureDetailsEntity entity = new UserSecureDetailsEntity();
+
+		entity.setId(model.getId());
+		entity.setUser(userEntity);
+		entity.setLogin(model.getLogin());
+		entity.setPassword(model.getPasswordEncrypted());
+		entity.setRole(model.getRole());
 	}
 }
