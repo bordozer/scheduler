@@ -21,7 +21,6 @@ public class UserDtoConverterTest {
     private UserDtoConverter sut = new UserDtoConverter();
 
 
-
     @Test
     public void shouldConvertToModel() {
         User model = sut.toModel(TestDataModels.currentUser(), TestDataDto.user());

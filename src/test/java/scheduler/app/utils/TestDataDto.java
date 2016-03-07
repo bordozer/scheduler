@@ -1,7 +1,9 @@
 package scheduler.app.utils;
 
 import scheduler.app.dto.RemoteJobDto;
+import scheduler.app.dto.SchedulerTaskDto;
 import scheduler.app.dto.UserDto;
+import scheduler.app.models.SchedulerTask;
 
 public class TestDataDto {
 
@@ -16,6 +18,18 @@ public class TestDataDto {
         final UserDto model = new UserDto();
         model.setUserId(TestData.CURRENT_USER_ID);
         model.setUserName(TestData.CURRENT_USER_NAME);
+        return model;
+    }
+
+    public static SchedulerTaskDto schedulerTask() {
+        final SchedulerTaskDto model = new SchedulerTaskDto();
+        model.setTaskId(TestData.SCHEDULER_TASK_ID);
+        model.setTaskName(TestData.SCHEDULER_TASK_NAME);
+        model.setTaskType(TestData.SCHEDULER_TASK_TYPE);
+        model.setTaskDescription(TestData.SCHEDULER_TASK_DESCRIPTION);
+        model.setTaskParametersJSON(TestData.SCHEDULER_TASK_PARAMETERS_JSON);
+        model.setUser(user());
+        model.setRemoteJob(remoteJob());
         return model;
     }
 
