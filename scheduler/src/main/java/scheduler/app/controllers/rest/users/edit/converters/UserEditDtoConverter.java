@@ -6,7 +6,5 @@ import scheduler.app.models.UserSecureDetails;
 
 public interface UserEditDtoConverter {
 
-    User toModel(NewUserDto dto);
-
-    UserSecureDetails toUserSecureDetailsModel(final User user, NewUserDto editDTO);
+    User createUser(NewUserDto dto);
 }

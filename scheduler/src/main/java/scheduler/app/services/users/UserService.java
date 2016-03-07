@@ -9,10 +9,10 @@ public interface UserService {
 	User findByLogin(String login);
 
 	@Transactional
-	User save(User user);
+	User create(User user, UserSecureDetails userSecureDetails);
 
 	@Transactional
-	User save(User user, UserSecureDetails userSecureDetails);
+	User save(User user);
 
 	UserSecureDetails getUserSecureDetails(Long userId);
 }

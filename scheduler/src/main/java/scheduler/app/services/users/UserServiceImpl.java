@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import scheduler.app.converters.entity.UserEntityConverter;
 import scheduler.app.converters.entity.UserSecureDetailsConverter;
 import scheduler.app.entities.UserEntity;
+import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.User;
 import scheduler.app.models.UserSecureDetails;
 import scheduler.app.repositories.UserRepository;
@@ -29,18 +30,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User save(final User user) {
-		final UserEntity userEntity = userRepository.findById(user.getId());
+	public User create(final User user, final UserSecureDetails userSecureDetails) {
+		final UserEntity userEntity = new UserEntity();
+		userEntity.setSecureDetails(new UserSecureDetailsEntity());
+
 		userEntityConverter.populateEntity(userEntity, user);
+		userSecureDetailsConverter.populateEntity(userEntity.getSecureDetails(), userSecureDetails);
+
 		final UserEntity saved = userRepository.saveAndFlush(userEntity);
+
 		return userEntityConverter.toModel(saved);
 	}
 
 	@Override
-	public User save(final User user, final UserSecureDetails userSecureDetails) {
+	public User save(final User user) {
 		final UserEntity userEntity = userRepository.findById(user.getId());
 		userEntityConverter.populateEntity(userEntity, user);
-		userSecureDetailsConverter.populateEntity(userEntity.getSecureDetails(), userSecureDetails);
 		final UserEntity saved = userRepository.saveAndFlush(userEntity);
 		return userEntityConverter.toModel(saved);
 	}
