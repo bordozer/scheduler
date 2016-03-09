@@ -1,7 +1,9 @@
 package scheduler.app.services.tasks;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
+import scheduler.app.entities.RemoteJobEntity;
 import scheduler.app.repositories.SchedulerTaskRepository;
 import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.models.SchedulerTask;
@@ -12,6 +14,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class SchedulerTaskServiceImpl implements SchedulerTaskService {
+
+	private static final String MODEL_MUST_NOT_BE_NULL = "Model must not be null";
+	private static final String REMOTE_JOB_MUST_NOT_BE_NULL = "Remote job must not be null";
 
 	@Inject
 	private SchedulerTaskRepository schedulerTaskRepository;
@@ -36,11 +41,21 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
 	@Override
 	public SchedulerTask create(final SchedulerTask schedulerTask) {
-		return populateAndSave(new SchedulerTaskEntity(), schedulerTask);
+		Assert.notNull(schedulerTask, MODEL_MUST_NOT_BE_NULL);
+		Assert.notNull(schedulerTask.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
+
+		SchedulerTaskEntity schedulerTaskEntity = new SchedulerTaskEntity();
+		RemoteJobEntity remoteJob = new RemoteJobEntity();
+		schedulerTaskEntity.setRemoteJob(remoteJob);
+		remoteJob.setSchedulerTask(schedulerTaskEntity);
+
+		return populateAndSave(schedulerTaskEntity, schedulerTask);
 	}
 
 	@Override
 	public SchedulerTask save(final SchedulerTask schedulerTask) {
+		Assert.notNull(schedulerTask, MODEL_MUST_NOT_BE_NULL);
+		Assert.notNull(schedulerTask.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 		return populateAndSave(schedulerTaskRepository.findById(schedulerTask.getId()), schedulerTask);
 	}
 
