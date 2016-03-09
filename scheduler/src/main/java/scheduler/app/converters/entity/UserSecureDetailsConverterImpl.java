@@ -3,7 +3,6 @@ package scheduler.app.converters.entity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.UserSecureDetails;
 import scheduler.app.repositories.UserRepository;

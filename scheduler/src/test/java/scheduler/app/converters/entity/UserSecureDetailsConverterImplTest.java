@@ -15,9 +15,8 @@ import scheduler.app.utils.TestDataEntities;
 import scheduler.app.utils.TestDataModels;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -58,20 +57,30 @@ public class UserSecureDetailsConverterImplTest {
     }
 
     @Test
-    public void shouldPopulateEntity() {
-        final UserEntity user = TestDataEntities.user();
-        when(userRepository.findById(TestData.USER_ID)).thenReturn(user);
-
+    public void shouldPopulateEntityIdUserIsNull() {
         UserSecureDetailsEntity entity = new UserSecureDetailsEntity();
         sut.populateEntity(entity, TestDataModels.userSecureDetails(TestDataModels.user()));
 
-        verify(userRepository, times(1)).findById(TestData.USER_ID);
+        assertEquals(TestData.USER_SECURE_DETAILS_ID, entity.getId());
+        assertEquals(TestData.USER_LOGIN, entity.getLogin());
+        assertEquals(60, entity.getPassword().length());
+        assertEquals(TestData.USER_ROLE, entity.getRole());
+        assertNull(entity.getUser());
+    }
+
+    @Test
+    public void shouldPopulateEntityIfUserIsNotNull() {
+        final UserEntity userEntity = TestDataEntities.user();
+        UserSecureDetailsEntity entity = new UserSecureDetailsEntity();
+        entity.setUser(userEntity);
+        userEntity.setSecureDetails(entity);
+        sut.populateEntity(entity, TestDataModels.userSecureDetails(TestDataModels.user()));
 
         assertEquals(TestData.USER_SECURE_DETAILS_ID, entity.getId());
         assertEquals(TestData.USER_LOGIN, entity.getLogin());
-        assertEquals(TestData.USER_PASSWORD, entity.getPassword());
+        assertEquals(60, entity.getPassword().length());
         assertEquals(TestData.USER_ROLE, entity.getRole());
-        assertTrue(user == entity.getUser());
+        assertTrue(userEntity == entity.getUser());
     }
 
     @Test
