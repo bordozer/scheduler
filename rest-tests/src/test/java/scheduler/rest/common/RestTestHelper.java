@@ -29,9 +29,6 @@ public class RestTestHelper {
     }
 
     public static UserData generateAndLoginUser(){
-//        RestAssured.reset();
-//        SecurityCookieFilter securityCookieFilter = new SecurityCookieFilter();
-//        RestAssured.filters(securityCookieFilter);
         UserData userData = DataGenerator.generateUserData();
         register(userData.getLogin(), userData.getPassword(), userData.getName());
 //        login(userData.getLogin(), userData.getPassword());
@@ -54,10 +51,27 @@ public class RestTestHelper {
     }
 
     public static Response login(final String login, final String password) {
-        String requestBody = String.format(RestTestHelper.readJson(ResourcePath.USER_LOGIN_DATA_JSON),
+        String requestBody = String.format(readJson(ResourcePath.USER_LOGIN_DATA_JSON),
                 login, password
         );
-        return RestTestHelper.doJsonPost(requestBody, AuthRoutes.LOGIN, HttpStatus.SC_OK);
+        return doJsonPost(requestBody, AuthRoutes.LOGIN, HttpStatus.SC_OK);
+    }
+
+    public static void logout() {
+        doGet(AuthRoutes.LOGOUT);
+    }
+
+    public static Response doGet(final Route route) {
+        return doGet(route, HttpStatus.SC_OK);
+    }
+
+    public static Response doGet(final Route route, final int expectedStatusCode) {
+        return given()
+//                .log().ifValidationFails()
+//                .when()
+//                .response().then().statusCode(expectedStatusCode)
+//                .log().ifStatusCodeMatches(not(equalTo(expectedStatusCode)))
+                .get(buildRoute(route));
     }
 
     public static Response doJsonPost(final String jsonBody, final Route route, final int expectedStatusCode) {

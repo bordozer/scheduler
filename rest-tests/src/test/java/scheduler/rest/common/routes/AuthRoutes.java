@@ -1,11 +1,12 @@
 package scheduler.rest.common.routes;
 
 import lombok.Getter;
-import scheduler.rest.common.routes.Route;
 
 @Getter
 public enum  AuthRoutes implements Route {
-    LOGIN("/authenticate");
+    LOGIN("/authenticate"),
+    LOGOUT("/logout")
+    ;
 
     private final String route;
 

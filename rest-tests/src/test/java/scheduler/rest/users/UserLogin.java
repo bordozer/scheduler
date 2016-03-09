@@ -9,5 +9,7 @@ public class UserLogin {
     @Test
     public void shouldLoginUser() {
         UserData userData = RestTestHelper.generateAndLoginUser();
+        RestTestHelper.logout();
+        RestTestHelper.login(userData.getLogin(), userData.getPassword());
     }
 }
