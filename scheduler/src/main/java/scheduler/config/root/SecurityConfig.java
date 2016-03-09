@@ -20,7 +20,6 @@ import javax.inject.Inject;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
-	//	public static final String REMEMBER_ME_KEY = "Scheduler_Micro_Service_myAppKey";
 	public static final String REMEMBER_ME_KEY = "myAppKey";
 
 	public static final String PORTAL_PAGE_URL = "/scheduler/";
