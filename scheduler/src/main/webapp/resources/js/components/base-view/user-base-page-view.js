@@ -11,18 +11,20 @@ define( function ( require ) {
 	var PageView = require( 'js/components/base-view/base-page-view' );
 
 	var Translator = require( 'translator' );
-	var translator = new Translator( {
+	var t = new Translator( {
 		menuAdminLabel: "Administration"
 		, menuUsersLabel: 'Users'
 		, menuYourGroupsLabel: 'Your groups'
 		, menuPersonalDataLabel: 'User settings'
-		, menuLogoutLabel: 'Menu: Logout'
+		, menuLogoutLabel: 'Logout'
+		, logoutConfirmation: 'Logout?'
+		, error: 'Error!'
 	} );
 
 	return PageView.extend( {
 
 		builtinEvents: {
-			'click .logout-link': 'logout'
+			'click .js-logout': 'logout'
 		},
 
 		renderBody: function() {
@@ -38,7 +40,31 @@ define( function ( require ) {
 		},
 
 		mainMenuItems: function() {
-			return [];
+			return [
+				{ selector: 'js-logout',
+					icon: 'fa fa-sign-out',
+					link: '#',
+					text: t.menuLogoutLabel
+				}
+			];
+		},
+
+		logout: function () {
+
+			if ( ! confirm( t.logoutConfirmation ) ) {
+				return;
+			}
+
+			$.ajax( {
+				method: 'POST',
+				url: '/logout',
+				success: function ( response ) {
+					window.location.reload();
+				},
+				error: function() {
+					alert( t.error );
+				}
+			} )
 		}
 	});
 } );

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,6 +41,12 @@ public class ExceptionHandlingController {
 
         writer.write(new Gson().toJson(new ResponseExceptionsHolder(fields)));
     }
+
+    /*@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = UsernameNotFoundException.class)
+    public void permissionDenied(final Exception e, final Writer writer) throws IOException {
+        writer.write();
+    }*/
 
     @Getter
     @Setter

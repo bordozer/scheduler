@@ -68,9 +68,9 @@ public class RestTestHelper {
     public static Response doGet(final Route route, final int expectedStatusCode) {
         return given()
 //                .log().ifValidationFails()
-//                .when()
-//                .response().then().statusCode(expectedStatusCode)
-//                .log().ifStatusCodeMatches(not(equalTo(expectedStatusCode)))
+                .when()
+                .response().then().statusCode(expectedStatusCode)
+                .log().ifStatusCodeMatches(not(equalTo(expectedStatusCode)))
                 .get(buildRoute(route));
     }
 
