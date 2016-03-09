@@ -3,7 +3,6 @@ package scheduler.rest.dto;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
-import scheduler.rest.dto.UserDto;
 
 import java.util.List;
 

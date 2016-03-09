@@ -5,13 +5,18 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpStatus;
+import scheduler.rest.common.routes.AuthRoutes;
+import scheduler.rest.common.routes.Route;
+import scheduler.rest.common.routes.UserRoutes;
 
 import java.io.IOException;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
-import static scheduler.rest.common.Route.buildRoute;
+import static scheduler.rest.common.routes.Route.buildRoute;
+
 
 public class RestTestHelper {
 
@@ -23,7 +28,39 @@ public class RestTestHelper {
         }
     }
 
-    public static Response doJsonPost(final String jsonBody, final UserRoutes route, final int expectedStatusCode) {
+    public static UserData generateAndLoginUser(){
+//        RestAssured.reset();
+//        SecurityCookieFilter securityCookieFilter = new SecurityCookieFilter();
+//        RestAssured.filters(securityCookieFilter);
+        UserData userData = DataGenerator.generateUserData();
+        register(userData.getLogin(), userData.getPassword(), userData.getName());
+//        login(userData.getLogin(), userData.getPassword());
+        return userData;
+    }
+
+    public static Response register(final String login, final String password, final String userName) {
+        RestAssured.reset();
+        SecurityCookieFilter securityCookieFilter = new SecurityCookieFilter();
+        RestAssured.filters(securityCookieFilter);
+
+        String requestBody = String.format(readJson(ResourcePath.USER_REGISTRATION_DATA_JSON),
+                login,
+                userName,
+                password,
+                password
+        );
+
+        return doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_OK);
+    }
+
+    public static Response login(final String login, final String password) {
+        String requestBody = String.format(RestTestHelper.readJson(ResourcePath.USER_LOGIN_DATA_JSON),
+                login, password
+        );
+        return RestTestHelper.doJsonPost(requestBody, AuthRoutes.LOGIN, HttpStatus.SC_OK);
+    }
+
+    public static Response doJsonPost(final String jsonBody, final Route route, final int expectedStatusCode) {
         RestAssured.defaultParser = Parser.JSON;
         return given()
                 .log()
@@ -36,7 +73,7 @@ public class RestTestHelper {
                 .post(buildRoute(route));
     }
 
-    public static Response doJsonPut(final String jsonBody, final UserRoutes route, final int expectedStatusCode) {
+    public static Response doJsonPut(final String jsonBody, final Route route, final int expectedStatusCode) {
         RestAssured.defaultParser = Parser.JSON;
         return given()
                 .log()

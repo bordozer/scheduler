@@ -1,12 +1,13 @@
-package scheduler.rest.users.register;
+package scheduler.rest.users;
 
 import com.jayway.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
+import scheduler.rest.common.DataGenerator;
 import scheduler.rest.common.ResourcePath;
 import scheduler.rest.common.RestTestHelper;
 import scheduler.rest.common.UserData;
-import scheduler.rest.common.UserRoutes;
+import scheduler.rest.common.routes.UserRoutes;
 import scheduler.rest.dto.RegistrationResponse;
 import scheduler.rest.dto.UserDto;
 import scheduler.rest.errors.ResponseExceptionsHolder;
@@ -49,15 +50,8 @@ public class UserRegistration {
 
     @Test
     public void shouldRegisterUser() {
-        UserData userData = new UserData("login", "user_name", "password");
-        String requestBody = String.format(RestTestHelper.readJson(ResourcePath.USER_REGISTRATION_DATA_JSON),
-                userData.getLogin(),
-                userData.getName(),
-                userData.getPassword(),
-                userData.getPassword()
-        );
-
-        Response response = RestTestHelper.doJsonPut(requestBody, UserRoutes.USER_REGISTRATION, HttpStatus.SC_OK);
+        UserData userData = DataGenerator.generateUserData();
+        Response response = RestTestHelper.register(userData.getLogin(), userData.getPassword(), userData.getName());
 
         RegistrationResponse registrationResponse = response.as(RegistrationResponse.class);
         assertTrue(registrationResponse.isSuccess());

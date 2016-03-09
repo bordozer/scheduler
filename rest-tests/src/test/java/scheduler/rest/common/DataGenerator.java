@@ -1,7 +1,5 @@
 package scheduler.rest.common;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -15,13 +13,14 @@ public class DataGenerator {
     public static UserData generateUserData() {
         String login = generate();
         String username = generate();
-        String crypt = crypt(generate());
+        String password = generate();
+//        String password = crypt(generate());
 
-        return new UserData(login, username, crypt);
+        return new UserData(login, username, password);
     }
 
     private static String generate() {
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().substring(0, 8);
     }
 
     private static String crypt(final String salt) {
