@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
-import java.util.UUID;
+import java.util.Date;
 
 public class DataGenerator {
 
@@ -20,7 +20,8 @@ public class DataGenerator {
     }
 
     private static String generate() {
-        return UUID.randomUUID().toString().substring(0, 8);
+        return String.valueOf(new Date().getTime());
+//        return UUID.randomUUID().toString().substring(0, 8);
     }
 
     private static String crypt(final String salt) {

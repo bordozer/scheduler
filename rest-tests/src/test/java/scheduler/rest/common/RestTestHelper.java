@@ -31,7 +31,7 @@ public class RestTestHelper {
     public static UserData generateAndLoginUser(){
         UserData userData = DataGenerator.generateUserData();
         register(userData.getLogin(), userData.getPassword(), userData.getName());
-//        login(userData.getLogin(), userData.getPassword());
+        login(userData.getLogin(), userData.getPassword());
         return userData;
     }
 

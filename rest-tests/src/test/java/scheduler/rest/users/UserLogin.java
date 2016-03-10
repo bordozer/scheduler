@@ -3,6 +3,7 @@ package scheduler.rest.users;
 import com.jayway.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
+import scheduler.rest.common.DataGenerator;
 import scheduler.rest.common.RestTestHelper;
 import scheduler.rest.common.UserData;
 import scheduler.rest.common.routes.SchedulerTaskRoutes;
@@ -13,7 +14,7 @@ public class UserLogin {
 
     @Test
     public void shouldLoginUser() {
-        UserData userData = RestTestHelper.generateAndLoginUser();
+        UserData userData = DataGenerator.generateUserData();
 
         Response taskListResponse1 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
         assertEquals(HttpStatus.SC_UNAUTHORIZED, taskListResponse1.getStatusCode());
