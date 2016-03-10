@@ -1,88 +1,133 @@
 package scheduler.config.root;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
-import scheduler.app.security.AjaxAuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import scheduler.app.security.AuthFailureHandler;
+import scheduler.app.security.AuthSuccessHandler;
+import scheduler.app.security.HttpAuthenticationEntryPoint;
+import scheduler.app.security.HttpLogoutSuccessHandler;
 import scheduler.app.security.SecurityUserDetailsService;
 
 import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@ComponentScan(value = "scheduler.app.security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String LOGIN_PAGE_URL = "/resources/public/login/login.html";
-	public static final String REMEMBER_ME_KEY = "myAppKey";
-
-	public static final String PORTAL_PAGE_URL = "/scheduler/";
+	@Inject
+	private SecurityUserDetailsService securityUserDetailsService;
 
 	@Inject
-	private SecurityUserDetailsService userDetailsService;
+	private HttpAuthenticationEntryPoint authenticationEntryPoint;
 
 	@Inject
-	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+	private AuthSuccessHandler authSuccessHandler;
+
+	@Inject
+	private AuthFailureHandler authFailureHandler;
+
+	@Inject
+	private HttpLogoutSuccessHandler logoutSuccessHandler;
 
 	@Inject
 	private PersistentTokenRepository persistentTokenRepository;
 
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	@Override
+	public UserDetailsService userDetailsServiceBean() throws Exception {
+		return super.userDetailsServiceBean();
+	}
+
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(securityUserDetailsService);
+		authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+
+		return authenticationProvider;
+	}
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-				.eraseCredentials(true)
-				.userDetailsService(userDetailsService)
-				.passwordEncoder(new BCryptPasswordEncoder());
+		auth.authenticationProvider(authenticationProvider());
+	}
+
+	@Override
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return super.authenticationManager();
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-
-		http
-				.csrf().disable()
+		http.csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/resources/public/**").permitAll()
 				.antMatchers("/resources/images*//**").permitAll()
 				.antMatchers("/resources/bower_components*//**").permitAll()
 				.antMatchers("/rest/translator/").permitAll()
 				.antMatchers( HttpMethod.PUT, "/rest/users/register/" ).permitAll()
-//					.antMatchers( "/rest/app/" ).permitAll()
-//					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
-				.anyRequest()
-				.authenticated()
+				.anyRequest().authenticated()
+				.and()
+				.authenticationProvider(authenticationProvider())
+				.exceptionHandling()
+				.authenticationEntryPoint(authenticationEntryPoint)
 				.and()
 				.formLogin()
-				.defaultSuccessUrl(PORTAL_PAGE_URL)
-				.loginProcessingUrl("/authenticate")
-				.usernameParameter("login")
-				.passwordParameter("password")
-				.successHandler(ajaxAuthenticationSuccessHandler)
-				.failureUrl("/login?error") // TODO: implement beautiful error page
-				.loginPage(LOGIN_PAGE_URL)
+				.loginPage(Parameters.LOGIN_PAGE_URL)
+				.permitAll()
+				.loginProcessingUrl(Parameters.LOGIN_END_POINT)
+				.usernameParameter(Parameters.USERNAME)
+				.passwordParameter(Parameters.PASSWORD)
+				.defaultSuccessUrl(Parameters.PORTAL_PAGE_URL)
+				.successHandler(authSuccessHandler)
+				.failureHandler(authFailureHandler)
 				.and()
 				.logout()
-				.logoutUrl("/logout")
-				.logoutSuccessUrl(LOGIN_PAGE_URL)
-				.invalidateHttpSession(true)
 				.permitAll()
+				.logoutUrl("/logout")
+//				.logoutRequestMatcher(new AntPathRequestMatcher(Parameters.LOGIN_END_POINT, "DELETE"))
+				.logoutSuccessHandler(logoutSuccessHandler)
+				.logoutSuccessUrl(Parameters.LOGIN_PAGE_URL)
 				.and()
 				.rememberMe()
 				.tokenRepository(persistentTokenRepository)
 				.rememberMeServices(rememberMeServices())
-				.key(REMEMBER_ME_KEY);
+				.key(Parameters.REMEMBER_ME_KEY)
+				.and()
+				.sessionManagement()
+				.maximumSessions(1)
+		;
+
+		http.authorizeRequests().anyRequest().authenticated();
 	}
 
 	@Bean
 	public TokenBasedRememberMeServices rememberMeServices() {
 
-		final TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(REMEMBER_ME_KEY, userDetailsService);
+		final TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(Parameters.REMEMBER_ME_KEY, securityUserDetailsService);
 		rememberMeServices.setTokenValiditySeconds(1209600);
 		rememberMeServices.setCookieName("Scheduler_Micro_Service_Remember_Me_Cookie");
 
