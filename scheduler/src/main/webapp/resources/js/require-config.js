@@ -19,9 +19,9 @@ var require = {
 		, moment: "bower_components/moment/min/moment-with-locales.min"
 		, bootbox: "bower_components/bootbox/bootbox"
 
-		, translator: "public/js/translator"
-		, app: "public/js/app"
-		, auth: "public/js/authenticated"
+		, translator: "js/translator"
+		, app: "js/app"
+		, auth: "js/authenticated"
 	},
 
 	shim: {

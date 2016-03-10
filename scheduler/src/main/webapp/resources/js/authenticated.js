@@ -10,7 +10,7 @@ define( function ( require ) {
     var AuthenticationChecker = function () {
         this.initialize();
         if (!data.isAuthenticated) {
-            document.location.href = '/resources/public/login/login.html';
+            document.location.href = '/resources/login.html';
         }
     };
 

@@ -10,9 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="/resources/bower_components/fontawesome/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="/resources/public/style.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 
-	<script type="text/javascript" src="/resources/public/js/require-config.js"></script>
+	<script type="text/javascript" src="/resources/js/require-config.js"></script>
 	<script type="text/javascript" src="/resources/bower_components/requirejs/require.js"></script>
 
 </head>
@@ -24,7 +24,7 @@
 			<div class="row">
 
 				<div class="col-lg-2">
-					<img src="/resources/public/images/logo.png">
+					<img src="/resources/images/logo.png">
 				</div>
 
 				<div class="col-lg-10">
@@ -42,7 +42,7 @@
 				<div class="login-container" style="width: 500px; margin-left: auto; margin-right: auto;"></div>
 
 				<script type="text/javascript">
-					require( [ 'jquery', 'public/js/login/login-view' ], function ( $, Login ) {
+					require( [ 'jquery', 'js/login/login-view' ], function ( $, Login ) {
 						new Login( { el: $( '.login-container') } );
 					} );
 				</script>
