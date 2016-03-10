@@ -1,6 +1,8 @@
 package scheduler.app.security;
 
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import org.apache.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 @Component
 public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
@@ -20,12 +23,12 @@ public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
 
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.addParameters("auth_result", "Authentication failure");
-        authResponse.addParameters("error", exception.getMessage());
+        Map<String, String> map = Maps.newLinkedHashMap();
+        map.put(AuthResponse.AUTH_RESULT, "Authentication failure");
+        map.put(AuthResponse.ERROR, exception.getMessage());
 
         PrintWriter writer = response.getWriter();
-        writer.write(new Gson().toJson(authResponse));
+        writer.write(new Gson().toJson(new AuthResponse(HttpStatus.SC_UNAUTHORIZED, map)));
         writer.flush();
     }
 }

@@ -1,6 +1,8 @@
 package scheduler.app.security;
 
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import org.apache.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 @Component
 public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -32,13 +35,13 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         scheduler.app.models.User user = userService.findByLogin(principal.getUsername());
         UserSecureDetails userSecureDetails = userService.getUserSecureDetails(user.getId());
 
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.addParameters("auth_result", "Logged in successfully");
-        authResponse.addParameters("user_name", user.getUsername());
-        authResponse.addParameters("user_role", userSecureDetails.getRole().toString());
+        Map<String, String> map = Maps.newLinkedHashMap();
+        map.put(AuthResponse.AUTH_RESULT, "Logged in successfully");
+        map.put(AuthResponse.USER_NAME, user.getUsername());
+        map.put(AuthResponse.USER_ROLE, userSecureDetails.getRole().toString());
 
         PrintWriter writer = response.getWriter();
-        writer.write(new Gson().toJson(authResponse));
+        writer.write(new Gson().toJson(new AuthResponse(HttpStatus.SC_OK, map)));
         writer.flush();
     }
 }

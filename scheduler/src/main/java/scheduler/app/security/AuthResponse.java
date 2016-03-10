@@ -1,17 +1,19 @@
 package scheduler.app.security;
 
-import com.beust.jcommander.internal.Maps;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 public class AuthResponse {
-    private final Map<String, String> map = Maps.newLinkedHashMap();
 
-    public void addParameters(final String key, final String value) {
-        map.put(key, value);
-    }
+    public static final String AUTH_RESULT = "auth_result";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_ROLE = "user_role";
+    public static final String ERROR = "error";
+
+    private final int responseCode;
+    private final Map<String, String> details;
 }

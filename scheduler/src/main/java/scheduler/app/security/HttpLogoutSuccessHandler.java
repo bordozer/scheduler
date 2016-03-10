@@ -1,6 +1,8 @@
 package scheduler.app.security;
 
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import org.apache.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 @Component
 public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
@@ -29,13 +32,13 @@ public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
         org.springframework.security.core.userdetails.User principal = (User) authentication.getPrincipal();
         scheduler.app.models.User user = userService.findByLogin(principal.getUsername());
 
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.addParameters("auth_result", "Logged out");
-        authResponse.addParameters("user_name", user.getUsername());
+        Map<String, String> map = Maps.newLinkedHashMap();
+        map.put(AuthResponse.AUTH_RESULT, "Logged out");
+        map.put(AuthResponse.USER_NAME, user.getUsername());
 
 
         PrintWriter writer = response.getWriter();
-        writer.write(new Gson().toJson(authResponse));
+        writer.write(new Gson().toJson(new AuthResponse(HttpStatus.SC_OK, map)));
         writer.flush();
     }
 }
