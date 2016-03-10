@@ -43,12 +43,11 @@ define( function ( require ) {
 				method: 'POST',
 				url: url,
 				success: function ( response ) {
-
 					if ( response.responseCode === 200 && response.details.auth_result === 'Logged in successfully' ) {
 						window.location.replace( '/scheduler/' );
-						return;
 					}
-
+				},
+				error: function() {
 					bootbox.dialog( {
 						title: t.loginFailedLabel
 						, message: t.loginFailedMessage
