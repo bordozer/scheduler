@@ -14,15 +14,15 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class SecurityCookieFilter implements Filter {
 
     private final AtomicReference<String> securityToken = new AtomicReference<String>();
-    private static final String COOKIE = "SPRING_SECURITY_REMEMBER_ME_COOKIE";
+    private static final String JSESSIONID_COOKIE = "JSESSIONID";
 
     public Response filter(final FilterableRequestSpecification requestSpec, final FilterableResponseSpecification responseSpec, final FilterContext ctx) {
         if (hasSecurityToken()) {
-            requestSpec.cookie(new Cookie.Builder(COOKIE, securityToken.get()).setSecured(true).build());
+            requestSpec.cookie(new Cookie.Builder(JSESSIONID_COOKIE, securityToken.get()).setSecured(true).build());
         }
 
         final Response response = ctx.next(requestSpec, responseSpec);
-        String currentSecurityToken = response.getCookie(COOKIE);
+        String currentSecurityToken = response.getCookie(JSESSIONID_COOKIE);
 
         if (isNotBlank(currentSecurityToken)) {
             securityToken.set(currentSecurityToken);
