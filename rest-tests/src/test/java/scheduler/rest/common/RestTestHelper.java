@@ -5,6 +5,7 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import scheduler.rest.common.routes.AuthRoutes;
 import scheduler.rest.common.routes.Route;
@@ -51,14 +52,19 @@ public class RestTestHelper {
     }
 
     public static Response login(final String login, final String password) {
-        String requestBody = String.format(readJson(ResourcePath.USER_LOGIN_DATA_JSON),
-                login, password
-        );
-        return doJsonPost(requestBody, AuthRoutes.LOGIN, HttpStatus.SC_OK);
+        RestAssured.defaultParser = Parser.JSON;
+        return given()
+                .log()
+                .ifValidationFails()
+                .contentType(ContentType.JSON)
+                .when()
+                .response().log().ifStatusCodeMatches(not(equalTo(HttpStatus.SC_OK)))
+                .then().statusCode(HttpStatus.SC_OK)
+                .post(String.format("%s?login=%spassword=%s", buildRoute(AuthRoutes.LOGIN), login, password));
     }
 
-    public static void logout() {
-        doGet(AuthRoutes.LOGOUT);
+    public static Response logout() {
+        return doGet(AuthRoutes.LOGOUT);
     }
 
     public static Response doGet(final Route route) {

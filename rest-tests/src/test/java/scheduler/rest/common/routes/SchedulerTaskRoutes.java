@@ -3,14 +3,12 @@ package scheduler.rest.common.routes;
 import lombok.Getter;
 
 @Getter
-public enum  AuthRoutes implements Route {
-    LOGIN("/authenticate"),
-    LOGOUT("/logout")
-    ;
+public enum SchedulerTaskRoutes implements Route {
+    SCHEDULER_TASK_LIST("/rest/tasks/");
 
     private final String route;
 
-    AuthRoutes(final String route) {
+    SchedulerTaskRoutes(final String route) {
         this.route = route;
     }
 }
