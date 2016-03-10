@@ -2,7 +2,6 @@ package scheduler.rest.users;
 
 import com.jayway.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import scheduler.rest.common.AuthResponse;
 import scheduler.rest.common.DataGenerator;
