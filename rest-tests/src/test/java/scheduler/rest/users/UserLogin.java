@@ -16,18 +16,21 @@ public class UserLogin {
         UserData userData = RestTestHelper.generateAndLoginUser();
 
         Response taskListResponse1 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
-        assertEquals(401, taskListResponse1.getStatusCode());
+        assertEquals(HttpStatus.SC_UNAUTHORIZED, taskListResponse1.getStatusCode());
 
-        Response loginResponse = RestTestHelper.login(userData.getLogin(), userData.getPassword());
-        assertEquals(200, loginResponse.getStatusCode());
+        Response loginResponse = RestTestHelper.login(userData.getLogin(), userData.getPassword(), HttpStatus.SC_UNAUTHORIZED);
+        assertEquals(HttpStatus.SC_UNAUTHORIZED, loginResponse.getStatusCode());
+
+        Response registerResponse = RestTestHelper.register(userData.getLogin(), userData.getPassword(), userData.getName());
+        assertEquals(HttpStatus.SC_OK, registerResponse.getStatusCode());
 
         Response taskListResponse2 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_OK);
-        assertEquals(200, taskListResponse2.getStatusCode());
+        assertEquals(HttpStatus.SC_OK, taskListResponse2.getStatusCode());
 
         Response logoutResponse = RestTestHelper.logout();
-        assertEquals(200, logoutResponse.getStatusCode());
+        assertEquals(HttpStatus.SC_OK, logoutResponse.getStatusCode());
 
         Response taskListResponse3 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
-        assertEquals(401, taskListResponse3.getStatusCode());
+        assertEquals(HttpStatus.SC_UNAUTHORIZED, taskListResponse3.getStatusCode());
     }
 }
