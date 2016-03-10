@@ -108,7 +108,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 				.permitAll()
 				.logoutUrl("/logout")
-//				.logoutRequestMatcher(new AntPathRequestMatcher(Parameters.LOGIN_END_POINT, "DELETE"))
 				.logoutSuccessHandler(logoutSuccessHandler)
 				.logoutSuccessUrl(Parameters.LOGIN_PAGE_URL)
 				.and()
