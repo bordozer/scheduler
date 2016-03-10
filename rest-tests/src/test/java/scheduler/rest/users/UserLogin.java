@@ -61,7 +61,7 @@ public class UserLogin {
 
         // non public resources are not available again
         Response taskListResponse4 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
-        AuthResponse taskList4AuthResponse = logoutResponse.as(AuthResponse.class);
+        AuthResponse taskList4AuthResponse = taskListResponse4.as(AuthResponse.class);
         assertEquals(HttpStatus.SC_UNAUTHORIZED, taskList4AuthResponse.getResponseCode());
     }
 }
