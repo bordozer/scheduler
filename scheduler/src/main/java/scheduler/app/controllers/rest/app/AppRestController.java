@@ -33,4 +33,9 @@ public class AppRestController {
         }
         return dto;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/authenticated/")
+    public boolean authenticated(final Principal principal) {
+        return principal != null;
+    }
 }

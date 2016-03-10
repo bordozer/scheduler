@@ -6,6 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var auth = require( 'auth' );
 	var pageHeader = require( 'js/components/header/header' );
 
 	var mainMenu = require( 'js/components/main-menu/main-menu' );

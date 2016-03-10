@@ -21,6 +21,7 @@ var require = {
 
 		, translator: "public/js/translator"
 		, app: "public/js/app"
+		, auth: "public/js/authenticated"
 	},
 
 	shim: {

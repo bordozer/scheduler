@@ -90,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				.antMatchers("/resources/images*//**").permitAll()
 //				.antMatchers("/resources/bower_components*//**").permitAll()
 				.antMatchers("/rest/translator/").permitAll()
-				.antMatchers( "/rest/app/" ).permitAll()
+				.antMatchers( "/rest/app/**" ).permitAll()
 				.antMatchers( HttpMethod.PUT, "/rest/users/register/" ).permitAll()
 //				.anyRequest().authenticated()
 				.antMatchers( "/rest/" ).authenticated()
