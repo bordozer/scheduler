@@ -56,15 +56,14 @@ public class RestTestHelper {
 
     public static Response login(final String login, final String password, final int expectedStatusCode) {
         RestAssured.defaultParser = Parser.JSON;
-        int scOk = expectedStatusCode;
         return given()
                 .log()
                 .ifValidationFails()
                 .contentType(ContentType.JSON)
                 .when()
-                .response().log().ifStatusCodeMatches(not(equalTo(scOk)))
-                .then().statusCode(scOk)
-                .post(String.format("%s?login=%spassword=%s", buildRoute(AuthRoutes.LOGIN), login, password));
+                .response().log().ifStatusCodeMatches(not(equalTo(expectedStatusCode)))
+                .then().statusCode(expectedStatusCode)
+                .post(String.format("%s?login=%s&password=%s", buildRoute(AuthRoutes.LOGIN), login, password));
     }
 
     public static Response logout() {
