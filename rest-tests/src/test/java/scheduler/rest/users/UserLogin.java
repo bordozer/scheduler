@@ -8,8 +8,13 @@ import scheduler.rest.common.DataGenerator;
 import scheduler.rest.common.RestTestHelper;
 import scheduler.rest.common.UserData;
 import scheduler.rest.common.routes.SchedulerTaskRoutes;
+import scheduler.rest.dto.RegistrationResponse;
 
+import java.util.List;
+
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class UserLogin {
 
@@ -52,6 +57,9 @@ public class UserLogin {
 
         // non public resources should be available now
         Response taskListResponse3 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_OK);
+        List<RegistrationResponse> schedulerTasks = taskListResponse3.as(List.class);
+        // 've just registered user does not have tasks yet
+        assertThat(schedulerTasks.size(), is(0));
 
         // log out
         Response logoutResponse = RestTestHelper.logout();
