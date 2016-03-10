@@ -38,18 +38,13 @@ define( function ( require ) {
 		},
 
 		__authenticate: function( options ) {
-
-			$.ajax( {
+			var url = '/authenticate?login=' + options[0].value + '&password=' + options[1].value;
+            $.ajax( {
 				method: 'POST',
-				url: '/authenticate',
-				data: options,
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-					"X-Login-Ajax-call": 'true'
-				},
+				url: url,
 				success: function ( response ) {
 
-					if ( response === 'ok' ) {
+					if ( response.responseCode === 200 && response.details.auth_result === 'Logged in successfully' ) {
 						window.location.replace( '/scheduler/' );
 						return;
 					}
