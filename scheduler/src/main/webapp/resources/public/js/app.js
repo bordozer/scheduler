@@ -47,6 +47,7 @@ define( function ( require ) {
 				error: function() {
 				}
 			} );
+			console.log(data); // TODO
 		}
 	} );
 

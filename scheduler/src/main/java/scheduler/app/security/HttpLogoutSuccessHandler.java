@@ -2,6 +2,7 @@ package scheduler.app.security;
 
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -29,16 +30,23 @@ public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
 
-        org.springframework.security.core.userdetails.User principal = (User) authentication.getPrincipal();
-        scheduler.app.models.User user = userService.findByLogin(principal.getUsername());
-
         Map<String, String> map = Maps.newLinkedHashMap();
         map.put(AuthResponse.AUTH_RESULT, "Logged out");
-        map.put(AuthResponse.USER_NAME, user.getUsername());
+        map.put(AuthResponse.USER_NAME, getUserName(authentication));
 
 
         PrintWriter writer = response.getWriter();
         writer.write(new Gson().toJson(new AuthResponse(HttpStatus.SC_OK, map)));
         writer.flush();
+    }
+
+    private String getUserName(final Authentication authentication) {
+        if (authentication == null) {
+            return StringUtils.EMPTY;
+        }
+
+        User principal = (User) authentication.getPrincipal();
+        scheduler.app.models.User user = userService.findByLogin(principal.getUsername());
+        return user.getUsername();
     }
 }
