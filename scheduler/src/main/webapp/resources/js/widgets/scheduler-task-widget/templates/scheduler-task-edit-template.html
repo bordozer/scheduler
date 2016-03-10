@@ -1,11 +1,40 @@
-<div class="row">
-
-	<div class="col-xs-12 col-lg-6">
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
 		<%= t.taskName %>
 	</div>
-
 	<div class="col-xs-12 col-lg-6">
 		<input type="text" class="form-control" value="<%= model.taskName %>">
 	</div>
+</div>
 
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.taskType %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<select class="form-control">
+			<option value="ONE_TIME">ONE_TIME</option>
+			<option value="DAILY">DAILY</option>
+			<option value="WEEKLY">WEEKLY</option>
+			<option value="MONTHLY">MONTHLY</option>
+		</select>
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.taskDescription %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<TEXTAREA class="form-control" cols="24"><%= model.taskDescription %></TEXTAREA>
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.taskParametersJSON %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<TEXTAREA class="form-control" cols="24"><%= model.taskParametersJSON %></TEXTAREA>
+	</div>
 </div>
