@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "remoteJobId")
 public class RemoteJobDto {
-    private Long id;
+    private Long remoteJobId;
     private String requestUrl;
     private RequestMethod requestMethod;
     private String authString;
@@ -16,6 +16,6 @@ public class RemoteJobDto {
 
     @Override
     public String toString() {
-        return String.format("#%d: %s (%s)", id, requestUrl, requestMethod);
+        return String.format("#%d: %s (%s)", remoteJobId, requestUrl, requestMethod);
     }
 }

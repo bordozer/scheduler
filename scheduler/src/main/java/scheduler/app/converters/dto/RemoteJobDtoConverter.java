@@ -13,7 +13,7 @@ public class RemoteJobDtoConverter extends AbstractGenericDtoConverter<RemoteJob
 	@Override
 	protected RemoteJob doConvertToModel(final User user, final RemoteJobDto dto) {
 		final RemoteJob model = new RemoteJob();
-		model.setId(dto.getId());
+		model.setId(dto.getRemoteJobId());
 		model.setRequestUrl(dto.getRequestUrl());
 		model.setRequestMethod(dto.getRequestMethod());
 		model.setAuthString(dto.getAuthString());
@@ -25,7 +25,7 @@ public class RemoteJobDtoConverter extends AbstractGenericDtoConverter<RemoteJob
 	protected Function<RemoteJob, RemoteJobDto> taskMapper() {
 		return model -> {
 			final RemoteJobDto dto = new RemoteJobDto();
-			dto.setId(model.getId());
+			dto.setRemoteJobId(model.getId());
 			dto.setRequestUrl(model.getRequestUrl());
 			dto.setRequestMethod(model.getRequestMethod());
 			dto.setAuthString(model.getAuthString());

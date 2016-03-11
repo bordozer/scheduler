@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import scheduler.app.converters.dto.SchedulerTaskDtoConverter;
 import scheduler.app.dto.IdDto;
 import scheduler.app.dto.SchedulerTaskDto;
-import scheduler.app.models.User;
 import scheduler.app.services.tasks.SchedulerTaskService;
 import scheduler.app.services.users.UserService;
 
@@ -31,23 +30,23 @@ public class TaskListRestController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public List<SchedulerTaskDto> tasks(final Principal principal) {
-		return schedulerTaskDtoConverter.toDtos(schedulerTaskService.loadAll(getCurrentUser(principal).getId()));
+		return schedulerTaskDtoConverter.toDtos(schedulerTaskService.loadAll(currentUserId(principal)));
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/ids/")
 	public List<IdDto> taskIds(final Principal principal) {
-		return schedulerTaskService.loadAll(getCurrentUser(principal).getId())
+		return schedulerTaskService.loadAll(currentUserId(principal))
 				.stream()
 				.map(schedulerTaskEntry -> new IdDto(schedulerTaskEntry.getId()))
 				.collect(Collectors.toList());
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{taskId}/")
-	public SchedulerTaskDto taskEntry(final @PathVariable Long taskId) {
-		return schedulerTaskDtoConverter.toDto(schedulerTaskService.load(taskId));
+	public SchedulerTaskDto taskEntry(final @PathVariable Long taskId, final Principal principal) {
+		return schedulerTaskDtoConverter.toDto(schedulerTaskService.load(currentUserId(principal), taskId));
 	}
 
-	private User getCurrentUser(final Principal principal) {
-		return userService.findByLogin(principal.getName());
+	private Long currentUserId(final Principal principal) {
+		return userService.findByLogin(principal.getName()).getId();
 	}
 }

@@ -52,7 +52,7 @@ public class RemoteJobEditDtoConverterTest {
     }
 
     private void checkDto(final RemoteJobEditDto dto) {
-        assertEquals(TestData.REMOTE_JOB_ID, dto.getId());
+        assertEquals(TestData.REMOTE_JOB_ID, dto.getRemoteJobId());
         assertEquals(TestData.REMOTE_JOB_REQUEST_URL, dto.getRequestUrl());
         assertEquals(TestData.REMOTE_JOB_REQUEST_METHOD, dto.getRequestMethod());
         assertEquals(TestData.REMOTE_JOB_AUTH_STRING, dto.getAuthString());

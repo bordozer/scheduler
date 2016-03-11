@@ -10,7 +10,7 @@ import scheduler.app.dto.Dto;
 @Setter
 @EqualsAndHashCode
 public class RemoteJobEditDto implements Dto {
-	private Long id;
+	private Long remoteJobId;
 	private String requestUrl;
 	private RequestMethod requestMethod;
 	private String authString;
@@ -18,6 +18,6 @@ public class RemoteJobEditDto implements Dto {
 
 	@Override
 	public String toString() {
-		return String.format("#%d: %s (%s)", id, requestUrl, requestMethod);
+		return String.format("#%d: %s (%s)", remoteJobId, requestUrl, requestMethod);
 	}
 }

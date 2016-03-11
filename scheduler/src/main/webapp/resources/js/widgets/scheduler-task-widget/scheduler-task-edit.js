@@ -43,7 +43,27 @@ define( function ( require ) {
 		},
 
 		save: function () {
-			console.log( 'save' ); // TODO
+			this._bind();
+			//console.log( 'save' ); // TODO
+		},
+
+		_bind: function() {
+			var model = this.model.toJSON();
+			console.log('before save', model);
+			this.model.set({
+				taskName: this.$("input[name='taskName']").val(),
+				taskType: this.$("input[name='schedulerTaskType']:checked").val(),
+				taskDescription: this.$("input[name='taskDescription']").text(),
+				taskParametersJSON: this.$("input[name='taskParametersJSON']").text(),
+				remoteJob: {
+					remoteJobId: model.remoteJob.remoteJobId,
+					requestUrl: '',
+					requestMethod: '',
+					authString: '',
+					postJson: ''
+				}
+			});
+			console.log('after save', this.model.toJSON());
 		}
 	} );
 } );

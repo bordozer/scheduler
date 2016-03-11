@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
 import scheduler.app.entities.RemoteJobEntity;
+import scheduler.app.exceptions.EntityNotFoundException;
 import scheduler.app.repositories.SchedulerTaskRepository;
 import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.models.SchedulerTask;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 
+	private static final String USER_ID_MUST_NOT_BE_NULL = "User ID must not be null";
+	private static final String SCHEDULER_TASK_ID_MUST_NOT_BE_NULL = "Scheduler task ID must not be null";
 	private static final String MODEL_MUST_NOT_BE_NULL = "Model must not be null";
 	private static final String REMOTE_JOB_MUST_NOT_BE_NULL = "Remote job must not be null";
 
@@ -25,22 +28,23 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	private SchedulerTaskEntityConverter schedulerTaskEntityConverter;
 
 	@Override
-	public List<SchedulerTask> loadAll() {
-		return toModel(schedulerTaskRepository.findAll());
-	}
-
-	@Override
 	public List<SchedulerTask> loadAll(final Long userId) {
+		Assert.notNull(userId, USER_ID_MUST_NOT_BE_NULL);
+
 		return toModel(schedulerTaskRepository.findAllByUserId(userId));
 	}
 
 	@Override
-	public SchedulerTask load(final Long taskId) {
-		return schedulerTaskEntityConverter.toModel(schedulerTaskRepository.findOne(taskId));
+	public SchedulerTask load(final Long userId, final Long schedulerTaskId) {
+		Assert.notNull(userId, USER_ID_MUST_NOT_BE_NULL);
+		Assert.notNull(schedulerTaskId, SCHEDULER_TASK_ID_MUST_NOT_BE_NULL);
+
+		return schedulerTaskEntityConverter.toModel(schedulerTaskRepository.findOne(schedulerTaskId));
 	}
 
 	@Override
-	public SchedulerTask create(final SchedulerTask schedulerTask) {
+	public SchedulerTask create(final Long userId, final SchedulerTask schedulerTask) {
+		Assert.notNull(userId, USER_ID_MUST_NOT_BE_NULL);
 		Assert.notNull(schedulerTask, MODEL_MUST_NOT_BE_NULL);
 		Assert.notNull(schedulerTask.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 
@@ -53,15 +57,23 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 
 	@Override
-	public SchedulerTask save(final SchedulerTask schedulerTask) {
+	public SchedulerTask modify(final Long userId, final SchedulerTask schedulerTask) {
+		Assert.notNull(userId, USER_ID_MUST_NOT_BE_NULL);
 		Assert.notNull(schedulerTask, MODEL_MUST_NOT_BE_NULL);
 		Assert.notNull(schedulerTask.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
-		return populateAndSave(schedulerTaskRepository.findById(schedulerTask.getId()), schedulerTask);
+
+		SchedulerTaskEntity schedulerTaskEntity = schedulerTaskRepository.findByUserIdAndId(userId, schedulerTask.getId());
+		if (schedulerTaskEntity == null) {
+			throw new EntityNotFoundException(String.format("Scheduler Task #%d cannot be modified: not found (user %d)",
+					userId, schedulerTask.getId()));
+		}
+
+		return populateAndSave(schedulerTaskEntity, schedulerTask);
 	}
 
 	@Override
-	public void delete(final Long taskId) {
-		schedulerTaskRepository.delete(taskId);
+	public List<SchedulerTaskEntity> delete(final Long userId, final Long taskId) {
+		return schedulerTaskRepository.deleteAllByUserIdAndId(userId, taskId);
 	}
 
 	private List<SchedulerTask> toModel(final List<SchedulerTaskEntity> allByUserId) {

@@ -4,10 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import scheduler.app.converters.entity.SchedulerTaskEntityConverter;
-import scheduler.app.converters.entity.SchedulerTaskEntityConverterImpl;
 import scheduler.app.entities.SchedulerTaskEntity;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.models.SchedulerTask;
@@ -45,10 +43,10 @@ public class SchedulerTaskServiceImplTest {
         SchedulerTaskEntity schedulerTaskEntity = TestDataEntities.schedulerTask();
 
         when(userRepository.findById(user.getId())).thenReturn(userEntity);
-        when(schedulerTaskRepository.findById(schedulerTaskEntity.getId())).thenReturn(schedulerTaskEntity);
+        when(schedulerTaskRepository.findByUserIdAndId(userEntity.getId(), schedulerTaskEntity.getId())).thenReturn(schedulerTaskEntity);
         when(schedulerTaskRepository.saveAndFlush(schedulerTaskEntity)).thenReturn(schedulerTaskEntity);
 
-        sut.save(schedulerTask);
+        sut.modify(user.getId(), schedulerTask);
 
         verify(schedulerTaskRepository, times(1)).saveAndFlush(schedulerTaskEntity);
     }

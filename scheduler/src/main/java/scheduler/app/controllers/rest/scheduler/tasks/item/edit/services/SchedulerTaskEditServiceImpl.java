@@ -28,7 +28,7 @@ public class SchedulerTaskEditServiceImpl implements SchedulerTaskEditService {
 		Assert.notNull(editDTO, ASSERT_DTO_MUST_NOT_BE_NULL);
 
 		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(user, editDTO);
-		final SchedulerTask saved = schedulerTaskService.create(schedulerTask);
+		final SchedulerTask saved = schedulerTaskService.create(user.getId(), schedulerTask);
 		return schedulerTaskEditDtoConverter.toDto(saved);
 	}
 
@@ -38,7 +38,7 @@ public class SchedulerTaskEditServiceImpl implements SchedulerTaskEditService {
 		Assert.notNull(editDTO, ASSERT_DTO_MUST_NOT_BE_NULL);
 
 		SchedulerTask schedulerTask = schedulerTaskEditDtoConverter.toModel(user, editDTO);
-		SchedulerTask saved = schedulerTaskService.save(schedulerTask);
+		SchedulerTask saved = schedulerTaskService.modify(user.getId(), schedulerTask);
 		return schedulerTaskEditDtoConverter.toDto(saved);
 	}
 
@@ -50,11 +50,11 @@ public class SchedulerTaskEditServiceImpl implements SchedulerTaskEditService {
 			return;
 		}
 
-		final SchedulerTask schedulerTask = schedulerTaskService.load(schedulerTaskId);
+		final SchedulerTask schedulerTask = schedulerTaskService.load(user.getId(), schedulerTaskId);
 		if (!schedulerTask.getUser().equals(user)) {
 			return;
 		}
 
-		schedulerTaskService.delete(schedulerTaskId);
+		schedulerTaskService.delete(user.getId(), schedulerTaskId);
 	}
 }

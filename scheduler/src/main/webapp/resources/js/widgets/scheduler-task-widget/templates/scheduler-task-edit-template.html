@@ -3,7 +3,7 @@
 		<%= t.taskName %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<input type="text" class="form-control" value="<%= model.taskName %>">
+		<input type="text" name="taskName" class="form-control" value="<%= model.taskName %>">
 	</div>
 </div>
 
@@ -12,12 +12,10 @@
 		<%= t.taskType %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<select class="form-control">
-			<option value="ONE_TIME">ONE_TIME</option>
-			<option value="DAILY">DAILY</option>
-			<option value="WEEKLY">WEEKLY</option>
-			<option value="MONTHLY">MONTHLY</option>
-		</select>
+		<input type="radio" name="schedulerTaskType" id="ONE_TIME"> One time<br />
+		<input type="radio" name="schedulerTaskType" id="DAILY" checked> Daily<br />
+		<input type="radio" name="schedulerTaskType" id="WEEKLY"> Weekly<br />
+		<input type="radio" name="schedulerTaskType" id="MONTHLY"> Monthly
 	</div>
 </div>
 
@@ -26,7 +24,7 @@
 		<%= t.taskDescription %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<TEXTAREA class="form-control" cols="24"><%= model.taskDescription %></TEXTAREA>
+		<textarea name="taskDescription" class="form-control" cols="24"><%= model.taskDescription %></textarea>
 	</div>
 </div>
 
@@ -35,6 +33,6 @@
 		<%= t.taskParametersJSON %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<TEXTAREA class="form-control" cols="24"><%= model.taskParametersJSON %></TEXTAREA>
+		<textarea name="taskParametersJSON" class="form-control" cols="24"><%= model.taskParametersJSON %></textarea>
 	</div>
 </div>
