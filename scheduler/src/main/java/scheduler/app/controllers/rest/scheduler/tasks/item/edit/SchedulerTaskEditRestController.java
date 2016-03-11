@@ -29,25 +29,29 @@ public class SchedulerTaskEditRestController {
 	private SchedulerTaskEditDtoConverter schedulerTaskEditDtoConverter;
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{schedulerTaskId}/")
-	public SchedulerTaskEditDto getForEdit(final @PathVariable Long schedulerTaskId, final Principal principal) {
+	public SchedulerTaskEditDto getForEdit(final @PathVariable Long schedulerTaskId,
+										   final Principal principal) {
 		User currentUser = getCurrentUser(principal.getName());
 		SchedulerTask schedulerTask = schedulerTaskService.load(currentUser.getId(), schedulerTaskId);
 		return schedulerTaskEditDtoConverter.toDto(schedulerTask);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/0/")
-	public SchedulerTaskEditDto create(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {
+	public SchedulerTaskEditDto create(final @RequestBody SchedulerTaskEditDto editDTO,
+									   final Principal principal) {
 		return schedulerTaskEditService.create(getCurrentUser(principal.getName()), editDTO);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/{taskId}/")
-	public SchedulerTaskEditDto modify(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {
+	@RequestMapping(method = RequestMethod.POST, value = "/{schedulerTaskId}/")
+	public SchedulerTaskEditDto modify(final @PathVariable Long schedulerTaskId,
+									   final @RequestBody SchedulerTaskEditDto editDTO,
+									   final Principal principal) {
 		return schedulerTaskEditService.modify(getCurrentUser(principal.getName()), editDTO);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/{taskId}/")
-	public void delete(final @PathVariable Long taskId, final Principal principal) {
-		schedulerTaskEditService.delete(getCurrentUser(principal.getName()), taskId);
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{schedulerTaskId}/")
+	public void delete(final @PathVariable Long schedulerTaskId, final Principal principal) {
+		schedulerTaskEditService.delete(getCurrentUser(principal.getName()), schedulerTaskId);
 	}
 
 	private User getCurrentUser(final String login) {

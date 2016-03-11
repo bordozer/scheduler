@@ -23,7 +23,7 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		events: {
-			'click .js-request-method': '__render'
+			'change .js-request-method': '__render'
 		},
 
 		initialize: function ( options ) {
