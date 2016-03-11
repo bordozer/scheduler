@@ -29,7 +29,7 @@ public class SchedulerTaskEditRestController {
 	private SchedulerTaskEditDtoConverter schedulerTaskEditDtoConverter;
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{schedulerTaskId}/")
-	public SchedulerTaskEditDto get(final @PathVariable Long schedulerTaskId, final Principal principal) {
+	public SchedulerTaskEditDto getForEdit(final @PathVariable Long schedulerTaskId, final Principal principal) {
 		User currentUser = getCurrentUser(principal.getName());
 		SchedulerTask schedulerTask = schedulerTaskService.load(currentUser.getId(), schedulerTaskId);
 		return schedulerTaskEditDtoConverter.toDto(schedulerTask);
@@ -41,7 +41,7 @@ public class SchedulerTaskEditRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{taskId}/")
-	public SchedulerTaskEditDto edit(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {
+	public SchedulerTaskEditDto modify(final @RequestBody SchedulerTaskEditDto editDTO, final Principal principal) {
 		return schedulerTaskEditService.modify(getCurrentUser(principal.getName()), editDTO);
 	}
 
