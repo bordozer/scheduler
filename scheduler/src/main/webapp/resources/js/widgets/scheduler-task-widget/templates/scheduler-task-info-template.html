@@ -63,11 +63,13 @@
 	</div>
 </div>
 
-<div class="row small">
-	<div class="col-xs-12 col-lg-6 text-muted">
-		<%= t.postJson %>
+<% if(model.remoteJob.requestMethod != 'GET') { %>
+	<div class="row small">
+		<div class="col-xs-12 col-lg-6 text-muted">
+			<%= t.postJson %>
+		</div>
+		<div class="col-xs-12 col-lg-6">
+			<%= model.remoteJob.postJson %>
+		</div>
 	</div>
-	<div class="col-xs-12 col-lg-6">
-		<%= model.remoteJob.postJson %>
-	</div>
-</div>
+<% } %>

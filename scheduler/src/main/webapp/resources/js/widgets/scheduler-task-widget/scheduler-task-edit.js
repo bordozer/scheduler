@@ -22,23 +22,16 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {},
+		events: {
+			'click .js-request-method': '__render'
+		},
 
 		initialize: function ( options ) {
-			this.model.on( 'sync', this._renderTaskEdit, this );
+			this.model.on( 'sync', this.__renderTaskEdit, this );
 		},
 
 		render: function () {
 			this.model.fetch( { cache: false } );
-		},
-
-		_renderTaskEdit: function () {
-			this.$el.html( template( {
-				model: this.model.toJSON()
-				, t: t
-			} ) );
-
-			this.trigger( 'inner-view-rendered' );
 		},
 
 		menuItems: function () {
@@ -47,15 +40,28 @@ define( function ( require ) {
 
 		save: function () {
 			this._bind();
-			//console.log( 'save' ); // TODO
+			this.model.save();
+		},
+
+		__renderTaskEdit: function () {
+			this.$el.html( template( {
+				model: this.model.toJSON()
+				, t: t
+			} ) );
+
+			this.trigger( 'inner-view-rendered' );
+		},
+
+		__render: function() {
+			this._bind();
+			this.__renderTaskEdit();
 		},
 
 		_bind: function() {
 			var model = this.model.toJSON();
-			console.log('before save', model);
 			this.model.set({
 				taskName: this.$("input[name='taskName']").val(),
-				taskType: this.$("input[name='schedulerTaskType']:checked").val(),
+				taskType: this.$("input[name='taskType']:checked").val(),
 				taskDescription: this.$("textarea[name='taskDescription']").val(),
 				taskParametersJSON: this.$("textarea[name='taskParametersJSON']").val(),
 				remoteJob: {
@@ -63,11 +69,10 @@ define( function ( require ) {
 					requestUrl: this.$("input[name='requestUrl']").val(),
 					requestMethod: this.$("input[name='requestMethod']:checked").val(),
 					authString: this.$("input[name='authString']").val(),
-					postJson: this.$("textarea[name='postJson']").val()
+					postJson: this.$("textarea[name='postJson']").val() || model.remoteJob.postJson
 				}
 			});
-			this.model.save();
-			//console.log('after save', this.model.toJSON());
+			console.log(this.model.toJSON());
 		}
 	} );
 } );

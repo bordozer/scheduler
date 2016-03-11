@@ -12,10 +12,10 @@
 		<%= t.taskType %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<input type="radio" name="schedulerTaskType" id="ONE_TIME" <%= model.schedulerTaskType == 'ONE_TIME' ? 'checked' : '' %> > One time<br />
-		<input type="radio" name="schedulerTaskType" id="DAILY" <%= model.schedulerTaskType == 'DAILY' ? 'checked' : '' %> > Daily<br />
-		<input type="radio" name="schedulerTaskType" id="WEEKLY" <%= model.schedulerTaskType == 'WEEKLY' ? 'checked' : '' %> > Weekly<br />
-		<input type="radio" name="schedulerTaskType" id="MONTHLY" <%= model.schedulerTaskType == 'MONTHLY' ? 'checked' : '' %> > Monthly
+		<input type="radio" name="taskType" id="ONE_TIME" value="ONE_TIME" <%= model.taskType == 'ONE_TIME' ? 'checked' : '' %> > One time<br />
+		<input type="radio" name="taskType" id="DAILY" value="DAILY" <%= model.taskType == 'DAILY' ? 'checked' : '' %> > Daily<br />
+		<input type="radio" name="taskType" id="WEEKLY" value="WEEKLY" <%= model.taskType == 'WEEKLY' ? 'checked' : '' %> > Weekly<br />
+		<input type="radio" name="taskType" id="MONTHLY" value="MONTHLY" <%= model.taskType == 'MONTHLY' ? 'checked' : '' %> > Monthly
 	</div>
 </div>
 
@@ -53,10 +53,10 @@
 		<%= t.requestMethod %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<input type="radio" name="requestMethod" id="GET" <%= model.remoteJob.requestMethod == 'GET' ? 'checked' : '' %> > GET<br />
-		<input type="radio" name="requestMethod" id="POST" <%= model.remoteJob.requestMethod == 'POST' ? 'checked' : '' %> > POST<br />
-		<input type="radio" name="requestMethod" id="PUT" <%= model.remoteJob.requestMethod == 'PUT' ? 'checked' : '' %> > PUT<br />
-		<input type="radio" name="requestMethod" id="DELETE" <%= model.remoteJob.requestMethod == 'DELETE' ? 'checked' : '' %> > DELETE
+		<input type="radio" class="js-request-method" name="requestMethod" id="GET" value="GET" <%= model.remoteJob.requestMethod == 'GET' ? 'checked' : '' %> > GET<br />
+		<input type="radio" class="js-request-method" name="requestMethod" id="POST" value="POST" <%= model.remoteJob.requestMethod == 'POST' ? 'checked' : '' %> > POST<br />
+		<input type="radio" class="js-request-method" name="requestMethod" id="PUT" value="PUT" <%= model.remoteJob.requestMethod == 'PUT' ? 'checked' : '' %> > PUT<br />
+		<input type="radio" class="js-request-method" name="requestMethod" id="DELETE" value="DELETE" <%= model.remoteJob.requestMethod == 'DELETE' ? 'checked' : '' %> > DELETE
 	</div>
 </div>
 
@@ -69,11 +69,13 @@
 	</div>
 </div>
 
-<div class="row small">
-	<div class="col-xs-12 col-lg-6 text-muted">
-		<%= t.postJson %>
+<% if(model.remoteJob.requestMethod != 'GET') { %>
+	<div class="row small">
+		<div class="col-xs-12 col-lg-6 text-muted">
+			<%= t.postJson %>
+		</div>
+		<div class="col-xs-12 col-lg-6">
+			<textarea name="postJson" class="form-control" cols="24"><%= model.remoteJob.postJson %></textarea>
+		</div>
 	</div>
-	<div class="col-xs-12 col-lg-6">
-		<textarea name="postJson" class="form-control" cols="24"><%= model.remoteJob.postJson %></textarea>
-	</div>
-</div>
+<% } %>
