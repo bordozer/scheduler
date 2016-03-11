@@ -38,7 +38,9 @@ define( function ( require ) {
 		},
 
 		__authenticate: function( options ) {
-			var url = '/authenticate?login=' + options[0].value + '&password=' + options[1].value;
+			var url = '/authenticate?login=' + options[0].value
+				+ '&password=' + options[1].value
+				+ "&_spring_security_remember_me=" + options[2].value;
             $.ajax( {
 				method: 'POST',
 				url: url,

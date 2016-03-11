@@ -1,6 +1,6 @@
 package scheduler.app.utils;
 
-import org.springframework.web.bind.annotation.RequestMethod;
+import scheduler.app.models.RequestMethod;
 import scheduler.app.models.SchedulerTaskType;
 import scheduler.app.models.UserRole;
 

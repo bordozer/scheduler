@@ -3,8 +3,8 @@ package scheduler.app.controllers.rest.scheduler.tasks.item.edit.dto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.RequestMethod;
 import scheduler.app.dto.Dto;
+import scheduler.app.models.RequestMethod;
 
 @Getter
 @Setter

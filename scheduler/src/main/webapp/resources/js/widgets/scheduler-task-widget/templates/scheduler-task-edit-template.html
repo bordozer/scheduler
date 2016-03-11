@@ -12,10 +12,10 @@
 		<%= t.taskType %>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<input type="radio" name="schedulerTaskType" id="ONE_TIME"> One time<br />
-		<input type="radio" name="schedulerTaskType" id="DAILY" checked> Daily<br />
-		<input type="radio" name="schedulerTaskType" id="WEEKLY"> Weekly<br />
-		<input type="radio" name="schedulerTaskType" id="MONTHLY"> Monthly
+		<input type="radio" name="schedulerTaskType" id="ONE_TIME" <%= model.schedulerTaskType == 'ONE_TIME' ? 'checked' : '' %> > One time<br />
+		<input type="radio" name="schedulerTaskType" id="DAILY" <%= model.schedulerTaskType == 'DAILY' ? 'checked' : '' %> > Daily<br />
+		<input type="radio" name="schedulerTaskType" id="WEEKLY" <%= model.schedulerTaskType == 'WEEKLY' ? 'checked' : '' %> > Weekly<br />
+		<input type="radio" name="schedulerTaskType" id="MONTHLY" <%= model.schedulerTaskType == 'MONTHLY' ? 'checked' : '' %> > Monthly
 	</div>
 </div>
 
@@ -34,5 +34,46 @@
 	</div>
 	<div class="col-xs-12 col-lg-6">
 		<textarea name="taskParametersJSON" class="form-control" cols="24"><%= model.taskParametersJSON %></textarea>
+	</div>
+</div>
+
+<hr />
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.requestUrl %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<input name="requestUrl" class="form-control" value="<%= model.remoteJob.requestUrl %>">
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.requestMethod %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<input type="radio" name="requestMethod" id="GET" <%= model.remoteJob.requestMethod == 'GET' ? 'checked' : '' %> > GET<br />
+		<input type="radio" name="requestMethod" id="POST" <%= model.remoteJob.requestMethod == 'POST' ? 'checked' : '' %> > POST<br />
+		<input type="radio" name="requestMethod" id="PUT" <%= model.remoteJob.requestMethod == 'PUT' ? 'checked' : '' %> > PUT<br />
+		<input type="radio" name="requestMethod" id="DELETE" <%= model.remoteJob.requestMethod == 'DELETE' ? 'checked' : '' %> > DELETE
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.authString %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<input name="authString" class="form-control" value="<%= model.remoteJob.authString %>">
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.postJson %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<textarea name="postJson" class="form-control" cols="24"><%= model.remoteJob.postJson %></textarea>
 	</div>
 </div>

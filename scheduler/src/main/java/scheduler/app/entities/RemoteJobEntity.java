@@ -3,7 +3,7 @@ package scheduler.app.entities;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.web.bind.annotation.RequestMethod;
+import scheduler.app.models.RequestMethod;
 
 import javax.persistence.*;
 

@@ -2,7 +2,7 @@ package scheduler.app.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.RequestMethod;
+import scheduler.app.models.RequestMethod;
 
 @Getter
 @Setter

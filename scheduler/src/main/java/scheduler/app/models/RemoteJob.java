@@ -3,7 +3,6 @@ package scheduler.app.models;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Getter
 @Setter

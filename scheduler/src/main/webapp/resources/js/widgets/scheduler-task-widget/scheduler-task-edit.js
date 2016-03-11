@@ -14,7 +14,10 @@ define( function ( require ) {
 		taskType: "Task type",
 		taskDescription: "Description",
 		taskParametersJSON: "Task parameters JSON",
-		taskUrl: "Url"
+		requestUrl: "Request URL",
+		requestMethod: "Request method",
+		authString: "Auth string",
+		postJson: "Json post to"
 	} );
 
 	return Backbone.View.extend( {
@@ -53,17 +56,18 @@ define( function ( require ) {
 			this.model.set({
 				taskName: this.$("input[name='taskName']").val(),
 				taskType: this.$("input[name='schedulerTaskType']:checked").val(),
-				taskDescription: this.$("input[name='taskDescription']").text(),
-				taskParametersJSON: this.$("input[name='taskParametersJSON']").text(),
+				taskDescription: this.$("textarea[name='taskDescription']").val(),
+				taskParametersJSON: this.$("textarea[name='taskParametersJSON']").val(),
 				remoteJob: {
 					remoteJobId: model.remoteJob.remoteJobId,
-					requestUrl: '',
-					requestMethod: '',
-					authString: '',
-					postJson: ''
+					requestUrl: this.$("input[name='requestUrl']").val(),
+					requestMethod: this.$("input[name='requestMethod']:checked").val(),
+					authString: this.$("input[name='authString']").val(),
+					postJson: this.$("textarea[name='postJson']").val()
 				}
 			});
-			console.log('after save', this.model.toJSON());
+			this.model.save();
+			//console.log('after save', this.model.toJSON());
 		}
 	} );
 } );

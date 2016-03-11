@@ -33,3 +33,41 @@
 		<%= model.taskParametersJSON %>
 	</div>
 </div>
+
+<hr />
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.requestUrl %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<%= model.remoteJob.requestUrl %>
+	</div>
+</div>
+
+<div class="row small">
+	<div class="requestMethod col-lg-6 text-muted">
+		<%= t.requestUrl %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<%= model.remoteJob.requestMethod %>
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.authString %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<%= model.remoteJob.authString %>
+	</div>
+</div>
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
+		<%= t.postJson %>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<%= model.remoteJob.postJson %>
+	</div>
+</div>

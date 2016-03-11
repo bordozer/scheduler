@@ -15,7 +15,10 @@ define( function ( require ) {
 		taskName: "Task name",
 		taskDescription: "Description",
 		taskParametersJSON: "Task parameters JSON",
-		taskUrl: "Url"
+		requestUrl: "Request URL",
+		requestMethod: "Request method",
+		authString: "Auth string",
+		postJson: "Json post to"
 	} );
 
 	return Backbone.View.extend( {
