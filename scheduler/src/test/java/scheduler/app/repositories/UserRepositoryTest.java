@@ -22,16 +22,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AbstractRepositoryTest.Config.class, HibernateTestConfig.class})
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-//        DirtiesContextTestExecutionListener.class,
-//        TransactionalTestExecutionListener.class,
-        TransactionDbUnitTestExecutionListener.class
-})
 @DatabaseSetup(value = UserRepositoryTest.TEST_DATA_SET, type = DatabaseOperation.INSERT)
 @DatabaseTearDown(value = UserRepositoryTest.TEST_DATA_SET, type = DatabaseOperation.DELETE)
-@DbUnitConfiguration(databaseConnection = "h2TestConnection")
 public class UserRepositoryTest extends AbstractRepositoryTest {
 
     public static final String TEST_DATA_SET = "classpath:/users/users.xml";
