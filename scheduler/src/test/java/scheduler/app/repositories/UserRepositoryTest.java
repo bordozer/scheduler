@@ -55,7 +55,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     @Commit
-    public void shouldCreateNewUser() {
+    public void shouldCreateNewUserWithoutUserSecureDetails() {
         String userName = "Newly created user";
 
         UserEntity constructed = new UserEntity();
