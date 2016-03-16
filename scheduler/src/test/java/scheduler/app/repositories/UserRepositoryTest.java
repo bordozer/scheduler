@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @DatabaseSetup(value = UserRepositoryTest.TEST_DATA_SET, type = DatabaseOperation.INSERT)
@@ -44,13 +45,33 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-//    @Rollback(true)
     @Commit
     public void shouldFindUser3() {
         UserEntity userEntity3 = selectAndCheckUser(USER_DURANT, UserRole.USER);
         UserSecureDetailsEntity secureDetails3 = userEntity3.getSecureDetails();
         assertThat(secureDetails3.getLogin(), is("durant"));
         assertThat(secureDetails3.getPassword(), is("$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC"));
+    }
+
+    @Test
+    @Commit
+    public void shouldCreateNewUser() {
+        String userName = "Newly created user";
+
+        UserEntity constructed = new UserEntity();
+        constructed.setUsername(userName);
+
+        UserEntity saved = sut.saveAndFlush(constructed);
+        assertThat(constructed.getId(), is(notNullValue()));
+        assertThat(saved.getId(), is(constructed.getId()));
+        assertThat(saved, is(constructed));
+
+        UserEntity loaded = sut.findById(saved.getId());
+        assertThat(constructed.getId(), is(loaded.getId()));
+        assertThat(loaded.getUsername(), is(userName));
+
+        UserSecureDetailsEntity secureDetails = loaded.getSecureDetails();
+        assertThat(secureDetails, is(nullValue()));
     }
 
     private UserEntity selectAndCheckUser(final TestUser testUser, final UserRole userRole) {
