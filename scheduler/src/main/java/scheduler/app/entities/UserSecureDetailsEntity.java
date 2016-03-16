@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "T_USER_SECURITY")
-@org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
+//@org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
 public class UserSecureDetailsEntity implements DBEntity {

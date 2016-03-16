@@ -1,0 +1,42 @@
+<dataset>
+
+    <T_USER
+            C_USER_ID="1"
+            C_USER_NAME="Steph Curry"
+    />
+
+    <T_USER
+            C_USER_ID="2"
+            C_USER_NAME="Serge Ibaka"
+    />
+
+    <T_USER
+            C_USER_ID="3"
+            C_USER_NAME="Kevin Durant"
+    />
+
+    <T_USER_SECURITY
+            T_USER_SECURITY_ID="11"
+            C_USER_ID="1"
+            C_USER_LOGIN="curry"
+            C_USER_PASSWORD="$2a$10$oNXFlhGI0LekTBIedkILTeBYcDCT11Mb4NmIO.p5WH.6isYLLs9uC"
+            C_USER_ROLE="ADMIN"
+    />
+
+    <T_USER_SECURITY
+            T_USER_SECURITY_ID="12"
+            C_USER_ID="2"
+            C_USER_LOGIN="ibaka"
+            C_USER_PASSWORD="$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC"
+            C_USER_ROLE="USER"
+    />
+
+    <T_USER_SECURITY
+            T_USER_SECURITY_ID="13"
+            C_USER_ID="3"
+            C_USER_LOGIN="durant"
+            C_USER_PASSWORD="$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC"
+            C_USER_ROLE="USER"
+    />
+
+</dataset>

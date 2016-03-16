@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "T_REMOTE_JOB")
-@org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
+//@org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
 public class RemoteJobEntity implements DBEntity {

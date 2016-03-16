@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "T_SCH_TASK")
-@org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
+//@org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
 public class SchedulerTaskEntity implements DBEntity {
