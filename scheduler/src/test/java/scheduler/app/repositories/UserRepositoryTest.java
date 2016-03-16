@@ -121,6 +121,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
         UserEntity loadedUser = sut.findById(savedUser.getId());
         assertThat(constructedUser.getId(), is(loadedUser.getId()));
         assertThat(loadedUser.getUsername(), is(userName));
+        assertThat(loadedUser, not(is(constructedUser)));
+        assertThat(loadedUser, not(is(savedUser)));
 
         UserSecureDetailsEntity secureDetails = loadedUser.getSecureDetails();
         assertThat(secureDetails, is(notNullValue()));
