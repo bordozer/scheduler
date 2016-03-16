@@ -81,14 +81,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     @Test(expected = PersistenceException.class)
     @Commit
     public void shouldThrowExceptionIfSecureDetailsHasNotUser() {
-        UserSecureDetailsEntity constructedSecureDetails = new UserSecureDetailsEntity();
-        constructedSecureDetails.setLogin(NEW_USER_LOGIN);
-        constructedSecureDetails.setPassword(NEW_USER_PASSWORD);
-        constructedSecureDetails.setRole(NEW_USER_ROLE);
-
-        UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername(NEW_USER_NAME);
-        constructedUser.setSecureDetails(constructedSecureDetails);
+        UserEntity constructedUser = constructUserEntity();
+        constructedUser.getSecureDetails().setUser(null);
 
         sut.saveAndFlush(constructedUser);
     }
@@ -96,16 +90,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     @Test
     @Commit
     public void shouldCreateNewUserWithUserSecureDetails() {
-        UserSecureDetailsEntity constructedSecureDetails = new UserSecureDetailsEntity();
-        constructedSecureDetails.setLogin(NEW_USER_LOGIN);
-        constructedSecureDetails.setPassword(NEW_USER_PASSWORD);
-        constructedSecureDetails.setRole(NEW_USER_ROLE);
-
-        UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername(NEW_USER_NAME);
-        constructedUser.setSecureDetails(constructedSecureDetails);
-
-        constructedSecureDetails.setUser(constructedUser);
+        UserEntity constructedUser = constructUserEntity();
 
         UserEntity savedUser = sut.saveAndFlush(constructedUser);
         assertThat(constructedUser.getId(), is(notNullValue()));
@@ -127,6 +112,20 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
         assertThat(secureDetails.getUser(), not(is(constructedUser)));
         assertThat(secureDetails.getUser(), not(is(savedUser)));
         assertThat(secureDetails.getUser(), is(loadedUser));
+    }
+
+    private UserEntity constructUserEntity() {
+        UserSecureDetailsEntity constructedSecureDetails = new UserSecureDetailsEntity();
+        constructedSecureDetails.setLogin(NEW_USER_LOGIN);
+        constructedSecureDetails.setPassword(NEW_USER_PASSWORD);
+        constructedSecureDetails.setRole(NEW_USER_ROLE);
+
+        UserEntity constructedUser = new UserEntity();
+        constructedUser.setUsername(NEW_USER_NAME);
+        constructedUser.setSecureDetails(constructedSecureDetails);
+
+        constructedSecureDetails.setUser(constructedUser);
+        return constructedUser;
     }
 
     private UserEntity selectAndCheckUser(final TestUser testUser, final UserRole userRole) {
