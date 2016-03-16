@@ -1,20 +1,14 @@
 package scheduler.app.repositories;
 
-import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
-import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.annotation.Commit;
+import org.springframework.test.annotation.Rollback;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.UserRole;
-import scheduler.config.HibernateTestConfig;
 
 import javax.inject.Inject;
 
@@ -32,6 +26,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     private UserRepository sut;
 
     @Test
+    @Commit
     public void shouldFindUser() {
         UserEntity userEntity1 = selectAndCheckUser(USER_CURRY, UserRole.ADMIN);
         UserSecureDetailsEntity secureDetails1 = userEntity1.getSecureDetails();
@@ -40,6 +35,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
+    @Commit
     public void shouldFindUser2() {
         UserEntity userEntity2 = selectAndCheckUser(USER_IBAKA, UserRole.USER);
         UserSecureDetailsEntity secureDetails2 = userEntity2.getSecureDetails();
@@ -48,6 +44,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
+//    @Rollback(true)
+    @Commit
     public void shouldFindUser3() {
         UserEntity userEntity3 = selectAndCheckUser(USER_DURANT, UserRole.USER);
         UserSecureDetailsEntity secureDetails3 = userEntity3.getSecureDetails();
