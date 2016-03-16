@@ -24,6 +24,11 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 
     public static final String TEST_DATA_SET = "classpath:/users/users.xml";
 
+    private static final String NEW_USER_NAME = "Newly created user";
+    private static final String NEW_USER_LOGIN = "new_user_login";
+    private static final String NEW_USER_PASSWORD = "$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC";
+    private static final UserRole NEW_USER_ROLE = UserRole.USER;
+
     @Inject
     private UserRepository sut;
 
@@ -39,28 +44,26 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     @Test
     @Commit
     public void shouldFindUser2() {
-        UserEntity userEntity2 = selectAndCheckUser(USER_IBAKA, UserRole.USER);
+        UserEntity userEntity2 = selectAndCheckUser(USER_IBAKA, NEW_USER_ROLE);
         UserSecureDetailsEntity secureDetails2 = userEntity2.getSecureDetails();
         assertThat(secureDetails2.getLogin(), is("ibaka"));
-        assertThat(secureDetails2.getPassword(), is("$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC"));
+        assertThat(secureDetails2.getPassword(), is(NEW_USER_PASSWORD));
     }
 
     @Test
     @Commit
     public void shouldFindUser3() {
-        UserEntity userEntity3 = selectAndCheckUser(USER_DURANT, UserRole.USER);
+        UserEntity userEntity3 = selectAndCheckUser(USER_DURANT, NEW_USER_ROLE);
         UserSecureDetailsEntity secureDetails3 = userEntity3.getSecureDetails();
         assertThat(secureDetails3.getLogin(), is("durant"));
-        assertThat(secureDetails3.getPassword(), is("$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC"));
+        assertThat(secureDetails3.getPassword(), is(NEW_USER_PASSWORD));
     }
 
     @Test
     @Commit
     public void shouldCreateNewUserWithoutUserSecureDetails() {
-        String userName = "Newly created user";
-
         UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername(userName);
+        constructedUser.setUsername(NEW_USER_NAME);
 
         UserEntity savedUser = sut.saveAndFlush(constructedUser);
         assertThat(constructedUser.getId(), is(notNullValue()));
@@ -69,7 +72,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 
         UserEntity loadedUser = sut.findById(savedUser.getId());
         assertThat(constructedUser.getId(), is(loadedUser.getId()));
-        assertThat(loadedUser.getUsername(), is(userName));
+        assertThat(loadedUser.getUsername(), is(NEW_USER_NAME));
 
         UserSecureDetailsEntity secureDetails = loadedUser.getSecureDetails();
         assertThat(secureDetails, is(nullValue()));
@@ -78,37 +81,28 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     @Test(expected = PersistenceException.class)
     @Commit
     public void shouldThrowExceptionIfSecureDetailsHasNotUser() {
-
-        String userName = "Newly created user";
-
         UserSecureDetailsEntity constructedSecureDetails = new UserSecureDetailsEntity();
-        constructedSecureDetails.setLogin("new_user_login");
-        constructedSecureDetails.setPassword("$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC");
-        constructedSecureDetails.setRole(UserRole.USER);
+        constructedSecureDetails.setLogin(NEW_USER_LOGIN);
+        constructedSecureDetails.setPassword(NEW_USER_PASSWORD);
+        constructedSecureDetails.setRole(NEW_USER_ROLE);
 
         UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername(userName);
+        constructedUser.setUsername(NEW_USER_NAME);
         constructedUser.setSecureDetails(constructedSecureDetails);
 
-        UserEntity savedUser = sut.saveAndFlush(constructedUser);
+        sut.saveAndFlush(constructedUser);
     }
 
     @Test
     @Commit
     public void shouldCreateNewUserWithUserSecureDetails() {
-
-        String userName = "Newly created user";
-        String userLogin = "new_user_login";
-        String password = "$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC";
-        UserRole userRole = UserRole.USER;
-
         UserSecureDetailsEntity constructedSecureDetails = new UserSecureDetailsEntity();
-        constructedSecureDetails.setLogin(userLogin);
-        constructedSecureDetails.setPassword(password);
-        constructedSecureDetails.setRole(userRole);
+        constructedSecureDetails.setLogin(NEW_USER_LOGIN);
+        constructedSecureDetails.setPassword(NEW_USER_PASSWORD);
+        constructedSecureDetails.setRole(NEW_USER_ROLE);
 
         UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername(userName);
+        constructedUser.setUsername(NEW_USER_NAME);
         constructedUser.setSecureDetails(constructedSecureDetails);
 
         constructedSecureDetails.setUser(constructedUser);
@@ -120,16 +114,16 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 
         UserEntity loadedUser = sut.findById(savedUser.getId());
         assertThat(constructedUser.getId(), is(loadedUser.getId()));
-        assertThat(loadedUser.getUsername(), is(userName));
+        assertThat(loadedUser.getUsername(), is(NEW_USER_NAME));
         assertThat(loadedUser, not(is(constructedUser)));
         assertThat(loadedUser, not(is(savedUser)));
 
         UserSecureDetailsEntity secureDetails = loadedUser.getSecureDetails();
         assertThat(secureDetails, is(notNullValue()));
         assertThat(secureDetails.getId(), is(notNullValue()));
-        assertThat(secureDetails.getLogin(), is(userLogin));
-        assertThat(secureDetails.getPassword(), is(password));
-        assertThat(secureDetails.getRole(), is(userRole));
+        assertThat(secureDetails.getLogin(), is(NEW_USER_LOGIN));
+        assertThat(secureDetails.getPassword(), is(NEW_USER_PASSWORD));
+        assertThat(secureDetails.getRole(), is(NEW_USER_ROLE));
         assertThat(secureDetails.getUser(), not(is(constructedUser)));
         assertThat(secureDetails.getUser(), not(is(savedUser)));
         assertThat(secureDetails.getUser(), is(loadedUser));
