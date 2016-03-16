@@ -45,12 +45,18 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
         UserSecureDetailsEntity secureDetails1 = userEntity1.getSecureDetails();
         assertThat(secureDetails1.getLogin(), is("curry"));
         assertThat(secureDetails1.getPassword(), is("$2a$10$oNXFlhGI0LekTBIedkILTeBYcDCT11Mb4NmIO.p5WH.6isYLLs9uC"));
+    }
 
+    @Test
+    public void shouldFindUser2() {
         UserEntity userEntity2 = selectAndCheckUser(USER_IBAKA, UserRole.USER);
         UserSecureDetailsEntity secureDetails2 = userEntity2.getSecureDetails();
         assertThat(secureDetails2.getLogin(), is("ibaka"));
         assertThat(secureDetails2.getPassword(), is("$2a$10$Km5QAjX0JsCE0DSpPNroLucN1/wlfc4V4PCDJRbb0/yH0jnso0dcC"));
+    }
 
+    @Test
+    public void shouldFindUser3() {
         UserEntity userEntity3 = selectAndCheckUser(USER_DURANT, UserRole.USER);
         UserSecureDetailsEntity secureDetails3 = userEntity3.getSecureDetails();
         assertThat(secureDetails3.getLogin(), is("durant"));
