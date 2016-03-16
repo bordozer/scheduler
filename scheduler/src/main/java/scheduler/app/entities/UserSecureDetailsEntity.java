@@ -2,10 +2,18 @@ package scheduler.app.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import scheduler.app.models.UserRole;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_USER_SECURITY")
@@ -20,7 +28,7 @@ public class UserSecureDetailsEntity implements DBEntity {
 	@SequenceGenerator(name = "T_USER_SECURITY_GEN", sequenceName = "T_USER_SECURITY_SEQ", allocationSize = 20)
 	private Long id;
 
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@OneToOne(optional = false)
 	@JoinColumn(name = "C_USER_ID", nullable = false)
 	private UserEntity user;
 

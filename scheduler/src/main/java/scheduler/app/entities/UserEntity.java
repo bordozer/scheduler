@@ -29,7 +29,7 @@ public class UserEntity implements DBEntity {
 	@Column(name = "C_USER_NAME", unique = true, columnDefinition = "VARCHAR(100)")
 	private String username;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private UserSecureDetailsEntity secureDetails;
 
 	@Override
