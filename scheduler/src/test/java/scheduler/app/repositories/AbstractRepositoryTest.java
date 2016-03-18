@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.ext.h2.H2Connection;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,8 @@ import java.sql.SQLException;
 //        DbUnitTestExecutionListener.class
         TransactionDbUnitTestExecutionListener.class
 })
+//@DatabaseSetup("sampleData.xml")
+//@ExpectedDatabase("expectedData.xml")
 public abstract class AbstractRepositoryTest {
 
     protected final static TestUser USER_CURRY = new TestUser(1L, "Steph Curry");
