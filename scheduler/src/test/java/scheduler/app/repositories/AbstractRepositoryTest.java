@@ -1,6 +1,5 @@
 package scheduler.app.repositories;
 
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.ext.h2.H2Connection;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -59,13 +57,13 @@ public abstract class AbstractRepositoryTest {
         }
     }
 
-    /*@BeforeClass
+    @BeforeClass
     public static void setUp() throws SQLException {
-    }*/
+    }
 
-    /*@AfterClass
+    @AfterClass
     public static void tearDown() {
-    }*/
+    }
 
     @Getter
     @Setter

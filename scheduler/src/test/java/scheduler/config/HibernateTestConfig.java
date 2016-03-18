@@ -29,7 +29,7 @@ public class HibernateTestConfig {
     public static final String DB_USERNAME = "sa";
     public static final String DB_USER_PASSWORD = "";
 
-    private static final String MIGRATION_SCHEMA_SQL = "migration/V1__schema.sql";
+    public static final String MIGRATION_SCHEMA_SQL = "migration/V1__schema.sql";
 
     @Bean(name = "datasource")
     public DriverManagerDataSource dataSource() {

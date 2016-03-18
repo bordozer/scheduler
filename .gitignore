@@ -3,7 +3,7 @@ bower_components
 node_modules/
 target/
 rebel.xml
-log4j.*
+log4j.xml
 *.properties
 *.iml
 *.log
