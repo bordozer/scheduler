@@ -60,11 +60,11 @@ public abstract class AbstractRepositoryTest {
     }
 
     @BeforeClass
-    public static void prepareFakeApplication() {
+    public static void setUp() {
     }
 
     @AfterClass
-    public static void finish() {
+    public static void tearDown() {
     }
 
     @Getter
