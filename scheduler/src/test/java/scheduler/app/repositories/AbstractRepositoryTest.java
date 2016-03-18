@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.ext.h2.H2Connection;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -49,7 +50,12 @@ public abstract class AbstractRepositoryTest {
     public static class Config {
         @Bean
         public org.dbunit.ext.h2.H2Connection testConnection(final DriverManagerDataSource dataSource) throws DatabaseUnitException, SQLException {
-            return new H2Connection(dataSource.getConnection(), TEST_SCHEMA_NAME);
+            H2Connection connection = new H2Connection(dataSource.getConnection(), TEST_SCHEMA_NAME);
+
+            DatabaseConfig config = connection.getConfig();
+            config.setProperty("http://www.dbunit.org/features/batchedStatements", true);
+
+            return connection;
         }
     }
 
