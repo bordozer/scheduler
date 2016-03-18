@@ -30,7 +30,7 @@ import java.sql.SQLException;
 //        TransactionalTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class
 })
-@DbUnitConfiguration(databaseConnection = "h2TestConnection")
+@DbUnitConfiguration(databaseConnection = "testConnection")
 public abstract class AbstractRepositoryTest {
 
     protected final static TestUser USER_CURRY = new TestUser(1L, "Steph Curry");
@@ -46,7 +46,7 @@ public abstract class AbstractRepositoryTest {
     })
     public static class Config {
         @Bean
-        public org.dbunit.ext.h2.H2Connection h2TestConnection(final DriverManagerDataSource dataSource) throws DatabaseUnitException, SQLException {
+        public org.dbunit.ext.h2.H2Connection testConnection(final DriverManagerDataSource dataSource) throws DatabaseUnitException, SQLException {
             return new H2Connection(dataSource.getConnection(), HibernateTestConfig.TEST_SCHEMA_NAME);
         }
     }
