@@ -38,8 +38,6 @@ public abstract class AbstractRepositoryTest {
     protected final static TestUser USER_IBAKA = new TestUser(2L, "Serge Ibaka");
     protected final static TestUser USER_DURANT = new TestUser(3L, "Kevin Durant");
 
-    private static final String TEST_SCHEMA_NAME = "PUBLIC";
-
     @Configuration
     @EnableJpaRepositories("scheduler.app.repositories")
     @ComponentScan({
@@ -50,17 +48,24 @@ public abstract class AbstractRepositoryTest {
     public static class Config {
         @Bean
         public org.dbunit.ext.h2.H2Connection testConnection(final DriverManagerDataSource dataSource) throws DatabaseUnitException, SQLException {
-            H2Connection connection = new H2Connection(dataSource.getConnection(), TEST_SCHEMA_NAME);
+            H2Connection connection = new H2Connection(dataSource.getConnection(), HibernateTestConfig.TEST_SCHEMA_NAME);
 
             DatabaseConfig config = connection.getConfig();
-            config.setProperty("http://www.dbunit.org/features/batchedStatements", true);
+            config.setProperty(DatabaseConfig.FEATURE_BATCHED_STATEMENTS, true);
 
             return connection;
         }
     }
 
     @BeforeClass
-    public static void setUp() {
+    public static void setUp() throws SQLException {
+        /*RunScript.execute("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
+                HibernateTestConfig.DB_USERNAME,
+                HibernateTestConfig.DB_USER_PASSWORD,
+                TEST_SCHEMA_NAME,
+                Charset.defaultCharset(),
+                false
+        );*/
     }
 
     @AfterClass

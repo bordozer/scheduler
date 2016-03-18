@@ -24,15 +24,20 @@ import java.util.Map;
 @EnableTransactionManagement
 public class HibernateTestConfig {
 
+    public static final String DB_NAME = "test";
+    public static final String TEST_SCHEMA_NAME = "PUBLIC";
+    public static final String DB_USERNAME = "sa";
+    public static final String DB_USER_PASSWORD = "";
+
     private static final String MIGRATION_SCHEMA_SQL = "migration/V1__schema.sql";
 
     @Bean(name = "datasource")
     public DriverManagerDataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(org.h2.Driver.class.getName());
-        dataSource.setUrl("jdbc:h2:mem:test;MODE=Oracle;");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
+        dataSource.setUrl(String.format("jdbc:h2:mem:%s;MODE=Oracle;", DB_NAME)); //DB_CLOSE_DELAY
+        dataSource.setUsername(DB_USERNAME);
+        dataSource.setPassword(DB_USER_PASSWORD);
 
         return dataSource;
     }
