@@ -1,5 +1,6 @@
 package scheduler.app.repositories;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import lombok.AllArgsConstructor;
@@ -26,12 +27,13 @@ import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AbstractRepositoryTest.Config.class, HibernateTestConfig.class})
+@DbUnitConfiguration(databaseConnection = "testConnection")
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
 //        DirtiesContextTestExecutionListener.class,
 //        TransactionalTestExecutionListener.class,
+//        DbUnitTestExecutionListener.class
         TransactionDbUnitTestExecutionListener.class
 })
-@DbUnitConfiguration(databaseConnection = "testConnection")
 public abstract class AbstractRepositoryTest {
 
     protected final static TestUser USER_CURRY = new TestUser(1L, "Steph Curry");
@@ -57,20 +59,13 @@ public abstract class AbstractRepositoryTest {
         }
     }
 
-    @BeforeClass
+    /*@BeforeClass
     public static void setUp() throws SQLException {
-        /*RunScript.execute("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
-                HibernateTestConfig.DB_USERNAME,
-                HibernateTestConfig.DB_USER_PASSWORD,
-                TEST_SCHEMA_NAME,
-                Charset.defaultCharset(),
-                false
-        );*/
-    }
+    }*/
 
-    @AfterClass
+    /*@AfterClass
     public static void tearDown() {
-    }
+    }*/
 
     @Getter
     @Setter
