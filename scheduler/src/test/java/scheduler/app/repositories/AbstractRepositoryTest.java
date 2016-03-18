@@ -37,6 +37,8 @@ public abstract class AbstractRepositoryTest {
     protected final static TestUser USER_IBAKA = new TestUser(2L, "Serge Ibaka");
     protected final static TestUser USER_DURANT = new TestUser(3L, "Kevin Durant");
 
+    private static final String TEST_SCHEMA_NAME = "PUBLIC";
+
     @Configuration
     @EnableJpaRepositories("scheduler.app.repositories")
     @ComponentScan({
@@ -47,7 +49,7 @@ public abstract class AbstractRepositoryTest {
     public static class Config {
         @Bean
         public org.dbunit.ext.h2.H2Connection testConnection(final DriverManagerDataSource dataSource) throws DatabaseUnitException, SQLException {
-            return new H2Connection(dataSource.getConnection(), HibernateTestConfig.TEST_SCHEMA_NAME);
+            return new H2Connection(dataSource.getConnection(), TEST_SCHEMA_NAME);
         }
     }
 

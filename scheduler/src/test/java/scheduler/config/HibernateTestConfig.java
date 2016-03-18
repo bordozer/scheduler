@@ -24,8 +24,6 @@ import java.util.Map;
 @EnableTransactionManagement
 public class HibernateTestConfig {
 
-    public static final String TEST_SCHEMA_NAME = "PUBLIC";
-
     private static final String MIGRATION_SCHEMA_SQL = "migration/V1__schema.sql";
 
     @Bean(name = "datasource")
