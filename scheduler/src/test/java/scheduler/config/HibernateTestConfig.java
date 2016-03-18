@@ -35,7 +35,7 @@ public class HibernateTestConfig {
     public DriverManagerDataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(org.h2.Driver.class.getName());
-        dataSource.setUrl(String.format("jdbc:h2:mem:%s;MODE=Oracle;", DB_NAME)); //DB_CLOSE_DELAY
+        dataSource.setUrl(String.format("jdbc:h2:mem:%s;MODE=Oracle;", DB_NAME)); //DB_CLOSE_DELAY=-1
         dataSource.setUsername(DB_USERNAME);
         dataSource.setPassword(DB_USER_PASSWORD);
 
