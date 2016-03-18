@@ -4,7 +4,6 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Test;
-import org.springframework.test.annotation.Commit;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.UserRole;
@@ -33,7 +32,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     private UserRepository sut;
 
     @Test
-    @Commit
     public void shouldFindUser() {
         UserEntity userEntity1 = selectAndCheckUser(USER_CURRY, UserRole.ADMIN);
         UserSecureDetailsEntity secureDetails1 = userEntity1.getSecureDetails();
@@ -42,7 +40,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    @Commit
     public void shouldFindUser2() {
         UserEntity userEntity2 = selectAndCheckUser(USER_IBAKA, NEW_USER_ROLE);
         UserSecureDetailsEntity secureDetails2 = userEntity2.getSecureDetails();
@@ -51,7 +48,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    @Commit
     public void shouldFindUser3() {
         UserEntity userEntity3 = selectAndCheckUser(USER_DURANT, NEW_USER_ROLE);
         UserSecureDetailsEntity secureDetails3 = userEntity3.getSecureDetails();
@@ -60,7 +56,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    @Commit
     public void shouldCreateNewUserWithoutUserSecureDetails() {
         UserEntity constructedUser = new UserEntity();
         constructedUser.setUsername(NEW_USER_NAME);
@@ -79,7 +74,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test(expected = PersistenceException.class)
-    @Commit
     public void shouldThrowExceptionIfSecureDetailsHasNotUser() {
         UserEntity constructedUser = constructUserEntity();
         constructedUser.getSecureDetails().setUser(null);
@@ -88,7 +82,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    @Commit
     public void shouldCreateNewUserWithUserSecureDetails() {
         UserEntity constructedUser = constructUserEntity();
 

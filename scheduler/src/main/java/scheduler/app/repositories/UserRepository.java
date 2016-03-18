@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	String CACHE_ENTRY = "scheduler.app.cache.user";
     String CACHE_QUERY = "scheduler.app.cache.users";
 
-//	@Cacheable( value = CACHE_ENTRY, key = "#userId" )
+//	@Cacheable( value = CACHE_ENTRY, key = "#userid" )
 	UserEntity findById(Long userId);
 
 //	@Cacheable( value = CACHE_ENTRY, key = "#p0" )
