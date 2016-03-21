@@ -27,14 +27,10 @@ import java.sql.SQLException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AbstractIntegrationTest.Config.class, HibernateTestConfig.class})
 @DbUnitConfiguration(databaseConnection = "testConnection")
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-//        DirtiesContextTestExecutionListener.class,
-//        TransactionalTestExecutionListener.class,
-//        DbUnitTestExecutionListener.class
+@TestExecutionListeners({
+        DependencyInjectionTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class
 })
-//@DatabaseSetup("sampleData.xml")
-//@ExpectedDatabase("expectedData.xml")
 public abstract class AbstractIntegrationTest {
 
     protected final static TestUser USER_CURRY = new TestUser(1L, "Steph Curry");
