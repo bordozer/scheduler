@@ -30,13 +30,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User create(final User user, final UserSecureDetails userSecureDetails) {
-		UserSecureDetailsEntity userSecureDetailsEntity = new UserSecureDetailsEntity();
 		final UserEntity userEntity = new UserEntity();
-		userEntity.setSecureDetails(userSecureDetailsEntity);
-		userSecureDetailsEntity.setUser(userEntity);
-
 		userEntityConverter.populateEntity(userEntity, user);
+
+		UserSecureDetailsEntity userSecureDetailsEntity = new UserSecureDetailsEntity();
+		userSecureDetailsEntity.setUser(userEntity);
 		userSecureDetailsConverter.populateEntity(userSecureDetailsEntity, userSecureDetails);
+
+		userEntity.setSecureDetails(userSecureDetailsEntity);
 
 		final UserEntity saved = userRepository.saveAndFlush(userEntity);
 

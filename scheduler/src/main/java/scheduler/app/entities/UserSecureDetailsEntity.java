@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import scheduler.app.models.UserRole;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,7 +30,7 @@ public class UserSecureDetailsEntity implements DBEntity {
 	@SequenceGenerator(name = "T_USER_SECURITY_GEN", sequenceName = "T_USER_SECURITY_SEQ", allocationSize = 20)
 	private Long id;
 
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "C_USER_ID", nullable = false)
 	private UserEntity user;
 

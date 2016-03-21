@@ -26,7 +26,6 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 	public void populateEntity(final UserSecureDetailsEntity entity, final UserSecureDetails model) {
 		Assert.notNull(entity, ENTITY_MUST_NOT_BE_NULL);
 		Assert.notNull(model, MODEL_MUST_NOT_BE_NULL);
-		Assert.notNull(model.getUser(), USER_MUST_NOT_BE_NULL);
 
 		entity.setId(model.getId());
 		entity.setLogin(model.getLogin());
