@@ -3,12 +3,15 @@ package scheduler.config;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -17,52 +20,46 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.SharedCacheMode;
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories("scheduler.app.repositories")
+@ComponentScan({
+        "scheduler.app.repositories",
+        "scheduler.app.services",
+        "scheduler.app.converters"
+})
 public class HibernateTestConfig {
-
-    public static final String DB_NAME = "test";
-    public static final String TEST_SCHEMA_NAME = "PUBLIC";
-    public static final String DB_USERNAME = "sa";
-    public static final String DB_USER_PASSWORD = "";
 
     public static final String MIGRATION_SCHEMA_SQL = "migration/V1__schema.sql";
 
-    @Bean(name = "datasource")
-    public DriverManagerDataSource dataSource() {
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(org.h2.Driver.class.getName());
-        dataSource.setUrl(String.format("jdbc:h2:mem:%s;MODE=Oracle;", DB_NAME)); //DB_CLOSE_DELAY=-1
-        dataSource.setUsername(DB_USERNAME);
-        dataSource.setPassword(DB_USER_PASSWORD);
-
-        return dataSource;
+    @Bean(name = "dataSource")
+    public EmbeddedDatabase dataSource() {
+        final EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript(MIGRATION_SCHEMA_SQL)
+                .build();
+        return embeddedDatabase;
     }
 
     @Bean
-    public DataSourceInitializer dataSourceInitializer() {
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-        resourceDatabasePopulator.addScript(new ClassPathResource(MIGRATION_SCHEMA_SQL));
-
-        DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-        dataSourceInitializer.setDataSource(dataSource());
-        dataSourceInitializer.setDatabasePopulator(resourceDatabasePopulator);
-        return dataSourceInitializer;
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(final DriverManagerDataSource dataSource) {
-        return new JpaTransactionManager(entityManagerFactory(dataSource));
+    public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
+        return new JpaTransactionManager(emf);
     }
 
     @Bean(name = "entityManagerFactory")
-    public EntityManagerFactory entityManagerFactory(final DriverManagerDataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DataSource dataSource) {
 
         final Map<String, Object> jpaProperties = new HashMap<>();
-        jpaProperties.put(Environment.HBM2DDL_AUTO, "create-drop");
+        jpaProperties.put(Environment.HBM2DDL_AUTO, "none"); // change to validate and fix errors later
         jpaProperties.put("hibernate.connection.CharSet", "utf8");
         jpaProperties.put("hibernate.connection.characterEncoding", "utf8");
         jpaProperties.put("hibernate.connection.useUnicode", "true");
@@ -87,8 +84,7 @@ public class HibernateTestConfig {
         entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactory.setDataSource(dataSource());
         entityManagerFactory.setJpaPropertyMap(jpaProperties);
-        entityManagerFactory.afterPropertiesSet();
 
-        return entityManagerFactory.getObject();
+        return entityManagerFactory;
     }
 }
