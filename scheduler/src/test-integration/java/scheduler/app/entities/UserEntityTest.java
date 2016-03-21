@@ -1,9 +1,9 @@
-package scheduler.app.repositories;
+package scheduler.app.entities;
 
 import org.junit.Test;
-import scheduler.app.entities.UserEntity;
-import scheduler.app.entities.UserSecureDetailsEntity;
+import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.models.UserRole;
+import scheduler.app.repositories.UserRepository;
 
 import javax.inject.Inject;
 

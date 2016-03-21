@@ -1,10 +1,10 @@
 package scheduler.app.services.users;
 
 import org.junit.Test;
+import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.models.User;
 import scheduler.app.models.UserRole;
 import scheduler.app.models.UserSecureDetails;
-import scheduler.app.repositories.AbstractIntegrationTest;
 
 import javax.inject.Inject;
 

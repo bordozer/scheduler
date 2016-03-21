@@ -1,4 +1,4 @@
-package scheduler.app.repositories;
+package scheduler.app;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;

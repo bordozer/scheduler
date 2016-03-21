@@ -4,6 +4,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Test;
+import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.UserRole;
