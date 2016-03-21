@@ -33,7 +33,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         org.springframework.security.core.userdetails.User principal = (User) authentication.getPrincipal();
 
         scheduler.app.models.User user = userService.findByLogin(principal.getUsername());
-        UserSecureDetails userSecureDetails = userService.getUserSecureDetails(user.getId());
+        UserSecureDetails userSecureDetails = userService.loadUserSecureDetails(user.getId());
 
         Map<String, String> map = Maps.newLinkedHashMap();
         map.put(AuthResponse.AUTH_RESULT, "Logged in successfully");

@@ -14,5 +14,5 @@ public interface UserService {
 	@Transactional
 	User modify(User user);
 
-	UserSecureDetails getUserSecureDetails(Long userId);
+	UserSecureDetails loadUserSecureDetails(Long userId);
 }

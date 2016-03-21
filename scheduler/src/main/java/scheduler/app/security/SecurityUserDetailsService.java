@@ -30,7 +30,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(String.format("Username not found: %s", login));
 		}
 
-		UserSecureDetails userSecureDetails = userService.getUserSecureDetails(user.getId());
+		UserSecureDetails userSecureDetails = userService.loadUserSecureDetails(user.getId());
 
 		final List<GrantedAuthority> authorities = newArrayList();
 		authorities.add(new SimpleGrantedAuthority(userSecureDetails.getRole().getRole()));

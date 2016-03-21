@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserSecureDetails getUserSecureDetails(final Long userId) {
+	public UserSecureDetails loadUserSecureDetails(final Long userId) {
 		return userSecureDetailsConverter.toModel(userRepository.findById(userId).getSecureDetails());
 	}
 }
