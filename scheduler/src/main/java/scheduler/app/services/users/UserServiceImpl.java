@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User save(final User user) {
+	public User modify(final User user) {
 		final UserEntity userEntity = userRepository.findById(user.getId());
 		userEntityConverter.populateEntity(userEntity, user);
 		final UserEntity saved = userRepository.saveAndFlush(userEntity);
