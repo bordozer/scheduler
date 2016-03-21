@@ -3,10 +3,8 @@ package scheduler.app.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -29,7 +27,7 @@ public class UserEntity implements DBEntity {
 	@Column(name = "C_USER_NAME", unique = true, columnDefinition = "VARCHAR(100)")
 	private String username;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "user", optional = false)
 	private UserSecureDetailsEntity secureDetails;
 
 	@Override
