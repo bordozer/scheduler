@@ -1,6 +1,8 @@
 package scheduler.app.services.users;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.models.User;
 import scheduler.app.models.UserRole;
@@ -20,6 +22,14 @@ public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
 
     @Inject
     private UserService sut;
+
+    @Inject
+    private DataSourceInitializer dataSourceInitializer;
+
+    @Before
+    public void setIp() {
+//        dataSourceInitializer.afterPropertiesSet();
+    }
 
     @Test
     public void shouldCreateUserAndReturnModel() {

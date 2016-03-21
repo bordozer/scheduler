@@ -71,6 +71,7 @@ public class HibernateTestConfig {
         jpaProperties.put("hibernate.use_sql_comments", true);
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         jpaProperties.put("hibernate.enable_lazy_load_no_trans", true);
+        jpaProperties.put("hibernate.current_session_context_class", "thread");
 
         jpaProperties.put("javax.persistence.sharedCache.mode", SharedCacheMode.NONE);
         jpaProperties.put(Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName());
