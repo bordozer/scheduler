@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UserEntityTest extends AbstractRepositoryTest {
+public class UserEntityTest extends AbstractIntegrationTest {
 
     @Inject
     private UserRepository userRepository;

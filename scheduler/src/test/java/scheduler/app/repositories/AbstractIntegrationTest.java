@@ -25,7 +25,7 @@ import scheduler.config.HibernateTestConfig;
 import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AbstractRepositoryTest.Config.class, HibernateTestConfig.class})
+@ContextConfiguration(classes = {AbstractIntegrationTest.Config.class, HibernateTestConfig.class})
 @DbUnitConfiguration(databaseConnection = "testConnection")
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
 //        DirtiesContextTestExecutionListener.class,
@@ -35,7 +35,7 @@ import java.sql.SQLException;
 })
 //@DatabaseSetup("sampleData.xml")
 //@ExpectedDatabase("expectedData.xml")
-public abstract class AbstractRepositoryTest {
+public abstract class AbstractIntegrationTest {
 
     protected final static TestUser USER_CURRY = new TestUser(1L, "Steph Curry");
     protected final static TestUser USER_IBAKA = new TestUser(2L, "Serge Ibaka");

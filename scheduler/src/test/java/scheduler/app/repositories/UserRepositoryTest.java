@@ -19,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @DatabaseSetup(value = UserRepositoryTest.TEST_DATA_SET, type = DatabaseOperation.INSERT)
 @DatabaseTearDown(value = UserRepositoryTest.TEST_DATA_SET, type = DatabaseOperation.DELETE)
-public class UserRepositoryTest extends AbstractRepositoryTest {
+public class UserRepositoryTest extends AbstractIntegrationTest {
 
     public static final String TEST_DATA_SET = "classpath:/users/users.xml";
 
