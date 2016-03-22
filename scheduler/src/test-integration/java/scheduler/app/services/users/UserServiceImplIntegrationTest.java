@@ -1,5 +1,7 @@
 package scheduler.app.services.users;
 
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Test;
 import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.models.User;
@@ -11,6 +13,7 @@ import javax.inject.Inject;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
 
@@ -50,7 +53,7 @@ public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
     @Test
     public void shouldUpdateNewlyCreatedUser() {
         String username = "User Name 3";
-        String login = "login3";
+        String login = "login1";
 
         User user = constructUser(username);
         UserSecureDetails details =  constructUserSecureDetails(user, login);
