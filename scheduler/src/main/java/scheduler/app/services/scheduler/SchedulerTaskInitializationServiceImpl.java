@@ -5,8 +5,8 @@ import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
-import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.services.tasks.SchedulerTaskService;
@@ -25,7 +25,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
     ;
 
     @Override
-    public List<Trigger> initSchedulerTasks() throws SchedulerException {
+    public List<Trigger> buildSchedulerJobTriggers() throws SchedulerException {
 
         List<SchedulerTask> schedulerTasks = schedulerTaskService.loadAll();
 
@@ -33,48 +33,42 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                 .map(schedulerTask -> {
                     String jobName = getJobName(schedulerTask);
                     String jobGroup = getJobGroup(schedulerTask);
-
+                    String triggerName = getTriggerName(schedulerTask);
                     JobKey jobKey = new JobKey(jobName, jobGroup);
+                    TriggerKey triggerKey = new TriggerKey(triggerName, jobGroup);
+
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)
                             .build();
 
-                    /*Trigger trigger1 = TriggerBuilder
+                    /*return TriggerBuilder
                             .newTrigger()
-                            .withIdentity(getTriggerName(schedulerTask), jobGroup)
+                            .withIdentity(triggerKey)
                             .withSchedule(CronScheduleBuilder.cronSchedule(CRON))
                             .build();*/
-
-                    return cronTriggerFactoryBean(job, jobName, jobGroup, CRON).getObject();
+                    return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON).getObject();
 
                 }).collect(Collectors.toList());
     }
 
-    public CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String jobName, final String jobGroup, final String cron) {
+    private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName, final String group, final String crone) {
         CronTriggerFactoryBean stFactory = new CronTriggerFactoryBean();
-        stFactory.setName(jobName);
-        stFactory.setGroup(jobGroup);
         stFactory.setJobDetail(job);
-        stFactory.setCronExpression(cron);
+        stFactory.setName(triggerName);
+        stFactory.setGroup(group);
+        stFactory.setCronExpression(crone);
         return stFactory;
-    }
-
-    /*public MethodInvokingJobDetailFactoryBean methodInvokingJobDetailFactoryBean(final SchedulerTask schedulerTask) {
-        MethodInvokingJobDetailFactoryBean obj = new MethodInvokingJobDetailFactoryBean();
-        obj.setTargetBeanName("pickupsAlertFacadeImpl");
-        obj.setTargetMethod("sendPickupAlertEmails");
-        return obj;
-    }*/
-
-    private String getJobGroup(final SchedulerTask schedulerTask) {
-        return String.format("QUARTZ_JOB_GROUP_%d", schedulerTask.getUser().getId());
     }
 
     private String getJobName(final SchedulerTask schedulerTask) {
         return String.format("QUARTZ_JOB_%d_%d", schedulerTask.getUser().getId(), schedulerTask.getId());
     }
 
-    /*private String getTriggerName(final SchedulerTask schedulerTask) {
+    private String getJobGroup(final SchedulerTask schedulerTask) {
+        return String.format("QUARTZ_JOB_GROUP_%d", schedulerTask.getUser().getId());
+    }
+
+    private String getTriggerName(final SchedulerTask schedulerTask) {
         return String.format("QUARTZ_TRIGGER_%d_%d", schedulerTask.getUser().getId(), schedulerTask.getId());
-    }*/
+    }
 }
