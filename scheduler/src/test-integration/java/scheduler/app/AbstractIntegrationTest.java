@@ -5,7 +5,6 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Session;
 import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,12 +13,9 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.jdbc.JdbcTestUtils;
-import org.springframework.transaction.annotation.Transactional;
 import scheduler.config.HibernateTestConfig;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HibernateTestConfig.class})
