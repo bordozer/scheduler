@@ -36,7 +36,7 @@ public class UserEntityTest extends AbstractIntegrationTest {
     @Test
     public void shouldCreateUserAndUpdateThen() {
         UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername("User name");
+        constructedUser.setUsername("User name 1");
         UserSecureDetailsEntity constructedUserDetails = new UserSecureDetailsEntity();
         constructedUserDetails.setLogin("user_login");
         constructedUserDetails.setRole(UserRole.USER);
@@ -61,10 +61,10 @@ public class UserEntityTest extends AbstractIntegrationTest {
     @Test
     public void shouldSaveUserAndUserDetailsWhenUserIsSaved() {
         UserEntity constructedUser = new UserEntity();
-        constructedUser.setUsername("User name");
+        constructedUser.setUsername("User name 2");
 
         UserSecureDetailsEntity constructedUserDetails = new UserSecureDetailsEntity();
-        constructedUserDetails.setLogin("user_login");
+        constructedUserDetails.setLogin("user_login_1");
         constructedUserDetails.setRole(UserRole.USER);
         constructedUserDetails.setPassword("11111111111111111111111111111111111111111111");
         constructedUserDetails.setUser(constructedUser);
