@@ -35,7 +35,7 @@ public abstract class AbstractIntegrationTest {
 
     @After
     public void cleanDatabase() throws Exception {
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "T_USER_SECURITY", "T_USER");
+//        JdbcTestUtils.deleteFromTables(jdbcTemplate, "T_USER_SECURITY", "T_USER");
     }
 
     @Getter
