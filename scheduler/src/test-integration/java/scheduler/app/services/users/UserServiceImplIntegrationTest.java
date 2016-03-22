@@ -24,6 +24,9 @@ public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
     @Inject
     private UserService sut;
 
+    @Inject
+    JdbcTemplate jdbcTemplate;
+
     @Test
     public void shouldCreateUserAndReturnModel() {
         User user = constructUser();
@@ -71,9 +74,6 @@ public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
         assertThat(secureDetails.getRole(), is(UserRole.USER));
         assertThat(secureDetails.getUser(), is(createdUser));
     }
-
-    @Inject
-    JdbcTemplate jdbcTemplate;
 
     @After
     public void cleanDatabase() throws Exception {
