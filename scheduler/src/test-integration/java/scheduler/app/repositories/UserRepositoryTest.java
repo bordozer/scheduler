@@ -4,13 +4,13 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Test;
+import org.springframework.dao.DataIntegrityViolationException;
 import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.entities.UserEntity;
 import scheduler.app.entities.UserSecureDetailsEntity;
 import scheduler.app.models.UserRole;
 
 import javax.inject.Inject;
-import javax.persistence.PersistenceException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -74,7 +74,7 @@ public class UserRepositoryTest extends AbstractIntegrationTest {
         assertThat(secureDetails, is(nullValue()));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = DataIntegrityViolationException.class)
     public void shouldThrowExceptionIfSecureDetailsHasNotUser() {
         UserEntity constructedUser = constructUserEntity();
         constructedUser.getSecureDetails().setUser(null);
@@ -85,6 +85,7 @@ public class UserRepositoryTest extends AbstractIntegrationTest {
     @Test
     public void shouldCreateNewUserWithUserSecureDetails() {
         UserEntity constructedUser = constructUserEntity();
+        constructedUser.setUsername("Another user name");
 
         UserEntity savedUser = sut.saveAndFlush(constructedUser);
         assertThat(constructedUser.getId(), is(notNullValue()));
@@ -93,7 +94,7 @@ public class UserRepositoryTest extends AbstractIntegrationTest {
 
         UserEntity loadedUser = sut.findById(savedUser.getId());
         assertThat(constructedUser.getId(), is(loadedUser.getId()));
-        assertThat(loadedUser.getUsername(), is(NEW_USER_NAME));
+        assertThat(loadedUser.getUsername(), is("Another user name"));
         assertThat(loadedUser, not(is(constructedUser)));
         assertThat(loadedUser, not(is(savedUser)));
 

@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -38,11 +37,10 @@ public class HibernateTestConfig {
 
     @Bean(name = "dataSource")
     public EmbeddedDatabase dataSource() {
-        final EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder()
+        return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript(MIGRATION_SCHEMA_SQL)
                 .build();
-        return embeddedDatabase;
     }
 
     @Bean
