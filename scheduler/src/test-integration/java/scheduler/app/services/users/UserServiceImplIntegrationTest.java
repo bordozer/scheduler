@@ -1,9 +1,6 @@
 package scheduler.app.services.users;
 
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.jdbc.JdbcTestUtils;
 import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.models.User;
 import scheduler.app.models.UserRole;
@@ -23,9 +20,6 @@ public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
 
     @Inject
     private UserService sut;
-
-    @Inject
-    JdbcTemplate jdbcTemplate;
 
     @Test
     public void shouldCreateUserAndReturnModel() {
@@ -73,11 +67,6 @@ public class UserServiceImplIntegrationTest extends AbstractIntegrationTest {
         assertThat(secureDetails.getLogin(), is(USER_LOGIN));
         assertThat(secureDetails.getRole(), is(UserRole.USER));
         assertThat(secureDetails.getUser(), is(createdUser));
-    }
-
-    @After
-    public void cleanDatabase() throws Exception {
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "T_USER_SECURITY", "T_USER");
     }
 
     private User constructUser() {
