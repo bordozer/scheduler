@@ -3,6 +3,7 @@ package scheduler.config;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import scheduler.config.root.DevelopmentConfiguration;
+import scheduler.config.root.QuartzConfig;
 import scheduler.config.root.RootContextConfig;
 import scheduler.config.root.SecurityConfig;
 import scheduler.config.servlet.RequestListener;
@@ -16,7 +17,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[]{RootContextConfig.class, DevelopmentConfiguration.class, SecurityConfig.class};
+		return new Class<?>[]{
+				RootContextConfig.class,
+				DevelopmentConfiguration.class,
+				SecurityConfig.class,
+				QuartzConfig.class
+		};
 	}
 
 	@Override

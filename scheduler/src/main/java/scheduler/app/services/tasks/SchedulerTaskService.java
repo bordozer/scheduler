@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface SchedulerTaskService {
 
+	List<SchedulerTask> loadAll();
+
 	List<SchedulerTask> loadAll(Long userId);
 
 	SchedulerTask load(Long userId, Long schedulerTaskId);

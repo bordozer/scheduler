@@ -28,6 +28,11 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	private SchedulerTaskEntityConverter schedulerTaskEntityConverter;
 
 	@Override
+	public List<SchedulerTask> loadAll() {
+		return toModel(schedulerTaskRepository.findAll());
+	}
+
+	@Override
 	public List<SchedulerTask> loadAll(final Long userId) {
 		Assert.notNull(userId, USER_ID_MUST_NOT_BE_NULL);
 
