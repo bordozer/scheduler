@@ -1,11 +1,11 @@
 package scheduler.app.services.scheduler;
 
 import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
-import org.quartz.TriggerKey;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.app.models.SchedulerTask;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
+    public static final String SCHEDULER_TASK = "schedulerTask";
     private static final String CRON = "0/5 * * * * ?"; // each minute
 
     @Inject
@@ -36,8 +37,12 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     String triggerName = getTriggerName(schedulerTask);
                     JobKey jobKey = new JobKey(jobName, jobGroup);
 
+                    JobDataMap dataMap = new JobDataMap();
+                    dataMap.put(SCHEDULER_TASK, schedulerTask);
+
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)
+                            .setJobData(dataMap)
                             .build();
 
                     /*return TriggerBuilder
@@ -55,13 +60,15 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                 }).collect(Collectors.toList());
     }
 
-    private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName, final String group, final String crone) throws ParseException {
+    private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName,
+                                                          final String group, final String crone) throws ParseException {
         CronTriggerFactoryBean stFactory = new CronTriggerFactoryBean();
         stFactory.setJobDetail(job);
         stFactory.setName(triggerName);
         stFactory.setGroup(group);
         stFactory.setCronExpression(crone);
         stFactory.afterPropertiesSet();
+
         return stFactory;
     }
 
