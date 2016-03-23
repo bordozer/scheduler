@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
-    public static final String SCHEDULER_TASK = "schedulerTask";
+    public static final String SCHEDULER_TASK_REMOTE_JOB = "schedulerTask";
     private static final String CRON = "0/15 * * * * ?";
 
     @Inject
@@ -38,7 +38,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     JobKey jobKey = new JobKey(jobName, jobGroup);
 
                     JobDataMap dataMap = new JobDataMap();
-                    dataMap.put(SCHEDULER_TASK, schedulerTask);
+                    dataMap.put(SCHEDULER_TASK_REMOTE_JOB, schedulerTask.getRemoteJob());
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)
