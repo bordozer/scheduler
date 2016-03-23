@@ -9,6 +9,7 @@ import org.quartz.Trigger;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.app.models.SchedulerTask;
+import scheduler.app.services.remote.RemoteClientService;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
 import javax.inject.Inject;
@@ -20,10 +21,15 @@ import java.util.stream.Collectors;
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
     public static final String SCHEDULER_TASK_REMOTE_JOB = "schedulerTask";
+    public static final String SCHEDULER_TASK_HTTP_CLIENT_SERVICE = "remoteClientService";
+
     private static final String CRON = "0/15 * * * * ?";
 
     @Inject
     private SchedulerTaskService schedulerTaskService;
+
+    @Inject
+    private RemoteClientService remoteClientService;
 
     @Override
     public List<Trigger> buildSchedulerJobTriggers() throws SchedulerException {
@@ -39,6 +45,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
 
                     JobDataMap dataMap = new JobDataMap();
                     dataMap.put(SCHEDULER_TASK_REMOTE_JOB, schedulerTask.getRemoteJob());
+                    dataMap.put(SCHEDULER_TASK_HTTP_CLIENT_SERVICE, remoteClientService);
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)

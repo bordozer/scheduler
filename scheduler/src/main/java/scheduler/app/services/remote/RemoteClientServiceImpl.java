@@ -1,0 +1,88 @@
+package scheduler.app.services.remote;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+@Service
+public class RemoteClientServiceImpl implements RemoteClientService {
+
+    private static final Logger LOGGER = Logger.getLogger(RemoteClientServiceImpl.class);
+
+    private final static String USER_AGENT = "Mozilla/5.0";
+
+    @Override
+    public void sendGet(final String url) throws IOException {
+        doSendGet(url);
+    }
+
+    @Override
+    public void sendPost(final String url, final String json) throws Exception {
+        doSendPost(url, json);
+    }
+
+    private void doSendGet(final String url) throws IOException {
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod("GET");
+
+        con.setRequestProperty("User-Agent", USER_AGENT);
+
+        int responseCode = con.getResponseCode();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        LOGGER.debug(String.format("Remote client response: %s", response.toString()));
+    }
+
+    private void doSendPost(final String url, final String json) throws Exception {
+
+        URL obj = new URL(url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        LOGGER.debug(String.format("Remote client response: %s", response.toString()));
+    }
+}
