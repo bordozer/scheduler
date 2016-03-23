@@ -17,5 +17,4 @@ public class SchedulerJob extends QuartzJobBean {
     protected void executeInternal(final JobExecutionContext context) throws JobExecutionException {
         System.out.println(String.format("JOB: #%d", schedulerTask.getId()));
     }
-
 }
