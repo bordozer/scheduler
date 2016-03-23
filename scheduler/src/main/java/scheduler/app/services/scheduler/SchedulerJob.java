@@ -9,12 +9,16 @@ public class SchedulerJob extends QuartzJobBean {
 
     private SchedulerTask schedulerTask;
 
+    public SchedulerJob() {
+    }
+
     public SchedulerJob(final SchedulerTask schedulerTask) {
         this.schedulerTask = schedulerTask;
     }
 
     @Override
     protected void executeInternal(final JobExecutionContext context) throws JobExecutionException {
-        System.out.println(String.format("JOB: #%d", schedulerTask.getId()));
+//        System.out.println(String.format("JOB: #%d", schedulerTask.getId()));
+        System.out.println("==========================");
     }
 }

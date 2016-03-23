@@ -31,6 +31,8 @@ public class QuartzConfig {
         schedulerFactory.setStartupDelay(0); // TODO: startup delay, set to 120 (seconds)
         schedulerFactory.setConfigLocation(new ClassPathResource("quartz.properties"));
 
+        schedulerFactory.start();
+
         return schedulerFactory;
     }
 

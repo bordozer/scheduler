@@ -12,17 +12,17 @@ import scheduler.app.models.SchedulerTask;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
 import javax.inject.Inject;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
-    private static final String CRON = "0 0/1 * * * ?"; // each minute
+    private static final String CRON = "0/5 * * * * ?"; // each minute
 
     @Inject
     private SchedulerTaskService schedulerTaskService;
-    ;
 
     @Override
     public List<Trigger> buildSchedulerJobTriggers() throws SchedulerException {
@@ -35,7 +35,6 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     String jobGroup = getJobGroup(schedulerTask);
                     String triggerName = getTriggerName(schedulerTask);
                     JobKey jobKey = new JobKey(jobName, jobGroup);
-                    TriggerKey triggerKey = new TriggerKey(triggerName, jobGroup);
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)
@@ -46,17 +45,23 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                             .withIdentity(triggerKey)
                             .withSchedule(CronScheduleBuilder.cronSchedule(CRON))
                             .build();*/
-                    return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON).getObject();
+                    try {
+                        return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON).getObject();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
 
                 }).collect(Collectors.toList());
     }
 
-    private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName, final String group, final String crone) {
+    private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName, final String group, final String crone) throws ParseException {
         CronTriggerFactoryBean stFactory = new CronTriggerFactoryBean();
         stFactory.setJobDetail(job);
         stFactory.setName(triggerName);
         stFactory.setGroup(group);
         stFactory.setCronExpression(crone);
+        stFactory.afterPropertiesSet();
         return stFactory;
     }
 
