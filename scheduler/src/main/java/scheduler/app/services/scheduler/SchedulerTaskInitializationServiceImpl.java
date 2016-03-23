@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
     public static final String SCHEDULER_TASK = "schedulerTask";
-    private static final String CRON = "0/5 * * * * ?"; // each minute
+    private static final String CRON = "0/15 * * * * ?";
 
     @Inject
     private SchedulerTaskService schedulerTaskService;
@@ -44,12 +44,6 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                             .withIdentity(jobKey)
                             .setJobData(dataMap)
                             .build();
-
-                    /*return TriggerBuilder
-                            .newTrigger()
-                            .withIdentity(triggerKey)
-                            .withSchedule(CronScheduleBuilder.cronSchedule(CRON))
-                            .build();*/
                     try {
                         return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON).getObject();
                     } catch (ParseException e) {
