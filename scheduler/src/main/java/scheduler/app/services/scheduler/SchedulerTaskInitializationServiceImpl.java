@@ -10,6 +10,7 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.app.models.SchedulerTask;
 import scheduler.app.services.remote.RemoteClientService;
+import scheduler.app.services.tasks.RemoteJobService;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
 import javax.inject.Inject;
@@ -20,13 +21,18 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
-    public static final String SCHEDULER_TASK_REMOTE_JOB = "schedulerTask";
-    public static final String SCHEDULER_TASK_HTTP_CLIENT_SERVICE = "remoteClientService";
+    public static final String SCHEDULER_TASK_USER = "SCHEDULER_TASK_USER";
+    public static final String SCHEDULER_TASK_REMOTE_JOB_ID = "SCHEDULER_TASK_REMOTE_JOB_ID";
+    public static final String REMOTE_JOB_SERVICE = "REMOTE_JOB_SERVICE";
+    public static final String SCHEDULER_TASK_HTTP_CLIENT_SERVICE = "SCHEDULER_TASK_HTTP_CLIENT_SERVICE";
 
     private static final String CRON = "0/15 * * * * ?";
 
     @Inject
     private SchedulerTaskService schedulerTaskService;
+
+    @Inject
+    private RemoteJobService remoteJobService;
 
     @Inject
     private RemoteClientService remoteClientService;
@@ -44,7 +50,9 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     JobKey jobKey = new JobKey(jobName, jobGroup);
 
                     JobDataMap dataMap = new JobDataMap();
-                    dataMap.put(SCHEDULER_TASK_REMOTE_JOB, schedulerTask.getRemoteJob());
+                    dataMap.put(SCHEDULER_TASK_USER, schedulerTask.getUser());
+                    dataMap.put(SCHEDULER_TASK_REMOTE_JOB_ID, schedulerTask.getRemoteJob().getId());
+                    dataMap.put(REMOTE_JOB_SERVICE, remoteJobService);
                     dataMap.put(SCHEDULER_TASK_HTTP_CLIENT_SERVICE, remoteClientService);
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)

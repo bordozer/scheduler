@@ -35,12 +35,12 @@ VALUES
 
 INSERT INTO T_REMOTE_JOB(C_REMOTE_JOB_ID, C_SCH_TASK_ID, C_REQUEST_URL, C_REQUEST_METHOD, C_USER_AUTH_STRING, C_POST_JSON)
 VALUES
-(1, 1, 'http://nba.com/',        'GET',    'ABC000N',  '{}'),
-(2, 2, 'http://nba.com',         'GET',    'BCD000W',  '{value:1}'),
-(3, 3, 'www.nba.com',            'GET',    'sfdffdf',  'null'),
-(4, 4, 'http://www.soccer.com/', 'POST',   '3453255',  '{}'),
-(5, 5, 'amerfoo.com',            'DELETE', 'fdbfd54',  '{}'),
-(6, 6, 'nhl.com',                'PUT',    '_^&%$*(',  '{}')
+(1, 1, 'http://_nba.com/',        'GET',    'ABC000N',  '{}'),
+(2, 2, 'http://_nba.com',         'GET',    'BCD000W',  '{value:1}'),
+(3, 3, 'www._nba.com',            'GET',    'sfdffdf',  'null'),
+(4, 4, 'http://www._soccer.com/', 'POST',   '3453255',  '{}'),
+(5, 5, '_amerfoo.com',            'DELETE', 'fdbfd54',  '{}'),
+(6, 6, '_nhl.com',                'PUT',    '_^&%$*(',  '{}')
 ;
 
 

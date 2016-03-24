@@ -2,13 +2,12 @@ package scheduler.app.services.remote;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import sun.net.www.protocol.http.HttpURLConnection;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Service
@@ -48,19 +47,19 @@ public class RemoteClientServiceImpl implements RemoteClientService {
         }
         in.close();
 
-        LOGGER.debug(String.format("Remote client response: %s", response.toString()));
+        LOGGER.debug(String.format("Remote client response: %s (%d)", response.toString(), responseCode));
     }
 
     private void doSendPost(final String url, final String json) throws Exception {
 
         URL obj = new URL(url);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+        String urlParameters = ""; // sn=C02G8416DRJM&cn=&locale=&caller=&num=12345
 
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -69,9 +68,6 @@ public class RemoteClientServiceImpl implements RemoteClientService {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
@@ -83,6 +79,6 @@ public class RemoteClientServiceImpl implements RemoteClientService {
         }
         in.close();
 
-        LOGGER.debug(String.format("Remote client response: %s", response.toString()));
+        LOGGER.debug(String.format("Remote client response: %s (%d)", response.toString(), responseCode));
     }
 }
