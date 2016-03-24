@@ -11,9 +11,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 @Service
-public class RemoteClientServiceImpl implements RemoteClientService {
+public class WebClientServiceImpl implements WebClientService {
 
-    private static final Logger LOGGER = Logger.getLogger(RemoteClientServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(WebClientServiceImpl.class);
 
     private final static String USER_AGENT = "Mozilla/5.0";
 

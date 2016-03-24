@@ -9,7 +9,7 @@ import org.quartz.Trigger;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.app.models.SchedulerTask;
-import scheduler.app.services.remote.RemoteClientService;
+import scheduler.app.services.remote.WebClientService;
 import scheduler.app.services.tasks.RemoteJobService;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
@@ -24,7 +24,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
     public static final String SCHEDULER_TASK_USER = "SCHEDULER_TASK_USER";
     public static final String SCHEDULER_TASK_REMOTE_JOB_ID = "SCHEDULER_TASK_REMOTE_JOB_ID";
     public static final String REMOTE_JOB_SERVICE = "REMOTE_JOB_SERVICE";
-    public static final String SCHEDULER_TASK_HTTP_CLIENT_SERVICE = "SCHEDULER_TASK_HTTP_CLIENT_SERVICE";
+    public static final String WEB_CLIENT_SERVICE = "WEB_CLIENT_SERVICE";
 
     private static final String CRON = "0/15 * * * * ?";
 
@@ -35,7 +35,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
     private RemoteJobService remoteJobService;
 
     @Inject
-    private RemoteClientService remoteClientService;
+    private WebClientService webClientService;
 
     @Override
     public List<Trigger> buildSchedulerJobTriggers() throws SchedulerException {
@@ -53,7 +53,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     dataMap.put(SCHEDULER_TASK_USER, schedulerTask.getUser());
                     dataMap.put(SCHEDULER_TASK_REMOTE_JOB_ID, schedulerTask.getRemoteJob().getId());
                     dataMap.put(REMOTE_JOB_SERVICE, remoteJobService);
-                    dataMap.put(SCHEDULER_TASK_HTTP_CLIENT_SERVICE, remoteClientService);
+                    dataMap.put(WEB_CLIENT_SERVICE, webClientService);
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)
