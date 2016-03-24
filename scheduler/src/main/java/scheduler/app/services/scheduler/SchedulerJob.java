@@ -1,7 +1,6 @@
 package scheduler.app.services.scheduler;
 
 import org.apache.log4j.Logger;
-import org.dom4j.IllegalAddException;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -47,9 +46,7 @@ public class SchedulerJob extends QuartzJobBean {
                 }
                 break;
             default:
-                String message = String.format("Unsupported Request Method: '%s' (remote job %s)", requestMethod, remoteJob);
-                LOGGER.warn(message);
-//                throw new IllegalAddException(message);
+                LOGGER.error(String.format("Unsupported Request Method: '%s' (remote job %s)", requestMethod, remoteJob));
         }
     }
 }

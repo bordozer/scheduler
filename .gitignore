@@ -7,3 +7,4 @@ log4j.xml
 *.properties
 *.iml
 *.log
+*.sh
