@@ -33,7 +33,7 @@ public class WebClientServiceImpl implements WebClientService {
                 break;
             case POST:
                 try {
-                    sendPost(requestUrl, parameters.getJson());
+                    sendPost(requestUrl, parameters.getPostJson());
                 } catch (Exception e) {
                     LOGGER.error(String.format("Error send POST request to %s", requestUrl), e);
                 }
@@ -66,6 +66,7 @@ public class WebClientServiceImpl implements WebClientService {
         LOGGER.debug(String.format("Remote client response: %s (%d)", response.toString(), responseCode));
     }
 
+    // TODO: postJSON
     private void sendPost(final String url, final String json) throws Exception {
 
         URL obj = new URL(url);

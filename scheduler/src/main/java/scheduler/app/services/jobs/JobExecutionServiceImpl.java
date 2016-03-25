@@ -23,11 +23,12 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 
     @Override
     public void execute(final Long remoteJobId) {
-
         RemoteJob remoteJob = remoteJobService.findById(remoteJobId);
+        HttpParameters parameters = new HttpParameters(remoteJob.getRequestUrl(), remoteJob.getRequestMethod())
+                .withPostJson(remoteJob.getPostJson());
 
         try {
-            webClientService.send(new HttpParameters(remoteJob.getRequestUrl(), remoteJob.getRequestMethod()));
+            webClientService.send(parameters);
             LOGGER.info(String.format("Remote job %s: successfully executed", remoteJob));
         } catch (IOException e) {
             LOGGER.error(String.format("Remote job %s: failed", remoteJob), e);

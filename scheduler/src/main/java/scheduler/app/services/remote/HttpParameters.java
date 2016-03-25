@@ -10,7 +10,7 @@ public class HttpParameters {
     private final String requestUrl;
     private final RequestMethod requestMethod;
     private Map<String, String> requestParameters;
-    private String json;
+    private String postJson;
 
     public HttpParameters(final String requestUrl) {
         this.requestUrl = requestUrl;
@@ -22,13 +22,13 @@ public class HttpParameters {
         this.requestMethod = requestMethod;
     }
 
-    public HttpParameters setRequestParameters(final Map<String, String> requestParameters) {
+    public HttpParameters withRequestParameters(final Map<String, String> requestParameters) {
         this.requestParameters = requestParameters;
         return this;
     }
 
-    public HttpParameters setJson(final String json) {
-        this.json = json;
+    public HttpParameters withPostJson(final String json) {
+        this.postJson = json;
         return this;
     }
 }
