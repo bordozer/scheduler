@@ -2,6 +2,7 @@ package scheduler.app.services.remote;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import scheduler.app.models.RequestMethod;
 import sun.net.www.protocol.http.HttpURLConnection;
 
 import java.io.BufferedReader;
@@ -18,16 +19,31 @@ public class WebClientServiceImpl implements WebClientService {
     private final static String USER_AGENT = "Mozilla/5.0";
 
     @Override
-    public void sendGet(final String url) throws IOException {
-        doSendGet(url);
+    public void send(final HttpParameters parameters) throws IOException {
+        String requestUrl = parameters.getRequestUrl();
+        RequestMethod requestMethod = parameters.getRequestMethod();
+
+        switch (requestMethod) {
+            case GET:
+                try {
+                    sendGet(requestUrl);
+                } catch (IOException e) {
+                    LOGGER.error(String.format("Error send GET request to %s", requestUrl), e);
+                }
+                break;
+            case POST:
+                try {
+                    sendPost(requestUrl, parameters.getJson());
+                } catch (Exception e) {
+                    LOGGER.error(String.format("Error send POST request to %s", requestUrl), e);
+                }
+                break;
+            default:
+                LOGGER.error(String.format("Unsupported Request Method: '%s'", requestMethod));
+        }
     }
 
-    @Override
-    public void sendPost(final String url, final String json) throws Exception {
-        doSendPost(url, json);
-    }
-
-    private void doSendGet(final String url) throws IOException {
+    private void sendGet(final String url) throws IOException {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -50,7 +66,7 @@ public class WebClientServiceImpl implements WebClientService {
         LOGGER.debug(String.format("Remote client response: %s (%d)", response.toString(), responseCode));
     }
 
-    private void doSendPost(final String url, final String json) throws Exception {
+    private void sendPost(final String url, final String json) throws Exception {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();

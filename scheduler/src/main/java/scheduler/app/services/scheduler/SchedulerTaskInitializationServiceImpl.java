@@ -9,8 +9,7 @@ import org.quartz.Trigger;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.app.models.SchedulerTask;
-import scheduler.app.services.remote.WebClientService;
-import scheduler.app.services.tasks.RemoteJobService;
+import scheduler.app.services.jobs.JobExecutionService;
 import scheduler.app.services.tasks.SchedulerTaskService;
 
 import javax.inject.Inject;
@@ -21,10 +20,9 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
-    public static final String SCHEDULER_TASK_USER = "SCHEDULER_TASK_USER";
     public static final String SCHEDULER_TASK_REMOTE_JOB_ID = "SCHEDULER_TASK_REMOTE_JOB_ID";
-    public static final String REMOTE_JOB_SERVICE = "REMOTE_JOB_SERVICE";
-    public static final String WEB_CLIENT_SERVICE = "WEB_CLIENT_SERVICE";
+    public static final String JOB_EXECUTION_SERVICE = "JOB_EXECUTION_SERVICE";
+    public static final String SCHEDULER_TASK_USER = "SCHEDULER_TASK_USER";
 
     private static final String CRON = "0/15 * * * * ?";
 
@@ -32,10 +30,7 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
     private SchedulerTaskService schedulerTaskService;
 
     @Inject
-    private RemoteJobService remoteJobService;
-
-    @Inject
-    private WebClientService webClientService;
+    private JobExecutionService jobExecutionService;
 
     @Override
     public List<Trigger> buildSchedulerJobTriggers() throws SchedulerException {
@@ -50,10 +45,9 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     JobKey jobKey = new JobKey(jobName, jobGroup);
 
                     JobDataMap dataMap = new JobDataMap();
-                    dataMap.put(SCHEDULER_TASK_USER, schedulerTask.getUser());
                     dataMap.put(SCHEDULER_TASK_REMOTE_JOB_ID, schedulerTask.getRemoteJob().getId());
-                    dataMap.put(REMOTE_JOB_SERVICE, remoteJobService);
-                    dataMap.put(WEB_CLIENT_SERVICE, webClientService);
+                    dataMap.put(SCHEDULER_TASK_USER, schedulerTask.getUser());
+                    dataMap.put(JOB_EXECUTION_SERVICE, jobExecutionService);
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
                             .withIdentity(jobKey)
