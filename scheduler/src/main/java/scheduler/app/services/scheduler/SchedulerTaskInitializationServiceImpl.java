@@ -1,5 +1,6 @@
 package scheduler.app.services.scheduler;
 
+import org.apache.log4j.Logger;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -20,9 +21,10 @@ import java.util.stream.Collectors;
 @Service
 public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInitializationService {
 
+    private static final Logger LOGGER = Logger.getLogger(SchedulerTaskInitializationServiceImpl.class);
+
     public static final String SCHEDULER_TASK_REMOTE_JOB_ID = "SCHEDULER_TASK_REMOTE_JOB_ID";
     public static final String JOB_EXECUTION_SERVICE = "JOB_EXECUTION_SERVICE";
-    public static final String SCHEDULER_TASK_USER = "SCHEDULER_TASK_USER";
 
     private static final String CRON = "0/15 * * * * ?";
 
@@ -46,7 +48,6 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
 
                     JobDataMap dataMap = new JobDataMap();
                     dataMap.put(SCHEDULER_TASK_REMOTE_JOB_ID, schedulerTask.getRemoteJob().getId());
-                    dataMap.put(SCHEDULER_TASK_USER, schedulerTask.getUser());
                     dataMap.put(JOB_EXECUTION_SERVICE, jobExecutionService);
 
                     JobDetail job = JobBuilder.newJob(SchedulerJob.class)
@@ -56,10 +57,9 @@ public class SchedulerTaskInitializationServiceImpl implements SchedulerTaskInit
                     try {
                         return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON).getObject();
                     } catch (ParseException e) {
-                        e.printStackTrace();
+                        LOGGER.error(String.format("Error scheduling task: %s", schedulerTask), e);
                         return null;
                     }
-
                 }).collect(Collectors.toList());
     }
 
