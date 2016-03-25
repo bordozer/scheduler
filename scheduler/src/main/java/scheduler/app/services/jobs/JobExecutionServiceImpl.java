@@ -8,7 +8,6 @@ import scheduler.app.services.remote.WebClientService;
 import scheduler.app.services.tasks.RemoteJobService;
 
 import javax.inject.Inject;
-import java.io.IOException;
 
 @Service
 public class JobExecutionServiceImpl implements JobExecutionService {
@@ -30,7 +29,7 @@ public class JobExecutionServiceImpl implements JobExecutionService {
         try {
             webClientService.send(parameters);
             LOGGER.info(String.format("Remote job %s: successfully executed", remoteJob));
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error(String.format("Remote job %s: failed", remoteJob), e);
         }
     }

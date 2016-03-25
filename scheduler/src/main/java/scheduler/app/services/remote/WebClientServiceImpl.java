@@ -19,28 +19,21 @@ public class WebClientServiceImpl implements WebClientService {
     private final static String USER_AGENT = "Mozilla/5.0";
 
     @Override
-    public void send(final HttpParameters parameters) throws IOException {
+    public void send(final HttpParameters parameters) throws Exception {
         String requestUrl = parameters.getRequestUrl();
         RequestMethod requestMethod = parameters.getRequestMethod();
 
         switch (requestMethod) {
             case GET:
-                try {
-                    sendGet(requestUrl);
-                } catch (IOException e) {
-                    LOGGER.error(String.format("Error send GET request to %s", requestUrl), e);
-                }
+                sendGet(requestUrl);
                 break;
             case POST:
-                try {
-                    sendPost(requestUrl, parameters.getPostJson());
-                } catch (Exception e) {
-                    LOGGER.error(String.format("Error send POST request to %s", requestUrl), e);
-                }
+                sendPost(requestUrl, parameters.getPostJson());
                 break;
             default:
                 LOGGER.error(String.format("Unsupported Request Method: '%s'", requestMethod));
         }
+
     }
 
     private void sendGet(final String url) throws IOException {
