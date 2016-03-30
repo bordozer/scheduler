@@ -2,6 +2,7 @@ package scheduler.rest.users;
 
 import com.jayway.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import org.hamcrest.Matcher;
 import org.testng.annotations.Test;
 import scheduler.rest.common.DataGenerator;
 import scheduler.rest.common.ResourcePath;
@@ -13,9 +14,9 @@ import scheduler.rest.dto.UserDto;
 import scheduler.rest.errors.ResponseExceptionsHolder;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 public class UserRegistration {
@@ -24,6 +25,7 @@ public class UserRegistration {
     public static final String FIELD_NAME = "name";
     public static final String FIELD_PASSWORD = "password";
     public static final String FIELD_PASSWORD_CONFIRM = "passwordConfirm";
+    public static final Matcher<Object> NOT_NULL_VALUE = notNullValue();
 
     @Test
     public void shouldNotRegisterUserIfNoDataProvided() {
@@ -35,17 +37,17 @@ public class UserRegistration {
 
         assertThat(8, is(registrationResponse.errorsCount()));
 
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.user_login_must_not_be_empty"));
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_too_long"));
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.user_login_must_not_be_empty"), NOT_NULL_VALUE);
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_too_long"), NOT_NULL_VALUE);
 
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.user_name_must_not_be_empty"));
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.name_too_long"));
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.user_name_must_not_be_empty"), NOT_NULL_VALUE);
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.name_too_long"), NOT_NULL_VALUE);
 
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.user_password_must_not_be_empty"));
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.password_too_long"));
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.user_password_must_not_be_empty"), NOT_NULL_VALUE);
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.password_too_long"), NOT_NULL_VALUE);
 
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.user_password_confirm_must_not_be_empty"));
-        assertNotNull(registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.password_confirmation_too_long"));
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.user_password_confirm_must_not_be_empty"), NOT_NULL_VALUE);
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD_CONFIRM, "errors.password_confirmation_too_long"), NOT_NULL_VALUE);
     }
 
     @Test

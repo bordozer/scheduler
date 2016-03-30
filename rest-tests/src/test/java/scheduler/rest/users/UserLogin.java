@@ -12,9 +12,8 @@ import scheduler.rest.dto.RegistrationResponse;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 public class UserLogin {
 
@@ -28,17 +27,17 @@ public class UserLogin {
     public void shouldFailNonPublicResourcesGettingIfUnauthorized() {
         Response response = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
         AuthResponse authResponse = response.as(AuthResponse.class);
-        assertEquals(HttpStatus.SC_UNAUTHORIZED, authResponse.getResponseCode());
-        assertEquals(UNAUTHORIZED, authResponse.getDetails().get(AuthResponse.AUTH_RESULT));
-        assertEquals(FULL_AUTHENTICATION_IS_REQUIRED_TO_ACCESS_THIS_RESOURCE, authResponse.getDetails().get(AuthResponse.ERROR));
+        assertThat(authResponse.getResponseCode(), is(HttpStatus.SC_UNAUTHORIZED));
+        assertThat(authResponse.getDetails().get(AuthResponse.AUTH_RESULT), is(UNAUTHORIZED));
+        assertThat(authResponse.getDetails().get(AuthResponse.ERROR), is(FULL_AUTHENTICATION_IS_REQUIRED_TO_ACCESS_THIS_RESOURCE));
     }
 
     @Test
     public void shouldFailLoginIfCredentialsAreWrong() {
         Response response = RestTestHelper.login(userData.getLogin(), userData.getPassword(), HttpStatus.SC_UNAUTHORIZED);
         AuthResponse authResponse = response.as(AuthResponse.class);
-        assertEquals(HttpStatus.SC_UNAUTHORIZED, authResponse.getResponseCode());
-        assertEquals(AUTHENTICATION_FAILURE, authResponse.getDetails().get(AuthResponse.AUTH_RESULT));
+        assertThat(authResponse.getResponseCode(), is(HttpStatus.SC_UNAUTHORIZED));
+        assertThat(authResponse.getDetails().get(AuthResponse.AUTH_RESULT), is(AUTHENTICATION_FAILURE));
     }
 
     @Test
@@ -49,8 +48,8 @@ public class UserLogin {
         // registration of new user is not a authentication - non public resources are not available
         Response taskListResponse2 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
         AuthResponse taskList2AuthResponse = taskListResponse2.as(AuthResponse.class);
-        assertEquals(HttpStatus.SC_UNAUTHORIZED, taskList2AuthResponse.getResponseCode());
-        assertEquals(UNAUTHORIZED, taskList2AuthResponse.getDetails().get(AuthResponse.AUTH_RESULT));
+        assertThat(taskList2AuthResponse.getResponseCode(), is(HttpStatus.SC_UNAUTHORIZED));
+        assertThat(taskList2AuthResponse.getDetails().get(AuthResponse.AUTH_RESULT), is(UNAUTHORIZED));
 
         // login as earlie registered user
         Response loginResponse2 = RestTestHelper.login(userData.getLogin(), userData.getPassword(), HttpStatus.SC_OK);
@@ -64,11 +63,11 @@ public class UserLogin {
         // log out
         Response logoutResponse = RestTestHelper.logout();
         AuthResponse logoutAuthResponse = logoutResponse.as(AuthResponse.class);
-        assertEquals(HttpStatus.SC_OK, logoutAuthResponse.getResponseCode());
+        assertThat(logoutAuthResponse.getResponseCode(), is(HttpStatus.SC_OK));
 
         // non public resources are not available again
         Response taskListResponse4 = RestTestHelper.doGet(SchedulerTaskRoutes.SCHEDULER_TASK_LIST, HttpStatus.SC_UNAUTHORIZED);
         AuthResponse taskList4AuthResponse = taskListResponse4.as(AuthResponse.class);
-        assertEquals(HttpStatus.SC_UNAUTHORIZED, taskList4AuthResponse.getResponseCode());
+        assertThat(taskList4AuthResponse.getResponseCode(), is(HttpStatus.SC_UNAUTHORIZED));
     }
 }
