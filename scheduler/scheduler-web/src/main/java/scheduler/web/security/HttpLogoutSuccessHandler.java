@@ -45,7 +45,7 @@ public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
             return StringUtils.EMPTY;
         }
 
-        User principal = (User) authentication.getPrincipal();
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
         User user = userService.findByLogin(principal.getUsername());
         return user.getUsername();
     }

@@ -30,7 +30,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
 
-        User principal = (User) authentication.getPrincipal();
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 
         User user = userService.findByLogin(principal.getUsername());
         UserSecureDetails userSecureDetails = userService.loadUserSecureDetails(user.getId());
