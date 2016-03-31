@@ -27,7 +27,7 @@ import java.io.IOException;
 		, "scheduler.core.converters"
 		, "scheduler.web.security"
 		, "scheduler.web.controllers"
-		, "scheduler.web.converters."
+		, "scheduler.web.converters"
 })
 public class RootContextConfig {
 
