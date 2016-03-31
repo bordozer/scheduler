@@ -1,7 +1,5 @@
 package scheduler.app.services.users;
 
-import com.github.springtestdbunit.annotation.DatabaseOperation;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Test;
 import scheduler.app.AbstractIntegrationTest;
 import scheduler.app.models.User;
