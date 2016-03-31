@@ -11,7 +11,7 @@
 	<modules>
 		<module>scheduler-core</module>
 		<module>scheduler-web-api</module>
-		<module>test-integration</module>
+		<module>tests-integration</module>
 	</modules>
 
 	<name>Scheduler Micro Service</name>
@@ -409,7 +409,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.3.0.M1</version>
+				<version>9.3.8.v20160314</version>
 				<configuration>
 					<httpConnector>
 						<!--host>localhost</host-->
