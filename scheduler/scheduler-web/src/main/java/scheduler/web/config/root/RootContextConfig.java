@@ -22,10 +22,12 @@ import java.io.IOException;
 @Configuration
 @EnableCaching // TODO: ENABLE
 @ComponentScan({
-		"scheduler.app.services"
-		, "scheduler.app.repositories"
-		, "scheduler.app.security"
-		, "scheduler.app.converters"
+		"scheduler.core.services"
+		, "scheduler.core.repositories"
+		, "scheduler.core.converters"
+		, "scheduler.web.security"
+		, "scheduler.web.controllers"
+		, "scheduler.web.converters."
 })
 public class RootContextConfig {
 

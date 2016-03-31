@@ -28,7 +28,7 @@ import javax.inject.Inject;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@ComponentScan(value = "scheduler.app.security")
+@ComponentScan(value = "scheduler.web.security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Inject
