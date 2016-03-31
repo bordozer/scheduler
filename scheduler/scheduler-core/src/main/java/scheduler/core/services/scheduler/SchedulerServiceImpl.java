@@ -28,9 +28,10 @@ public class SchedulerServiceImpl implements SchedulerService {
         if (isRunning()) {
             return;
         }
-        unscheduleTasks();
+//        unscheduleTasks();
         scheduleTasks();
-        schedulerFactoryBean.start();
+        getScheduler().start();
+//        schedulerFactoryBean.start();
     }
 
     @Override
@@ -58,19 +59,24 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     private void unscheduleTasks() throws SchedulerException {
-        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+        getScheduler().clear();
+        /*Scheduler scheduler = schedulerFactoryBean.getScheduler();
         scheduler.getTriggerKeys(GroupMatcher.anyGroup())
                 .stream()
-                .forEach(this::unscheduleTrigger);
+                .forEach(this::unscheduleTrigger);*/
     }
 
     private void unscheduleTrigger(final TriggerKey triggerKey) {
-        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+        Scheduler scheduler = getScheduler();
         try {
             scheduler.unscheduleJob(triggerKey);
         } catch (SchedulerException e) {
             LOGGER.warn(String.format("Cannot unschedule trigger: '%s'", triggerKey.getName()), e);
         }
+    }
+
+    private Scheduler getScheduler() {
+        return schedulerFactoryBean.getScheduler();
     }
 
     private boolean isRunning() {

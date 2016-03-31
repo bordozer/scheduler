@@ -4,6 +4,7 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import scheduler.core.services.jobs.JobExecutionService;
 
 public class SchedulerJob extends QuartzJobBean {
 
@@ -12,7 +13,7 @@ public class SchedulerJob extends QuartzJobBean {
         JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 
         Long remoteJobId = (Long) dataMap.get(SchedulerJobServiceImpl.SCHEDULER_TASK_REMOTE_JOB_ID);
-        scheduler.core.services.jobs.JobExecutionService jobExecutionService = (scheduler.core.services.jobs.JobExecutionService) dataMap.get(SchedulerJobServiceImpl.JOB_EXECUTION_SERVICE);
+        JobExecutionService jobExecutionService = (JobExecutionService) dataMap.get(SchedulerJobServiceImpl.JOB_EXECUTION_SERVICE);
 
         jobExecutionService.execute(remoteJobId);
     }

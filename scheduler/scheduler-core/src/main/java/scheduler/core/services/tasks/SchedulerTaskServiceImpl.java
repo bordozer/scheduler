@@ -2,9 +2,12 @@ package scheduler.core.services.tasks;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import scheduler.core.converters.entity.SchedulerTaskEntityConverter;
 import scheduler.core.entities.RemoteJobEntity;
-import scheduler.core.repositories.SchedulerTaskRepository;
+import scheduler.core.entities.SchedulerTaskEntity;
+import scheduler.core.exceptions.EntityNotFoundException;
 import scheduler.core.models.SchedulerTask;
+import scheduler.core.repositories.SchedulerTaskRepository;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -22,7 +25,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	private SchedulerTaskRepository schedulerTaskRepository;
 
 	@Inject
-	private scheduler.core.converters.entity.SchedulerTaskEntityConverter schedulerTaskEntityConverter;
+	private SchedulerTaskEntityConverter schedulerTaskEntityConverter;
 
 	@Override
 	public List<SchedulerTask> loadAll() {
@@ -50,7 +53,7 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 		Assert.notNull(schedulerTask, MODEL_MUST_NOT_BE_NULL);
 		Assert.notNull(schedulerTask.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 
-		scheduler.core.entities.SchedulerTaskEntity schedulerTaskEntity = new scheduler.core.entities.SchedulerTaskEntity();
+		SchedulerTaskEntity schedulerTaskEntity = new SchedulerTaskEntity();
 		RemoteJobEntity remoteJob = new RemoteJobEntity();
 		schedulerTaskEntity.setRemoteJob(remoteJob);
 		remoteJob.setSchedulerTask(schedulerTaskEntity);
@@ -64,9 +67,9 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 		Assert.notNull(schedulerTask, MODEL_MUST_NOT_BE_NULL);
 		Assert.notNull(schedulerTask.getRemoteJob(), REMOTE_JOB_MUST_NOT_BE_NULL);
 
-		scheduler.core.entities.SchedulerTaskEntity schedulerTaskEntity = schedulerTaskRepository.findByUserIdAndId(userId, schedulerTask.getId());
+		SchedulerTaskEntity schedulerTaskEntity = schedulerTaskRepository.findByUserIdAndId(userId, schedulerTask.getId());
 		if (schedulerTaskEntity == null) {
-			throw new scheduler.core.exceptions.EntityNotFoundException(String.format("Scheduler Task #%d cannot be modified: not found (user %d)",
+			throw new EntityNotFoundException(String.format("Scheduler Task #%d cannot be modified: not found (user %d)",
 					userId, schedulerTask.getId()));
 		}
 
@@ -74,19 +77,19 @@ public class SchedulerTaskServiceImpl implements SchedulerTaskService {
 	}
 
 	@Override
-	public List<scheduler.core.entities.SchedulerTaskEntity> delete(final Long userId, final Long taskId) {
+	public List<SchedulerTaskEntity> delete(final Long userId, final Long taskId) {
 		return schedulerTaskRepository.deleteAllByUserIdAndId(userId, taskId);
 	}
 
-	private List<SchedulerTask> toModel(final List<scheduler.core.entities.SchedulerTaskEntity> allByUserId) {
+	private List<SchedulerTask> toModel(final List<SchedulerTaskEntity> allByUserId) {
 		return allByUserId.stream()
 				.map(schedulerTaskEntityConverter::toModel)
 				.collect(Collectors.toList());
 	}
 
-	private SchedulerTask populateAndSave(final scheduler.core.entities.SchedulerTaskEntity taskEntity, final SchedulerTask schedulerTask) {
+	private SchedulerTask populateAndSave(final SchedulerTaskEntity taskEntity, final SchedulerTask schedulerTask) {
 		schedulerTaskEntityConverter.populateEntity(taskEntity, schedulerTask);
-		scheduler.core.entities.SchedulerTaskEntity savedEntity = schedulerTaskRepository.saveAndFlush(taskEntity);
+		SchedulerTaskEntity savedEntity = schedulerTaskRepository.saveAndFlush(taskEntity);
 		return schedulerTaskEntityConverter.toModel(savedEntity);
 	}
 }

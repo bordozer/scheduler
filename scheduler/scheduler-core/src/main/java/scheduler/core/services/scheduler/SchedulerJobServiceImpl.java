@@ -30,7 +30,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     private static final String QUARTZ_JOB_GROUP_PATTERN = "QUARTZ_JOB_GROUP_%d";
     private static final String QUARTZ_TRIGGER_PATTERN = "QUARTZ_TRIGGER_%d_%d";
 
-    private static final String CRON = "0/15 * * * * ?"; // TODO: temporary, will be read from Scheduler Task parameters
+    private static final String CRON = "0/5 * * * * ?"; // TODO: temporary, will be read from Scheduler Task parameters
 
     @Inject
     private SchedulerTaskService schedulerTaskService;
