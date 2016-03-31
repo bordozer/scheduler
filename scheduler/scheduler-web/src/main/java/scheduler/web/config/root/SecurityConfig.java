@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
-import scheduler.core.utils.Parameters;
+import scheduler.web.utils.Parameters;
 import scheduler.web.security.AuthFailureHandler;
 import scheduler.web.security.AuthSuccessHandler;
 import scheduler.web.security.HttpAuthenticationEntryPoint;

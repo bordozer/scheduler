@@ -1,4 +1,4 @@
-package scheduler.core.utils;
+package scheduler.web.utils;
 
 public class Parameters {
 
