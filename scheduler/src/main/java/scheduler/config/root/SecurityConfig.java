@@ -16,12 +16,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import scheduler.app.security.AuthFailureHandler;
 import scheduler.app.security.AuthSuccessHandler;
 import scheduler.app.security.HttpAuthenticationEntryPoint;
 import scheduler.app.security.HttpLogoutSuccessHandler;
 import scheduler.app.security.SecurityUserDetailsService;
+import scheduler.app.utils.Parameters;
 
 import javax.inject.Inject;
 
