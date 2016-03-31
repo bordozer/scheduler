@@ -27,9 +27,8 @@ public class SchedulerServiceImpl implements SchedulerService {
         if (isRunning()) {
             return;
         }
-        unscheduleTasks();
-        scheduleTasks();
-//        getScheduler().start();
+        unscheduleAllTasks();
+        scheduleAllTasks();
         schedulerFactoryBean.start();
     }
 
@@ -43,7 +42,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleTask(final Long scheduleTaskId) {
-        schedulerJobService.buildSchedulerJobTrigger(scheduleTaskId);
+        schedulerFactoryBean.setTriggers(schedulerJobService.buildSchedulerJobTrigger(scheduleTaskId));
     }
 
     @Override
@@ -52,7 +51,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public void scheduleTasks() {
+    public void scheduleAllTasks() {
         List<Trigger> triggers = schedulerJobService.buildSchedulerJobTriggers();
         Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
         schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
@@ -64,7 +63,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public void unscheduleTasks() throws SchedulerException {
+    public void unscheduleAllTasks() throws SchedulerException {
         getScheduler().clear();
         /*Scheduler scheduler = schedulerFactoryBean.getScheduler();
         scheduler.getTriggerKeys(GroupMatcher.anyGroup())

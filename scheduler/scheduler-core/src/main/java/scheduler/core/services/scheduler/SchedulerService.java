@@ -12,9 +12,9 @@ public interface SchedulerService {
 
     void unScheduleTask(Long scheduleTaskId);
 
-    void unscheduleTasks() throws SchedulerException;
+    void unscheduleAllTasks() throws SchedulerException;
 
-    void scheduleTasks();
+    void scheduleAllTasks();
 
     boolean isRunning();
 }
