@@ -11,7 +11,7 @@
 	<modules>
 		<module>scheduler-core</module>
 		<module>scheduler-web</module>
-		<module>tests-integration</module>
+		<module>scheduler-tests-integration</module>
 	</modules>
 
 	<name>Scheduler Micro Service</name>
