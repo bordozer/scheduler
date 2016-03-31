@@ -11,4 +11,8 @@ public interface SystemVarsService {
 	String getDbPassword();
 
 	boolean showDbLog();
+
+	boolean schedulerAutorun();
+
+	int schedulerStartupDelay();
 }

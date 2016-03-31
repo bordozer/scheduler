@@ -11,8 +11,8 @@ public class SchedulerJob extends QuartzJobBean {
     protected void executeInternal(final JobExecutionContext context) throws JobExecutionException {
         JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 
-        Long remoteJobId = (Long) dataMap.get(SchedulerTaskInitializationServiceImpl.SCHEDULER_TASK_REMOTE_JOB_ID);
-        scheduler.core.services.jobs.JobExecutionService jobExecutionService = (scheduler.core.services.jobs.JobExecutionService) dataMap.get(SchedulerTaskInitializationServiceImpl.JOB_EXECUTION_SERVICE);
+        Long remoteJobId = (Long) dataMap.get(SchedulerJobServiceImpl.SCHEDULER_TASK_REMOTE_JOB_ID);
+        scheduler.core.services.jobs.JobExecutionService jobExecutionService = (scheduler.core.services.jobs.JobExecutionService) dataMap.get(SchedulerJobServiceImpl.JOB_EXECUTION_SERVICE);
 
         jobExecutionService.execute(remoteJobId);
     }

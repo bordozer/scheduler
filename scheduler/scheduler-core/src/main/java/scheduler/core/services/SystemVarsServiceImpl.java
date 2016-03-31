@@ -69,6 +69,16 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 		return config.getBoolean("db.default.logStatements", false);
 	}
 
+	@Override
+	public boolean schedulerAutorun() {
+		return config.getBoolean("scheduler.autorun", false);
+	}
+
+	@Override
+	public int schedulerStartupDelay() {
+		return config.getInt("scheduler.startup.delay", 0);
+	}
+
 	private File getPropertyFile(final String fileName) {
 		return new File(String.format("%s/%s.properties", getPropertiesPath(), fileName));
 	}

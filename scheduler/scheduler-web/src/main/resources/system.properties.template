@@ -1,2 +1,8 @@
 system.projectName=Scheduler Micro Service
 
+# run the scheduler with system start
+scheduler.autorun=true
+
+# scheduler startup delay (seconds)
+scheduler.startup.delay=120
+
