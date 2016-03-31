@@ -27,9 +27,9 @@ import java.util.Map;
 @EnableTransactionManagement
 @EnableJpaRepositories("scheduler.app.repositories")
 @ComponentScan({
-        "scheduler.app.repositories",
-        "scheduler.app.services",
-        "scheduler.app.converters"
+        "scheduler.core.repositories",
+        "scheduler.core.services",
+        "scheduler.core.converters"
 })
 public class HibernateTestConfig {
 

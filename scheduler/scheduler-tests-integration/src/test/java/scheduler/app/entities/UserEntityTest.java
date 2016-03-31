@@ -2,8 +2,10 @@ package scheduler.app.entities;
 
 import org.junit.Test;
 import scheduler.app.AbstractIntegrationTest;
-import scheduler.app.models.UserRole;
-import scheduler.app.repositories.UserRepository;
+import scheduler.core.entities.UserEntity;
+import scheduler.core.entities.UserSecureDetailsEntity;
+import scheduler.core.models.UserRole;
+import scheduler.core.repositories.UserRepository;
 
 import javax.inject.Inject;
 

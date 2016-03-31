@@ -6,9 +6,10 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Test;
 import org.springframework.dao.DataIntegrityViolationException;
 import scheduler.app.AbstractIntegrationTest;
-import scheduler.app.entities.UserEntity;
-import scheduler.app.entities.UserSecureDetailsEntity;
-import scheduler.app.models.UserRole;
+import scheduler.core.entities.UserEntity;
+import scheduler.core.entities.UserSecureDetailsEntity;
+import scheduler.core.models.UserRole;
+import scheduler.core.repositories.UserRepository;
 
 import javax.inject.Inject;
 

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("scheduler.app.controllers")
+@ComponentScan("scheduler.web.controllers")
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
 
 	@Override
