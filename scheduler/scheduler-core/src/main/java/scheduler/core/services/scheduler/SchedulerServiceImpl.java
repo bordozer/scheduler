@@ -5,7 +5,6 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.TriggerKey;
-import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +27,9 @@ public class SchedulerServiceImpl implements SchedulerService {
         if (isRunning()) {
             return;
         }
-//        unscheduleTasks();
+        unscheduleTasks();
         scheduleTasks();
-        getScheduler().start();
+//        getScheduler().start();
         schedulerFactoryBean.start();
     }
 
@@ -49,7 +48,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void unScheduleTask(final Long scheduleTaskId) {
-
+//        getScheduler().getJobDetail()
     }
 
     @Override
@@ -57,6 +56,11 @@ public class SchedulerServiceImpl implements SchedulerService {
         List<Trigger> triggers = schedulerJobService.buildSchedulerJobTriggers();
         Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
         schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
+        /*try {
+            getScheduler().scheduleJob(cronTriggerFactoryBeen[0]);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }*/
     }
 
     @Override

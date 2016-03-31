@@ -10,6 +10,7 @@ import org.quartz.Trigger;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.stereotype.Service;
 import scheduler.core.models.SchedulerTask;
+import scheduler.core.models.User;
 import scheduler.core.services.jobs.JobExecutionService;
 import scheduler.core.services.tasks.SchedulerTaskService;
 
@@ -52,9 +53,11 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     }
 
     private CronTrigger buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
+        User user = schedulerTask.getUser();
+
         String jobName = getJobName(schedulerTask);
-        String jobGroup = getJobGroup(schedulerTask);
-        String triggerName = getTriggerName(schedulerTask);
+        String jobGroup = getJobGroup(user.getId());
+        String triggerName = getTriggerName(user.getId(), schedulerTask.getId());
         JobKey jobKey = new JobKey(jobName, jobGroup);
 
         JobDataMap dataMap = new JobDataMap();
@@ -66,7 +69,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
                 .setJobData(dataMap)
                 .build();
         try {
-            return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON).getObject();
+            return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON, schedulerTask.getTaskName()).getObject();
         } catch (ParseException e) {
             LOGGER.error(String.format("Error scheduling task: %s", schedulerTask), e);
             return null;
@@ -74,12 +77,13 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     }
 
     private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName,
-                                                          final String group, final String crone) throws ParseException {
+                                                          final String group, final String crone, final String taskName) throws ParseException {
         CronTriggerFactoryBean stFactory = new CronTriggerFactoryBean();
         stFactory.setJobDetail(job);
         stFactory.setName(triggerName);
         stFactory.setGroup(group);
         stFactory.setCronExpression(crone);
+        stFactory.setDescription(taskName);
         stFactory.afterPropertiesSet();
 
         return stFactory;
@@ -89,11 +93,11 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
         return String.format(QUARTZ_JOB_PATTERN, schedulerTask.getUser().getId(), schedulerTask.getId());
     }
 
-    private String getJobGroup(final SchedulerTask schedulerTask) {
-        return String.format(QUARTZ_JOB_GROUP_PATTERN, schedulerTask.getUser().getId());
+    private String getJobGroup(final Long userId) {
+        return String.format(QUARTZ_JOB_GROUP_PATTERN, userId);
     }
 
-    private String getTriggerName(final SchedulerTask schedulerTask) {
-        return String.format(QUARTZ_TRIGGER_PATTERN, schedulerTask.getUser().getId(), schedulerTask.getId());
+    private String getTriggerName(final Long userId, final Long schedulerTaskId) {
+        return String.format(QUARTZ_TRIGGER_PATTERN, userId, schedulerTaskId);
     }
 }
