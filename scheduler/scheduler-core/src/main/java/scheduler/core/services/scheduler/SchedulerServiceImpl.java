@@ -24,18 +24,18 @@ public class SchedulerServiceImpl implements SchedulerService {
     private SchedulerJobService schedulerJobService;
 
     @Override
-    public void start() throws SchedulerException {
+    public void startScheduler() throws SchedulerException {
         if (isRunning()) {
             return;
         }
 //        unscheduleTasks();
         scheduleTasks();
         getScheduler().start();
-//        schedulerFactoryBean.start();
+        schedulerFactoryBean.start();
     }
 
     @Override
-    public void stop() {
+    public void stopScheduler() {
         if (!isRunning()) {
             return;
         }
@@ -44,7 +44,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleTask(final Long scheduleTaskId) {
-
+        schedulerJobService.buildSchedulerJobTrigger(scheduleTaskId);
     }
 
     @Override
@@ -52,18 +52,25 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     }
 
-    private void scheduleTasks() {
+    @Override
+    public void scheduleTasks() {
         List<Trigger> triggers = schedulerJobService.buildSchedulerJobTriggers();
         Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
         schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
     }
 
-    private void unscheduleTasks() throws SchedulerException {
+    @Override
+    public void unscheduleTasks() throws SchedulerException {
         getScheduler().clear();
         /*Scheduler scheduler = schedulerFactoryBean.getScheduler();
         scheduler.getTriggerKeys(GroupMatcher.anyGroup())
                 .stream()
                 .forEach(this::unscheduleTrigger);*/
+    }
+
+    @Override
+    public boolean isRunning() {
+        return schedulerFactoryBean.isRunning();
     }
 
     private void unscheduleTrigger(final TriggerKey triggerKey) {
@@ -77,9 +84,5 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     private Scheduler getScheduler() {
         return schedulerFactoryBean.getScheduler();
-    }
-
-    private boolean isRunning() {
-        return schedulerFactoryBean.isRunning();
     }
 }

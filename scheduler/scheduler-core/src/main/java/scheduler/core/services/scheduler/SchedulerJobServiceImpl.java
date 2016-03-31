@@ -47,7 +47,11 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     }
 
     @Override
-    public CronTrigger buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
+    public Trigger buildSchedulerJobTrigger(final Long schedulerTaskId) {
+        return buildSchedulerJobTrigger(schedulerTaskService.load(schedulerTaskId));
+    }
+
+    private CronTrigger buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
         String jobName = getJobName(schedulerTask);
         String jobGroup = getJobGroup(schedulerTask);
         String triggerName = getTriggerName(schedulerTask);

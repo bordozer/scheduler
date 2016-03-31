@@ -4,11 +4,17 @@ import org.quartz.SchedulerException;
 
 public interface SchedulerService {
 
-    void start() throws SchedulerException;
+    void startScheduler() throws SchedulerException;
 
-    void stop();
+    void stopScheduler();
 
     void scheduleTask(Long scheduleTaskId);
 
     void unScheduleTask(Long scheduleTaskId);
+
+    void unscheduleTasks() throws SchedulerException;
+
+    void scheduleTasks();
+
+    boolean isRunning();
 }

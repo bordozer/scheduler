@@ -41,7 +41,7 @@ public class QuartzConfig {
 
         public void init() throws SchedulerException {
             if (systemVarsService.schedulerAutorun()) {
-                schedulerService.start();
+                schedulerService.startScheduler();
             }
         }
     }
