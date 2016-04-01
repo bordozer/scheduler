@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <artifactId>schemway</artifactId>
+        <groupId>scheduler-micro-service</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>schemway-db-evolution</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <lqb.changeLogFile>liquibase/db.changelog-master.xml</lqb.changeLogFile>
+
+        <lqb.jdbcDriver>org.h2.Driver</lqb.jdbcDriver>
+        <lqb.dbUrl>jdbc:h2:~/dev/db/h2-db/scheduler;MODE=Oracle;AUTO_SERVER=TRUE</lqb.dbUrl>
+        <lqb.dbUsername>sa</lqb.dbUsername>
+        <lqb.dbPassword></lqb.dbPassword>
+        <lqb.prompt>true</lqb.prompt>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <changeLogFile>${lqb.changeLogFile}</changeLogFile>
+                    <driver>${lqb.jdbcDriver}</driver>
+                    <url>${lqb.dbUrl}</url>
+                    <username>${lqb.dbUsername}</username>
+                    <password>${lqb.dbPassword}</password>
+                    <promptOnNonLocalDatabase>${lqb.prompt}</promptOnNonLocalDatabase>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>

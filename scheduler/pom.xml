@@ -13,6 +13,7 @@
 		<module>schemway-scheduler</module>
 		<module>schemway-web</module>
 		<module>schemway-tests-integration</module>
+		<module>schemway-db-evolution</module>
 	</modules>
 
 	<name>Scheduler Micro Service</name>
