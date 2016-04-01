@@ -25,7 +25,7 @@ import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("schemway.app.repositories")
+@EnableJpaRepositories("schemway.core.repositories")
 @ComponentScan({
         "schemway.core.repositories",
         "schemway.core.services",
@@ -34,6 +34,8 @@ import java.util.Map;
 public class HibernateTestConfig {
 
     public static final String MIGRATION_SCHEMA_SQL = "migration/V1__schema.sql";
+
+    private static final String SCHEMWAY_ENTITIES = "schemway.core.entities";
 
     @Bean(name = "dataSource")
     public EmbeddedDatabase dataSource() {
@@ -77,7 +79,7 @@ public class HibernateTestConfig {
 
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
-        entityManagerFactory.setPackagesToScan("scheduler.app.entities");
+        entityManagerFactory.setPackagesToScan(SCHEMWAY_ENTITIES);
         entityManagerFactory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
         entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactory.setDataSource(dataSource());
