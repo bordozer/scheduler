@@ -3,11 +3,11 @@ package converters;
 import com.beust.jcommander.internal.Lists;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import scheduler.core.models.Model;
-import scheduler.core.models.User;
-import scheduler.web.converters.AbstractGenericDtoConverter;
-import scheduler.web.dto.Dto;
-import scheduler.web.dto.UserDto;
+import schemway.core.models.Model;
+import schemway.core.models.User;
+import schemway.web.converters.AbstractGenericDtoConverter;
+import schemway.web.dto.Dto;
+import schemway.web.dto.UserDto;
 import utils.TestDataModels;
 
 import java.util.List;

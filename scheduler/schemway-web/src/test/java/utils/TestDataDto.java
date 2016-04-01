@@ -1,10 +1,10 @@
 package utils;
 
-import scheduler.web.controllers.rest.scheduler.tasks.item.edit.dto.RemoteJobEditDto;
-import scheduler.web.controllers.rest.scheduler.tasks.item.edit.dto.SchedulerTaskEditDto;
-import scheduler.web.dto.RemoteJobDto;
-import scheduler.web.dto.SchedulerTaskDto;
-import scheduler.web.dto.UserDto;
+import schemway.web.controllers.rest.scheduler.tasks.item.edit.dto.RemoteJobEditDto;
+import schemway.web.controllers.rest.scheduler.tasks.item.edit.dto.SchedulerTaskEditDto;
+import schemway.web.dto.RemoteJobDto;
+import schemway.web.dto.SchedulerTaskDto;
+import schemway.web.dto.UserDto;
 
 public class TestDataDto {
 

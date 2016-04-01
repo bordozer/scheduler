@@ -4,25 +4,25 @@
 
 	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false"/>
 
-	<cache name="scheduler.app.cache.user"
+	<cache name="schemway.app.cache.user"
 		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
-	<cache name="scheduler.app.cache.users"
+	<cache name="schemway.app.cache.users"
 		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
-	<cache name="scheduler.app.cache.scheduler-task"
+	<cache name="schemway.app.cache.scheduler-task"
 		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
-	<cache name="scheduler.app.cache.scheduler-tasks"
+	<cache name="schemway.app.cache.scheduler-tasks"
 		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"

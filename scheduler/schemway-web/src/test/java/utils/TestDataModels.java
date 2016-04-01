@@ -1,9 +1,9 @@
 package utils;
 
-import scheduler.core.models.RemoteJob;
-import scheduler.core.models.SchedulerTask;
-import scheduler.core.models.User;
-import scheduler.core.models.UserSecureDetails;
+import schemway.core.models.RemoteJob;
+import schemway.core.models.SchedulerTask;
+import schemway.core.models.User;
+import schemway.core.models.UserSecureDetails;
 
 public class TestDataModels {
 

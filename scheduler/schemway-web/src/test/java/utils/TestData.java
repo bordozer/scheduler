@@ -1,8 +1,8 @@
 package utils;
 
-import scheduler.core.models.RequestMethod;
-import scheduler.core.models.SchedulerTaskType;
-import scheduler.core.models.UserRole;
+import schemway.core.models.RequestMethod;
+import schemway.core.models.SchedulerTaskType;
+import schemway.core.models.UserRole;
 
 public class TestData {
 
