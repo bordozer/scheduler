@@ -17,6 +17,8 @@ import javax.inject.Inject;
 @EnableScheduling
 public class QuartzConfig {
 
+    public static final String SCHEDULER_MICRO_SERVICE = "SCHEDULER_MICRO_SERVICE";
+
     @Inject
     private SystemVarsService systemVarsService;
 
@@ -26,7 +28,7 @@ public class QuartzConfig {
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() {
         SchedulerFactoryBean schedulerFactory = new SchedulerFactoryBean();
-        schedulerFactory.setSchedulerName("SCHEDULER_MICRO_SERVICE");
+        schedulerFactory.setSchedulerName(SCHEDULER_MICRO_SERVICE);
         schedulerFactory.setStartupDelay(systemVarsService.schedulerStartupDelay());
         schedulerFactory.setConfigLocation(new ClassPathResource("quartz.properties"));
         schedulerFactory.start();

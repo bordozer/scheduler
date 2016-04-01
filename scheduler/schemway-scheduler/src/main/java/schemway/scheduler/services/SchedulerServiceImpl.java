@@ -60,11 +60,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
         schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
-        /*try {
-            getScheduler().scheduleJob(cronTriggerFactoryBeen[0]);
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }*/
+
         LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", cronTriggerFactoryBeen.length));
     }
 
