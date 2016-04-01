@@ -3,16 +3,16 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>schems</artifactId>
+	<artifactId>schemway</artifactId>
 	<groupId>scheduler-micro-service</groupId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>schems-core</module>
-		<module>schems-web</module>
-		<module>schems-tests-integration</module>
-		<module>schems-scheduler</module>
+		<module>schemway-core</module>
+		<module>schemway-scheduler</module>
+		<module>schemway-web</module>
+		<module>schemway-tests-integration</module>
 	</modules>
 
 	<name>Scheduler Micro Service</name>
