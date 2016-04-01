@@ -29,7 +29,7 @@ public class QuartzConfig {
         schedulerFactory.setSchedulerName("SCHEDULER_MICRO_SERVICE");
         schedulerFactory.setStartupDelay(systemVarsService.schedulerStartupDelay());
         schedulerFactory.setConfigLocation(new ClassPathResource("quartz.properties"));
-//        schedulerFactory.start();
+        schedulerFactory.start();
         return schedulerFactory;
     }
 

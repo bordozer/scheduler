@@ -29,7 +29,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         }
         unscheduleAllTasks();
         scheduleAllTasks();
-        schedulerFactoryBean.start();
+//        schedulerFactoryBean.start();
     }
 
     @Override
@@ -53,6 +53,11 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public void scheduleAllTasks() {
         List<Trigger> triggers = schedulerJobService.buildSchedulerJobTriggers();
+
+        if (triggers == null || triggers.size() == 0) {
+            return;
+        }
+
         Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
         schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
         /*try {
@@ -60,6 +65,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         } catch (SchedulerException e) {
             e.printStackTrace();
         }*/
+        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", cronTriggerFactoryBeen.length));
     }
 
     @Override
@@ -69,6 +75,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         scheduler.getTriggerKeys(GroupMatcher.anyGroup())
                 .stream()
                 .forEach(this::unscheduleTrigger);*/
+        LOGGER.debug("All scheduler tasks have been cleaned up successfully");
     }
 
     @Override
