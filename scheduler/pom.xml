@@ -9,9 +9,10 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>scheduler-core</module>
-		<module>scheduler-web</module>
-		<module>scheduler-tests-integration</module>
+		<module>schems-core</module>
+		<module>schems-web</module>
+		<module>schems-tests-integration</module>
+		<module>schems-scheduler</module>
 	</modules>
 
 	<name>Scheduler Micro Service</name>
