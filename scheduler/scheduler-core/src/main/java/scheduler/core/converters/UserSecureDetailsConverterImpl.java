@@ -1,4 +1,4 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class UserSecureDetailsConverterImpl implements UserSecureDetailsConverte
 	private UserRepository userRepository;
 
 	@Inject
-	private scheduler.core.converters.entity.UserEntityConverter userEntityConverter;
+	private UserEntityConverter userEntityConverter;
 
 	@Override
 	public void populateEntity(final UserSecureDetailsEntity entity, final UserSecureDetails model) {

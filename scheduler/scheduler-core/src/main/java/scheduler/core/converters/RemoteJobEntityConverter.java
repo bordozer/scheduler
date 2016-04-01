@@ -1,4 +1,4 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import scheduler.core.entities.RemoteJobEntity;
 import scheduler.core.models.RemoteJob;

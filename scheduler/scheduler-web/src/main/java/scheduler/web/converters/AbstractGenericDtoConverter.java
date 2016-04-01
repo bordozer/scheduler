@@ -1,4 +1,4 @@
-package scheduler.web.converters.dto;
+package scheduler.web.converters;
 
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;

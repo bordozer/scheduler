@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import scheduler.web.controllers.rest.users.edit.converters.UserEditDtoConverter;
 import scheduler.web.controllers.rest.users.edit.dto.NewUserDto;
 import scheduler.web.controllers.rest.users.edit.dto.RegistrationResponse;
-import scheduler.web.converters.dto.UserDtoConverter;
+import scheduler.web.converters.UserDtoConverter;
 import scheduler.web.dto.UserDto;
 
 import javax.inject.Inject;

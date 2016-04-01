@@ -1,4 +1,4 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import scheduler.core.models.UserSecureDetails;
 

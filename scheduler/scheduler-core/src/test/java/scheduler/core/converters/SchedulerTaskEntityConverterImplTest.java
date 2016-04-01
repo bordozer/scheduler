@@ -1,4 +1,4 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,6 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
+import scheduler.core.converters.RemoteJobEntityConverter;
+import scheduler.core.converters.RemoteJobEntityConverterImpl;
+import scheduler.core.converters.SchedulerTaskEntityConverterImpl;
+import scheduler.core.converters.UserEntityConverter;
 import scheduler.core.entities.RemoteJobEntity;
 import scheduler.core.entities.SchedulerTaskEntity;
 import scheduler.core.entities.UserEntity;
@@ -23,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class SchedulerTaskEntityConverterImplTest {
 
     @InjectMocks
-    private scheduler.core.converters.entity.SchedulerTaskEntityConverterImpl sut = new SchedulerTaskEntityConverterImpl();
+    private SchedulerTaskEntityConverterImpl sut = new SchedulerTaskEntityConverterImpl();
 
     @Spy
     private RemoteJobEntityConverter remoteJobEntityConverter = new RemoteJobEntityConverterImpl();
@@ -32,7 +36,7 @@ public class SchedulerTaskEntityConverterImplTest {
     private UserRepository userRepository;
 
     @Mock
-    private scheduler.core.converters.entity.UserEntityConverter userEntityConverter;
+    private UserEntityConverter userEntityConverter;
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfEntityIsNullWhenPopulatesEntity() {

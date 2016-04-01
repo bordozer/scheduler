@@ -1,4 +1,4 @@
-package scheduler.web.converters.dto;
+package scheduler.web.converters;
 
 import scheduler.core.models.Model;
 import scheduler.core.models.User;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import scheduler.core.models.SchedulerTask;
 import scheduler.core.models.User;
 import scheduler.web.controllers.rest.scheduler.tasks.item.edit.dto.SchedulerTaskEditDto;
-import scheduler.web.converters.dto.AbstractGenericDtoConverter;
+import scheduler.web.converters.AbstractGenericDtoConverter;
 
 import javax.inject.Inject;
 import java.util.function.Function;

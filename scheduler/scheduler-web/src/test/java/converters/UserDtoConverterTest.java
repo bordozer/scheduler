@@ -1,11 +1,11 @@
-package converters.dto;
+package converters;
 
 import com.beust.jcommander.internal.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import scheduler.core.models.User;
-import scheduler.web.converters.dto.UserDtoConverter;
+import scheduler.web.converters.UserDtoConverter;
 import scheduler.web.dto.UserDto;
 import utils.TestData;
 import utils.TestDataDto;

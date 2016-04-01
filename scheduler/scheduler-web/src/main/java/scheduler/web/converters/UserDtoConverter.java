@@ -1,4 +1,4 @@
-package scheduler.web.converters.dto;
+package scheduler.web.converters;
 
 import org.springframework.stereotype.Service;
 import scheduler.core.models.User;

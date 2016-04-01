@@ -1,4 +1,4 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;

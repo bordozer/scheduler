@@ -1,8 +1,9 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import scheduler.core.converters.RemoteJobEntityConverterImpl;
 import scheduler.core.entities.RemoteJobEntity;
 import scheduler.core.models.RemoteJob;
 import scheduler.core.utils.TestData;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class RemoteJobEntityConverterImplTest {
 
     @InjectMocks
-    private scheduler.core.converters.entity.RemoteJobEntityConverterImpl sut = new scheduler.core.converters.entity.RemoteJobEntityConverterImpl();
+    private RemoteJobEntityConverterImpl sut = new RemoteJobEntityConverterImpl();
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfEntityIsNullWhenPopulatesEntity() {

@@ -1,11 +1,11 @@
-package converters.dto;
+package converters;
 
 import com.beust.jcommander.internal.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import scheduler.core.models.RemoteJob;
-import scheduler.web.converters.dto.RemoteJobDtoConverter;
+import scheduler.web.converters.RemoteJobDtoConverter;
 import scheduler.web.dto.RemoteJobDto;
 import utils.TestData;
 import utils.TestDataDto;

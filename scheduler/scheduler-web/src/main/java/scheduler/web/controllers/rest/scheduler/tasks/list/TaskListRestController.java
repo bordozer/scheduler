@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.core.services.tasks.SchedulerTaskService;
 import scheduler.core.services.users.UserService;
-import scheduler.web.converters.dto.SchedulerTaskDtoConverter;
+import scheduler.web.converters.SchedulerTaskDtoConverter;
 import scheduler.web.dto.IdDto;
 import scheduler.web.dto.SchedulerTaskDto;
 

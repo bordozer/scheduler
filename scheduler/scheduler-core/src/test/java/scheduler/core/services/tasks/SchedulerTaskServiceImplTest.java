@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import scheduler.core.converters.entity.SchedulerTaskEntityConverter;
+import scheduler.core.converters.SchedulerTaskEntityConverter;
 import scheduler.core.entities.SchedulerTaskEntity;
 import scheduler.core.entities.UserEntity;
 import scheduler.core.models.SchedulerTask;

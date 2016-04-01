@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import scheduler.core.models.RemoteJob;
 import scheduler.core.models.User;
 import scheduler.web.controllers.rest.scheduler.tasks.item.edit.dto.RemoteJobEditDto;
-import scheduler.web.converters.dto.AbstractGenericDtoConverter;
+import scheduler.web.converters.AbstractGenericDtoConverter;
 
 import java.util.function.Function;
 

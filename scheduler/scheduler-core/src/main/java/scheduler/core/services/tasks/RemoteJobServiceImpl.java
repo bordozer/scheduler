@@ -1,7 +1,7 @@
 package scheduler.core.services.tasks;
 
 import org.springframework.stereotype.Service;
-import scheduler.core.converters.entity.RemoteJobEntityConverter;
+import scheduler.core.converters.RemoteJobEntityConverter;
 import scheduler.core.models.RemoteJob;
 import scheduler.core.repositories.RemoteJobRepository;
 

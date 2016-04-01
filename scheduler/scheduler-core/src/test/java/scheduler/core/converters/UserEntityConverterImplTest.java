@@ -1,7 +1,8 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import scheduler.core.converters.UserEntityConverterImpl;
 import scheduler.core.entities.UserEntity;
 import scheduler.core.entities.UserSecureDetailsEntity;
 import scheduler.core.models.User;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertNull;
 public class UserEntityConverterImplTest {
 
     @InjectMocks
-    private scheduler.core.converters.entity.UserEntityConverterImpl sut = new scheduler.core.converters.entity.UserEntityConverterImpl();
+    private UserEntityConverterImpl sut = new UserEntityConverterImpl();
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfEntityIsNullWhenPopulatesEntity() {

@@ -1,4 +1,4 @@
-package scheduler.core.converters.entity;
+package scheduler.core.converters;
 
 public interface GenericEntityConverter<E extends scheduler.core.entities.DBEntity, M extends scheduler.core.models.Model> {
 

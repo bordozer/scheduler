@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import scheduler.core.services.SystemVarsService;
 import scheduler.core.services.users.UserService;
-import scheduler.web.converters.dto.UserDtoConverter;
+import scheduler.web.converters.UserDtoConverter;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;

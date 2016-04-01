@@ -1,8 +1,8 @@
 package scheduler.core.services.users;
 
 import org.springframework.stereotype.Service;
-import scheduler.core.converters.entity.UserEntityConverter;
-import scheduler.core.converters.entity.UserSecureDetailsConverter;
+import scheduler.core.converters.UserEntityConverter;
+import scheduler.core.converters.UserSecureDetailsConverter;
 import scheduler.core.entities.UserEntity;
 import scheduler.core.entities.UserSecureDetailsEntity;
 import scheduler.core.models.User;

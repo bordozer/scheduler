@@ -1,4 +1,4 @@
-package converters.dto;
+package converters;
 
 import com.beust.jcommander.internal.Lists;
 import org.junit.Test;
@@ -9,9 +9,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import scheduler.core.models.RemoteJob;
 import scheduler.core.models.SchedulerTask;
 import scheduler.core.models.User;
-import scheduler.web.converters.dto.RemoteJobDtoConverter;
-import scheduler.web.converters.dto.SchedulerTaskDtoConverter;
-import scheduler.web.converters.dto.UserDtoConverter;
+import scheduler.web.converters.RemoteJobDtoConverter;
+import scheduler.web.converters.SchedulerTaskDtoConverter;
+import scheduler.web.converters.UserDtoConverter;
 import scheduler.web.dto.RemoteJobDto;
 import scheduler.web.dto.SchedulerTaskDto;
 import scheduler.web.dto.UserDto;
