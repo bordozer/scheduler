@@ -88,7 +88,7 @@ define( function ( require ) {
 				taskName: this.$("input[name='taskName']").val(),
 				taskType: this.$("input[name='taskType']:checked").val(),
 				taskDescription: this.$("textarea[name='taskDescription']").val(),
-				taskParametersJSON: this.$("textarea[name='taskParametersJSON']").val(),
+				taskParametersJSON: model.taskParametersJSON,
 				remoteJob: {
 					remoteJobId: model.remoteJob.remoteJobId,
 					requestUrl: this.$("input[name='requestUrl']").val(),
