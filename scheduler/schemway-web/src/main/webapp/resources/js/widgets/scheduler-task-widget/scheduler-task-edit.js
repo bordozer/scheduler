@@ -8,6 +8,11 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/scheduler-task-edit-template.html' ) );
 
+	var OneTimeTaskVew = require( './task-type/one-time/one-time-task' );
+	var DailyTaskVew = require( './task-type/daily/daily-task' );
+	var WeeklyTaskVew = require( './task-type/weekly/weekly-task' );
+	var MonthlyTaskVew = require( './task-type/monthly/monthly-task' );
+
 	var Translator = require( 'translator' );
 	var t = new Translator( {
 		taskName: "Task name",
@@ -45,10 +50,28 @@ define( function ( require ) {
 		},
 
 		__renderTaskEdit: function () {
-			this.$el.html( template( {
-				model: this.model.toJSON()
+			var json = this.model.toJSON();
+            this.$el.html( template( {
+				model: json
 				, t: t
 			} ) );
+
+			var container = this.$('.js-task-type-specific-parameters');
+            if (json.taskType === 'ONE_TIME') {
+				new OneTimeTaskVew({el: container});
+			}
+
+			if (json.taskType === 'DAILY') {
+				new DailyTaskVew({el: container});
+			}
+
+			if (json.taskType === 'WEEKLY') {
+				new WeeklyTaskVew({el: container});
+			}
+
+			if (json.taskType === 'MONTHLY') {
+				new MonthlyTaskVew({el: container});
+			}
 
 			this.trigger( 'inner-view-rendered' );
 		},
