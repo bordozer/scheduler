@@ -31,7 +31,6 @@ public class QuartzConfig {
         schedulerFactory.setSchedulerName(SCHEDULER_MICRO_SERVICE);
         schedulerFactory.setStartupDelay(systemVarsService.schedulerStartupDelay());
         schedulerFactory.setConfigLocation(new ClassPathResource("quartz.properties"));
-        schedulerFactory.start();
         return schedulerFactory;
     }
 
@@ -41,7 +40,6 @@ public class QuartzConfig {
     }
 
     public class SchedulerRunner {
-
         public void init() throws SchedulerException {
             if (systemVarsService.schedulerAutorun()) {
                 schedulerService.startScheduler();

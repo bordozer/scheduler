@@ -1,6 +1,7 @@
 package schemway.scheduler.services;
 
 import org.apache.log4j.Logger;
+import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
@@ -29,7 +30,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         }
         unscheduleAllTasks();
         scheduleAllTasks();
-//        schedulerFactoryBean.start();
+        schedulerFactoryBean.start();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleTask(final Long scheduleTaskId) {
-        schedulerFactoryBean.setTriggers(schedulerJobService.buildSchedulerJobTrigger(scheduleTaskId));
+//        schedulerFactoryBean.setTriggers(schedulerJobService.buildSchedulerJobTrigger(scheduleTaskId));
     }
 
     @Override
@@ -58,10 +59,25 @@ public class SchedulerServiceImpl implements SchedulerService {
             return;
         }
 
+        Scheduler scheduler = getScheduler();
+
         Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
         schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
 
-        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", cronTriggerFactoryBeen.length));
+        triggers.stream().forEach(trigger -> {
+            try {
+                JobDetail jobDetail = (JobDetail) trigger.getJobDataMap().get("jobDetail"); // TODO: bad way, but for temporary - ok
+                scheduler.scheduleJob(jobDetail, trigger);
+                LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", trigger.getKey()));
+            } catch (SchedulerException e) {
+                LOGGER.error(String.format("Scheduler task '%s' scheduling failed", trigger.getKey()), e);
+            }
+        });
+
+//        Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
+//        schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
+
+        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", triggers.size()));
     }
 
     @Override
