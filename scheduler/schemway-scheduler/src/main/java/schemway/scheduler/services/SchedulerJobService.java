@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SchedulerJobService {
 
-    List<ScheduledTask> buildSchedulerJobTriggers();
+    List<ScheduledTask> buildScheduledTasks();
 
-    ScheduledTask buildSchedulerJobTrigger(Long schedulerTaskId);
+    ScheduledTask buildScheduledTask(Long schedulerTaskId);
 }

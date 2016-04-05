@@ -40,7 +40,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     private JobExecutionService jobExecutionService;
 
     @Override
-    public List<ScheduledTask> buildSchedulerJobTriggers() {
+    public List<ScheduledTask> buildScheduledTasks() {
         return schedulerTaskService.loadAll()
                 .stream()
                 .map(this::buildSchedulerJobTrigger)
@@ -48,7 +48,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     }
 
     @Override
-    public ScheduledTask buildSchedulerJobTrigger(final Long schedulerTaskId) {
+    public ScheduledTask buildScheduledTask(final Long schedulerTaskId) {
         return buildSchedulerJobTrigger(schedulerTaskService.load(schedulerTaskId));
     }
 
