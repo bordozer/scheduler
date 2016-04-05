@@ -7,7 +7,7 @@ import org.quartz.SchedulerException;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import schemway.scheduler.models.ScheduledTask;
+import schemway.scheduler.models.SchedulerJobModel;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -53,12 +53,12 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleAllTasks() {
-        List<ScheduledTask> scheduledTasks = schedulerJobService.buildScheduledTasks();
-        if (scheduledTasks == null || scheduledTasks.size() == 0) {
+        List<SchedulerJobModel> schedulerJobModels = schedulerJobService.buildScheduledTasks();
+        if (schedulerJobModels == null || schedulerJobModels.size() == 0) {
             return;
         }
-        scheduledTasks.stream().forEach(this::doScheduleTask);
-        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", scheduledTasks.size()));
+        schedulerJobModels.stream().forEach(this::doScheduleTask);
+        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", schedulerJobModels.size()));
     }
 
     @Override
@@ -72,15 +72,15 @@ public class SchedulerServiceImpl implements SchedulerService {
         return schedulerFactoryBean.isRunning();
     }
 
-    private void doScheduleTask(final ScheduledTask scheduledTask) {
-        Assert.notNull(scheduledTask, "Scheduled Task must not be null");
+    private void doScheduleTask(final SchedulerJobModel schedulerJobModel) {
+        Assert.notNull(schedulerJobModel, "Scheduled Task must not be null");
 
         Scheduler scheduler = getScheduler();
         try {
-            scheduler.scheduleJob(scheduledTask.getJobDetail(), scheduledTask.getTrigger());
-            LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", scheduledTask.getSchedulerTaskId()));
+            scheduler.scheduleJob(schedulerJobModel.getJobDetail(), schedulerJobModel.getTrigger());
+            LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", schedulerJobModel.getSchedulerTaskId()));
         } catch (SchedulerException e) {
-            LOGGER.error(String.format("Scheduler task '%s' scheduling failed", scheduledTask.getSchedulerTaskId()), e);
+            LOGGER.error(String.format("Scheduler task '%s' scheduling failed", schedulerJobModel.getSchedulerTaskId()), e);
         }
     }
 

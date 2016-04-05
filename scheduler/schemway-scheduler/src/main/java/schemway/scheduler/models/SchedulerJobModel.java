@@ -10,7 +10,7 @@ import org.quartz.Trigger;
 @Getter
 @Setter
 @Builder
-public class ScheduledTask {
+public class SchedulerJobModel {
     private Long schedulerTaskId;
     private JobDetail jobDetail;
     private Trigger trigger;
