@@ -13,6 +13,7 @@ import schemway.core.models.SchedulerTask;
 import schemway.core.models.User;
 import schemway.core.services.tasks.SchedulerTaskService;
 import schemway.scheduler.jobs.JobExecutionService;
+import schemway.scheduler.models.ScheduledTask;
 
 import javax.inject.Inject;
 import java.text.ParseException;
@@ -40,7 +41,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     private JobExecutionService jobExecutionService;
 
     @Override
-    public List<Trigger> buildSchedulerJobTriggers() {
+    public List<ScheduledTask> buildSchedulerJobTriggers() {
         return schedulerTaskService.loadAll()
                 .stream()
                 .map(this::buildSchedulerJobTrigger)
@@ -48,11 +49,11 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     }
 
     @Override
-    public Trigger buildSchedulerJobTrigger(final Long schedulerTaskId) {
+    public ScheduledTask buildSchedulerJobTrigger(final Long schedulerTaskId) {
         return buildSchedulerJobTrigger(schedulerTaskService.load(schedulerTaskId));
     }
 
-    private CronTrigger buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
+    private ScheduledTask buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
         User user = schedulerTask.getUser();
 
         String jobName = getJobName(schedulerTask);
@@ -69,7 +70,12 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
                 .setJobData(dataMap)
                 .build();
         try {
-            return cronTriggerFactoryBean(job, triggerName, jobGroup, CRON, schedulerTask.getTaskName()).getObject();
+            CronTrigger trigger = cronTriggerFactoryBean(job, triggerName, jobGroup, CRON, schedulerTask.getTaskName()).getObject();
+            return ScheduledTask.builder().
+                    schedulerTaskId(schedulerTask.getId())
+                    .jobDetail(job)
+                    .trigger(trigger)
+                    .build();
         } catch (ParseException e) {
             LOGGER.error(String.format("Error scheduling task: %s", schedulerTask), e);
             return null;

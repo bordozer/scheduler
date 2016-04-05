@@ -1,12 +1,12 @@
 package schemway.scheduler.services;
 
-import org.quartz.Trigger;
+import schemway.scheduler.models.ScheduledTask;
 
 import java.util.List;
 
 public interface SchedulerJobService {
 
-    List<Trigger> buildSchedulerJobTriggers();
+    List<ScheduledTask> buildSchedulerJobTriggers();
 
-    Trigger buildSchedulerJobTrigger(Long schedulerTaskId);
+    ScheduledTask buildSchedulerJobTrigger(Long schedulerTaskId);
 }

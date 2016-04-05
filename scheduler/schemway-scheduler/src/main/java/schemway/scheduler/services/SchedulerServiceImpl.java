@@ -8,6 +8,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerKey;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
+import schemway.scheduler.models.ScheduledTask;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -53,31 +54,27 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleAllTasks() {
-        List<Trigger> triggers = schedulerJobService.buildSchedulerJobTriggers();
+        List<ScheduledTask> scheduledTasks = schedulerJobService.buildSchedulerJobTriggers();
 
-        if (triggers == null || triggers.size() == 0) {
+        if (scheduledTasks == null || scheduledTasks.size() == 0) {
             return;
         }
 
         Scheduler scheduler = getScheduler();
 
-        Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
-        schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
-
-        triggers.stream().forEach(trigger -> {
+        scheduledTasks.stream().forEach(scheduledTask -> {
             try {
-                JobDetail jobDetail = (JobDetail) trigger.getJobDataMap().get("jobDetail"); // TODO: bad way, but for temporary - ok
-                scheduler.scheduleJob(jobDetail, trigger);
-                LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", trigger.getKey()));
+                if (scheduledTask == null) {
+                    return;
+                }
+                scheduler.scheduleJob(scheduledTask.getJobDetail(), scheduledTask.getTrigger());
+                LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", scheduledTask.getSchedulerTaskId()));
             } catch (SchedulerException e) {
-                LOGGER.error(String.format("Scheduler task '%s' scheduling failed", trigger.getKey()), e);
+                LOGGER.error(String.format("Scheduler task '%s' scheduling failed", scheduledTask.getSchedulerTaskId()), e);
             }
         });
 
-//        Trigger[] cronTriggerFactoryBeen = triggers.toArray(new Trigger[triggers.size()]);
-//        schedulerFactoryBean.setTriggers(cronTriggerFactoryBeen);
-
-        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", triggers.size()));
+        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", scheduledTasks.size()));
     }
 
     @Override
