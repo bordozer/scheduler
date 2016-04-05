@@ -1,13 +1,13 @@
 package schemway.scheduler.services;
 
 import org.apache.log4j.Logger;
-import org.quartz.CronTrigger;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Trigger;
-import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
+import org.quartz.TriggerBuilder;
 import org.springframework.stereotype.Service;
 import schemway.core.models.SchedulerTask;
 import schemway.core.models.User;
@@ -16,7 +16,6 @@ import schemway.scheduler.jobs.JobExecutionService;
 import schemway.scheduler.models.ScheduledTask;
 
 import javax.inject.Inject;
-import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,30 +68,19 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
                 .withIdentity(jobKey)
                 .setJobData(dataMap)
                 .build();
-        try {
-            CronTrigger trigger = cronTriggerFactoryBean(job, triggerName, jobGroup, CRON, schedulerTask.getTaskName()).getObject();
-            return ScheduledTask.builder().
-                    schedulerTaskId(schedulerTask.getId())
-                    .jobDetail(job)
-                    .trigger(trigger)
-                    .build();
-        } catch (ParseException e) {
-            LOGGER.error(String.format("Error scheduling task: %s", schedulerTask), e);
-            return null;
-        }
-    }
 
-    private CronTriggerFactoryBean cronTriggerFactoryBean(final JobDetail job, final String triggerName,
-                                                          final String group, final String crone, final String taskName) throws ParseException {
-        CronTriggerFactoryBean stFactory = new CronTriggerFactoryBean();
-        stFactory.setJobDetail(job);
-        stFactory.setName(triggerName);
-        stFactory.setGroup(group);
-        stFactory.setCronExpression(crone);
-        stFactory.setDescription(taskName);
-        stFactory.afterPropertiesSet();
+        Trigger trigger = TriggerBuilder
+                .newTrigger()
+                .withIdentity(triggerName)
+                .withDescription(schedulerTask.getTaskDescription())
+                .withSchedule(CronScheduleBuilder.cronSchedule(CRON))
+                .build();
 
-        return stFactory;
+        return ScheduledTask.builder().
+                schedulerTaskId(schedulerTask.getId())
+                .jobDetail(job)
+                .trigger(trigger)
+                .build();
     }
 
     private String getJobName(final SchedulerTask schedulerTask) {
