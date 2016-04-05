@@ -1,12 +1,12 @@
 package schemway.scheduler.services;
 
-import schemway.scheduler.models.SchedulerJobModel;
+import schemway.scheduler.models.SchedulerJobTrigger;
 
 import java.util.List;
 
 public interface SchedulerJobService {
 
-    List<SchedulerJobModel> buildScheduledTasks();
+    List<SchedulerJobTrigger> buildSchedulerJobTriggers();
 
-    SchedulerJobModel buildScheduledTask(Long schedulerTaskId);
+    SchedulerJobTrigger buildSchedulerJobTrigger(Long schedulerTaskId);
 }

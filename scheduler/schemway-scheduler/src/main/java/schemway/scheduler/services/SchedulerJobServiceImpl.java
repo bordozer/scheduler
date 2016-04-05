@@ -13,7 +13,7 @@ import schemway.core.models.SchedulerTask;
 import schemway.core.models.User;
 import schemway.core.services.tasks.SchedulerTaskService;
 import schemway.scheduler.jobs.JobExecutionService;
-import schemway.scheduler.models.SchedulerJobModel;
+import schemway.scheduler.models.SchedulerJobTrigger;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -40,7 +40,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     private JobExecutionService jobExecutionService;
 
     @Override
-    public List<SchedulerJobModel> buildScheduledTasks() {
+    public List<SchedulerJobTrigger> buildSchedulerJobTriggers() {
         return schedulerTaskService.loadAll()
                 .stream()
                 .map(this::buildSchedulerJobTrigger)
@@ -48,11 +48,11 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
     }
 
     @Override
-    public SchedulerJobModel buildScheduledTask(final Long schedulerTaskId) {
+    public SchedulerJobTrigger buildSchedulerJobTrigger(final Long schedulerTaskId) {
         return buildSchedulerJobTrigger(schedulerTaskService.load(schedulerTaskId));
     }
 
-    private SchedulerJobModel buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
+    private SchedulerJobTrigger buildSchedulerJobTrigger(final SchedulerTask schedulerTask) {
         User user = schedulerTask.getUser();
 
         String jobName = getJobName(schedulerTask);
@@ -76,7 +76,7 @@ public class SchedulerJobServiceImpl implements SchedulerJobService {
                 .withSchedule(CronScheduleBuilder.cronSchedule(CRON))
                 .build();
 
-        return SchedulerJobModel.builder().
+        return SchedulerJobTrigger.builder().
                 schedulerTaskId(schedulerTask.getId())
                 .jobDetail(job)
                 .trigger(trigger)

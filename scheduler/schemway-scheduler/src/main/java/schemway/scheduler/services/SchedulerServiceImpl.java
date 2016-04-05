@@ -7,7 +7,7 @@ import org.quartz.SchedulerException;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import schemway.scheduler.models.SchedulerJobModel;
+import schemway.scheduler.models.SchedulerJobTrigger;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -43,7 +43,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleTask(final Long scheduleTaskId) {
-        doScheduleTask(schedulerJobService.buildScheduledTask(scheduleTaskId));
+        doScheduleTask(schedulerJobService.buildSchedulerJobTrigger(scheduleTaskId));
     }
 
     @Override
@@ -53,12 +53,12 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public void scheduleAllTasks() {
-        List<SchedulerJobModel> schedulerJobModels = schedulerJobService.buildScheduledTasks();
-        if (schedulerJobModels == null || schedulerJobModels.size() == 0) {
+        List<SchedulerJobTrigger> triggers = schedulerJobService.buildSchedulerJobTriggers();
+        if (triggers == null || triggers.size() == 0) {
             return;
         }
-        schedulerJobModels.stream().forEach(this::doScheduleTask);
-        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", schedulerJobModels.size()));
+        triggers.stream().forEach(this::doScheduleTask);
+        LOGGER.debug(String.format("%d scheduler tasks have been scheduled successfully", triggers.size()));
     }
 
     @Override
@@ -72,15 +72,15 @@ public class SchedulerServiceImpl implements SchedulerService {
         return schedulerFactoryBean.isRunning();
     }
 
-    private void doScheduleTask(final SchedulerJobModel schedulerJobModel) {
-        Assert.notNull(schedulerJobModel, "Scheduled Task must not be null");
+    private void doScheduleTask(final SchedulerJobTrigger trigger) {
+        Assert.notNull(trigger, "Scheduled Task must not be null");
 
         Scheduler scheduler = getScheduler();
         try {
-            scheduler.scheduleJob(schedulerJobModel.getJobDetail(), schedulerJobModel.getTrigger());
-            LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", schedulerJobModel.getSchedulerTaskId()));
+            scheduler.scheduleJob(trigger.getJobDetail(), trigger.getTrigger());
+            LOGGER.debug(String.format("Scheduler task '%s' have been scheduled successfully", trigger.getSchedulerTaskId()));
         } catch (SchedulerException e) {
-            LOGGER.error(String.format("Scheduler task '%s' scheduling failed", schedulerJobModel.getSchedulerTaskId()), e);
+            LOGGER.error(String.format("Scheduler task '%s' scheduling failed", trigger.getSchedulerTaskId()), e);
         }
     }
 
