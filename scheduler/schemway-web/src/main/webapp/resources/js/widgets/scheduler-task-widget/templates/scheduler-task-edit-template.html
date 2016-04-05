@@ -9,6 +9,17 @@
 
 <div class="row small">
 	<div class="col-xs-12 col-lg-6 text-muted">
+		<label for="taskDescription"><%= t.taskDescription %></label>
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<textarea id="taskDescription" name="taskDescription" class="form-control" cols="24"><%= model.taskDescription %></textarea>
+	</div>
+</div>
+
+<hr />
+
+<div class="row small">
+	<div class="col-xs-12 col-lg-6 text-muted">
 		<label for="DAILY"><%= t.taskType %></label>
 	</div>
 	<div class="col-xs-12 col-lg-6">
@@ -26,21 +37,10 @@
 	</div>
 </div>
 
-<hr />
 <div class="row small">
 
 	<div class="col-xs-12 js-task-type-specific-parameters">
 
-	</div>
-</div>
-<hr />
-
-<div class="row small">
-	<div class="col-xs-12 col-lg-6 text-muted">
-		<label for="taskDescription"><%= t.taskDescription %></label>
-	</div>
-	<div class="col-xs-12 col-lg-6">
-		<textarea id="taskDescription" name="taskDescription" class="form-control" cols="24"><%= model.taskDescription %></textarea>
 	</div>
 </div>
 
