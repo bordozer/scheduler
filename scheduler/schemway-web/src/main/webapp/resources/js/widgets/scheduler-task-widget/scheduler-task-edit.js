@@ -23,6 +23,7 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		events: {
+			"change input[name='taskType']": '__render',
 			'change .js-request-method': '__render'
 		},
 
@@ -53,6 +54,7 @@ define( function ( require ) {
 		},
 
 		__render: function() {
+			console.log('__render');
 			this._bind();
 			this.__renderTaskEdit();
 		},

@@ -42,6 +42,7 @@ define( function ( require ) {
 			view.$el = this.$bel;
 			view.on( 'inner-view-rendered', this.renderBodyFinished, this );
 			view.render();
+			view.delegateEvents();
 		},
 
 		getTitle: function() {
